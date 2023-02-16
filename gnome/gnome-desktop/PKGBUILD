@@ -1,0 +1,42 @@
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jan@archlinux.org>
+
+pkgname=gnome-desktop
+pkgver=43.1+2+g3c8834af+6597+3c8834af
+pkgrel=1
+pkgdesc="Library with common API for various GNOME modules"
+url="https://gitlab.gnome.org/GNOME/gnome-desktop"
+arch=(x86_64)
+license=(GPL LGPL)
+depends=(gsettings-desktop-schemas gtk3 libxkbfile xkeyboard-config iso-codes libseccomp bubblewrap
+         systemd-libs)
+makedepends=(gobject-introspection git meson gtk-doc yelp-tools)
+checkdepends=(xorg-server-xvfb)
+provides=(libgnome-desktop-3.so libgnome-{bg,desktop,rr}-4.so)
+source=("git+https://gitlab.gnome.org/GNOME/gnome-desktop.git")
+sha256sums=('SKIP')
+
+replaces=(gnome-desktop-common gnome-desktop-4)
+conflicts=(gnome-desktop-common gnome-desktop-4)
+
+#DEBUG DISABLE
+
+pkgver() {
+    cd ${pkgname}
+
+    local _version=$(git describe --tags | sed 's/-/+/g')
+
+    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D desktop_docs=false \
+        -D debug_tools=false
+
+    meson compile -C build
+}
+
+package() {
+    DESTDIR="$pkgdir" meson install -C build
+}

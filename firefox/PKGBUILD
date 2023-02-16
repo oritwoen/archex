@@ -1,0 +1,87 @@
+# Maintainer: Andrew Crerar <crerar@archlinux.org>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+
+pkgname=firefox
+pkgver=111.0a1+651831+c4af9a62fcca
+pkgrel=1
+pkgdesc="Developer Edition of the popular Firefox web browser"
+arch=('x86_64')
+license=('MPL' 'GPL' 'LGPL')
+url="https://www.mozilla.org/firefox/channel/#developer"
+depends=('dbus-glib'
+         'ffmpeg'
+         'gtk3'
+         'libpulse'
+         'libxt'
+         'mime-types'
+         'nss'
+         'ttf-font')
+makedepends=('cbindgen'
+             'clang'
+             'diffutils'
+             'dump_syms'
+             'imake'
+             'inetutils'
+             'jack'
+             'lld'
+             'llvm'
+             'mesa'
+             'nasm'
+             'nodejs'
+             'python'
+             'rust'
+             'unzip'
+             'wasi-compiler-rt'
+             'wasi-libc'
+             'wasi-libc++'
+             'wasi-libc++abi'
+             'xorg-server-xvfb'
+             'yasm'
+             'zip')
+optdepends=('networkmanager: Location detection via available WiFi networks'
+            'libnotify: Notification integration'
+            'pulseaudio: Audio support'
+            'speech-dispatcher: Text-to-Speech'
+            'hunspell-en_US: Spell checking, American English'
+            'xdg-desktop-portal: Screensharing with Wayland')
+replaces=('firefox-developer')
+options=(!emptydirs !makeflags !strip !lto !debug)
+source=(hg+https://hg.mozilla.org/mozilla-central mozconfig zstandard-0.18.0.diff firefox.desktop)
+sha512sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
+
+pkgver() {
+    cd mozilla-central
+
+    local _version=$(cat browser/config/version.txt)
+
+    echo ${_version}+$(hg id --num --rev tip)+$(hg id -i)
+}
+
+prepare() {
+  mkdir -p mozbuild
+  mkdir -p mozobjdir
+
+  cd mozilla-central
+
+  #patch -Np1 -i ../zstandard-0.18.0.diff
+}
+
+build() {
+  cd mozilla-central
+
+  export MOZ_NOSPAM=1
+  export MOZCONFIG="$srcdir/mozconfig"
+  export MOZ_OBJDIR="$srcdir/mozobjdir"
+  export MOZBUILD_STATE_PATH="$srcdir/mozbuild"
+  export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=pip
+
+  ./mach build
+}
+
+package() {
+  cd mozilla-central
+  
+  DESTDIR="$pkgdir" ./mach install
+
+  install -Dvm644 ../$pkgname.desktop "$pkgdir/usr/share/applications/$pkgname.desktop"
+}

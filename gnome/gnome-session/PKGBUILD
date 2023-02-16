@@ -1,0 +1,35 @@
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+
+pkgname=gnome-session
+pkgver=43.0+6652+f3593725
+pkgrel=1
+pkgdesc="The GNOME Session Handler"
+url="https://gitlab.gnome.org/GNOME/gnome-session"
+arch=(x86_64)
+license=(GPL)
+depends=(systemd dconf gsettings-desktop-schemas gtk3 gnome-desktop
+         json-glib libgl libsm libxtst systemd)
+makedepends=(mesa gtk-doc xtrans git python xmlto docbook-xsl meson)
+groups=(gnome)
+source=("git+https://gitlab.gnome.org/GNOME/gnome-session.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd ${pkgname}
+
+    local _version=$(cat meson.build | grep "version:" | sed -n 1p | cut -d "'" -f2 | cut -d "'" -f1)
+
+    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D docbook=false \
+        -D man=false
+
+    meson compile -C build
+}
+
+package() {
+    DESTDIR="$pkgdir" meson install -C build
+}

@@ -1,0 +1,35 @@
+# Maintainer: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=eog
+pkgver=44.beta+7984+71b134cb
+pkgrel=1
+pkgdesc="Eye of Gnome: An image viewing and cataloging program"
+url="https://wiki.gnome.org/Apps/EyeOfGnome"
+arch=(x86_64)
+license=(GPL)
+depends=(gnome-desktop libexif lcms2 exempi libpeas librsvg libhandy webp-pixbuf-loader libportal libportal-gtk3)
+makedepends=(gobject-introspection gi-docgen git meson yelp-tools systemd)
+optdepends=('eog-plugins: Additional features')
+groups=(gnome)
+source=("git+https://gitlab.gnome.org/GNOME/eog.git")
+sha256sums=('SKIP')
+
+pkgver () {
+    cd ${pkgname}
+
+    local _version=$(cat meson.build | grep "version:" |  head -n 1 | cut -d "'" -f2 | cut -d "'" -f1)
+
+    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+build() {
+  arch-meson eog build
+  
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir "$pkgdir"
+}

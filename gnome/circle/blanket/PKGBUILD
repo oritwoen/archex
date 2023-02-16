@@ -1,0 +1,31 @@
+# Maintainer: Balló György <ballogyor+arch at gmail dot com>
+# Contributor: Mark Wagie <mark dot wagie at tutanota dot com>
+
+pkgname=blanket
+pkgver=0.6.0+519+d91e031
+pkgrel=1
+pkgdesc='Improve focus and increase your productivity by listening to different sounds'
+arch=('any')
+url='https://github.com/rafaelmardojai/blanket'
+license=('GPL3')
+depends=('gst-plugins-bad-libs' 'gst-plugins-base' 'gst-plugins-good' 'gst-python' 'libadwaita' 'python-gobject')
+makedepends=('appstream-glib' 'meson')
+source=("git+https://github.com/rafaelmardojai/blanket.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd ${pkgname}
+
+    local _version=$(grep -m 1 "version:" meson.build | cut -d "'" -f2)
+
+    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+build() {
+  arch-meson $pkgname build
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir "$pkgdir"
+}

@@ -1,0 +1,37 @@
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+
+pkgname=gnome-settings-daemon
+pkgver=44.beta+6533+f5bd253f
+pkgrel=1
+pkgdesc="GNOME Settings Daemon"
+url="https://gitlab.gnome.org/GNOME/gnome-settings-daemon"
+arch=(x86_64)
+license=(GPL)
+depends=(dconf gnome-desktop gsettings-desktop-schemas libcanberra-pulse libnotify systemd-libs
+         libwacom pulseaudio pulseaudio-alsa upower librsvg libgweather geocode-glib geoclue nss
+         libgudev gtk3 libnm gcr)
+makedepends=(xf86-input-wacom libxslt python git meson usbguard)
+checkdepends=(python-gobject python-dbusmock)
+optdepends=('usbguard: USB protection support')
+groups=(gnome)
+backup=(etc/xdg/Xwayland-session.d/00-xrdb)
+source=("git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd ${pkgname}
+
+    local _version=$(grep -m 1 "version:" meson.build | cut -d "'" -f2)
+
+    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+build() {
+  arch-meson $pkgname build
+
+  meson compile -C build
+}
+
+package() {
+  DESTDIR="$pkgdir" meson install -C build
+}

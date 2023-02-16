@@ -1,0 +1,4 @@
+**/pkg
+**/src
+prepare
+archex-commit-hook

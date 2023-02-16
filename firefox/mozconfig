@@ -1,0 +1,51 @@
+
+
+#mk_add_options AUTOCLOBBER=1
+
+ac_add_options --prefix=/usr
+
+ac_add_options --enable-rust-simd
+ac_add_options --enable-application=browser
+ac_add_options --enable-update-channel=nightly
+
+ac_add_options --with-wasi-sysroot=/usr/share/wasi-sysroot
+
+# Branding
+ac_add_options --with-branding=browser/branding/nightly
+ac_add_options --with-distribution-id=org.atolinux
+ac_add_options --with-unsigned-addon-scopes=app,system
+ac_add_options --allow-addon-sideload
+
+# Keys
+#ac_add_options --with-google-location-service-api-keyfile="AIzaSyDwr302FpOSkGRpLlUpPThNTDPbXcIn_FM"
+#ac_add_options --with-google-safebrowsing-api-keyfile="AIzaSyDwr302FpOSkGRpLlUpPThNTDPbXcIn_FM"
+#ac_add_options --with-mozilla-api-keyfile="e05d56db0a694edc8b5aaebda3f2db6a"
+
+# System libraries
+ac_add_options --with-system-icu
+#ac_add_options --with-system-nss
+#ac_add_options --with-system-png
+ac_add_options --with-system-ffi
+ac_add_options --with-system-jpeg
+ac_add_options --with-system-zlib
+ac_add_options --with-system-nspr
+ac_add_options --with-system-webp
+ac_add_options --with-system-libvpx
+ac_add_options --with-system-libevent
+
+
+ac_add_options --enable-system-pixman
+
+# Features
+ac_add_options --enable-alsa
+ac_add_options --enable-jack
+
+ac_add_options --disable-tests
+ac_add_options --disable-updater
+ac_add_options --disable-elf-hack
+ac_add_options --disable-bootstrap
+ac_add_options --disable-crashreporter
+ac_add_options --disable-debug-symbols
+
+#ac_add_options MOZ_PGO=1
+

@@ -1,0 +1,51 @@
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Lukas Fleischer <lfleischer@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgbase=adwaita-icon-theme
+pkgname=(adwaita-icon-theme adwaita-cursors)
+pkgver=43+r85+g3d33ab374+3824+3d33ab374
+pkgrel=1
+pkgdesc="GNOME standard icons"
+url="https://gitlab.gnome.org/GNOME/adwaita-icon-theme"
+arch=(any)
+license=(LGPL3 CCPL:by-sa)
+depends=(hicolor-icon-theme gtk-update-icon-cache librsvg)
+makedepends=(git gtk3)
+source=("git+https://gitlab.gnome.org/GNOME/adwaita-icon-theme.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+  
+  echo $(git describe --tags | sed 's/[^-]*-g/r&/;s/-/+/g')+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd $pkgname
+  autoreconf -fvi
+}
+  
+build() {
+  cd $pkgname
+  ./configure --prefix=/usr
+  
+  make
+}
+
+
+package_adwaita-icon-theme() {
+  depends+=(adwaita-cursors)
+
+  make -C $pkgname DESTDIR="$pkgdir" install
+
+  mkdir -p cursors/usr/share/icons/Adwaita
+  mv {"$pkgdir",cursors}/usr/share/icons/Adwaita/cursors
+}
+
+package_adwaita-cursors() {
+  pkgdesc="GNOME standard cursors"
+  depends=()
+
+  mv cursors/* "$pkgdir"
+}

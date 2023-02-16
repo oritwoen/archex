@@ -1,0 +1,34 @@
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+
+pkgname=libadwaita
+pkgver=1.3.rc+3351+c56c6d98
+pkgrel=1
+pkgdesc="Building blocks for modern adaptive GNOME applications"
+url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
+arch=(x86_64)
+license=(LGPL)
+depends=(gtk4)
+makedepends=(git meson sassc gobject-introspection vala)
+source=("git+https://gitlab.gnome.org/GNOME/libadwaita.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd ${pkgname}
+
+    local _version=$(cat meson.build | grep "version:" | sed -n 1p | cut -d "'" -f2 | cut -d "'" -f1)
+
+    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D tests=false \
+        -D examples=false
+    
+    meson compile -C build
+}
+
+
+package() {
+  meson install -C build --destdir "$pkgdir"
+}

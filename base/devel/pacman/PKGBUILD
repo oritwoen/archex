@@ -1,0 +1,51 @@
+# Maintainer: Dominik Opyd <dominik.opyd@gmail.com>
+# Contributor: Morten Linderud <foxboron@archlinux.org>
+
+pkgname=pacman
+pkgver=6.0.1+7210+262aa6c2
+pkgrel=3
+pkgdesc="A library-based package manager with dependency support"
+arch=('x86_64')
+url="https://www.archlinux.org/pacman/"
+license=('GPL')
+groups=('base-devel')
+depends=('bash' 'glibc' 'libarchive' 'curl' 'gpgme' 'pacman-mirrorlist'
+         'gettext' 'gawk' 'coreutils' 'gnupg' 'grep')
+makedepends=('meson')
+checkdepends=('python' 'fakechroot')
+optdepends=('perl-locale-gettext: translation support in makepkg-template')
+provides=('libalpm.so')
+source=(git+https://gitlab.archlinux.org/pacman/pacman.git
+        pacman.conf
+        makepkg.conf)
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP')
+
+pkgver() {
+    cd ${pkgname}
+
+    local _version=$(cat meson.build | grep "version :" | sed -n 1p | cut -d "'" -f2 | cut -d "'" -f1)
+
+    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D use-git-version=true \
+        -D pkg-ext='.pkg.tar.zst' \
+        -D src-ext='.src.tar.zst' \
+        -D doc=disabled
+
+    meson compile -C build
+}
+
+
+package() {
+    DESTDIR="$pkgdir" meson install -C build
+
+    # install Arch specific stuff
+    install -dm755 "$pkgdir/etc"
+    install -m644 "$srcdir/pacman.conf" "$pkgdir/etc"
+    install -m644 "$srcdir/makepkg.conf" "$pkgdir/etc"
+}
