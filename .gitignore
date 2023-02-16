@@ -1,4 +1,4 @@
 **/pkg
 **/src
 prepare
-archex-commit-hook
+base/devel/archex-commit-hook

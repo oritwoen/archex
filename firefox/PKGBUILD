@@ -3,7 +3,7 @@
 
 pkgname=firefox
 pkgver=111.0a1+651831+c4af9a62fcca
-pkgrel=2
+pkgrel=4
 pkgdesc="Developer Edition of the popular Firefox web browser"
 arch=('x86_64')
 license=('MPL' 'GPL' 'LGPL')
