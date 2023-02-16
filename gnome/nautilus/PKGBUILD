@@ -2,7 +2,7 @@
 # Maintainer: Jan de Groot <jgc@archlinux.org>
 
 pkgname=nautilus
-pkgver=44.alpha.1+23828+c83a73fe0
+pkgver=44.beta.1+23831+6842a2781
 pkgrel=1
 pkgdesc="Default file manager for GNOME"
 url="https://wiki.gnome.org/Apps/Files"
