@@ -4,7 +4,7 @@
 
 pkgname=folks
 pkgver=0.15.6+3008+bc03cbab
-pkgrel=2
+pkgrel=3
 pkgdesc="Library to aggregates people into metacontacts"
 arch=(x86_64)
 url="https://wiki.gnome.org/Projects/Folks"
