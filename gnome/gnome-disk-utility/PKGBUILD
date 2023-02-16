@@ -3,7 +3,7 @@
 # Contributor: Silvio Knizek (killermoehre)
 
 pkgname=gnome-disk-utility
-pkgver=44.beta+3692+21c71a45
+pkgver=44.beta+3693+4ddfd6a4
 pkgrel=1
 pkgdesc="Disk Management Utility for GNOME"
 url="https://gitlab.gnome.org/GNOME/gnome-disk-utility"
