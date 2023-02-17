@@ -1,0 +1,89 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+# Contributor: Flamelab <panosfilip@gmail.com>
+
+pkgname=gnome-shell
+pkgver=44.beta+17543+2ee61c6bb
+pkgrel=1
+pkgdesc="Next generation desktop shell"
+url="https://wiki.gnome.org/Projects/GnomeShell"
+arch=(x86_64)
+license=(GPL)
+depends=(
+  accountsservice
+  gcr-4
+  gjs
+  gnome-autoar
+  gnome-session
+  gnome-settings-daemon
+  gsettings-desktop-schemas
+  gtk4
+  libcanberra-pulse
+  libgdm
+  libgweather-4
+  libibus
+  libnma
+  libsecret
+  libsoup3
+  mutter
+  unzip
+  upower
+)
+makedepends=(
+  asciidoc
+  bash-completion
+  evolution-data-server
+  git
+  gnome-control-center
+  gobject-introspection
+  gtk-doc
+  meson
+  sassc
+)
+checkdepends=(xorg-server-xvfb)
+optdepends=(
+  'evolution-data-server: Evolution calendar integration'
+  'gnome-bluetooth-3.0: Bluetooth support'
+  'gnome-control-center: System settings'
+  'gnome-disk-utility: Mount with keyfiles'
+  'gst-plugin-pipewire: Screen recording'
+  'gst-plugins-good: Screen recording'
+  'power-profiles-daemon: Power profile switching'
+  'switcheroo-control: Multi-GPU support'
+)
+groups=(gnome)
+source=(
+  "git+https://gitlab.gnome.org/GNOME/gnome-shell.git"
+  "git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git"
+)
+b2sums=('SKIP'
+        'SKIP')
+
+pkgver() {
+    cd ${pkgname}
+
+    local _version=$(grep -m 1 "version:" meson.build | cut -d "'" -f2)
+
+    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    cd ${pkgname}
+
+    git submodule init
+    git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
+    git -c protocol.file.allow=always submodule update
+}
+
+build() {
+    arch-meson gnome-shell build \
+        -D man=false \
+        -D tests=false 
+  
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}
