@@ -2,7 +2,7 @@
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=gnome-weather
-pkgver=44.rc+1412+071a8a9
+pkgver=44.rc+1413+a791292
 pkgrel=1
 pkgdesc="Access current weather conditions and forecasts"
 url="https://wiki.gnome.org/Apps/Weather"
