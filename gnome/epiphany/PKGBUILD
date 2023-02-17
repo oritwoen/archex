@@ -5,7 +5,7 @@ pkgname=epiphany
 pkgdesc="A GNOME web browser based on the WebKit rendering engine"
 
 pkgver=44.beta+r17+g1ebdbd64d
-pkgrel=1
+pkgrel=2
 url="https://wiki.gnome.org/Apps/Web"
 arch=(x86_64)
 license=(GPL)
