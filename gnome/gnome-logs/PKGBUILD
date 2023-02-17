@@ -2,7 +2,7 @@
 
 pkgname=gnome-logs
 pkgver=43.1+1280+e6de502
-pkgrel=3
+pkgrel=4
 pkgdesc="A log viewer for the systemd journal"
 url="https://wiki.gnome.org/Apps/Logs"
 arch=(x86_64)
