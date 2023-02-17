@@ -2,7 +2,7 @@
 
 pkgname=gnome-session
 pkgver=43.0+6652+f3593725
-pkgrel=2
+pkgrel=3
 pkgdesc="The GNOME Session Handler"
 url="https://gitlab.gnome.org/GNOME/gnome-session"
 arch=(x86_64)
