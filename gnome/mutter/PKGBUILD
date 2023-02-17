@@ -1,0 +1,74 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+# Contributor: Michael Kanis <mkanis_at_gmx_dot_de>
+
+pkgname=mutter
+pkgver=44.beta+29836+7f292326c
+pkgrel=1
+pkgdesc="Window manager and compositor for GNOME"
+url="https://gitlab.gnome.org/GNOME/mutter"
+arch=(x86_64)
+license=(GPL)
+depends=(
+  colord
+  dconf
+  gnome-desktop
+  gnome-settings-daemon
+  graphene
+  gsettings-desktop-schemas
+  lcms2
+  libcanberra
+  libgudev
+  libinput
+  libsm
+  libsysprof-capture
+  libxkbcommon-x11
+  libxkbfile
+  pipewire
+  startup-notification
+  xorg-xwayland
+)
+makedepends=(
+  egl-wayland
+  gi-docgen
+  git
+  gobject-introspection
+  meson
+  sysprof
+  wayland-protocols
+  xorg-server
+)
+
+source=(
+  "git+https://gitlab.gnome.org/GNOME/mutter.git#branch=main"
+)
+b2sums=('SKIP')
+
+pkgver() {
+    cd ${pkgname}
+
+    local _version=$(cat meson.build | grep "version:" | sed -n 1p | cut -d "'" -f2 | cut -d "'" -f1)
+
+    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+}
+
+build() {
+    arch-meson mutter build \
+        -D egl_device=true \
+        -D wayland_eglstream=true \
+        -D cogl_tests=false \
+        -D clutter_tests=false \
+        -D core_tests=false \
+        -D native_tests=false \
+        -D tests=false \
+        -D profiler=false \
+        -D installed_tests=false
+  
+    meson compile -C build
+}
+
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}
