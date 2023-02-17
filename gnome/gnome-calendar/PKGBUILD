@@ -3,7 +3,7 @@
 
 pkgname=gnome-calendar
 pkgver=44.rc+4194+9826550e
-pkgrel=2
+pkgrel=3
 pkgdesc="Simple and beautiful calendar application designed to perfectly fit the GNOME desktop"
 url="https://wiki.gnome.org/Apps/Calendar"
 arch=(x86_64)
