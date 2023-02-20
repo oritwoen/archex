@@ -2,7 +2,7 @@
 
 pkgname=gnome-firmware
 pkgver=+265+42f8bdc
-pkgrel=4
+pkgrel=5
 pkgdesc="Manage firmware on devices supported by fwupd"
 arch=(x86_64)
 url="https://gitlab.gnome.org/world/gnome-firmware"
