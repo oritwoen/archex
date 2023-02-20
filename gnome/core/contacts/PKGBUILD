@@ -5,7 +5,7 @@
 
 pkgname=contacts
 pkgver=44.beta+3769+b918da4c
-pkgrel=3
+pkgrel=2
 pkgdesc="Contacts Manager for GNOME"
 url="https://wiki.gnome.org/Apps/Contacts"
 arch=(x86_64)
@@ -30,6 +30,9 @@ pkgver() {
 }
 
 build() {
+    export CC=gcc
+    export CXX=gcc++
+
 	arch-meson $pkgname build \
 		-D manpage=false
 
