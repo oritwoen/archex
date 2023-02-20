@@ -3,8 +3,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=evolution-data-server
-pkgver=3.47.2+r4+g5e7c00392
-pkgrel=5
+pkgver=3.47.2+r5+ge357afea7
+pkgrel=1
 pkgdesc="Centralized access to appointments and contacts"
 url="https://wiki.gnome.org/Apps/Evolution"
 arch=(x86_64)
