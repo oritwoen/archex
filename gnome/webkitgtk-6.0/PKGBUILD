@@ -9,7 +9,7 @@
 
 pkgname=webkitgtk-6.0
 pkgver=2.39.7
-pkgrel=2
+pkgrel=3
 pkgdesc="Web content engine for GTK"
 url="https://webkitgtk.org"
 arch=(x86_64)
@@ -88,11 +88,6 @@ prepare() {
 }
 
 build() {
-  # Produce minimal debug info: 4.3 GB of debug data makes the
-  # build too slow and is too much to package for debuginfod
-  CFLAGS+=' -g1'
-  CXXFLAGS+=' -g1'
-
   cmake -S webkitgtk-$pkgver -B build -G Ninja \
     -DPORT=GTK \
     -DCMAKE_BUILD_TYPE=Release \
@@ -103,8 +98,9 @@ build() {
     -DUSE_AVIF=ON \
     -DUSE_GTK4=ON \
     -DUSE_JPEGXL=ON \
-    -DENABLE_DOCUMENTATION=ON \
+    -DENABLE_DOCUMENTATION=OFF \
     -DENABLE_MINIBROWSER=ON
+
   cmake --build build
 }
 
