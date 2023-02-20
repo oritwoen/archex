@@ -2,8 +2,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=gnome-characters
-pkgver=44.rc+1265+9d67ddd
-pkgrel=3
+pkgver=44.rc+1267+6916fc5
+pkgrel=1
 pkgdesc="A character map application"
 arch=(x86_64)
 url="https://gitlab.gnome.org/GNOME/gnome-characters"
