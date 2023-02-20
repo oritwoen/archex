@@ -1,0 +1,41 @@
+
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+
+pkgname=contacts
+pkgver=44.beta+3769+b918da4c
+pkgrel=2
+pkgdesc="Contacts Manager for GNOME"
+url="https://wiki.gnome.org/Apps/Contacts"
+arch=(x86_64)
+license=(GPL2)
+depends=(gtk3 folks gnome-desktop dconf gnome-online-accounts libgee cheese libhandy)
+makedepends=(vala gobject-introspection git meson appstream-glib)
+groups=(gnome-core)
+source=("git+https://gitlab.gnome.org/GNOME/gnome-contacts.git#branch=main")
+sha256sums=('SKIP')
+
+replaces=('gnome-contacts')
+conflicts=('gnome-contacts')
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson $pkgname build \
+		-D manpage=false
+
+	ninja -C build
+}
+
+package() {
+	DESTDIR="$pkgdir" meson install -C build
+}
