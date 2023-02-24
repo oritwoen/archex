@@ -45,12 +45,16 @@ source=(
 )
 b2sums=('SKIP')
 
+groups=(gnome-core)
+
 pkgver() {
-    cd ${pkgname}
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
 
-    local _version=$(cat meson.build | grep "version:" | sed -n 1p | cut -d "'" -f2 | cut -d "'" -f1)
-
-    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+    echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
