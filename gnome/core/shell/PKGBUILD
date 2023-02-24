@@ -4,8 +4,8 @@
 # Contributor: Flamelab <panosfilip@gmail.com>
 
 pkgname=gnome-shell
-pkgver=44.beta+17547+feb1c57dd
-pkgrel=3
+pkgver=44.beta+17551+628866f7d
+pkgrel=1
 pkgdesc="Next generation desktop shell"
 url="https://wiki.gnome.org/Projects/GnomeShell"
 arch=(x86_64)
@@ -69,6 +69,8 @@ pkgver() {
 }
 
 prepare() {
+    cd gnome-shell
+
     git submodule init
     git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
     git -c protocol.file.allow=always submodule update
