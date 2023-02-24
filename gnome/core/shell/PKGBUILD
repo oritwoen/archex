@@ -52,28 +52,19 @@ optdepends=(
   'power-profiles-daemon: Power profile switching'
   'switcheroo-control: Multi-GPU support'
 )
-groups=(gnome)
-source=(
-  "git+https://gitlab.gnome.org/GNOME/gnome-shell.git"
-  "git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git"
-)
+groups=(gnome-core)
+source=("git+https://gitlab.gnome.org/GNOME/gnome-shell.git#branch=main")
 b2sums=('SKIP'
         'SKIP')
 
 pkgver() {
-    cd ${pkgname}
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
 
-    local _version=$(grep -m 1 "version:" meson.build | cut -d "'" -f2)
-
-    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
-}
-
-prepare() {
-    cd ${pkgname}
-
-    git submodule init
-    git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
-    git -c protocol.file.allow=always submodule update
+    echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
