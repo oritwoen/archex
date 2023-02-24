@@ -5,7 +5,7 @@
 
 pkgname=mutter
 pkgver=44.beta+29877+bac7b3f4e
-pkgrel=2
+pkgrel=3
 pkgdesc="Window manager and compositor for GNOME"
 url="https://gitlab.gnome.org/GNOME/mutter"
 arch=(x86_64)
