@@ -11,7 +11,7 @@ arch=(x86_64)
 license=(GPL2)
 depends=(gtk3 folks gnome-desktop dconf gnome-online-accounts libgee cheese libhandy)
 makedepends=(vala gobject-introspection git meson appstream-glib)
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-contacts.git#branch=main")
 sha256sums=('SKIP')
 

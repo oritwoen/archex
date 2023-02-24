@@ -12,7 +12,7 @@ arch=(x86_64)
 license=(GPL3)
 depends=(libgtop libadwaita vte4)
 makedepends=(appstream-glib git meson)
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("$pkgname::git+https://gitlab.gnome.org/GNOME/console.git#branch=main")
 sha256sums=('SKIP')
 

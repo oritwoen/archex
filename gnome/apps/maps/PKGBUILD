@@ -12,7 +12,7 @@ arch=(x86_64)
 license=(GPL)
 depends=(geoclue geocode-glib-2 libadwaita libshumate appstream-glib gjs libgweather-4 librest)
 makedepends=(gobject-introspection git meson yelp-tools)
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-maps.git#branch=main")
 sha256sums=('SKIP')
 

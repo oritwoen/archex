@@ -11,7 +11,7 @@ arch=(x86_64)
 license=(GPL)
 depends=(libgtop gtkmm3 librsvg systemd)
 makedepends=(meson yelp-tools git)
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-system-monitor.git#branch=master")
 sha256sums=('SKIP')
 

@@ -11,7 +11,7 @@ arch=(x86_64)
 license=(GPL)
 depends=(gnome-desktop libadwaita)
 makedepends=(git meson)
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-font-viewer.git#branch=main")
 sha256sums=('SKIP')
 

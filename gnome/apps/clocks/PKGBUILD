@@ -10,7 +10,7 @@ arch=(x86_64)
 license=(GPL)
 depends=(libgweather gnome-desktop geoclue2 geocode-glib gsound libhandy)
 makedepends=(vala gobject-introspection yelp-tools git meson)
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-clocks.git")
 sha256sums=('SKIP')
 

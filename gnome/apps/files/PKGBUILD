@@ -15,7 +15,7 @@ makedepends=(gobject-introspection git gtk-doc meson appstream-glib)
 source=("git+https://gitlab.gnome.org/GNOME/nautilus.git#branch=master")
 sha256sums=('SKIP')
 
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 
 replaces=(libnautilus-extension)
 conflicts=(libnautilus-extension)

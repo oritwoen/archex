@@ -14,7 +14,7 @@ depends=(webkit2gtk-4.1 gcr icu libdazzle libhandy libarchive libportal-gtk3
          libsoup3)
 makedepends=(docbook-xml startup-notification lsb-release gobject-introspection
              yelp-tools git meson)
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("git+https://gitlab.gnome.org/GNOME/epiphany.git#branch=master")
 sha256sums=('SKIP')
 

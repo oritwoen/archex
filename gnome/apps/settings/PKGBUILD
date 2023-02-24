@@ -22,7 +22,7 @@ optdepends=('system-config-printer: Printer settings'
             'rygel: media sharing'
             'openssh: remote login'
             'power-profiles-daemon: Power profiles support')
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-control-center.git#branch=main"
         "git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git")
 sha256sums=('SKIP'

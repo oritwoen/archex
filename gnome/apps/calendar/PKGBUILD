@@ -12,7 +12,7 @@ license=(GPL)
 depends=(evolution-data-server gsettings-desktop-schemas gnome-control-center libdazzle)
 makedepends=(python appstream-glib git meson)
 optdepends=('evolution: ICS file import')
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-calendar.git#branch=main")
 sha256sums=('SKIP')
 

@@ -10,7 +10,7 @@ pkgdesc="Disk Management Utility for GNOME"
 url="https://gitlab.gnome.org/GNOME/gnome-disk-utility"
 arch=(x86_64)
 license=(GPL)
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 depends=(udisks2 gtk3 libsecret libpwquality libcanberra libdvdread libnotify parted systemd libhandy)
 makedepends=(git meson)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-disk-utility.git#branch=master")

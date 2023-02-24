@@ -11,7 +11,7 @@ arch=(any)
 license=(GPL)
 depends=(gjs libgweather-4 geoclue libadwaita)
 makedepends=(gobject-introspection appstream-glib git meson)
-groups=(gnome-core-apps)
+groups=(gnome-apps)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-weather.git#branch=main")
 sha256sums=('SKIP')
 
