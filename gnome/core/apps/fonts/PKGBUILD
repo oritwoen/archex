@@ -1,0 +1,37 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+
+pkgname=gnome-font-viewer
+pkgver=44.rc+1053+09f988a
+pkgrel=3
+pkgdesc="A font viewer utility for GNOME"
+url="https://gitlab.gnome.org/GNOME/gnome-font-viewer"
+arch=(x86_64)
+license=(GPL)
+depends=(gnome-desktop libadwaita)
+makedepends=(git meson)
+groups=(gnome-core-apps)
+source=("git+https://gitlab.gnome.org/GNOME/gnome-font-viewer.git#branch=main")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build
+
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}
+

@@ -1,0 +1,38 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+# Contributor: Silvio Knizek (killermoehre)
+
+pkgname=gnome-disk-utility
+pkgver=44.beta+3696+81f4a430
+pkgrel=3
+pkgdesc="Disk Management Utility for GNOME"
+url="https://gitlab.gnome.org/GNOME/gnome-disk-utility"
+arch=(x86_64)
+license=(GPL)
+groups=(gnome-core-apps)
+depends=(udisks2 gtk3 libsecret libpwquality libcanberra libdvdread libnotify parted systemd libhandy)
+makedepends=(git meson)
+source=("git+https://gitlab.gnome.org/GNOME/gnome-disk-utility.git#branch=master")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D man=false
+
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}
