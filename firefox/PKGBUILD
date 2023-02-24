@@ -2,7 +2,7 @@
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=firefox
-pkgver=112.0a1+653618+dd93eb14eeca
+pkgver=112.0a1+654290+4fba5295dc19
 pkgrel=1
 pkgdesc="Developer Edition of the popular Firefox web browser"
 arch=('x86_64')
