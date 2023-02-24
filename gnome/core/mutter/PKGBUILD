@@ -4,8 +4,8 @@
 # Contributor: Michael Kanis <mkanis_at_gmx_dot_de>
 
 pkgname=mutter
-pkgver=44.beta+29877+bac7b3f4e
-pkgrel=8
+pkgver=44.beta+29878+53126bf00
+pkgrel=1
 pkgdesc="Window manager and compositor for GNOME"
 url="https://gitlab.gnome.org/GNOME/mutter"
 arch=(x86_64)
