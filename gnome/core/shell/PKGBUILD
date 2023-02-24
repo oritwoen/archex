@@ -53,8 +53,10 @@ optdepends=(
   'switcheroo-control: Multi-GPU support'
 )
 groups=(gnome-core)
-source=("git+https://gitlab.gnome.org/GNOME/gnome-shell.git#branch=main")
-b2sums=('SKIP')
+source=("git+https://gitlab.gnome.org/GNOME/gnome-shell.git#branch=main"
+        "git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git")
+b2sums=('SKIP'
+        'SKIP')
 
 pkgver() {
     cd $pkgname
@@ -64,6 +66,12 @@ pkgver() {
     local _commith=$(git rev-parse --short HEAD)
 
     echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+    git submodule init
+    git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
+    git -c protocol.file.allow=always submodule update
 }
 
 build() {
