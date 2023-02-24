@@ -3,8 +3,8 @@
 # Contributor: Jan de Groot <jan@archlinux.org>
 
 pkgname=gnome-desktop
-pkgver=44.beta+3+gc319dbf8+6602+c319dbf8
-pkgrel=2
+pkgver=44.beta+6602+c319dbf8
+pkgrel=3
 pkgdesc="Library with common API for various GNOME modules"
 url="https://gitlab.gnome.org/GNOME/gnome-desktop"
 arch=(x86_64)
@@ -17,15 +17,16 @@ provides=(libgnome-desktop-3.so libgnome-{bg,desktop,rr}-4.so)
 source=("git+https://gitlab.gnome.org/GNOME/gnome-desktop.git#branch=master")
 sha256sums=('SKIP')
 
-groups=(gnome-core-deps)
+groups=(gnome-core)
 
+provides=(gnome-desktop-common gnome-desktop-4)
 replaces=(gnome-desktop-common gnome-desktop-4)
 conflicts=(gnome-desktop-common gnome-desktop-4)
 
 pkgver() {
     cd $pkgname
     
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2{print $2}')
     local _commits=$(git rev-list --count HEAD)
     local _commith=$(git rev-parse --short HEAD)
 

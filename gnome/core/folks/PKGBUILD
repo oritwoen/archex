@@ -4,8 +4,8 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 
 pkgname=folks
-pkgver=0.15.6+3008+bc03cbab
-pkgrel=8
+pkgver=0.15.6+3009+ab2719f1
+pkgrel=1
 pkgdesc="Library to aggregates people into metacontacts"
 arch=(x86_64)
 url="https://wiki.gnome.org/Projects/Folks"
@@ -16,7 +16,7 @@ provides=(libfolks.so libfolks-{dummy,eds}.so)
 source=("git+https://gitlab.gnome.org/GNOME/folks.git")
 sha256sums=('SKIP')
 
-groups(gnome-core-deps)
+groups=(gnome-core)
 
 pkgver() {
     cd $pkgname
