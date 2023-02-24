@@ -1,0 +1,41 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=file-roller
+pkgver=43.0+5320+eac4aa1c
+pkgrel=8
+pkgdesc="Create and modify archives"
+url="https://wiki.gnome.org/Apps/FileRoller"
+arch=(x86_64)
+license=(GPL)
+depends=(dconf libarchive file json-glib libnotify zip unzip)
+makedepends=(yelp-tools git nautilus meson appstream-glib)
+optdepends=('p7zip: 7z, arj, exe and encrypted zip files support'
+            'unrar: better RAR archive support'
+            'unace: ACE archive support'
+            'lrzip: lrzip archive support')
+groups=(gnome-core)
+
+source=("git+https://gitlab.gnome.org/GNOME/file-roller.git#branch=master")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build
+    
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

@@ -1,0 +1,42 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+
+pkgname=gjs
+pkgver=gjs+5077+146787f5
+pkgrel=2
+pkgdesc="Javascript Bindings for GNOME"
+url="https://wiki.gnome.org/Projects/Gjs"
+arch=(x86_64)
+license=(GPL)
+depends=(cairo gobject-introspection-runtime js78 dconf readline)
+makedepends=(gobject-introspection git meson)
+checkdepends=(valgrind xorg-server-xvfb)
+provides=(libgjs.so)
+source=("git+https://gitlab.gnome.org/GNOME/gjs.git#branch=master")
+sha256sums=('SKIP')
+
+groups=(gnome-core)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+      -D installed_tests=false \
+      -D skip_dbus_tests=true \
+      -D skip_gtk_tests=true
+
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

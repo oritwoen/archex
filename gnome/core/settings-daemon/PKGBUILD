@@ -1,4 +1,5 @@
-# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=gnome-settings-daemon
 pkgver=44.beta+6540+2c58c8ec
@@ -13,25 +14,28 @@ depends=(dconf gnome-desktop gsettings-desktop-schemas libcanberra-pulse libnoti
 makedepends=(xf86-input-wacom libxslt python git meson usbguard)
 checkdepends=(python-gobject python-dbusmock)
 optdepends=('usbguard: USB protection support')
-groups=(gnome)
+groups=(gnome-core)
+
 backup=(etc/xdg/Xwayland-session.d/00-xrdb)
-source=("git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git")
+source=("git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git#branch=master")
 sha256sums=('SKIP')
 
 pkgver() {
-    cd ${pkgname}
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
 
-    local _version=$(grep -m 1 "version:" meson.build | cut -d "'" -f2)
-
-    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+    echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-  arch-meson $pkgname build
+    arch-meson $pkgname build
 
-  meson compile -C build
+    meson compile -C build
 }
 
 package() {
-  DESTDIR="$pkgdir" meson install -C build
+    DESTDIR="$pkgdir" meson install -C build
 }
