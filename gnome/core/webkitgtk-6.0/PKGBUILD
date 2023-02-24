@@ -9,7 +9,7 @@
 
 pkgname=webkitgtk-6.0
 pkgver=2.39.90
-pkgrel=6
+pkgrel=7
 pkgdesc="Web content engine for GTK"
 url="https://webkitgtk.org"
 arch=(x86_64)
@@ -77,12 +77,9 @@ makedepends=(
 )
 
 # !lto: https://bugs.webkit.org/show_bug.cgi?id=249368
-options=(!debug !lto)
+#options=(!debug !lto)
 source=($url/releases/webkitgtk-$pkgver.tar.xz)
-sha256sums=('bb7da0346388d349f560ef0f2c666880d068e77c195cbcf644a0ae69230244b2')
-#validpgpkeys=('D7FCF61CF9A2DEAB31D81BD3F3D322D0EC4582C3'  # Carlos Garcia Campos <cgarcia@igalia.com>
-#              '5AA3BC334FD7E3369E7C77B291C559DBE4C9123B') # Adrián Pérez de Castro <aperez@igalia.com>
-
+sha256sums=('SKIP')
 prepare() {
   cd webkitgtk-$pkgver
 }

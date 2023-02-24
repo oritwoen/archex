@@ -3,7 +3,7 @@
 
 pkgname=gnome-settings-daemon
 pkgver=44.beta+6542+2ab56d7c
-pkgrel=4
+pkgrel=5
 pkgdesc="GNOME Settings Daemon"
 url="https://gitlab.gnome.org/GNOME/gnome-settings-daemon"
 arch=(x86_64)
