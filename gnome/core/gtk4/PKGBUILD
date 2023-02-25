@@ -6,9 +6,8 @@ pkgname=(
   gtk4
   gtk-update-icon-cache
 )
-pkgver=4.9.5+74996+4cf42eb19c
-pkgrel=4
-epoch=1
+pkgver=4.9.5+74998+6f7b6ad61a
+pkgrel=1
 pkgdesc="GObject-based multi-platform GUI toolkit"
 url="https://www.gtk.org/"
 arch=(x86_64)
@@ -75,8 +74,6 @@ sha256sums=('SKIP'
             'f1d3a0dbfd82f7339301abecdbe5f024337919b48bd0e09296bb0e79863b2541'
             'cd8e607eddd9941f279084e1d15309941423d26cca1897f43524a02e58e48816')
 
-provides=(libgtk-4.so)
-
 pkgver() {
     cd gtk
 
@@ -116,7 +113,7 @@ _pick() {
 package_gtk4() {
   depends+=(gtk-update-icon-cache)
   optdepends=('evince: Default print preview command')
-  provides=(libgtk-4.so)
+  provides=(libgtk-4.so libgtk-4.so=1-64)
 
   meson install -C build --destdir "$pkgdir"
 

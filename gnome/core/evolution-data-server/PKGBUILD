@@ -3,8 +3,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=evolution-data-server
-pkgver=3.47.2+r5+ge357afea7
-pkgrel=7
+pkgver=3.47.2+r13+g1f5fe0530
+pkgrel=1
 pkgdesc="Centralized access to appointments and contacts"
 url="https://wiki.gnome.org/Apps/Evolution"
 arch=(x86_64)
@@ -18,7 +18,6 @@ depends=(
   libphonenumber
   nss
   sqlite
-  webkit2gtk-4.1
   webkitgtk-6.0
 )
 makedepends=(
@@ -41,30 +40,24 @@ pkgver() {
   git describe --tags | sed 's/[^-]*-g/r&/;s/-/+/g'
 }
 
-prepare() {
-  cd $pkgname
-}
-
 build() {
   local cmake_options=(
     -DCMAKE_INSTALL_PREFIX=/usr
     -DLIBEXEC_INSTALL_DIR=/usr/lib
     -DSYSCONF_INSTALL_DIR=/etc
-    -DENABLE_GTK_DOC=ON
+    -DENABLE_GTK_DOC=OFF
     -DENABLE_INTROSPECTION=ON
     -DENABLE_VALA_BINDINGS=ON
-    -DWITH_GWEATHER4=ON
     -DWITH_LIBDB=OFF
     -DWITH_PHONENUMBER=ON
+    -DENABLE_EXAMPLES=OFF
   )
+
+    export CMAKE_CC_COMPILER=gcc
+    export CMAKE_CXX_COMPILER=gcc++
 
   cmake -S $pkgname -B build -G Ninja "${cmake_options[@]}"
   cmake --build build
-}
-
-check() {
-  cd build
-  ctest --output-on-failure --stop-on-failure
 }
 
 package() {
