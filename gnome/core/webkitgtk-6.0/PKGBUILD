@@ -8,7 +8,7 @@
 # https://src.fedoraproject.org/rpms/webkitgtk/c/f1d95b90e57fec87a68637fb6270dd7ab4dbd50f?branch=rawhide
 
 pkgname=webkitgtk-6.0
-pkgver=2.39.7
+pkgver=2.39.90
 pkgrel=7
 pkgdesc="Web content engine for GTK"
 url="https://webkitgtk.org"
