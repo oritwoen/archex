@@ -46,8 +46,8 @@ optdepends=('networkmanager: Location detection via available WiFi networks'
             'xdg-desktop-portal: Screensharing with Wayland')
 replaces=('firefox-developer')
 options=(!emptydirs !makeflags !strip !lto !debug)
-source=(hg+https://hg.mozilla.org/mozilla-central mozconfig zstandard-0.18.0.diff firefox.desktop)
-sha512sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
+source=(hg+https://hg.mozilla.org/mozilla-central mozconfig firefox.desktop)
+sha512sums=('SKIP' 'SKIP' 'SKIP')
 
 pkgver() {
     cd mozilla-central
@@ -62,8 +62,6 @@ prepare() {
   mkdir -p mozobjdir
 
   cd mozilla-central
-
-  #patch -Np1 -i ../zstandard-0.18.0.diff
 }
 
 build() {
