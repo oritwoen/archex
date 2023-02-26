@@ -52,10 +52,7 @@ build() {
     -DWITH_PHONENUMBER=ON
     -DENABLE_EXAMPLES=OFF
   )
-
-    export CMAKE_CC_COMPILER=gcc
-    export CMAKE_CXX_COMPILER=gcc++
-
+  
   cmake -S $pkgname -B build -G Ninja "${cmake_options[@]}"
   cmake --build build
 }
