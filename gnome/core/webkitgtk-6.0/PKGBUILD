@@ -104,8 +104,12 @@ build() {
 package() {
   depends+=(libwpe-1.0.so libWPEBackend-fdo-1.0.so)
   provides+=(libjavascriptcoregtk-6.0.so libwebkitgtk-6.0.so)
-  conflicts=(webkit2gtk-5.0)
+
+  #Legacy option to make other packages work.
+  provides+=(webkit2gtk-5.0)
+
   replaces=(webkit2gtk-5.0)
+  conflicts=(webkit2gtk-5.0)
   optdepends=('geoclue: Geolocation support'
               'gst-plugins-good: media decoding'
               'gst-plugins-bad: media decoding'
