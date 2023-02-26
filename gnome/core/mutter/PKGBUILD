@@ -47,6 +47,10 @@ b2sums=('SKIP')
 
 groups=(gnome-core)
 
+#LEGACY - only for correct install (gnome-shell conflict)
+#WARNING: gnome-shell should be build right after this
+provides=(libmutter-11.so=0-64)
+
 pkgver() {
     cd $pkgname
     

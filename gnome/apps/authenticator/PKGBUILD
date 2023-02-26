@@ -2,8 +2,8 @@
 # co-Maintainer: Igor Dyatlov <dyatlov.igor@protonmail.com>
 
 pkgname=authenticator
-pkgver=4.2.0+1508+e5c9b92
-pkgrel=4
+pkgver=4.2.0+1511+2ef4645
+pkgrel=1
 pkgdesc="2FA code generator for GNOME"
 arch=('any')
 url="https://gitlab.gnome.org/world/authenticator"
