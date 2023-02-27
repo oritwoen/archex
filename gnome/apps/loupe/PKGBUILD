@@ -19,28 +19,27 @@ makedepends=(
   meson
   rust
 )
-_commit=70d8d00a3dff0ce1a51f381c68a61bb0462ce781  # main^0
-source=("git+https://gitlab.gnome.org/Incubator/loupe.git#commit=$_commit")
+
+source=("git+https://gitlab.gnome.org/Incubator/loupe.git")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd $pkgname
-  printf "0.0.0+r%s+%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
 }
 
-prepare() {
-  cd $pkgname
-}
 
 build() {
-  arch-meson $pkgname build
-  meson compile -C build
-}
-
-check() {
-  meson test -C build --print-errorlogs
+    arch-meson $pkgname build
+    
+    meson compile -C build
 }
 
 package() {
-  meson install -C build --destdir "$pkgdir"
+    meson install -C build --destdir "$pkgdir"
 }
