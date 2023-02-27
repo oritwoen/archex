@@ -5,7 +5,7 @@
 
 pkgname=gnome-maps
 pkgver=44.rc+3567+2b221564
-pkgrel=1
+pkgrel=3
 pkgdesc="A simple GNOME 3 maps application"
 url="https://wiki.gnome.org/Apps/Maps"
 arch=(x86_64)

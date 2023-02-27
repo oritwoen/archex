@@ -5,7 +5,7 @@
 
 pkgname=gnome-console
 pkgver=44.rc+660+3959726
-pkgrel=1
+pkgrel=3
 pkgdesc="A simple user-friendly terminal emulator for the GNOME desktop"
 url="https://gitlab.gnome.org/GNOME/console"
 arch=(x86_64)

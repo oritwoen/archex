@@ -3,8 +3,8 @@
 # Contributor: Jan de Groot <jan@archlinux.org>
 
 pkgname=gnome-desktop
-pkgver=44.beta+6602+c319dbf8
-pkgrel=15
+pkgver=44.beta+6603+2c13b8cc
+pkgrel=1
 pkgdesc="Library with common API for various GNOME modules"
 url="https://gitlab.gnome.org/GNOME/gnome-desktop"
 arch=(x86_64)
