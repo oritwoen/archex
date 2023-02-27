@@ -3,7 +3,7 @@
 
 pkgname=gnome-clocks
 pkgver=44.beta+2561+f78d9f4
-pkgrel=3
+pkgrel=4
 pkgdesc="Clocks applications for GNOME"
 url="https://wiki.gnome.org/Apps/Clocks"
 arch=(x86_64)
