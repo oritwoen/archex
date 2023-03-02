@@ -3,8 +3,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=nautilus
-pkgver=+23839+6fecc5351
-pkgrel=4
+pkgver=+23844+376b0db4b
+pkgrel=1
 pkgdesc="Default file manager for GNOME"
 url="https://wiki.gnome.org/Apps/Files"
 arch=(x86_64)

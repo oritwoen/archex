@@ -3,8 +3,8 @@
 # Maintainer: Jan de Groot <jgc@archlinux.org>
 
 pkgname=gnome-calendar
-pkgver=44.rc+4200+a9a6e61b
-pkgrel=4
+pkgver=44.rc+4204+e8850135
+pkgrel=1
 pkgdesc="Simple and beautiful calendar application designed to perfectly fit the GNOME desktop"
 url="https://wiki.gnome.org/Apps/Calendar"
 arch=(x86_64)

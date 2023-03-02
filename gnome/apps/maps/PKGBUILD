@@ -4,8 +4,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=gnome-maps
-pkgver=44.rc+3567+2b221564
-pkgrel=4
+pkgver=44.rc+3571+47491f37
+pkgrel=1
 pkgdesc="A simple GNOME 3 maps application"
 url="https://wiki.gnome.org/Apps/Maps"
 arch=(x86_64)
