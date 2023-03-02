@@ -73,6 +73,8 @@ build() {
   export MOZBUILD_STATE_PATH="$srcdir/mozbuild"
   export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=pip
 
+  ulimit -n 4096
+
   ./mach build
 }
 
