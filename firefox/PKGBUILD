@@ -2,7 +2,7 @@
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=firefox
-pkgver=112.0a1+654462+24a4ae4377f7
+pkgver=112.0a1+655015+da5d9cb0388f
 pkgrel=1
 pkgdesc="Developer Edition of the popular Firefox web browser"
 arch=('x86_64')
@@ -49,6 +49,18 @@ options=(!emptydirs !makeflags !strip !lto !debug)
 source=(hg+https://hg.mozilla.org/mozilla-central mozconfig firefox.desktop)
 sha512sums=('SKIP' 'SKIP' 'SKIP')
 
+# Google API keys (see http://www.chromium.org/developers/how-tos/api-keys)
+# Note: These are for Arch Linux use ONLY. For your own distribution, please
+# get your own set of keys. Feel free to contact foutrelis@archlinux.org for
+# more information.
+_google_api_key=AIzaSyDwr302FpOSkGRpLlUpPThNTDPbXcIn_FM
+
+# Mozilla API keys (see https://location.services.mozilla.com/api)
+# Note: These are for Arch Linux use ONLY. For your own distribution, please
+# get your own set of keys. Feel free to contact heftig@archlinux.org for
+# more information.
+_mozilla_api_key=e05d56db0a694edc8b5aaebda3f2db6a
+
 pkgver() {
     cd mozilla-central
 
@@ -61,7 +73,8 @@ prepare() {
   mkdir -p mozbuild
   mkdir -p mozobjdir
 
-  cd mozilla-central
+  echo -n "$_google_api_key" > google-api-key
+  echo -n "$_mozilla_api_key" > mozilla-api-key
 }
 
 build() {
@@ -73,7 +86,12 @@ build() {
   export MOZBUILD_STATE_PATH="$srcdir/mozbuild"
   export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=pip
 
-  ulimit -n 4096
+  echo "Add keyfiles..."
+  cat >.mozconfig ../mozconfig - <<END
+ac_add_options --with-google-location-service-api-keyfile=${srcdir}/google-api-key
+ac_add_options --with-google-safebrowsing-api-keyfile=${srcdir}/google-api-key
+ac_add_options --with-mozilla-api-keyfile=${srcdir}/mozilla-api-key
+END
 
   ./mach build
 }
