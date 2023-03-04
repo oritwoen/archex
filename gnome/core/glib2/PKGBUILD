@@ -3,7 +3,7 @@
 
 pkgname=glib2
 pkgver=2.75.4+27008+e1c364ca2
-pkgrel=3
+pkgrel=4
 pkgdesc="Low level core library"
 url="https://wiki.gnome.org/Projects/GLib"
 license=(LGPL)
