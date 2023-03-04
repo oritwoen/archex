@@ -4,7 +4,7 @@
 # Contributor: Flamelab <panosfilip@gmail.com>
 
 pkgname=gnome-shell
-pkgver=44.beta+17574+a13d37c01
+pkgver=44.beta+17596+2b8b3d53b
 pkgrel=1
 pkgdesc="Next generation desktop shell"
 url="https://wiki.gnome.org/Projects/GnomeShell"
