@@ -4,7 +4,7 @@
 
 pkgname=gjs
 pkgver=gjs+5094+38f96bd8
-pkgrel=2
+pkgrel=3
 pkgdesc="Javascript Bindings for GNOME"
 url="https://wiki.gnome.org/Projects/Gjs"
 arch=(x86_64)
