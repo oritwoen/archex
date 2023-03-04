@@ -5,7 +5,7 @@
 
 pkgname=gnome-shell
 pkgver=44.beta+17596+2b8b3d53b
-pkgrel=1
+pkgrel=2
 pkgdesc="Next generation desktop shell"
 url="https://wiki.gnome.org/Projects/GnomeShell"
 arch=(x86_64)

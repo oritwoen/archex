@@ -3,7 +3,7 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=gnome-characters
-pkgver=44.rc+1273+b3aa18c
+pkgver=44.rc+1274+a0b2e17
 pkgrel=1
 pkgdesc="A character map application"
 arch=(x86_64)
