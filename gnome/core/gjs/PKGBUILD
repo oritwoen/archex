@@ -3,8 +3,8 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 
 pkgname=gjs
-pkgver=gjs+5094+38f96bd8
-pkgrel=5
+pkgver=1.75.2+5094+38f96bd8
+pkgrel=1
 pkgdesc="Javascript Bindings for GNOME"
 url="https://wiki.gnome.org/Projects/Gjs"
 arch=(x86_64)
@@ -21,7 +21,7 @@ groups=(gnome-core)
 pkgver() {
     cd $pkgname
     
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _version=$(grep -m 1 "version:" meson.build | cut -d "'" -f 8)
     local _commits=$(git rev-list --count HEAD)
     local _commith=$(git rev-parse --short HEAD)
 
@@ -30,9 +30,10 @@ pkgver() {
 
 build() {
     arch-meson $pkgname build \
+      -D profiler=disabled \
       -D installed_tests=false \
       -D skip_dbus_tests=true \
-      -D skip_gtk_tests=true
+      -D skip_gtk_tests=false
 
     meson compile -C build
 }
