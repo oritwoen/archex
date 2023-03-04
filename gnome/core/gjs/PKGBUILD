@@ -3,7 +3,7 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 
 pkgname=gjs
-pkgver=1.75.2+5094+38f96bd8
+pkgver=1.75.2+5099+e8aa880e
 pkgrel=1
 pkgdesc="Javascript Bindings for GNOME"
 url="https://wiki.gnome.org/Projects/Gjs"
