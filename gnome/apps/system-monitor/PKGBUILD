@@ -3,8 +3,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=gnome-system-monitor
-pkgver=44.beta+4719+d9802793
-pkgrel=5
+pkgver=44.rc+4720+f1319174
+pkgrel=1
 pkgdesc="View current processes and monitor system state"
 url="https://wiki.gnome.org/Apps/SystemMonitor"
 arch=(x86_64)
