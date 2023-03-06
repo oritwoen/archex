@@ -6,7 +6,7 @@ pkgname=(
   gtk4
   gtk-update-icon-cache
 )
-pkgver=4.10.1+75077+a899c0af6e
+pkgver=4.10.1+75118+6d2c5e51e0
 pkgrel=1
 pkgdesc="GObject-based multi-platform GUI toolkit"
 url="https://www.gtk.org/"

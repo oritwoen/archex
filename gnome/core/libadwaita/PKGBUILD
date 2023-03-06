@@ -2,7 +2,7 @@
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=libadwaita
-pkgver=1.4.alpha+3415+c15be348
+pkgver=1.4.alpha+3428+da7184bc
 pkgrel=1
 pkgdesc="Building blocks for modern adaptive GNOME applications"
 url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
