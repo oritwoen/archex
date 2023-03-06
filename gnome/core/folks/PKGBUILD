@@ -4,8 +4,8 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 
 pkgname=folks
-pkgver=0.15.6+3009+ab2719f1
-pkgrel=24
+pkgver=0.15.7+3012+a1954fca
+pkgrel=1
 pkgdesc="Library to aggregates people into metacontacts"
 arch=(x86_64)
 url="https://wiki.gnome.org/Projects/Folks"
