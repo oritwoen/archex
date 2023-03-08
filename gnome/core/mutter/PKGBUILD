@@ -63,7 +63,7 @@ pkgver() {
 
 build() {
     arch-meson mutter build \
-        -D xwayland=false \
+        -D xwayland=true \
         -D cogl_tests=false \
         -D clutter_tests=false \
         -D core_tests=false \
