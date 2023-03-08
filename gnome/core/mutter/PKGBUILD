@@ -63,8 +63,7 @@ pkgver() {
 
 build() {
     arch-meson mutter build \
-        -D egl_device=true \
-        -D wayland_eglstream=true \
+        -D xwayland=false \
         -D cogl_tests=false \
         -D clutter_tests=false \
         -D core_tests=false \

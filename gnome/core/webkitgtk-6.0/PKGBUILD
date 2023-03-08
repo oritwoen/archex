@@ -9,7 +9,7 @@
 
 pkgname=webkitgtk-6.0
 pkgver=2.39.90
-pkgrel=19
+pkgrel=20
 pkgdesc="Web content engine for GTK"
 url="https://webkitgtk.org"
 arch=(x86_64)

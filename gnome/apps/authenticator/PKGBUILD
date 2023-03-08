@@ -3,7 +3,7 @@
 
 pkgname=authenticator
 pkgver=4.2.0+1512+12b5db4
-pkgrel=5
+pkgrel=6
 pkgdesc="2FA code generator for GNOME"
 arch=('any')
 url="https://gitlab.gnome.org/world/authenticator"

@@ -4,7 +4,7 @@
 
 pkgname=baobab
 pkgver=44.0+2160+e39eca7
-pkgrel=1
+pkgrel=2
 pkgdesc="A graphical directory tree analyzer"
 url="https://wiki.gnome.org/Apps/DiskUsageAnalyzer"
 arch=(x86_64)

@@ -4,7 +4,7 @@
 
 pkgname=nautilus
 pkgver=+23859+d73bd43a0
-pkgrel=1
+pkgrel=2
 pkgdesc="Default file manager for GNOME"
 url="https://wiki.gnome.org/Apps/Files"
 arch=(x86_64)
