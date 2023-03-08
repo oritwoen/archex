@@ -33,7 +33,7 @@ build() {
       -D profiler=disabled \
       -D installed_tests=false \
       -D skip_dbus_tests=true \
-      -D skip_gtk_tests=false
+      -D skip_gtk_tests=true
 
     meson compile -C build
 }

@@ -2,7 +2,7 @@
 # Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
 
 pkgname=loupe
-pkgver=44.alpha+219+f80ec7d
+pkgver=44.alpha+224+9535b33
 pkgrel=1
 pkgdesc="A simple image viewer for GNOME"
 url="https://gitlab.gnome.org/Incubator/loupe"
