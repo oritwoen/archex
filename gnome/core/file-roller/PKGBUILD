@@ -4,7 +4,7 @@
 
 pkgname=file-roller
 pkgver=43.0+5320+eac4aa1c
-pkgrel=30
+pkgrel=31
 pkgdesc="Create and modify archives"
 url="https://wiki.gnome.org/Apps/FileRoller"
 arch=(x86_64)
