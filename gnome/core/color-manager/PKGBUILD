@@ -3,7 +3,7 @@
 
 pkgname=gnome-color-manager
 pkgver=3.36.1+2904+36ba6ff0
-pkgrel=7
+pkgrel=8
 pkgdesc="GNOME Color Profile Tools"
 url="https://gitlab.gnome.org/GNOME/gnome-color-manager"
 arch=(x86_64)
