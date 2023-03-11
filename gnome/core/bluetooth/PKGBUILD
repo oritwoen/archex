@@ -1,27 +1,21 @@
 # Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
 
-pkgname=loupe
-pkgver=44.alpha+233+dafdc97
+pkgname=gnome-bluetooth
+pkgdesc="GNOME Bluetooth Subsystem"
+license=(GPL LGPL)
+
+arch=(x86_64)
+pkgver=42.5+3647+01706fac
 pkgrel=1
-pkgdesc="A simple image viewer for GNOME"
-url="https://gitlab.gnome.org/Incubator/loupe"
-arch=(any)
-license=(GPL)
-depends=(
-  gtk4
-  libadwaita
-  libgweather-4
-)
-makedepends=(
-  git
-  itstool
-  meson
-  rust
-)
 
-source=("git+https://gitlab.gnome.org/Incubator/loupe.git")
-sha256sums=('SKIP')
+url=https://wiki.gnome.org/Projects/GnomeBluetooth
+
+depends=(gtk4 libadwaita libnotify bluez gsound systemd pulseaudio-bluetooth upower)
+makedepends=(gobject-introspection git meson)
+
+groups=(gnome/core)
+source=(git+https://gitlab.gnome.org/gnome/gnome-bluetooth.git)
+b2sums=(SKIP)
 
 pkgver() {
     cd $pkgname
@@ -32,7 +26,6 @@ pkgver() {
 
     echo ${_version}+${_commits}+${_commith}
 }
-
 
 build() {
     arch-meson $pkgname build
