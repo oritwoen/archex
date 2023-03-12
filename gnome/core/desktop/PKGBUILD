@@ -4,7 +4,7 @@
 
 pkgname=gnome-desktop
 pkgver=44.beta+6605+24a17fda
-pkgrel=2
+pkgrel=3
 pkgdesc="Library with common API for various GNOME modules"
 url="https://gitlab.gnome.org/GNOME/gnome-desktop"
 arch=(x86_64)
