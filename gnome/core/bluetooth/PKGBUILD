@@ -6,7 +6,7 @@ license=(GPL LGPL)
 
 arch=(x86_64)
 pkgver=42.5+3647+01706fac
-pkgrel=1
+pkgrel=2
 
 url=https://wiki.gnome.org/Projects/GnomeBluetooth
 
