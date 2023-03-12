@@ -3,7 +3,7 @@
 
 pkgname=libadwaita
 pkgver=1.4.alpha+3434+3183d44f
-pkgrel=1
+pkgrel=2
 pkgdesc="Building blocks for modern adaptive GNOME applications"
 url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
 arch=(x86_64)
