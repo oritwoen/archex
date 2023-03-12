@@ -5,7 +5,7 @@
 
 pkgname=adwaita-icon-theme
 pkgver=44.beta+r3+gea00e436a+3828+ea00e436a
-pkgrel=6
+pkgrel=7
 pkgdesc="GNOME standard icons"
 url="https://gitlab.gnome.org/GNOME/adwaita-icon-theme"
 arch=(any)
