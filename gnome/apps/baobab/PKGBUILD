@@ -3,7 +3,7 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 
 pkgname=baobab
-pkgver=44.0+2162+ef12fc7
+pkgver=44.0+2165+1d2aa0c
 pkgrel=1
 pkgdesc="A graphical directory tree analyzer"
 url="https://wiki.gnome.org/Apps/DiskUsageAnalyzer"

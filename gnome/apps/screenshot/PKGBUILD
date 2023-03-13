@@ -3,7 +3,7 @@
 
 pkgname=gnome-screenshot
 pkgver=41.0+1422+9f067cf
-pkgrel=3
+pkgrel=4
 pkgdesc="Take pictures of your screen"
 url="https://gitlab.gnome.org/GNOME/gnome-screenshot"
 arch=(x86_64)

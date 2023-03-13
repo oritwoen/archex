@@ -3,7 +3,7 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 
 pkgname=gnome-contacts
-pkgver=44.rc+3817+d7b5446f
+pkgver=44.rc+3825+bce488fb
 pkgrel=1
 pkgdesc="Contacts Manager for GNOME"
 url="https://wiki.gnome.org/Apps/Contacts"

@@ -3,8 +3,8 @@
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=gnome-font-viewer
-pkgver=44.0+1072+9e08f28
-pkgrel=3
+pkgver=44.0+1074+3e9c1e7
+pkgrel=1
 pkgdesc="A font viewer utility for GNOME"
 url="https://gitlab.gnome.org/GNOME/gnome-font-viewer"
 arch=(x86_64)

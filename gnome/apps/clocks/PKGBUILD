@@ -2,7 +2,7 @@
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 
 pkgname=gnome-clocks
-pkgver=44.rc+2579+e9db397
+pkgver=44.rc+2581+efcadc6
 pkgrel=1
 pkgdesc="Clocks applications for GNOME"
 url="https://wiki.gnome.org/Apps/Clocks"
