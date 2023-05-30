@@ -7,7 +7,7 @@ for D in ./$1/*/; do
             PKGREL=$(grep -m 1 "^pkgrel=" PKGBUILD | cut -d "=" -f2)
             PKGREL=$((${PKGREL} + 1))
             sed -i "s/^pkgrel=.*/pkgrel=${PKGREL}/" PKGBUILD
-            makepkg -Cisf --noconfirm)
+            paru -U --localrepo --skipreview --rebuild)
         else
             echo "No PKGBUILD found in $D."
         fi
