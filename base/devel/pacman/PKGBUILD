@@ -1,33 +1,58 @@
 # Maintainer: Dominik Opyd <dominik.opyd@gmail.com>
+# Contributor: Levente Polyak <anthraxx[at]archlinux[dot]org>
 # Contributor: Morten Linderud <foxboron@archlinux.org>
 
 pkgname=pacman
-pkgver=6.0.1+7210+262aa6c2
-pkgrel=41
 pkgdesc="A library-based package manager with dependency support"
-arch=('x86_64')
-url="https://www.archlinux.org/pacman/"
 license=('GPL')
+
+arch=('x86_64')
+pkgver=6.0.1+7214+2c45e854
+pkgrel=1
+
+url="https://www.archlinux.org/pacman/"
+
 groups=('base-devel')
-depends=('bash' 'glibc' 'libarchive' 'curl' 'gpgme' 'pacman-mirrorlist'
-         'gettext' 'gawk' 'coreutils' 'gnupg' 'grep')
-makedepends=('meson')
-checkdepends=('python' 'fakechroot')
-optdepends=('perl-locale-gettext: translation support in makepkg-template')
+depends=(
+    curl
+    bash
+    grep
+    gawk
+    gpgme
+    glibc
+    gnupg
+    gettext
+    coreutils
+    libarchive 
+    pacman-mirrorlist
+    coreutils
+)
+
+makedepends=(
+    meson
+)
+
+source=(
+    pacman.conf
+    makepkg.conf
+    git+https://gitlab.archlinux.org/pacman/pacman.git
+)
+b2sums=(
+    SKIP
+    SKIP
+    SKIP
+)
+
 provides=('libalpm.so')
-source=(git+https://gitlab.archlinux.org/pacman/pacman.git
-        pacman.conf
-        makepkg.conf)
-sha256sums=('SKIP'
-            'SKIP'
-            'SKIP')
 
 pkgver() {
-    cd ${pkgname}
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
 
-    local _version=$(cat meson.build | grep "version :" | sed -n 1p | cut -d "'" -f2 | cut -d "'" -f1)
-
-    echo ${_version}+$(git rev-list --count HEAD)+$(git rev-parse --short HEAD)
+    echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
