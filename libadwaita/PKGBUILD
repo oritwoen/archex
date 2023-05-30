@@ -2,18 +2,27 @@
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=libadwaita
-pkgver=1.4.alpha+3434+3183d44f
-pkgrel=2
 pkgdesc="Building blocks for modern adaptive GNOME applications"
-url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
-arch=(x86_64)
 license=(LGPL)
-#depends=(gtk4)
-makedepends=(git meson sassc gobject-introspection vala)
-source=("git+https://gitlab.gnome.org/GNOME/libadwaita.git#branch=main")
-sha256sums=('SKIP')
 
+arch=(x86_64)
+pkgver=1.4.alpha+3624+3033b9d8
+pkgrel=1
+
+url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
+
+depends=(gtk4)
+makedepends=(
+    git
+    vala
+    meson
+    sassc
+    gobject-introspection
+)
+
+b2sums=(SKIP)
 groups=(gnome-core)
+source=(git+https://gitlab.gnome.org/GNOME/libadwaita.git#branch=main)
 
 pkgver() {
     cd $pkgname
