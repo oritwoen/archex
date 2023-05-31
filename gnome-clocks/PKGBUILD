@@ -2,17 +2,30 @@
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 
 pkgname=gnome-clocks
-pkgver=44.rc+2581+efcadc6
-pkgrel=1
 pkgdesc="Clocks applications for GNOME"
-url="https://wiki.gnome.org/Apps/Clocks"
-arch=(x86_64)
 license=(GPL)
-depends=(libgweather gnome-desktop geoclue2 geocode-glib gsound libhandy)
-makedepends=(vala gobject-introspection yelp-tools git meson)
-groups=(gnome-apps)
-source=("git+https://gitlab.gnome.org/GNOME/gnome-clocks.git")
-sha256sums=('SKIP')
+
+arch=(x86_64)
+pkgver=44.0+2593+89838c1
+pkgrel=1
+
+url="https://wiki.gnome.org/Apps/Clocks"
+
+depends=(
+    gtk4
+    gsound
+    geoclue
+    libadwaita
+    libgweather-4
+    geocode-glib-2
+    gnome-desktop-4
+)
+
+makedepends=(git vala meson yelp-tools gobject-introspection)
+
+b2sums=(SKIP)
+groups=(gnome)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-clocks.git#branch=master)
 
 pkgver() {
     cd $pkgname
@@ -31,5 +44,5 @@ build() {
 }
 
 package() {
-    DESTDIR="$pkgdir" meson install -C build
+    meson install -C build --destdir "$pkgdir"
 }

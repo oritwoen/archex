@@ -1,0 +1,45 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Lukas Fleischer <lfleischer@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=adwaita-icon-theme
+pkgdesc="GNOME standard icons"
+license=(LGPL3 CCPL:by-sa)
+
+arch=(any)
+pkgver=44.0+3899+5700860a5
+pkgrel=1
+
+url="https://gitlab.gnome.org/GNOME/adwaita-icon-theme"
+
+depends=(librsvg hicolor-icon-theme gtk-update-icon-cache)
+makedepends=(git gtk3)
+
+b2sums=(SKIP)
+groups=(gnome)
+source=(git+https://gitlab.gnome.org/GNOME/adwaita-icon-theme.git#branch=master)
+
+provides=(adwaita-cursors)
+replaces=(adwaita-cursors)
+conflicts=(adwaita-cursors)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $4}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build
+
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

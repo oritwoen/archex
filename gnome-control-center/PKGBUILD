@@ -1,0 +1,56 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=gnome-control-center
+pkgdesc="GNOME's main interface to configure various aspects of the desktop"
+license=(GPL2)
+
+arch=(x86_64)
+pkgver=45.alpha+22405+e1c8f9b29
+pkgrel=1
+
+url="https://gitlab.gnome.org/GNOME/gnome-control-center"
+
+depends=(bolt smbclient gtk4 gcr libmm-glib udisks2 libpwquality libadwaita libgtop libgudev libgnomekbd gnome-bluetooth-3.0 gnome-settings-daemon gnome-shell gnome-color-manager colord-gtk4 gnome-online-accounts gsettings-desktop-schemas libibus libmalcontent accountsservice libnma-gtk4 cups-pk-helper upower sound-theme-freedesktop gnome-desktop-4)
+makedepends=(git meson python docbook-xsl modemmanager)
+
+b2sums=(SKIP SKIP)
+groups=(gnome)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-control-center.git#branch=main
+        git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+  cd $pkgname
+
+  git submodule init subprojects/gvc
+  git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
+  git -c protocol.file.allow=always submodule update
+}
+
+
+build() {
+    arch-meson $pkgname build \
+      -D tests=false \
+      -D malcontent=true
+    
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+
+    install -d -o root -g 102 -m 750 "$pkgdir/usr/share/polkit-1/rules.d"
+}
+

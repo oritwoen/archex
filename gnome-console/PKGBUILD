@@ -4,17 +4,21 @@
 # Contributor: Igor Dyatlov <dyatlov.igor@gmail.com>
 
 pkgname=gnome-console
-pkgver=44.rc+674+5de93cd
-pkgrel=1
 pkgdesc="A simple user-friendly terminal emulator for the GNOME desktop"
-url="https://gitlab.gnome.org/GNOME/console"
-arch=(x86_64)
 license=(GPL3)
-depends=(libgtop libadwaita vte4)
-makedepends=(appstream-glib git meson)
-groups=(gnome-apps)
-source=("$pkgname::git+https://gitlab.gnome.org/GNOME/console.git#branch=main")
-sha256sums=('SKIP')
+
+arch=(x86_64)
+pkgver=45.alpha+690+ad52a39
+pkgrel=1
+
+url="https://gitlab.gnome.org/GNOME/console"
+
+depends=(vte4 libgtop libadwaita)
+makedepends=(git meson appstream-glib)
+
+b2sums=(SKIP)
+groups=(gnome)
+source=($pkgname::git+https://gitlab.gnome.org/GNOME/console.git#branch=main)
 
 pkgver() {
     cd $pkgname
