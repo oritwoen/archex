@@ -7,7 +7,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=44.0+2593+89838c1
-pkgrel=1
+pkgrel=2
 
 url="https://wiki.gnome.org/Apps/Clocks"
 
