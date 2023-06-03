@@ -9,7 +9,7 @@ license=(LGPL3 CCPL:by-sa)
 
 arch=(any)
 pkgver=44.0+3900+ced053a12
-pkgrel=1
+pkgrel=2
 
 url="https://gitlab.gnome.org/GNOME/adwaita-icon-theme"
 
