@@ -6,12 +6,12 @@ pkgdesc="A simple image viewer for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=44.3+449+43fa219
-pkgrel=1
+pkgver=45.alpha+521+2d7e05c
+pkgrel=2
 
 url="https://gitlab.gnome.org/Incubator/loupe"
 
-depends=(gtk4 libadwaita libgweather-4)
+depends=(gtk4 lcms2 libheif libadwaita libgweather-4)
 makedepends=(git meson rust itstool)
 
 b2sums=(SKIP)

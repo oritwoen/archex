@@ -1,0 +1,90 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Maxime Gauduin <alucryd@archlinux.org>
+# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
+# Contributor: sebikul <sebikul@gmail.com>
+# Contributor: Massimiliano Torromeo <massimiliano.torromeo@gmail.com>
+
+pkgname=geary
+pkgdesc='A lightweight email client for the GNOME desktop'
+license=(GPL3)
+
+arch=(x86_64)
+pkgver=44.0+7033+83b97630c
+pkgrel=2
+
+url=https://wiki.gnome.org/Apps/Geary
+
+depends=(
+  at-spi2-core
+  cairo
+  dconf
+  enchant
+  folks
+  gcr
+  gdk-pixbuf2
+  glib2
+  glibc
+  gmime3
+  gnome-online-accounts
+  gsound
+  gspell
+  gtk3
+  hicolor-icon-theme
+  icu
+  iso-codes
+  json-glib
+  libgee
+  libhandy
+  libpeas
+  libsecret
+  libsoup3
+  libstemmer
+  libunwind
+  libxml2
+  libytnef
+  org.freedesktop.secrets
+  pango
+  sqlite
+  webkit2gtk-4.1
+)
+
+makedepends=(
+  appstream-glib
+  cmake
+  git
+  gobject-introspection
+  meson
+  vala
+  yelp-tools
+)
+
+b2sums=(SKIP)
+groups=(gnome-extra)
+source=(git+https://gitlab.gnome.org/GNOME/geary.git#branch=main)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type"
+
+    local meson_options=(
+        -D profile=release
+        -D valadoc=disabled
+    )
+  
+  arch-meson $pkgname build "${meson_options[@]}"
+  
+  meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "${pkgdir}"
+}

@@ -1,0 +1,46 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Sébastien Luttringer <seblu@archlinux.org>
+# Contributor: Tom Gundersen <teg@jklm.no>
+# Contributor: Joel Teichroeb <joel@teichroeb.net>
+
+pkgname=wayland
+pkgdesc='A computer display server protocol'
+license=('MIT')
+
+arch=('x86_64')
+pkgver=1.22.90+2518+72da004
+pkgrel=6
+
+url='https://wayland.freedesktop.org/'
+
+depends=('glibc' 'libffi' 'expat' 'libxml2' 'default-cursors')
+makedepends=('meson' 'libxslt' 'xmlto' 'graphviz')
+
+b2sums=(SKIP)
+source=(git+https://gitlab.freedesktop.org/wayland/wayland#branch=main)
+
+provides=(libwayland-{client,cursor,egl,server}.so)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D tests=false \
+        -D documentation=false
+        
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+    
+    install -Dm 644 $pkgname/COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}

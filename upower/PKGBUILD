@@ -1,0 +1,59 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=upower
+pkgdesc="Abstraction for enumerating power devices, listening to device events and querying history and statistics"
+license=(GPL)
+
+arch=(x86_64)
+pkgver=1.90.2+1671+8dcf544
+pkgrel=18
+
+url="https://upower.freedesktop.org"
+
+depends=(
+  libgudev
+  libimobiledevice
+  systemd
+  usbmuxd
+)
+
+makedepends=(
+  docbook-xsl
+  git
+  gobject-introspection
+  gtk-doc
+  meson
+  python
+)
+
+source=(git+https://gitlab.freedesktop.org/upower/upower.git#commit=8dcf54440d7eb58b75d7982bc1c29ee35dccf0c2)
+b2sums=(SKIP)
+
+provides=(libupower-glib.so)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D man=false \
+        -D gtk-doc=false
+    
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+    
+    # Remove installed-tests
+    rm -rv "$pkgdir"/usr/{lib/upower,share/installed-tests}
+}

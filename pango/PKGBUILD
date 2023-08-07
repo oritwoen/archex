@@ -1,0 +1,52 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=pango
+pkgdesc="A library for layout and rendering of text"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=1.51.0+6295+a6b4b776
+pkgrel=4
+
+url="https://www.pango.org/"
+
+depends=(
+  cairo
+  fribidi
+  harfbuzz
+  libthai
+  libxft
+)
+
+makedepends=(
+  git
+  gobject-introspection
+  meson
+)
+
+b2sums=('SKIP')
+source=(git+https://gitlab.gnome.org/GNOME/pango.git#branch=main)
+
+provides=(libpango{,cairo,ft2,xft}-1.0.so libpango-1.0.so=0-64)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson pango build
+    
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

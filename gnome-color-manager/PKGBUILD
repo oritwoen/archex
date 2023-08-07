@@ -1,0 +1,40 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
+
+pkgname=gnome-color-manager
+pkgdesc="GNOME Color Profile Tools"
+license=(GPL2)
+
+arch=(x86_64)
+pkgver=3.36.1+2904+36ba6ff0
+pkgrel=35
+
+url="https://gitlab.gnome.org/GNOME/gnome-color-manager"
+
+depends=(shared-color-targets colord lcms2)
+makedepends=(yelp-tools git appstream-glib meson perl-sgmls)
+
+b2sums=(SKIP)
+groups=(gnome)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-color-manager.git#branch=master)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson $pkgname build \
+		-D tests=false
+
+    meson compile -C build
+}
+
+package() {
+	DESTDIR="$pkgdir" meson install -C build
+}

@@ -1,0 +1,78 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+# Contributor: Michael Kanis <mkanis_at_gmx_dot_de>
+
+pkgname=mutter
+pkgdesc="Window manager and compositor for GNOME"
+license=(GPL)
+
+arch=(x86_64)
+pkgrel=1
+pkgver=45.alpha+30412+5a33e9843
+
+url="https://gitlab.gnome.org/GNOME/mutter"
+
+depends=(
+  colord
+  dconf
+  gnome-desktop-4
+  gnome-settings-daemon
+  graphene
+  gsettings-desktop-schemas
+  iio-sensor-proxy
+  lcms2
+  libcanberra
+  libgudev
+  libinput
+  libsm
+  libsysprof-capture
+  libxkbcommon-x11
+  libxkbfile
+  pipewire
+  startup-notification
+  xorg-xwayland
+)
+
+makedepends=(
+  egl-wayland
+  gi-docgen
+  git
+  gobject-introspection
+  gtk3
+  meson
+  sysprof
+  wayland-protocols
+  xorg-server
+  xorg-server-xvfb
+)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/mutter.git#branch=main)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson mutter build \
+        -D cogl_tests=false \
+        -D clutter_tests=false \
+        -D native_tests=false \
+        -D tests=false \
+        -D profiler=false \
+        -D installed_tests=false
+  
+    meson compile -C build
+}
+
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

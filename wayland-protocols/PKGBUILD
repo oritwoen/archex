@@ -1,0 +1,39 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Sébastien Luttringer <seblu@seblu.net>
+
+pkgname=wayland-protocols
+pkgdesc='Specifications of extended Wayland protocols'
+license=('MIT')
+
+arch=('any')
+pkgver=1.32+335+5293896
+pkgrel=6
+
+url='https://wayland.freedesktop.org/'
+makedepends=('wayland' 'meson' 'ninja')
+
+b2sums=(SKIP)
+source=(git+https://gitlab.freedesktop.org/wayland/wayland-protocols#branch=main)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+      -D tests=false
+
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+    
+    install -Dm 644 $pkgname/COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}

@@ -1,0 +1,69 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Bruno Pagani <archange@archlinux.org>
+# Contributor: Filipe Laíns (FFY00) <lains@archlinux.org>
+# Contributor: Frederik Schwan <freswa at archlinux dot org>
+# Contributor: Mirco Tischler <mt-ml at gmx dot de>
+
+pkgname=fwupd
+pkgdesc="Simple daemon to allow session software to update firmware"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=1.9.4+9027+1fbed0ffd
+pkgrel=1
+
+url="https://github.com/fwupd/fwupd" 
+
+depends=(libxmlb efivar python libsmbios libgusb
+         polkit shared-mime-info tpm2-tss flashrom
+         libjcat fwupd-efi gcab hicolor-icon-theme
+         bluez gnutls
+         libarchive.so libcurl.so libcbor.so
+         libjson-glib-1.0.so libgudev-1.0.so libmm-glib.so
+         libqmi-glib.so libprotobuf-c.so)
+
+makedepends=(meson valgrind gobject-introspection gi-docgen
+             python-cairo noto-fonts noto-fonts-cjk python-gobject vala
+             bash-completion python-pillow gnu-efi-libs)
+
+backup=('etc/fwupd/fwupd.conf'
+        'etc/fwupd/remotes.d/dell-esrt.conf'
+        'etc/fwupd/remotes.d/fwupd-tests.conf'
+        'etc/fwupd/remotes.d/lvfs-testing.conf'
+        'etc/fwupd/remotes.d/lvfs.conf'
+        'etc/fwupd/remotes.d/vendor-directory.conf'
+        'etc/fwupd/remotes.d/vendor.conf'
+)
+
+b2sums=(SKIP)
+source=(git+https://github.com/fwupd/fwupd#branch=main)
+
+provides=(libfwupd.so)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D docs=disabled \
+        -D man=false \
+        -D tests=false \
+        -D supported_build=enabled \
+        -D fish_completion=false
+
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+
+    # Fixup mode to match polkit
+    install -d -o root -g 102 -m 750 "${pkgdir}"/usr/share/polkit-1/rules.d
+}

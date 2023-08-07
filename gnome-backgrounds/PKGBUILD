@@ -1,0 +1,39 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=gnome-backgrounds
+pkgdesc="Background images and data for GNOME"
+license=(CCPL:by-sa)
+
+arch=(any)
+pkgver=45.beta+1428+ead74c7
+pkgrel=2
+
+url="https://gitlab.gnome.org/GNOME/gnome-backgrounds"
+
+depends=(webp-pixbuf-loader)
+makedepends=(glib2 meson)
+
+b2sums=(SKIP)
+groups=(gnome)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-backgrounds)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  arch-meson $pkgname build
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir "$pkgdir"
+}

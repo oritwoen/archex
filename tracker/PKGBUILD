@@ -1,0 +1,87 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
+# Contributor: Alexander Fehr <pizzapunk gmail com>
+
+pkgname=tracker
+pkgdesc="Desktop-neutral user information store, search tool and indexer"
+license=(GPL)
+
+arch=(x86_64)
+pkgver=3.6.alpha+15393+78a1ed11d
+pkgrel=2
+
+url="https://wiki.gnome.org/Projects/Tracker"
+
+depends=(
+  glib2
+  icu
+  json-glib
+  libsoup3
+  libstemmer
+  libxml2
+  sqlite
+)
+
+makedepends=(
+  asciidoc
+  bash-completion
+  dbus
+  gi-docgen
+  git
+  gobject-introspection
+  libsoup
+  meson
+  python-dbus
+  python-gobject
+  python-tappy
+  systemd
+  vala
+)
+
+b2sums=(
+    SKIP
+    SKIP
+)
+source=(
+    git+https://gitlab.gnome.org/GNOME/gvdb.git
+    git+https://gitlab.gnome.org/GNOME/tracker.git
+)
+
+provides=(libtracker-sparql-3.0.so tracker3)
+replaces=(tracker3)
+conflicts=(tracker3)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+    cd $pkgname
+    
+    git submodule init
+    git submodule set-url subprojects/gvdb "$srcdir/gvdb"
+    git -c protocol.file.allow=always submodule update
+}
+
+build() {
+    local meson_options=(
+        -D docs=false
+        -D man=false
+        -D tests=false
+        -D test_utils=false
+    )
+    
+    arch-meson tracker build "${meson_options[@]}"
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

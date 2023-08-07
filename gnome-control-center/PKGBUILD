@@ -8,18 +8,20 @@ pkgdesc="GNOME's main interface to configure various aspects of the desktop"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.alpha+22443+fc4703423
+pkgver=45.beta+22578+4a0d924af
 pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/gnome-control-center"
 
 depends=(bolt smbclient gtk4 gcr libmm-glib udisks2 libpwquality libadwaita libgtop libgudev libgnomekbd gnome-bluetooth-3.0 gnome-settings-daemon gnome-shell gnome-color-manager colord-gtk4 gnome-online-accounts gsettings-desktop-schemas libibus libmalcontent accountsservice libnma-gtk4 cups-pk-helper upower sound-theme-freedesktop gnome-desktop-4)
-makedepends=(git meson python docbook-xsl modemmanager)
+makedepends=(git meson python modemmanager)
 
 b2sums=(SKIP SKIP)
 groups=(gnome)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-control-center.git#branch=main
         git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git)
+
+options=(!lto)
 
 pkgver() {
     cd $pkgname
@@ -41,6 +43,8 @@ prepare() {
 
 
 build() {
+    CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type"
+
     arch-meson $pkgname build \
       -D tests=false \
       -D malcontent=true

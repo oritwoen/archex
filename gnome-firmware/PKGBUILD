@@ -1,0 +1,37 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Bruno Pagani <archange@archlinux.org>
+
+pkgname=gnome-firmware
+pkgdesc="Manage firmware on devices supported by fwupd"
+license=(GPL2)
+
+arch=(x86_64)
+pkgver=43.3+285+02a9378
+pkgrel=1
+
+url="https://gitlab.gnome.org/world/gnome-firmware"
+
+depends=(gtk4 glib2 fwupd libadwaita libxmlb systemd)
+makedepends=(meson)
+source=(git+https://gitlab.gnome.org/world/gnome-firmware#branch=master)
+sha256sums=('SKIP')
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  arch-meson ${pkgname} build -D man=false
+
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir "${pkgdir}"
+}

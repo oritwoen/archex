@@ -1,0 +1,61 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jan@archlinux.org>
+
+
+pkgname=gnome-desktop
+pkgdesc="Library with common API for various GNOME modules"
+license=(GPL LGPL)
+
+arch=(x86_64)
+pkgrel=26
+pkgver=44.0+6612+7b2fa273
+
+url="https://gitlab.gnome.org/GNOME/gnome-desktop"
+
+makedepends=(
+  bubblewrap
+  git
+  gobject-introspection
+  gsettings-desktop-schemas
+  gtk-doc
+  gtk3
+  gtk4
+  iso-codes
+  libseccomp
+  libxkbcommon
+  meson
+  systemd
+  xkeyboard-config
+  yelp-tools
+)
+
+provides=(libgnome-desktop-3.so libgnome-{bg,desktop,rr}-4.so)
+source=("git+https://gitlab.gnome.org/GNOME/gnome-desktop.git#branch=master")
+b2sums=('SKIP')
+
+provides=(gnome-desktop-common gnome-desktop-4)
+replaces=(gnome-desktop-common gnome-desktop-4)
+conflicts=(gnome-desktop-common gnome-desktop-4)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D desktop_docs=false \
+        -D debug_tools=false
+
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

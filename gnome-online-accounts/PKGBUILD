@@ -1,0 +1,61 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+
+pkgname=gnome-online-accounts
+pkgdesc="Single sign-on framework for GNOME"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=3.49.0+2832+028dc714
+pkgrel=1
+
+url="https://wiki.gnome.org/Projects/GnomeOnlineAccounts"
+
+depends=(
+  gcr
+  json-glib
+  krb5
+  libnotify
+  librest
+  libsecret
+  webkit2gtk-4.1
+)
+
+makedepends=(
+  git
+  gobject-introspection
+  meson
+  vala
+)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-online-accounts.git)
+
+provides=(libgoa-backend-1.0.so libgoa-1.0.so libgoa)
+replaces=(libgoa)
+conflicts=(libgoa)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    local meson_options=(
+        -D media_server=true
+    )
+    
+    arch-meson $pkgname build "${meson_options[@]}"
+    
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

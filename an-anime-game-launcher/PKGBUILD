@@ -1,0 +1,75 @@
+# Maintainer: DrakeTDL <everyone@disroot.org>
+pkgname="an-anime-game-launcher"
+pkgver=3.8.0+745+f359be9
+pkgrel=2
+pkgdesc="A Launcher for a specific anime game with auto-patching, discord rpc and time tracking"
+arch=("x86_64")
+url="https://github.com/an-anime-team/an-anime-game-launcher"
+license=("GPL3")
+depends=(
+  cabextract
+  curl
+  git
+  glibc
+  gtk4
+  iputils
+  libadwaita
+  tar
+  unzip
+  xdelta3
+)
+makedepends=(rust)
+optdepends=(
+  "mangohud: FPS Hud/GUI"
+  "gamemode: Game Optimizations"
+  "gamescope: a tool from Valve that allows for games to run in an isolated Xwayland instance"
+)
+source=(
+  "git+https://github.com/an-anime-team/an-anime-game-launcher"
+  "$pkgname.desktop"
+)
+sha256sums=(
+  SKIP
+  "3bb15b29fd47e60ead712a67046daf42bd0ba5547d379ead6ea9bba37ea7b137"
+)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 'version = ' Cargo.toml | awk -F '["]' '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	cd $pkgname
+
+	#git switch next
+}
+
+build() {
+	cd $pkgname
+	
+  #LDFLAGS+=" -fuse-ld=lld"
+
+  #export CC=gcc
+  #export CXX=gcc++
+
+	cargo build --release
+}
+
+package() {
+	cd $pkgname
+	
+	install -dm755 "${pkgdir}/usr/lib/${pkgname}"
+	install -dm755 "${pkgdir}/usr/bin/"
+	
+	cp target/release/anime-game-launcher "${pkgdir}/usr/lib/${pkgname}/${$pkgname}"
+	ln -s "/usr/lib/${pkgname}/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+	
+	install -Dm644 "assets/images/icon.png" "${pkgdir}/usr/share/pixmaps/an-anime-game-launcher.png"
+	install -Dm644 "assets/images/icon.png" "${pkgdir}/usr/share/icons/moe.launcher.an-anime-game-launcher.png"
+	install -Dm644 "${srcdir}/an-anime-game-launcher.desktop" -t "${pkgdir}/usr/share/applications"
+}

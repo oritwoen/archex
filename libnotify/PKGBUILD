@@ -1,0 +1,55 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=libnotify
+pkgdesc="Library for sending desktop notifications"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=0.8.2+492+69aff6e
+pkgrel=12
+
+url="https://gitlab.gnome.org/GNOME/libnotify"
+
+license=(LGPL)
+
+depends=(gdk-pixbuf2)
+makedepends=(
+  docbook-xsl
+  gi-docgen
+  git
+  gobject-introspection
+  gtk3
+  meson
+  xmlto
+)
+
+source=(git+https://gitlab.gnome.org/GNOME/libnotify.git)
+b2sums=(SKIP)
+
+provides=(libnotify.so)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D tests=false \
+        -D man=false \
+        -D gtk_doc=false \
+        -D docbook_docs=disabled
+
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

@@ -1,0 +1,58 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=gnome-maps
+pkgdesc="A simple GNOME 3 maps application"
+license=(GPL)
+
+arch=(x86_64)
+pkgver=45.rc+3734+36ab3fc6
+pkgrel=1
+
+url="https://wiki.gnome.org/Apps/Maps"
+
+
+depends=(
+  geoclue
+  geocode-glib-2
+  gjs
+  gtk4
+  libadwaita
+  libgweather-4
+  librest
+  libshumate
+  libxml2
+)
+
+makedepends=(
+  git
+  gobject-introspection
+  meson
+  yelp-tools
+)
+
+b2sums=(SKIP)
+groups=(gnome)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-maps.git)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build
+  
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

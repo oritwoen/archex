@@ -1,0 +1,46 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+
+pkgname=glib-networking
+pkgdesc="Network extensions for GLib"
+license=(GPL2)
+
+arch=(x86_64)
+pkgver=2.76.1+1861+26465b5
+pkgrel=18
+
+url="https://gitlab.gnome.org/GNOME/glib-networking"
+
+depends=(
+  glib2
+  gnutls
+  gsettings-desktop-schemas
+  libproxy
+)
+
+makedepends=(
+  git
+  meson
+)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/glib-networking.git#branch=master)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build
+    
+    meson compile -C build
+}
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

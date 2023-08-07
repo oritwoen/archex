@@ -1,0 +1,46 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+
+pkgname=tecla
+pkgdesc="Tecla is a keyboard layout viewer"
+license=(GPL)
+
+arch=(x86_64)
+pkgver=45.alpha+33+e345699
+pkgrel=15
+
+url="https://gitlab.gnome.org/GNOME/tecla"
+
+depends=(
+  gtk4
+  libadwaita
+)
+
+makedepends=(
+  git
+  meson
+)
+
+b2sums=('SKIP')
+source=(git+https://gitlab.gnome.org/GNOME/tecla.git#branch=main)
+
+provides=(libpango{,cairo,ft2,xft}-1.0.so libpango-1.0.so=0-64)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build
+    
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

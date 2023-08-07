@@ -1,0 +1,54 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+
+pkgname=colord
+pkgdesc="System daemon for managing color devices"
+license=(GPL2)
+
+arch=(x86_64)
+pkgver=1.4.7+1889+d735245
+pkgrel=27
+
+url="https://www.freedesktop.org/software/colord"
+
+depends=(lcms2 libgusb polkit sqlite dconf dbus libgudev shared-mime-info systemd)
+makedepends=(gobject-introspection vala sane bash-completion argyllcms git meson)
+
+b2sums=(SKIP)
+source=(git+https://github.com/hughsie/colord#branch=main)
+options=(!emptydirs)
+
+provides=(libcolorhug.so libcolord.so libcolord colord-sane)
+replaces=(shared-color-profiles colord-sane libcolord)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D libcolordcompat=true \
+        -D sane=true \
+        -D vapi=true \
+        -D print_profiles=true \
+        -D tests=false \
+        -D daemon_user=colord \
+        -D man=false \
+        -D docs=false
+    
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+
+    echo 'u colord - "Color management daemon" /var/lib/colord' |
+        install -Dm644 /dev/stdin "$pkgdir/usr/lib/sysusers.d/colord.conf"
+}

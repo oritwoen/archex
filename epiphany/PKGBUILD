@@ -1,0 +1,42 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=epiphany
+pkgdesc="A GNOME web browser based on the WebKit rendering engine"
+license=(GPL)
+
+arch=(x86_64)
+pkgrel=1
+pkgver=45.beta+17765+a4e300705
+url="https://wiki.gnome.org/Apps/Web"
+
+depends=(webkit2gtk-4.1 gcr icu libdazzle libhandy libarchive libportal-gtk3 libsoup3)
+makedepends=(docbook-xml startup-notification lsb-release gobject-introspection yelp-tools git meson)
+
+b2sums=(SKIP)
+groups=(gnome)
+source=(git+https://gitlab.gnome.org/GNOME/epiphany.git#branch=master)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build \
+        -D unit_tests=disabled \
+        -D tech_preview=true \
+        -D developer_mode=true
+
+    meson compile -C build
+}
+
+package () {
+    meson install -C build --destdir "$pkgdir"
+}

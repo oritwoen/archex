@@ -1,0 +1,55 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+
+pkgname=baobab
+pkgdesc="A graphical directory tree analyzer"
+license=(GPL2)
+
+arch=(x86_64)
+pkgver=45.beta+2199+e07efde
+pkgrel=2
+
+url="https://wiki.gnome.org/Apps/DiskUsageAnalyzer"
+
+depends=(
+  dconf
+  gsettings-desktop-schemas
+  gtk4
+  libadwaita
+  librsvg
+)
+
+makedepends=(
+  appstream-glib
+  git
+  gobject-introspection
+  meson
+  vala
+  yelp-tools
+)
+
+
+b2sums=(SKIP)
+groups=(gnome)
+source=(git+https://gitlab.gnome.org/GNOME/baobab.git#branch=main)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    arch-meson $pkgname build
+
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

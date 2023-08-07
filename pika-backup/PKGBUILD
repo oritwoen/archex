@@ -1,0 +1,44 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Mark Wagie <mark dot wagie at proton dot me>
+
+#TODO: fix build
+
+pkgname=pika-backup
+pkgdesc="Keep your data safe"
+license=('GPL3')
+
+arch=('x86_64')
+pkgver=0.6.1+1501+0ead86c
+pkgrel=3
+
+url="https://apps.gnome.org/app/org.gnome.World.PikaBackup"
+
+depends=(borg fuse3 libsecret libadwaita)
+makedepends=(git meson cargo itstool)
+
+source=(git+https://gitlab.gnome.org/World/pika-backup.git)
+b2sums=(SKIP)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -Po '(?<=version = ")[^"]*' Cargo.toml | head -1)
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    cd $pkgname
+
+    arch-meson . build
+    
+    meson compile -C build
+}
+
+package() {
+    cd $pkgname
+
+    meson install -C build --destdir "$pkgdir"
+}

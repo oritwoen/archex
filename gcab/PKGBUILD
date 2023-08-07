@@ -1,0 +1,49 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=gcab
+pkgdesc="A GObject library to create cabinet files"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=1.6+392+b1a8a58
+pkgrel=18
+
+url="https://wiki.gnome.org/msitools"
+
+depends=(glib2)
+makedepends=(
+  git
+  gobject-introspection
+  meson
+  vala
+)
+
+b2sums=(SKIP)
+source=("git+https://gitlab.gnome.org/GNOME/gcab.git#branch=master")
+
+provides=(libgcab-1.0.so)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+
+build() {
+    arch-meson $pkgname build \
+        -D docs=false \
+        -D tests=false
+    
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}

@@ -1,0 +1,45 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+
+pkgname=folks
+pkgdesc="Library to aggregates people into metacontacts"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=0.15.7+3017+fa4c614f
+pkgrel=25
+
+url="https://wiki.gnome.org/Projects/Folks"
+
+depends=(libgee libxml2 evolution-data-server telepathy-glib)
+makedepends=(gobject-introspection vala git meson python-dbusmock)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/folks.git#branch=master)
+provides=(libfolks.so libfolks-{dummy,eds}.so)
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+    local meson_options=(
+      -D tests=false
+    )
+
+    arch-meson folks build "${meson_options[@]}"
+    
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}
