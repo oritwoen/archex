@@ -9,7 +9,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=3.6.alpha+15393+78a1ed11d
-pkgrel=3
+pkgrel=4
 
 url="https://wiki.gnome.org/Projects/Tracker"
 
