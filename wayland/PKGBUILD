@@ -8,8 +8,8 @@ pkgdesc='A computer display server protocol'
 license=('MIT')
 
 arch=('x86_64')
-pkgver=1.22.90+2518+72da004
-pkgrel=6
+pkgver=1.22.90+2523+edb943d
+pkgrel=1
 
 url='https://wayland.freedesktop.org/'
 
