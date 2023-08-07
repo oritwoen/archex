@@ -9,7 +9,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=45.alpha+30412+5a33e9843
+pkgver=45.alpha+30434+8a20d20fe
 
 url="https://gitlab.gnome.org/GNOME/mutter"
 
@@ -25,6 +25,7 @@ depends=(
   libcanberra
   libgudev
   libinput
+  libei
   libsm
   libsysprof-capture
   libxkbcommon-x11
