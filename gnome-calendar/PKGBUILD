@@ -7,7 +7,7 @@ pkgdesc="Simple and beautiful calendar application designed to perfectly fit the
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.alpha+4417+70dc1df4
+pkgver=45.alpha+4418+1cfc83ec
 pkgrel=1
 
 url="https://wiki.gnome.org/Apps/Calendar"
