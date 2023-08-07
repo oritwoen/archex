@@ -7,8 +7,8 @@ pkgdesc="Default file manager for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgrel=1
-pkgver=45.alpha2+24137+d2b52771b
+pkgrel=2
+pkgver=45.rc+24146+643b32d9e
 
 url="https://wiki.gnome.org/Apps/Files"
 
