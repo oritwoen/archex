@@ -8,8 +8,8 @@ pkgdesc="Library to aggregates people into metacontacts"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=0.15.7+3017+fa4c614f
-pkgrel=28
+pkgver=0.15.7+3018+9c8e7981
+pkgrel=1
 
 url="https://wiki.gnome.org/Projects/Folks"
 
