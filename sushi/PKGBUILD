@@ -8,7 +8,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=45.beta+936+ed277e6
-pkgrel=16
+pkgrel=17
 
 url="https://gitlab.gnome.org/GNOME/sushi"
 
