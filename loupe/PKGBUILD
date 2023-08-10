@@ -16,7 +16,7 @@ makedepends=(git meson rust itstool)
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/Incubator/loupe.git)
+source=(git+https://gitlab.gnome.org/GNOME/loupe.git)
 
 pkgver() {
     cd $pkgname
