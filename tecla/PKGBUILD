@@ -6,7 +6,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=45.alpha+33+e345699
-pkgrel=17
+pkgrel=18
 
 url="https://gitlab.gnome.org/GNOME/tecla"
 
