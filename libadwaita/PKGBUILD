@@ -6,8 +6,8 @@ pkgdesc="Building blocks for modern adaptive GNOME applications"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.4.beta+3815+0bd172c6
-pkgrel=2
+pkgver=1.4.beta+3821+3c91b844
+pkgrel=1
 
 url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
 
