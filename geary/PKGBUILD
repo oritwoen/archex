@@ -10,7 +10,7 @@ license=(GPL3)
 
 arch=(x86_64)
 pkgver=44.0+7033+83b97630c
-pkgrel=7
+pkgrel=8
 
 url=https://wiki.gnome.org/Apps/Geary
 
