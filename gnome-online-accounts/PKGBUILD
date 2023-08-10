@@ -8,7 +8,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=3.49.0+2832+028dc714
-pkgrel=4
+pkgrel=5
 
 url="https://wiki.gnome.org/Projects/GnomeOnlineAccounts"
 
