@@ -8,7 +8,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=0.8.2+492+69aff6e
-pkgrel=17
+pkgrel=18
 
 url="https://gitlab.gnome.org/GNOME/libnotify"
 
