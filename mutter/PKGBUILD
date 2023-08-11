@@ -9,7 +9,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=45.beta+30500+4d76a2102
+pkgver=45.beta.1+30502+d7b3a088e1
 
 url="https://gitlab.gnome.org/GNOME/mutter"
 
