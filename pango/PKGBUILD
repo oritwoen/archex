@@ -7,8 +7,8 @@ pkgdesc="A library for layout and rendering of text"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.51.0+6295+a6b4b776
-pkgrel=9
+pkgver=1.51.0+6296+dfdbb8b5
+pkgrel=1
 
 url="https://www.pango.org/"
 
