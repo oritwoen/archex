@@ -8,7 +8,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=45.alpha+4466+da2b7328
-pkgrel=2
+pkgrel=3
 
 url="https://wiki.gnome.org/Apps/Calendar"
 
