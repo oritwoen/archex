@@ -4,7 +4,7 @@
 
 pkgname=lutris
 pkgver=v0.5.13+204+g6a617020+8799+6a617020
-pkgrel=2
+pkgrel=3
 pkgdesc='Open Gaming Platform'
 arch=('any')
 url='https://lutris.net'
