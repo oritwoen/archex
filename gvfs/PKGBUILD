@@ -7,8 +7,8 @@ pkgdesc="Virtual filesystem implementation for GIO"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.51.91+6359+31ab12ae
-pkgrel=8
+pkgver=1.51.91+6360+b51d755f
+pkgrel=1
 
 url="https://wiki.gnome.org/Projects/gvfs"
 
