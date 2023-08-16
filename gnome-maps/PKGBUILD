@@ -8,7 +8,7 @@ pkgdesc="A simple GNOME 3 maps application"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.rc+3747+8f5c6627
+pkgver=45.rc+3755+0fdf43dd
 pkgrel=1
 
 url="https://wiki.gnome.org/Apps/Maps"
