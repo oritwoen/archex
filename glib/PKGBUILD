@@ -2,8 +2,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=glib2
-pkgver=2.77.1+27552+3513be4e3
-pkgrel=3
+pkgver=2.77.2+27606+77a56b58e
+pkgrel=1
 pkgdesc="Low level core library"
 url="https://wiki.gnome.org/Projects/GLib"
 license=(LGPL)
@@ -41,12 +41,6 @@ b2sums=('SKIP'
         '14c9211c0557f6d8d9a914f1b18b7e0e23f79f4abde117cb03ab119b95bf9fa9d7a712aa0a29beb266468aeb352caa3a9e4540503cfc9fe0bbaf764371832a96'
         'd30d349b4cb4407839d9074ce08f5259b8a5f3ca46769aabc621f17d15effdb89c4bf19bd23603f6df3d59f8d1adaded0f4bacd0333afcab782f2d048c882858')
 
-
-pkgver() {
-  cd glib
-  git describe --tags | sed 's/[^-]*-g/r&/;s/-/+/g'
-}
-
 prepare() {
   cd glib
 
@@ -83,7 +77,7 @@ package() {
     libffi.so
     libmount.so
   )
-  provides+=(libg{lib,io,module,object,thread}-2.0.so)
+  provides+=(libg{lib,io,module,object,thread}-2.0.so libglib-2.0.so=0-64)
   optdepends=(
     'gvfs: most gio functionality'
     'libelf: gresource inspection tool'
