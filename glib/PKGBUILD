@@ -3,7 +3,7 @@
 
 pkgname=glib2
 pkgver=2.77.2+27606+77a56b58e
-pkgrel=2
+pkgrel=3
 pkgdesc="Low level core library"
 url="https://wiki.gnome.org/Projects/GLib"
 license=(LGPL)
@@ -40,7 +40,7 @@ source=(
     libffi.so
     libmount.so
   )
-  provides=(libg{lib,io,module,object,thread}-2.0.so libglib-2.0.so=0-64)
+  provides=(libgmodule-2.0.so=0-64 libglib-2.0.so=0-64 libgobject-2.0.so=0-64 libgio-2.0.so=0-64)
   optdepends=(
     'gvfs: most gio functionality'
     'libelf: gresource inspection tool'
@@ -61,12 +61,15 @@ prepare() {
 }
 
 build() {
+    CFLAGS+=" -fno-exceptions"
+
   local meson_options=(
     -D glib_debug=disabled
     -D gtk_doc=false
     -D man=false
     -D selinux=disabled
     -D sysprof=disabled
+    -D cpp_eh=none
   )
 
   arch-meson glib build "${meson_options[@]}"
