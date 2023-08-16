@@ -9,8 +9,8 @@ pkgdesc="Simple daemon to allow session software to update firmware"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.9.4+9050+7d2b28caf
-pkgrel=3
+pkgver=1.9.4+9068+5eeb6923a
+pkgrel=1
 
 url="https://github.com/fwupd/fwupd" 
 
