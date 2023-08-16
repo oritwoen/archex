@@ -7,7 +7,7 @@ license=('MIT')
 
 arch=('any')
 pkgver=1.32+335+5293896
-pkgrel=16
+pkgrel=17
 
 url='https://wayland.freedesktop.org/'
 makedepends=('wayland' 'meson' 'ninja')
