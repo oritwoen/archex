@@ -8,8 +8,8 @@ pkgdesc="Window manager and compositor for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgrel=3
-pkgver=45.beta.1+30502+d7b3a088e1
+pkgrel=1
+pkgver=45.beta.1+30543+90a00dae99
 
 url="https://gitlab.gnome.org/GNOME/mutter"
 
