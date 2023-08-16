@@ -3,7 +3,7 @@
 
 pkgname=glib2
 pkgver=2.77.2+27606+77a56b58e
-pkgrel=1
+pkgrel=2
 pkgdesc="Low level core library"
 url="https://wiki.gnome.org/Projects/GLib"
 license=(LGPL)
@@ -35,6 +35,17 @@ source=(
   gio-querymodules.hook
   glib-compile-schemas.hook
 )
+
+  depends=(
+    libffi.so
+    libmount.so
+  )
+  provides=(libg{lib,io,module,object,thread}-2.0.so libglib-2.0.so=0-64)
+  optdepends=(
+    'gvfs: most gio functionality'
+    'libelf: gresource inspection tool'
+    'python: gdbus-codegen, glib-genmarshal, glib-mkenums, gtester-report'
+  )
 
 b2sums=('SKIP'
         'SKIP'
@@ -73,17 +84,6 @@ pkgver() {
 }
 
 package() {
-  depends+=(
-    libffi.so
-    libmount.so
-  )
-  provides+=(libg{lib,io,module,object,thread}-2.0.so libglib-2.0.so=0-64)
-  optdepends=(
-    'gvfs: most gio functionality'
-    'libelf: gresource inspection tool'
-    'python: gdbus-codegen, glib-genmarshal, glib-mkenums, gtester-report'
-  )
-
   meson install -C build --destdir "$pkgdir"
 
   install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 *.hook
