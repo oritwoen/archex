@@ -9,7 +9,7 @@ license=(GPL3)
 
 arch=(x86_64)
 pkgver=45.rc+751+3ad8aa3
-pkgrel=3
+pkgrel=4
 
 url="https://gitlab.gnome.org/GNOME/console"
 
