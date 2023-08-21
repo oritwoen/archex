@@ -7,8 +7,8 @@ pkgdesc="A graphical directory tree analyzer"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.beta+2209+4935bbc
-pkgrel=2
+pkgver=45.beta+2210+529ec8c
+pkgrel=1
 
 url="https://wiki.gnome.org/Apps/DiskUsageAnalyzer"
 
