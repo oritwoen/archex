@@ -8,7 +8,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=45.rc+24224+09dad082c
+pkgver=45.rc+24225+93b1b1d89
 
 url="https://wiki.gnome.org/Apps/Files"
 
