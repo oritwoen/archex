@@ -7,8 +7,8 @@ pkgdesc="Web content engine for GTK"
 license=(custom)
 
 arch=(x86_64)
-pkgrel=65
-pkgver=2.41.6
+pkgrel=66
+pkgver=2.41.91
 
 url="https://webkitgtk.org"
 
