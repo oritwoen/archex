@@ -8,8 +8,8 @@ pkgdesc="Keep your data safe"
 license=('GPL3')
 
 arch=('x86_64')
-pkgver=0.6.1+1504+0e812bf
-pkgrel=9
+pkgver=0.6.1+1506+cd9bd48
+pkgrel=1
 
 url="https://apps.gnome.org/app/org.gnome.World.PikaBackup"
 
