@@ -7,8 +7,8 @@ pkgdesc="Javascript Bindings for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=1.77.2+5258+82453fe1
-pkgrel=1
+pkgver=1.77.90+5300+d7a3811f
+pkgrel=3
 
 url="https://wiki.gnome.org/Projects/Gjs"
 
@@ -16,7 +16,7 @@ depends=(
   cairo
   dconf
   gobject-introspection-runtime
-  js102
+  js115
   libsysprof-capture
   readline
 )
