@@ -1,7 +1,7 @@
 # Maintainer: DrakeTDL <everyone@disroot.org>
 pkgname="an-anime-game-launcher"
-pkgver=3.8.0+745+f359be9
-pkgrel=6
+pkgver=3.9.0+780+87a0bd6
+pkgrel=4
 pkgdesc="A Launcher for a specific anime game with auto-patching, discord rpc and time tracking"
 arch=("x86_64")
 url="https://github.com/an-anime-team/an-anime-game-launcher"
@@ -32,6 +32,7 @@ sha256sums=(
   SKIP
   "3bb15b29fd47e60ead712a67046daf42bd0ba5547d379ead6ea9bba37ea7b137"
 )
+options=(!lto)
 
 pkgver() {
     cd $pkgname
@@ -51,11 +52,6 @@ prepare() {
 
 build() {
 	cd $pkgname
-	
-  #LDFLAGS+=" -fuse-ld=lld"
-
-  #export CC=gcc
-  #export CXX=gcc++
 
 	cargo build --release
 }
@@ -66,7 +62,7 @@ package() {
 	install -dm755 "${pkgdir}/usr/lib/${pkgname}"
 	install -dm755 "${pkgdir}/usr/bin/"
 	
-	cp target/release/anime-game-launcher "${pkgdir}/usr/lib/${pkgname}/${$pkgname}"
+	cp target/release/anime-game-launcher "${pkgdir}/usr/lib/${pkgname}/${pkgname}"
 	ln -s "/usr/lib/${pkgname}/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
 	
 	install -Dm644 "assets/images/icon.png" "${pkgdir}/usr/share/pixmaps/an-anime-game-launcher.png"
