@@ -1,0 +1,37 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Andreas Radke <andyrtr@archlinux.org>
+# Contributor: Laurent Carlier <lordheavym@gmail.com>
+
+pkgname=glu
+pkgver=9.0.3+219+a2b96c7
+pkgrel=1
+pkgdesc="Mesa OpenGL utility library"
+arch=('x86_64')
+url="https://gitlab.freedesktop.org/mesa/glu"
+license=('LGPL')
+
+depends=('libgl' 'gcc-libs' 'glibc')
+makedepends=('meson')
+
+b2sums=(SKIP)
+source=(git+https://gitlab.freedesktop.org/mesa/glu.git)
+
+pkgver() {
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson $pkgname build
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
