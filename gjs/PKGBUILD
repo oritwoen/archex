@@ -7,8 +7,8 @@ pkgdesc="Javascript Bindings for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=1.77.90+5300+d7a3811f
-pkgrel=4
+pkgver=1.77.90+5320+61024387
+pkgrel=1
 
 url="https://wiki.gnome.org/Projects/Gjs"
 
