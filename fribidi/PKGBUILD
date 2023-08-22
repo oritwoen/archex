@@ -1,0 +1,48 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Giovanni Scafora <giovanni@archlinux.org>
+# Contributor: Nezmer <Nezmer@gmail.com>
+
+pkgname=fribidi
+pkgver=fribidi+420+b54871c
+pkgrel=1
+pkgdesc="A Free Implementation of the Unicode Bidirectional Algorithm"
+url="https://github.com/fribidi/fribidi"
+arch=(x86_64)
+license=(LGPL)
+
+depends=(
+	glibc
+)
+
+makedepends=(
+	meson
+)
+
+b2sums=(SKIP)
+source=(git+https://github.com/fribidi/fribidi.git)
+provides=(libfribidi.so)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local meson_options=(
+		-D docs=false
+		-D tests=false
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
