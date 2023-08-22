@@ -1,0 +1,39 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Balló György <ballogyor+arch at gmail dot com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=gsound
+pkgver=1.0.3+92+95d36d6
+pkgrel=1
+pkgdesc='Small library for playing system sounds'
+arch=('x86_64')
+url='https://wiki.gnome.org/Projects/GSound'
+license=('LGPL')
+
+depends=('glib2' 'glibc' 'libcanberra')
+makedepends=('gobject-introspection' 'meson' 'vala')
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/gsound.git)
+
+pkgver() {
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson $pkgname build \
+		-D gtk_doc=true
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
