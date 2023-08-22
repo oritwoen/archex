@@ -1,0 +1,69 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=libsoup
+pkgver=3.4.2+3863+4705c0cb
+pkgrel=1
+pkgdesc="HTTP client/server library for GNOME"
+url="https://wiki.gnome.org/Projects/libsoup"
+arch=(x86_64)
+license=(LGPL)
+depends=(
+	brotli
+	glib-networking
+	glib2
+	krb5
+	libpsl
+	libsysprof-capture
+	libxml2
+	sqlite
+)
+makedepends=(
+	git
+	gobject-introspection
+	meson
+	samba
+	vala
+)
+
+depends=(
+	libbrotlidec.so
+	libgssapi_krb5.so
+	libg{lib,object,io}-2.0.so
+	libpsl.so
+)
+optdepends=('samba: Windows Domain SSO')
+provides+=(libsoup{,-gnome}-2.4.so)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/libsoup.git)
+
+pkgver() {
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local meson_options=(
+		-D docs=disabled
+		-D doc_tests=false
+		-D tests=false
+		-D autobahn=disabled
+		-D sysprof=disabled
+		-D pkcs11_tests=disabled
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
