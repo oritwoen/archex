@@ -6,8 +6,8 @@ pkgdesc="A simple image viewer for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.beta.1+588+94f28cb
-pkgrel=2
+pkgver=45.beta.1+589+e1d3bb4
+pkgrel=1
 
 url="https://gitlab.gnome.org/Incubator/loupe"
 
