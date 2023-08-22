@@ -7,7 +7,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=1.4.beta+3831+f70d15f2
-pkgrel=3
+pkgrel=4
 
 url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
 
