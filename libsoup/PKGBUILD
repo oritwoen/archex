@@ -2,9 +2,9 @@
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
-pkgname=libsoup
+pkgname=libsoup3
 pkgver=3.4.2+3863+4705c0cb
-pkgrel=1
+pkgrel=2
 pkgdesc="HTTP client/server library for GNOME"
 url="https://wiki.gnome.org/Projects/libsoup"
 arch=(x86_64)
@@ -14,15 +14,16 @@ depends=(
 	glib-networking
 	glib2
 	krb5
+	libnghttp2
 	libpsl
 	libsysprof-capture
-	libxml2
 	sqlite
 )
 makedepends=(
 	git
 	gobject-introspection
 	meson
+	python-quart
 	samba
 	vala
 )
@@ -34,13 +35,13 @@ depends=(
 	libpsl.so
 )
 optdepends=('samba: Windows Domain SSO')
-provides+=(libsoup{,-gnome}-2.4.so)
+provides=(libsoup-3.0.so libsoup-3.0.so=0-64)
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/GNOME/libsoup.git)
 
 pkgver() {
-	cd $pkgname
+	cd libsoup
 	
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -59,7 +60,7 @@ build() {
 		-D pkcs11_tests=disabled
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson libsoup build "${meson_options[@]}"
 	
 	meson compile -C build
 }
