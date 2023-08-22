@@ -1,0 +1,42 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+
+pkgname=json-glib
+pkgver=1.7.1+1313+491eb8e
+pkgrel=1
+pkgdesc="JSON library built on GLib"
+url="https://wiki.gnome.org/Projects/JsonGlib"
+arch=(x86_64)
+license=(GPL)
+
+depends=(glib2)
+makedepends=(gobject-introspection git meson gi-docgen docbook-xsl)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/json-glib.git)
+
+depends=(libg{lib,object,io}-2.0.so)
+provides=(libjson-glib-1.0.so)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson json-glib build \
+		-D gtk_doc=disabled \
+		-D tests=false 
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
