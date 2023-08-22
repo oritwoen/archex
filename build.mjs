@@ -41,7 +41,7 @@ for (const entry of dirs) {
 
 		await writeFile("PKGBUILD", updt);
 
-		const { stdout } = await execa('paru', ['-U', '--localrepo', '--skipreview', '--rebuild', '--noconfirm'], { all: true }).pipeAll(process.stdout);
+		const { stdout } = await execa('paru', ['-U', '--localrepo', '--skipreview', '--rebuild', '--noconfirm', '--sudoloop'], { all: true }).pipeAll(process.stdout);
 
 		const nextVersion = await getPKGLine('pkgver');
 		const nextRelease = await getPKGLine('pkgrel');
