@@ -7,7 +7,7 @@ license=('GPL')
 
 arch=('x86_64')
 pkgver=45.alpha+3136+b42ce54d
-pkgrel=8
+pkgrel=10
 
 url='https://wiki.gnome.org/Apps/DejaDup'
 
