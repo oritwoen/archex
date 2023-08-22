@@ -1,0 +1,51 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Maxime Gauduin <alucryd@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+
+pkgname=libgusb
+pkgver=0.4.7+464+8b286fd
+pkgrel=1
+pkgdesc='GObject wrapper for libusb1'
+url=https://github.com/hughsie/libgusb
+arch=(x86_64)
+license=(LGPL2.1)
+
+depends=(
+	glib2
+	json-glib
+	libusb
+)
+
+makedepends=(
+	git
+	gobject-introspection
+	meson
+	python-setuptools
+	umockdev
+	vala
+)
+
+b2sums=(SKIP)
+source=(git+https://github.com/hughsie/libgusb.git)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson $pkgname build \
+		-D tests=false \
+		-D docs=false
+	
+	meson compile -C build
+}
+
+package() {
+	DESTDIR="${pkgdir}" ninja -C build install
+}
