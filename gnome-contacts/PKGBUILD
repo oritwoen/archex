@@ -8,7 +8,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=45.beta+3913+95f8698e
-pkgrel=2
+pkgrel=3
 
 url="https://wiki.gnome.org/Apps/Contacts"
 
