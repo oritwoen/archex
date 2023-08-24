@@ -1,0 +1,43 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+
+pkgname=librest
+pkgdesc="Library for accessing RESTful web services"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=0.9.1+687+5970778
+pkgrel=1
+
+url="https://gitlab.gnome.org/GNOME/librest"
+
+depends=(glib2 libxml2 libsoup3 json-glib)
+makedepends=(gobject-introspection git meson gi-docgen vala libadwaita gtksourceview5)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/librest.git)
+provides=(librest{,-extras}-1.0.so)
+
+pkgver() {
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson $pkgname build \
+		-D vapi=true \
+		-D examples=false \
+		-D gtk_doc=false \
+		-D tests=false
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
