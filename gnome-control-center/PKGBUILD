@@ -9,7 +9,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=45.rc+22667+1881d6a91
-pkgrel=1
+pkgrel=2
 
 url="https://gitlab.gnome.org/GNOME/gnome-control-center"
 
