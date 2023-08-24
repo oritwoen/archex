@@ -7,7 +7,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=2.76.1+1864+c7ef69c
-pkgrel=9
+pkgrel=10
 
 url="https://gitlab.gnome.org/GNOME/glib-networking"
 
