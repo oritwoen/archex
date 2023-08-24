@@ -9,7 +9,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=45.beta.1+18098+f2b7b84c0
-pkgrel=4
+pkgrel=5
 
 url="https://wiki.gnome.org/Projects/GnomeShell"
 
