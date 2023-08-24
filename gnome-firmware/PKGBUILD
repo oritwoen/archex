@@ -7,7 +7,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=43.3+286+80e0bda
-pkgrel=3
+pkgrel=4
 
 url="https://gitlab.gnome.org/world/gnome-firmware"
 
