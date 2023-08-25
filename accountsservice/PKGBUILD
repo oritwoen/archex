@@ -8,7 +8,7 @@ license=(GPL3)
 
 arch=(x86_64)
 pkgver=23.32.13+742+c013183
-pkgrel=17
+pkgrel=18
 
 url="https://gitlab.freedesktop.org/accountsservice/accountsservice"
 
