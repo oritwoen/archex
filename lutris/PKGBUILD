@@ -3,7 +3,7 @@
 # Contributor: Frederik “Freso” S. Olesen <freso.dk@gmail.com>
 
 pkgname=lutris
-pkgver=v0.5.13+232+g822b9c86+8827+822b9c86
+pkgver=v0.5.13+233+g55d65d00+8828+55d65d00
 pkgrel=1
 pkgdesc='Open Gaming Platform'
 arch=('any')
