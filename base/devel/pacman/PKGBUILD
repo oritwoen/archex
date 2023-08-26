@@ -28,6 +28,9 @@ depends=(
     alhp-mirrorlist
     pacman-mirrorlist
     coreutils
+
+    #For custom makepkg
+    sccache
 )
 
 makedepends=(
