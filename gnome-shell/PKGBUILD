@@ -8,8 +8,8 @@ pkgdesc="Next generation desktop shell"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.beta.1+18101+4386bc49d
-pkgrel=2
+pkgver=45.beta.1+18106+5fedb3de9
+pkgrel=1
 
 url="https://wiki.gnome.org/Projects/GnomeShell"
 
