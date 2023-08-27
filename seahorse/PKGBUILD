@@ -8,8 +8,8 @@ pkgdesc="GNOME application for managing PGP keys."
 license=(GPL)
 
 arch=(x86_64)
-pkgver=43.0+5860+034ddf2b
-pkgrel=63
+pkgver=43.0+5860+034ddf2
+pkgrel=1
 
 url="https://wiki.gnome.org/Apps/Seahorse"
 
