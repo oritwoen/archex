@@ -6,8 +6,8 @@ pkgdesc='A trivial-to-use personal backup tool to protect against accidental dat
 license=('GPL')
 
 arch=('x86_64')
-pkgver=45.alpha+3136+b42ce54d
-pkgrel=19
+pkgver=45.alpha+3137+e28c740
+pkgrel=1
 
 url='https://wiki.gnome.org/Apps/DejaDup'
 
