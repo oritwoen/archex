@@ -9,7 +9,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=45.rc+3770+7247405
-pkgrel=3
+pkgrel=4
 
 url="https://wiki.gnome.org/Apps/Maps"
 
