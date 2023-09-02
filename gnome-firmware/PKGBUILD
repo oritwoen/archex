@@ -6,7 +6,7 @@ pkgdesc="Manage firmware on devices supported by fwupd"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=43.3+291+d321c23
+pkgver=43.3+292+c4c944e
 pkgrel=1
 
 url="https://gitlab.gnome.org/world/gnome-firmware"
