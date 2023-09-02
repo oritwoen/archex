@@ -8,7 +8,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=1.51.0+6296+dfdbb8b
-pkgrel=4
+pkgrel=5
 
 url="https://www.pango.org/"
 
