@@ -5,8 +5,8 @@ pkgdesc="A local caching server. Named after the Latin word for “here, there a
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=0.1.2+45+6ae1e5f
-pkgrel=6
+pkgver=0.1.2+47+7720c3e
+pkgrel=1
 
 url="https://github.com/hughsie/passim" 
 
