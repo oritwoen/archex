@@ -8,7 +8,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=1.77.90+5324+78eadf80
-pkgrel=1
+pkgrel=2
 
 url="https://wiki.gnome.org/Projects/Gjs"
 
