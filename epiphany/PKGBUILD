@@ -7,8 +7,8 @@ pkgdesc="A GNOME web browser based on the WebKit rendering engine"
 license=(GPL)
 
 arch=(x86_64)
-pkgrel=5
-pkgver=45.beta+17802+8a0cc3d3
+pkgrel=2
+pkgver=45.beta+17811+d3ffc5daf
 url="https://wiki.gnome.org/Apps/Web"
 
 depends=(webkit2gtk-4.1 gcr icu libdazzle libhandy libarchive libportal-gtk3 libsoup3)
