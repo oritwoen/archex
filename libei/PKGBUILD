@@ -1,0 +1,65 @@
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+
+pkgname=libei
+pkgver=1.0.901+972+8713ef2
+pkgrel=2
+pkgdesc="Library for Emulated Input"
+url="https://libinput.pages.freedesktop.org/libei/"
+arch=(x86_64)
+license=(custom:X11)
+
+depends=(
+  libevdev
+  systemd
+)
+
+makedepends=(
+  git
+  libxkbcommon
+  meson
+  python-attrs
+  python-dbusmock
+  python-jinja
+  python-pytest
+  python-structlog
+  python-yaml
+)
+
+
+provides=(
+  lib{ei,eis,oeffis}.so
+)
+
+source=(
+  "git+https://gitlab.freedesktop.org/libinput/libei.git"
+  "git+https://github.com/nemequ/munit"
+)
+b2sums=(SKIP SKIP)
+
+pkgver() {
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	cd libei
+	
+	ln -sr ../munit subprojects/munit
+}
+
+build() {
+	arch-meson libei build
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir" --skip-subprojects
+	
+	install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 libei/COPYING
+}
