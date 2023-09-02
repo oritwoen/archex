@@ -7,8 +7,8 @@ pkgdesc="Abstraction for enumerating power devices, listening to device events a
 license=(GPL)
 
 arch=(x86_64)
-pkgver=1.90.2+1671+8dcf544
-pkgrel=39
+pkgver=1.90.2+1677+029651a
+pkgrel=2
 
 url="https://upower.freedesktop.org"
 
@@ -28,7 +28,7 @@ makedepends=(
   python
 )
 
-source=(git+https://gitlab.freedesktop.org/upower/upower.git#commit=8dcf54440d7eb58b75d7982bc1c29ee35dccf0c2)
+source=(git+https://gitlab.freedesktop.org/upower/upower.git)
 b2sums=(SKIP)
 
 provides=(libupower-glib.so)
