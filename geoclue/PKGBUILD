@@ -3,8 +3,8 @@
 # Contributor: György Balló <ballogy@freestart.hu>
 
 pkgname=geoclue
-pkgver=geoclue+1041+84721f1
-pkgrel=2
+pkgver=geoclue+1042+cf42ca2
+pkgrel=1
 pkgdesc="Modular geoinformation service built on the D-Bus messaging system"
 url="https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home"
 arch=(x86_64)
