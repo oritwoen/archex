@@ -2,7 +2,7 @@
 
 pkgname=libei
 pkgver=1.0.901+972+8713ef2
-pkgrel=2
+pkgrel=3
 pkgdesc="Library for Emulated Input"
 url="https://libinput.pages.freedesktop.org/libei/"
 arch=(x86_64)
