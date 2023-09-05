@@ -6,7 +6,7 @@ pkgdesc="GNOME Settings Daemon"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.beta+6651+2a499a7c
+pkgver=45.beta+6652+3cf0551a
 pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/gnome-settings-daemon"
