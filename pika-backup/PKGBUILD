@@ -9,7 +9,7 @@ license=('GPL3')
 
 arch=('x86_64')
 pkgver=0.6.1+1540+d0e0582
-pkgrel=1
+pkgrel=2
 
 url="https://apps.gnome.org/app/org.gnome.World.PikaBackup"
 
