@@ -7,7 +7,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=1.1.rc+534+a329951
-pkgrel=1
+pkgrel=2
 
 url="https://wiki.gnome.org/Projects/libshumate"
 
