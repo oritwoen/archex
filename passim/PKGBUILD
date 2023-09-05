@@ -6,7 +6,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=0.1.2+47+7720c3e
-pkgrel=2
+pkgrel=3
 
 url="https://github.com/hughsie/passim" 
 
