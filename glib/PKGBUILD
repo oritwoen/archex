@@ -2,8 +2,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=glib2
-pkgver=2.77.3+27656+fcba22cfb
-pkgrel=2
+pkgver=2.78.0+27677+d1ba2b421
+pkgrel=1
 pkgdesc="Low level core library"
 url="https://wiki.gnome.org/Projects/GLib"
 license=(LGPL)
