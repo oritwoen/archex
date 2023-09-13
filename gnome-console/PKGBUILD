@@ -8,8 +8,8 @@ pkgdesc="A simple user-friendly terminal emulator for the GNOME desktop"
 license=(GPL3)
 
 arch=(x86_64)
-pkgver=45.rc+762+a20e019
-pkgrel=2
+pkgver=45.rc+768+8aafd7d
+pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/console"
 
