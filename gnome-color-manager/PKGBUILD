@@ -7,7 +7,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=3.36.1+2905+05fa1b4c
-pkgrel=6
+pkgrel=7
 
 url="https://gitlab.gnome.org/GNOME/gnome-color-manager"
 
