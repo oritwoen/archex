@@ -4,7 +4,7 @@
 
 pkgname=libsoup3
 pkgver=3.4.2+3873+d5f209f1
-pkgrel=1
+pkgrel=2
 pkgdesc="HTTP client/server library for GNOME"
 url="https://wiki.gnome.org/Projects/libsoup"
 arch=(x86_64)
