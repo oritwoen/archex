@@ -6,8 +6,8 @@ pkgdesc="Map widget for GTK 4"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.1.rc+537+768e426
-pkgrel=2
+pkgver=1.1.rc+538+e7cdf0f
+pkgrel=1
 
 url="https://wiki.gnome.org/Projects/libshumate"
 
