@@ -8,8 +8,8 @@ pkgdesc="GNOME standard icons"
 license=(LGPL3 CCPL:by-sa)
 
 arch=(any)
-pkgver=45.rc+3916+2d070aa84
-pkgrel=5
+pkgver=45.0+3919+20b7f1e74
+pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/adwaita-icon-theme"
 
