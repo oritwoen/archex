@@ -8,8 +8,8 @@ pkgdesc="Library with common API for various GNOME modules"
 license=(GPL LGPL)
 
 arch=(x86_64)
-pkgrel=7
-pkgver=44.0+6631+89d70faa
+pkgrel=1
+pkgver=44.0+6632+ab5cedf1
 
 url="https://gitlab.gnome.org/GNOME/gnome-desktop"
 
