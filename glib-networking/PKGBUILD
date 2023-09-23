@@ -6,7 +6,7 @@ pkgdesc="Network extensions for GLib"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=2.78.0+1891+40c448f
+pkgver=2.78.0+1896+032eb4d
 pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/glib-networking"
