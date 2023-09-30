@@ -7,7 +7,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=45.0+639+99058ac
-pkgrel=1
+pkgrel=2
 
 url="https://gitlab.gnome.org/Incubator/loupe"
 
