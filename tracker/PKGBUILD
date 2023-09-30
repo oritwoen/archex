@@ -8,8 +8,8 @@ pkgdesc="Desktop-neutral user information store, search tool and indexer"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=3.6.0+15424+ef29743ed
-pkgrel=2
+pkgver=3.6.0+15431+19cebb3d6
+pkgrel=1
 
 url="https://wiki.gnome.org/Projects/Tracker"
 
