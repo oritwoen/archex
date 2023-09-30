@@ -7,8 +7,8 @@ pkgdesc="Single sign-on framework for GNOME"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=3.49.0+2838+b10c81e0
-pkgrel=5
+pkgver=3.49.0+2839+a0e4fc9b
+pkgrel=1
 
 url="https://wiki.gnome.org/Projects/GnomeOnlineAccounts"
 
