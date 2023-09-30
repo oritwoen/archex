@@ -9,7 +9,7 @@ license=('MIT')
 
 arch=('x86_64')
 pkgver=1.22.90+2523+edb943d
-pkgrel=33
+pkgrel=34
 
 url='https://wayland.freedesktop.org/'
 
