@@ -6,8 +6,8 @@ pkgdesc="GNOME Color Profile Tools"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=3.36.1+2905+05fa1b4c
-pkgrel=12
+pkgver=3.36.1+2906+cf7ee2b5
+pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/gnome-color-manager"
 
