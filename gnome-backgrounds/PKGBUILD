@@ -7,8 +7,8 @@ pkgdesc="Background images and data for GNOME"
 license=(CCPL:by-sa)
 
 arch=(any)
-pkgver=45.0+1436+0019ace
-pkgrel=3
+pkgver=45.0+1438+2bc1c70
+pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/gnome-backgrounds"
 
