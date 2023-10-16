@@ -3,8 +3,8 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 
 pkgname=libgusb
-pkgver=0.4.7+464+8b286fd
-pkgrel=25
+pkgver=0.4.8+466+89e6c4d
+pkgrel=1
 pkgdesc='GObject wrapper for libusb1'
 url=https://github.com/hughsie/libgusb
 arch=(x86_64)
