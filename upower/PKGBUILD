@@ -8,7 +8,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=1.90.2+1671+8dcf544
-pkgrel=12
+pkgrel=13
 
 url="https://upower.freedesktop.org"
 
