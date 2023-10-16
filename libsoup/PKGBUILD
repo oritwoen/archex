@@ -3,8 +3,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=libsoup3
-pkgver=3.4.3+3876+6d4032cc
-pkgrel=5
+pkgver=3.4.3+3877+eb0ebc0f
+pkgrel=1
 pkgdesc="HTTP client/server library for GNOME"
 url="https://wiki.gnome.org/Projects/libsoup"
 arch=(x86_64)
