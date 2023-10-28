@@ -6,26 +6,26 @@ pkgdesc="Clocks applications for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=44.0+2651+afd8136
-pkgrel=5
+pkgver=45.0+2708+2e78a20
+pkgrel=2
 
 url="https://wiki.gnome.org/Apps/Clocks"
 
 depends=(
     gtk4
-    gsound
     geoclue
     libadwaita
     libgweather-4
     geocode-glib-2
     gnome-desktop-4
+    xdg-desktop-portal
 )
 
 makedepends=(git vala meson yelp-tools gobject-introspection)
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-clocks.git#branch=master)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-clocks.git)
 
 pkgver() {
     cd $pkgname
@@ -38,6 +38,8 @@ pkgver() {
 }
 
 build() {
+    CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
+
     arch-meson $pkgname build
 
     meson compile -C build
