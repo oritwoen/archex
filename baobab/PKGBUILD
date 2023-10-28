@@ -7,8 +7,8 @@ pkgdesc="A graphical directory tree analyzer"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.beta+2210+529ec8c
-pkgrel=14
+pkgver=45.0+2229+a0c075a
+pkgrel=2
 
 url="https://wiki.gnome.org/Apps/DiskUsageAnalyzer"
 
@@ -32,7 +32,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/baobab.git#branch=main)
+source=(git+https://gitlab.gnome.org/GNOME/baobab.git)
 
 pkgver() {
     cd $pkgname
@@ -45,6 +45,8 @@ pkgver() {
 }
 
 build() {
+  	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
+
     arch-meson $pkgname build
 
     meson compile -C build
