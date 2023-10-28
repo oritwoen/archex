@@ -5,19 +5,33 @@ pkgdesc="A local caching server. Named after the Latin word for “here, there a
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=0.1.4+65+2af7fd1
-pkgrel=1
+pkgver=0.1.5+82+bfc3a52
+pkgrel=2
 
 url="https://github.com/hughsie/passim" 
 
-depends=(glib2 libsoup gnutls)
+depends=(
+  avahi
+  glib2 libgio-2.0.so
+  gnutls
+  hicolor-icon-theme
+  libsoup3 libsoup-3.0.so
+)
 
-makedepends=(git meson)
+makedepends=(
+  cmake
+  gobject-introspection
+  meson
+  systemd
+)
 
 b2sums=(SKIP)
 source=(git+https://github.com/hughsie/passim.git)
 
-provides=(libfwupd.so)
+provides=(libpassim.so)
+backup=(
+  etc/passim.conf
+)
 
 pkgver() {
     cd $pkgname
