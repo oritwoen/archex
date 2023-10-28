@@ -8,7 +8,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=1.4.7+1889+d735245
-pkgrel=75
+pkgrel=77
 
 url="https://www.freedesktop.org/software/colord"
 
@@ -16,11 +16,12 @@ depends=(lcms2 libgusb polkit sqlite dconf dbus libgudev shared-mime-info system
 makedepends=(gobject-introspection vala sane bash-completion argyllcms git meson)
 
 b2sums=(SKIP)
-source=(git+https://github.com/hughsie/colord#branch=main)
+source=(git+https://github.com/hughsie/colord)
 options=(!emptydirs)
 
 provides=(libcolorhug.so libcolord.so libcolord colord-sane)
 replaces=(shared-color-profiles colord-sane libcolord)
+conflicts=(shared-color-profiles colord-sane libcolord)
 
 pkgver() {
     cd $pkgname
