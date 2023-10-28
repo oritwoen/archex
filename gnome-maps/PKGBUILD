@@ -8,8 +8,8 @@ pkgdesc="A simple GNOME 3 maps application"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=46.alpha+3807+ffb757b5
-pkgrel=1
+pkgver=46.alpha+3822+0b0515b1
+pkgrel=2
 
 url="https://wiki.gnome.org/Apps/Maps"
 
@@ -24,6 +24,10 @@ depends=(
   librest
   libshumate
   libxml2
+  dconf
+  hicolor-icon-theme
+  glib2
+  libportal
 )
 
 makedepends=(
