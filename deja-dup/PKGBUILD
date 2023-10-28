@@ -6,8 +6,8 @@ pkgdesc='A trivial-to-use personal backup tool to protect against accidental dat
 license=('GPL')
 
 arch=('x86_64')
-pkgver=45.alpha+3137+e28c740
-pkgrel=2
+pkgver=45.2+3184+c9be074b
+pkgrel=3
 
 url='https://wiki.gnome.org/Apps/DejaDup'
 
@@ -19,6 +19,7 @@ depends=(
   'python-gobject'
   'python-pydrive2'
   'libadwaita'
+  'rclone'
 )
 
 makedepends=(
@@ -29,7 +30,7 @@ makedepends=(
 )
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/World/deja-dup.git#branch=main)
+source=(git+https://gitlab.gnome.org/World/deja-dup.git)
 
 pkgver() {
     cd $pkgname
@@ -42,7 +43,11 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build
+  	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
+
+    arch-meson $pkgname build \
+      -D enable_restic=true \
+      -D enable_borg=true
   
     meson compile -C build
 }
