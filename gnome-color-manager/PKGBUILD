@@ -6,8 +6,8 @@ pkgdesc="GNOME Color Profile Tools"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=3.36.1+2909+e3842783
-pkgrel=1
+pkgver=3.36.1+2910+a73ea7f6
+pkgrel=2
 
 url="https://gitlab.gnome.org/GNOME/gnome-color-manager"
 
@@ -16,7 +16,7 @@ makedepends=(yelp-tools git appstream-glib meson perl-sgmls)
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-color-manager.git#branch=master)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-color-manager.git)
 
 pkgver() {
     cd $pkgname
