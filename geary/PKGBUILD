@@ -9,7 +9,7 @@ pkgdesc='A lightweight email client for the GNOME desktop'
 license=(GPL3)
 
 arch=(x86_64)
-pkgver=44.0+7050+6bb4847
+pkgver=44.0+7077+d9b217481
 pkgrel=2
 
 url=https://wiki.gnome.org/Apps/Geary
@@ -60,7 +60,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome-extra)
-source=(git+https://gitlab.gnome.org/GNOME/geary.git#branch=main)
+source=(git+https://gitlab.gnome.org/GNOME/geary.git)
 
 pkgver() {
     cd $pkgname
@@ -73,7 +73,7 @@ pkgver() {
 }
 
 build() {
-    CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type"
+    CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type -Wno-error=incompatible-function-pointer-types"
 
     local meson_options=(
         -D profile=release
