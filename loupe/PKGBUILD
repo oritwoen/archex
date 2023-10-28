@@ -1,18 +1,34 @@
 # Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
+# Contributor: Fabian Bornschein <fabiscafe@archlinux.org>
 
 pkgname=loupe
 pkgdesc="A simple image viewer for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0+644+f246b2f
-pkgrel=1
+pkgver=45.0+647+19bf847
+pkgrel=2
 
-url="https://gitlab.gnome.org/Incubator/loupe"
+url="https://gitlab.gnome.org/GNOME/loupe"
 
-depends=(gtk4 lcms2 libheif libadwaita libgweather-4)
-makedepends=(git meson rust itstool)
+depends=(
+  cairo
+  glib2
+  glycin
+  graphene
+  gtk4
+  hicolor-icon-theme
+  lcms2
+  libadwaita
+  libgweather-4
+)
+
+makedepends=(
+  git
+  itstool
+  meson
+  rust
+)
 
 b2sums=(SKIP)
 groups=(gnome)
