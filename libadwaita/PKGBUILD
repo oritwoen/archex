@@ -6,12 +6,12 @@ pkgdesc="Building blocks for modern adaptive GNOME applications"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.5.alpha+3895+47c9b316
-pkgrel=1
+pkgver=1.5.alpha+3898+5758745e
+pkgrel=2
 
 url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
 
-depends=(gtk4)
+depends=(appstream gtk4)
 makedepends=(
     git
     vala
@@ -22,7 +22,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome-core)
-source=(git+https://gitlab.gnome.org/GNOME/libadwaita.git#branch=main)
+source=(git+https://gitlab.gnome.org/GNOME/libadwaita.git)
 
 pkgver() {
     cd $pkgname
