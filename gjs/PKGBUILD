@@ -7,17 +7,22 @@ pkgdesc="Javascript Bindings for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=1.79.1+5348+a929845a
-pkgrel=1
+pkgver=1.79.1+5350+0249c5e2
+pkgrel=2
 
 url="https://wiki.gnome.org/Projects/Gjs"
 
 depends=(
   cairo
   dconf
+  glib2
   gobject-introspection-runtime
+  js102
   js115
+  libffi
+  libgirepository
   libsysprof-capture
+  libx11
   readline
 )
 
@@ -29,10 +34,8 @@ makedepends=(
 )
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gjs.git#branch=master)
+source=(git+https://gitlab.gnome.org/GNOME/gjs.git)
 provides=(libgjs.so)
-
-groups=(gnome-core)
 
 pkgver() {
     cd $pkgname
