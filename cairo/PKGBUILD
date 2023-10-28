@@ -5,7 +5,7 @@
 
 pkgbase=cairo
 pkgname=cairo
-pkgver=1.18.1+12828+f9de19ad7
+pkgver=1.18.1+12830+36193ec95
 pkgrel=2
 pkgdesc="2D graphics library with support for multiple output devices"
 url="https://cairographics.org/"
