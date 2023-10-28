@@ -7,19 +7,27 @@ pkgdesc="Contacts Manager for GNOME"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.beta+3917+5bb9513
-pkgrel=1
+pkgver=45.0+3936+2a3f51d3
+pkgrel=2
 
 url="https://wiki.gnome.org/Apps/Contacts"
 
 depends=(
+  cairo
+  dconf
   evolution-data-server
   folks
+  gdk-pixbuf2
+  glib2
   gnome-online-accounts
   gtk4
+  hicolor-icon-theme
   libadwaita
   libgee
+  libgoa
+  libportal
   libportal-gtk4
+  pango
   qrencode
 )
 
@@ -33,7 +41,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-contacts.git#branch=main)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-contacts.git)
 
 pkgver() {
     cd $pkgname
@@ -46,10 +54,7 @@ pkgver() {
 }
 
 build() {
-    #export CC=gcc
-    #export CXX=gcc++
-
-    CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type"
+  CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type -Wno-error=incompatible-function-pointer-types"
 
 	arch-meson $pkgname build \
 		-D manpage=false
