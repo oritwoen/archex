@@ -9,7 +9,7 @@ license=('MIT')
 
 arch=('x86_64')
 pkgver=1.22.90+2523+edb943d
-pkgrel=37
+pkgrel=38
 
 url='https://wayland.freedesktop.org/'
 
@@ -17,7 +17,7 @@ depends=('glibc' 'libffi' 'expat' 'libxml2' 'default-cursors')
 makedepends=('meson' 'libxslt' 'xmlto' 'graphviz')
 
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/wayland/wayland#branch=main)
+source=(git+https://gitlab.freedesktop.org/wayland/wayland)
 
 provides=(libwayland-{client,cursor,egl,server}.so)
 
