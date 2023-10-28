@@ -4,14 +4,14 @@
 # Contributor: Alexander Fehr <pizzapunk gmail com>
 
 pkgname=tracker
-pkgdesc="Desktop-neutral user information store, search tool and indexer"
+pkgdesc="SQLite-based RDF triplestore database with SPARQL interface"
 license=(GPL)
 
 arch=(x86_64)
 pkgver=3.6.0+15454+088408718
-pkgrel=1
+pkgrel=2
 
-url="https://wiki.gnome.org/Projects/Tracker"
+url="https://tracker.gnome.org/"
 
 depends=(
   glib2
