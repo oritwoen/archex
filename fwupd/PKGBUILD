@@ -9,8 +9,8 @@ pkgdesc="Simple daemon to allow session software to update firmware"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.9.6+9207+b6e426dfc
-pkgrel=2
+pkgver=1.9.7+9333+cc515e3ec
+pkgrel=3
 
 url="https://github.com/fwupd/fwupd" 
 
@@ -36,7 +36,7 @@ backup=('etc/fwupd/fwupd.conf'
 )
 
 b2sums=(SKIP)
-source=(git+https://github.com/fwupd/fwupd#branch=main)
+source=(git+https://github.com/fwupd/fwupd)
 
 provides=(libfwupd.so)
 
@@ -54,11 +54,14 @@ build() {
     arch-meson $pkgname build \
         -D docs=disabled \
         -D man=false \
+        -D launchd=disabled \
         -D tests=false \
         -D supported_build=enabled \
         -D fish_completion=false
 
-    meson compile -C build
+    meson configure build # Print config
+
+    #meson compile -C build
 }
 
 package() {
