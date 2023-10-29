@@ -8,7 +8,7 @@ license=(GPL3)
 
 arch=(x86_64)
 pkgver=23.39.18+747+42aa71a
-pkgrel=4
+pkgrel=8
 
 url="https://gitlab.freedesktop.org/accountsservice/accountsservice"
 
@@ -44,8 +44,6 @@ pkgver() {
 }
 
 build() {
-	CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type"
-
 	local meson_options=(
 		-D admin_group=wheel
 	)
