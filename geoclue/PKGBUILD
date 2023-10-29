@@ -3,8 +3,8 @@
 # Contributor: György Balló <ballogy@freestart.hu>
 
 pkgname=geoclue
-pkgver=geoclue+1043+8a24f60
-pkgrel=9
+pkgver=2.7.1+1043+8a24f60
+pkgrel=4
 pkgdesc="Modular geoinformation service built on the D-Bus messaging system"
 url="https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home"
 arch=(x86_64)
@@ -40,7 +40,7 @@ _mozilla_api_key=e05d56db0a694edc8b5aaebda3f2db6a
 pkgver() {
 	cd $pkgname
 	
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $6}')
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
