@@ -8,15 +8,15 @@ license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=45.0+17851+af6a654c8
+pkgver=45.0+17868+9e4bb3cb5
 url="https://wiki.gnome.org/Apps/Web"
 
-depends=(webkit2gtk-4.1 gcr icu libdazzle libhandy libarchive libportal-gtk3 libsoup3)
+depends=(webkit2gtk-4.1 gcr libdazzle libhandy libarchive libportal-gtk3 libsoup3)
 makedepends=(docbook-xml startup-notification lsb-release gobject-introspection yelp-tools git meson)
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/epiphany.git#branch=master)
+source=(git+https://gitlab.gnome.org/GNOME/epiphany.git)
 
 pkgver() {
     cd $pkgname
