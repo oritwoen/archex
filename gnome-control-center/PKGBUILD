@@ -8,17 +8,68 @@ pkgdesc="GNOME's main interface to configure various aspects of the desktop"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.1+22900+4b9527b41
+pkgver=46.alpha+22959+c4337844e
 pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/gnome-control-center"
 
-depends=(bolt smbclient gtk4 gcr libmm-glib udisks2 libpwquality libadwaita libgtop libgudev libgnomekbd gnome-bluetooth-3.0 gnome-settings-daemon gnome-shell gnome-color-manager colord-gtk4 gnome-online-accounts gsettings-desktop-schemas libibus libmalcontent accountsservice libnma-gtk4 cups-pk-helper upower sound-theme-freedesktop gnome-desktop-4)
+depends=(
+  accountsservice
+  bolt
+  cairo
+  colord-gtk4
+  cups-pk-helper
+  dconf
+  fontconfig
+  gcr
+  gdk-pixbuf2
+  glib2
+  gnome-bluetooth-3.0
+  gnome-color-manager
+  gnome-desktop-4
+  gnome-online-accounts
+  gnome-settings-daemon
+  gnome-shell
+  gnutls
+  gsettings-desktop-schemas
+  gsound
+  gtk3
+  gtk4
+  hicolor-icon-theme
+  krb5
+  libadwaita
+  libcolord
+  libcups
+  libepoxy
+  libgoa
+  libgtop
+  libgudev
+  libibus
+  libmalcontent
+  libmm-glib
+  libnm
+  libnma-gtk4
+  libpulse
+  libpwquality
+  libsecret
+  libwacom
+  libx11
+  libxi
+  libxml2
+  pango
+  polkit
+  smbclient
+  sound-theme-freedesktop
+  tecla
+  udisks2
+  upower
+)
+
 makedepends=(git meson python modemmanager)
 
 b2sums=(SKIP SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-control-center.git#branch=main
+source=(git+https://gitlab.gnome.org/GNOME/gnome-control-center.git
         git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git)
 
 options=(!lto)
@@ -47,7 +98,6 @@ build() {
 
     arch-meson $pkgname build \
       -D tests=false \
-      -D malcontent=true
     
     meson compile -C build
 }

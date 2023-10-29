@@ -7,28 +7,36 @@ pkgdesc="Simple and beautiful calendar application designed to perfectly fit the
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.1+4557+9a8ae842
-pkgrel=1
+pkgver=46.alpha+4563+bed4c9b6
+pkgrel=2
 
 url="https://wiki.gnome.org/Apps/Calendar"
 
 depends=(
+  dconf
   evolution-data-server
   geoclue
   geocode-glib-2
+  glib2
+  graphene
   gsettings-desktop-schemas
+  gtk4
+  hicolor-icon-theme
   libadwaita
   libedataserverui4
   libgweather-4
+  libical
   libsoup3
+  pango
 )
+
 makedepends=(
   git
   meson
 )
 
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-calendar.git#branch=main)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-calendar.git)
 b2sums=('SKIP')
 
 pkgver() {

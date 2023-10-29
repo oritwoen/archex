@@ -8,8 +8,8 @@ pkgdesc="A simple user-friendly terminal emulator for the GNOME desktop"
 license=(GPL3)
 
 arch=(x86_64)
-pkgver=45.rc+769+1ff6d86
-pkgrel=1
+pkgver=46.alpha+798+ee24f75
+pkgrel=2
 
 url="https://gitlab.gnome.org/GNOME/console"
 
@@ -18,7 +18,7 @@ makedepends=(git meson appstream-glib)
 
 b2sums=(SKIP)
 groups=(gnome)
-source=($pkgname::git+https://gitlab.gnome.org/GNOME/console.git#branch=main)
+source=($pkgname::git+https://gitlab.gnome.org/GNOME/console.git)
 
 pkgver() {
     cd $pkgname

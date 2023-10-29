@@ -6,8 +6,8 @@ pkgname=(
   gtk4
   gtk-update-icon-cache
 )
-pkgver=4.13.2+77888+822425072b
-pkgrel=1
+pkgver=4.13.3+78075+de74d38039
+pkgrel=2
 pkgdesc="GObject-based multi-platform GUI toolkit"
 url="https://www.gtk.org/"
 arch=(x86_64)
@@ -52,6 +52,7 @@ depends=(
   wayland
 )
 
+
 makedepends=(
   docbook-xsl
   gi-docgen
@@ -65,7 +66,7 @@ makedepends=(
 )
 
 source=(
-  "git+https://gitlab.gnome.org/GNOME/gtk.git#branch=main"
+  "git+https://gitlab.gnome.org/GNOME/gtk.git"
   gtk-update-icon-cache.{hook,script}
   gtk4-querymodules.hook
 )
@@ -89,7 +90,7 @@ build() {
     -D cloudproviders=enabled
     -D tracker=enabled
     -D colord=enabled
-    -D demos=false
+    -D build-demos=false
     -D build-testsuite=false
     -D build-examples=false
     -D build-tests=false

@@ -3,8 +3,8 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=glib2
-pkgver=2.79.0+28084+cd1e11d1b
-pkgrel=4
+pkgver=2.78.1+27729+21624e78f
+pkgrel=1
 pkgdesc="Low level core library"
 url="https://wiki.gnome.org/Projects/GLib"
 license=(LGPL)
@@ -31,7 +31,7 @@ makedepends=(
 )
 
 source=(
-  "git+https://gitlab.gnome.org/GNOME/glib.git"
+  "git+https://gitlab.gnome.org/GNOME/glib.git#commit=21624e78f013ee8706483086e3086076d08fe242"
   "git+https://gitlab.gnome.org/GNOME/gvdb.git"
   gio-querymodules.hook
   glib-compile-schemas.hook
@@ -63,13 +63,26 @@ prepare() {
 
 build() {
   local meson_options=(
-    -D glib_debug=disabled
-    -D gtk_doc=false
-    -D man=false
     -D selinux=disabled
+    -D xattr=true
+    -D libmount=enabled
+    -D man=false
+    -D dtrace=false
+    -D systemtap=false
     -D sysprof=disabled
-    -D cpp_eh=none
-    -D introspection=disabled
+    -D gtk_doc=false
+    -D bsymbolic_functions=true
+    -D force_posix_threads=true
+    -D tests=false
+    -D installed_tests=false
+    -D nls=enabled
+    -D oss_fuzz=disabled
+    -D glib_debug=disabled
+    -D glib_assert=false
+    -D glib_checks=false
+    -D libelf=enabled
+    -D multiarch=false
+    #-D introspection=disabled
   )
 
   arch-meson glib build "${meson_options[@]}"
@@ -92,8 +105,8 @@ package() {
   install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 *.hook
   touch "$pkgdir/usr/lib/gio/modules/.keep"
 
-  python -m compileall -d /usr/share/glib-2.0/codegen \
-    "$pkgdir/usr/share/glib-2.0/codegen"
-  python -O -m compileall -d /usr/share/glib-2.0/codegen \
-    "$pkgdir/usr/share/glib-2.0/codegen"
+  #python -m compileall -d /usr/share/glib-2.0/codegen \
+  #  "$pkgdir/usr/share/glib-2.0/codegen"
+  #python -O -m compileall -d /usr/share/glib-2.0/codegen \
+  #  "$pkgdir/usr/share/glib-2.0/codegen"
 }

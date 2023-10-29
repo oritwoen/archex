@@ -7,17 +7,44 @@ pkgdesc="Default file manager for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgrel=1
-pkgver=46.alpha.0+24370+29c9311a3
+pkgrel=2
+pkgver=46.alpha.0+24404+f86c068dc
 
 url="https://wiki.gnome.org/Apps/Files"
 
-depends=(dconf gdk-pixbuf2 gnome-autoar gnome-desktop-4 gst-plugins-base-libs gvfs libadwaita libcloudproviders libgexiv2 libportal-gtk4 tracker3)
-makedepends=(appstream-glib gi-docgen git gobject-introspection meson tracker3-miners)
+depends=(
+  cairo
+  dconf
+  gdk-pixbuf2
+  glib2
+  gnome-autoar
+  gnome-desktop-4
+  gstreamer
+  gst-plugins-base-libs
+  gtk4
+  gvfs
+  hicolor-icon-theme
+  libadwaita
+  libcloudproviders
+  libgexiv2
+  libportal
+  libportal-gtk4
+  pango
+  tracker3
+)
+
+makedepends=(
+  appstream-glib
+  gi-docgen
+  git
+  gobject-introspection
+  meson
+  tracker3-miners
+)
 
 b2sums=(SKIP)
 groups=(gnome-apps)
-source=(git+https://gitlab.gnome.org/GNOME/nautilus.git#branch=main)
+source=(git+https://gitlab.gnome.org/GNOME/nautilus.git)
 
 provides=(libnautilus-extension)
 replaces=(libnautilus-extension)

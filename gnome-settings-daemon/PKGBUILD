@@ -6,8 +6,8 @@ pkgdesc="GNOME Settings Daemon"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0+6675+0a487d49
-pkgrel=1
+pkgver=45.0+6676+f1f11029
+pkgrel=2
 
 url="https://gitlab.gnome.org/GNOME/gnome-settings-daemon"
 
@@ -44,7 +44,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git#branch=master)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git)
 
 pkgver() {
     cd $pkgname

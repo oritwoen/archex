@@ -8,8 +8,8 @@ pkgdesc="Next generation desktop shell"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0+18205+ebf2f8036
-pkgrel=1
+pkgver=45.0+18229+8f09b2f4a
+pkgrel=2
 
 url="https://wiki.gnome.org/Projects/GnomeShell"
 
@@ -18,7 +18,7 @@ makedepends=(git meson sassc asciidoc gtk-doc bash-completion gnome-control-cent
 
 groups=(gnome)
 b2sums=(SKIP SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-shell.git#branch=main
+source=(git+https://gitlab.gnome.org/GNOME/gnome-shell.git
         git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git)
 
 pkgver() {
@@ -41,8 +41,14 @@ prepare() {
 
 build() {
     arch-meson gnome-shell build \
+        -D camera_monitor=true \
+        -D extensions_tool=true \
+        -D extensions_app=true \
+        -D gtk_doc=false \
         -D man=false \
-        -D tests=false 
+        -D tests=false \
+        -D networkmanager=true \
+        -D systemd=true
   
     meson compile -C build
 }

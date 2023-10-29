@@ -9,7 +9,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=45.0+30794+8d3d8b86e
+pkgver=45.0+30840+f2c55d647
 
 url="https://gitlab.gnome.org/GNOME/mutter"
 
@@ -23,6 +23,7 @@ depends=(
   iio-sensor-proxy
   lcms2
   libcanberra
+  libdisplay-info
   libgudev
   libinput
   libei
@@ -48,10 +49,10 @@ makedepends=(
   xorg-server-xvfb
 )
 
-provides=('libmutter-12.so=0-64')
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/mutter.git#branch=main)
+source=(git+https://gitlab.gnome.org/GNOME/mutter.git)
+
+provides=("libmutter-13.so=0-64")
 
 pkgver() {
     cd $pkgname
@@ -64,13 +65,42 @@ pkgver() {
 }
 
 build() {
-    arch-meson mutter build \
-        -D cogl_tests=false \
-        -D clutter_tests=false \
-        -D native_tests=false \
-        -D tests=false \
-        -D profiler=false \
-        -D installed_tests=false
+    local meson_options=(
+      -D opengl=true
+      -D gles2=true
+      -D egl=true
+      -D glx=true
+      -D wayland=true
+      -D xwayland=true
+      -D systemd=true
+      -D native_backend=true
+      -D remote_desktop=true
+      -D libgnome_desktop=true
+      -D egl_device=false
+      -D wayland_eglstream=false
+      -D udev=true
+      -D libwacom=true
+      -D sound_player=true
+      -D pango_ft2=true
+      -D startup_notification=true
+      -D sm=true
+      -D introspection=true
+      -D docs=false
+      -D cogl_tests=false
+      -D clutter_tests=false
+      -D core_tests=false
+      -D native_tests=false
+      -D tests=false
+      -D kvm_tests=false
+      -D tty_tests=false
+      -D profiler=false
+      -D installed_tests=false
+      -D verbose=true
+      -D catch=false
+      -D libdisplay_info=true
+    )
+
+    arch-meson mutter build "${meson_options[@]}"
   
     meson compile -C build
 }
