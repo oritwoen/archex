@@ -1,0 +1,164 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Laurent Carlier <lordheavym@gmail.com>
+# Contributor: Felix Yan <felixonmars@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+# Contributor: Andreas Radke <andyrtr@archlinux.org>
+
+pkgname=mesa
+pkgdesc="An open-source implementation of the OpenGL specification"
+license=('custom')
+
+arch=('x86_64')
+pkgver=24.0.0_devel+179710+122ed7cd806
+pkgrel=1
+
+url="https://www.mesa3d.org/"
+
+makedepends=(
+  'clang'
+  'expat'
+  'libdrm'
+  'libelf'
+  'libglvnd'
+  'libunwind'
+  'libva'
+  'libvdpau'
+  'libx11'
+  'libxdamage'
+  'libxml2'
+  'libxrandr'
+  'libxshmfence'
+  'libxxf86vm'
+  'llvm'
+  'lm_sensors'
+  'rust'
+  'spirv-llvm-translator'
+  'spirv-tools'
+  'systemd'
+  'vulkan-icd-loader'
+  'wayland'
+  'xcb-util-keysyms'
+  'zstd'
+
+  # shared between mesa and lib32-mesa
+  'clang'
+  'cmake'
+  'elfutils'
+  'glslang'
+  'libclc'
+  'meson'
+  'python-mako'
+  'python-ply'
+  'rust-bindgen'
+  'wayland-protocols'
+  'xorgproto'
+
+  # valgrind deps
+  'valgrind'
+
+  # d3d12 deps
+  'directx-headers'
+
+  # gallium-omx deps
+  'libomxil-bellagio'
+)
+
+b2sums=(SKIP SKIP)
+source=(
+    LICENSE
+    git+https://gitlab.freedesktop.org/mesa/mesa.git#branch=main
+)
+
+provides=('mesa' 'opencl-mesa' 'vulkan-radeon' 'vulkan-mesa-layer' 'libva-mesa-driver' 'mesa-vdpau' 'vulkan-swrast' 'vulkan-driver' 'mesa-libgl' 'opengl-driver' 'opencl-driver')
+conflicts=('mesa' 'opencl-mesa' 'vulkan-radeon' 'vulkan-mesa-layer' 'libva-mesa-driver' 'mesa-vdpau' 'vulkan-swrast' 'mesa-libgl')
+
+pkgver() {
+    cd $pkgname
+    
+    local _version=$(cat VERSION)
+    local _commits=$(git rev-list --count HEAD)
+    local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version/-/_}+${_commits}+${_commith}
+}
+
+build() {
+    local meson_options=(
+        -D platforms=x11,wayland
+        #-D egl-native-platform=x11,wayland
+        -D android-stub=false
+        -D android-libbacktrace=disabled
+        -D dri3=enabled
+        -D expat=enabled
+        -D gallium-drivers=radeonsi,swrast,zink,d3d12
+        -D gallium-extra-hud=true
+        -D gallium-vdpau=enabled
+        -D gallium-omx=bellagio
+        -D gallium-va=enabled
+        -D gallium-xa=disabled
+        -D gallium-nine=true
+        -D gallium-d3d10umd=false
+        -D gallium-opencl=icd
+        -D gallium-rusticl=true
+        -D opencl-spirv=true
+        -D vulkan-drivers=amd,swrast
+        -D freedreno-kmds=msm
+        -D imagination-srv=false
+        -D shader-cache=enabled
+        -D shader-cache-default=true
+        -D shader-cache-max-size=4
+        -D vulkan-layers=device-select,overlay
+        -D shared-glapi=enabled
+        -D gles1=disabled
+        -D gles2=enabled
+        -D opengl=true
+        -D gbm=enabled
+        -D glx=dri
+        -D egl=enabled
+        -D glvnd=true
+        -D microsoft-clc=disabled
+        -D spirv-to-dxil=true
+        -D glx-read-only-text=false
+        -D llvm=enabled
+        -D shared-llvm=enabled
+        -D draw-use-llvm=true
+        -D valgrind=disabled
+        -D libunwind=disabled
+        -D lmsensors=enabled
+        -D build-tests=false
+        -D enable-glcpp-tests=false
+        -D build-aco-tests=false
+        -D install-intel-gpu-tests=false
+        -D selinux=false
+        -D osmesa=true
+        -D power8=disabled
+        -D xlib-lease=enabled
+        -D glx-direct=true
+        -D allow-kcmp=enabled
+        -D zstd=enabled
+        -D zlib=enabled
+        -D sse2=true
+        -D perfetto=false
+        -D gpuvis=false
+        -D vmware-mks-stats=false
+        -D vulkan-beta=true
+        -D intel-clc=disabled
+        -D video-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc
+        -D gallium-d3d12-video=enabled
+        -D min-windows-version=8
+        -D xmlconfig=enabled
+        -D intel-xe-kmd=disabled
+    )
+    
+    arch-meson $pkgname build "${meson_options[@]}"
+    meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+
+    # indirect rendering
+    ln -s /usr/lib/libGLX_mesa.so.0 "${pkgdir}/usr/lib/libGLX_indirect.so.0"
+  
+    install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" "${srcdir}/LICENSE"
+}
