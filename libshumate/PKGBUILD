@@ -6,7 +6,7 @@ pkgdesc="Map widget for GTK 4"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.2.alpha+568+29202ab
+pkgver=1.2.alpha+569+5c6e2c7
 pkgrel=2
 
 url="https://wiki.gnome.org/Projects/libshumate"
@@ -27,7 +27,7 @@ makedepends=(
 )
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/libshumate.git)
+source=(git+https://gitlab.gnome.org/GNOME/libshumate.git#branch=main)
 
 pkgver() {
 	cd $pkgname
@@ -41,7 +41,10 @@ pkgver() {
 
 build() {
 	local meson_options=(
+		-D gir=true
+		-D vapi=true
 		-D gtk_doc=false
+		-D demos=false
 		-D vector_renderer=true
 		-D sysprof=disabled
 	)
