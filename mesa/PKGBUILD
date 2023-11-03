@@ -9,7 +9,7 @@ pkgdesc="An open-source implementation of the OpenGL specification"
 license=('custom')
 
 arch=('x86_64')
-pkgver=24.0.0_devel+179710+122ed7cd806
+pkgver=24.0.0_devel+179840+4a627af0e36
 pkgrel=1
 
 url="https://www.mesa3d.org/"
@@ -151,7 +151,7 @@ build() {
     )
     
     arch-meson $pkgname build "${meson_options[@]}"
-    meson compile -C build
+    #meson compile -C build
 }
 
 package() {
