@@ -8,7 +8,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=1.6+393+8a8ab90
-pkgrel=13
+pkgrel=14
 
 url="https://wiki.gnome.org/msitools"
 
@@ -21,7 +21,7 @@ makedepends=(
 )
 
 b2sums=(SKIP)
-source=("git+https://gitlab.gnome.org/GNOME/gcab.git")
+source=("git+https://gitlab.gnome.org/GNOME/gcab.git#branch=master")
 
 provides=(libgcab-1.0.so)
 
@@ -37,11 +37,17 @@ pkgver() {
 
 
 build() {
-    arch-meson $pkgname build \
-        -D docs=false \
+	local meson_options=(
+		-D docs=false
+		-D introspection=true
+		-D nls=true
+        -D vapi=true
         -D tests=false
-    
-    meson compile -C build
+        -D installed_tests=false
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
 }
 
 package() {
