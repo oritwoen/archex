@@ -8,7 +8,7 @@ license=(GPL3)
 
 arch=(x86_64)
 pkgver=23.39.18+747+42aa71a
-pkgrel=13
+pkgrel=14
 
 url="https://gitlab.freedesktop.org/accountsservice/accountsservice"
 
@@ -29,7 +29,7 @@ makedepends=(
 )
 
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/accountsservice/accountsservice.git)
+source=(git+https://gitlab.freedesktop.org/accountsservice/accountsservice.git#branch=main)
 
 provides=(libaccountsservice.so)
 
