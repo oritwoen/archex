@@ -8,7 +8,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=45.0+3936+2a3f51d3
-pkgrel=2
+pkgrel=3
 
 url="https://wiki.gnome.org/Apps/Contacts"
 
@@ -41,7 +41,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-contacts.git)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-contacts.git#branch=main)
 
 pkgver() {
     cd $pkgname
@@ -54,14 +54,19 @@ pkgver() {
 }
 
 build() {
-  CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type -Wno-error=incompatible-function-pointer-types"
+    local meson_options=(
+        -D profile=default
+        -D camera=true
+        -D manpage=false
+        -D docs=false
+        -D goa=true
+    )
+    
+    arch-meson $pkgname build "${meson_options[@]}"
 
-	arch-meson $pkgname build \
-		-D manpage=false
-
-	ninja -C build
+    meson compile -C build
 }
 
 package() {
-	DESTDIR="$pkgdir" meson install -C build
+  DESTDIR="$pkgdir" meson install -C build
 }
