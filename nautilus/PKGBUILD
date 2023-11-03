@@ -8,7 +8,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgrel=2
-pkgver=46.alpha.0+24404+f86c068dc
+pkgver=46.alpha.0+24444+8ec1244c3
 
 url="https://wiki.gnome.org/Apps/Files"
 
@@ -44,7 +44,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome-apps)
-source=(git+https://gitlab.gnome.org/GNOME/nautilus.git)
+source=(git+https://gitlab.gnome.org/GNOME/nautilus.git#branch=main)
 
 provides=(libnautilus-extension)
 replaces=(libnautilus-extension)
@@ -61,12 +61,19 @@ pkgver() {
 }
 
 build() {
-    CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type"
-
-    arch-meson $pkgname build \
-      -D tests=none
-
-    meson compile -C build
+	local meson_options=(
+		-D docs=false
+    -D extensions=true
+    -D introspection=true
+    -D packagekit=true
+    -D selinux=false
+    -D cloudproviders=true
+    -D tests=none
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	
+	meson compile -C build
 }
 
 package () {
