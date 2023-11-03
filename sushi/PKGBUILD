@@ -8,7 +8,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=46.alpha+941+cd171b4
-pkgrel=7
+pkgrel=8
 
 url="https://gitlab.gnome.org/GNOME/sushi"
 
@@ -31,7 +31,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/sushi.git)
+source=(git+https://gitlab.gnome.org/GNOME/sushi.git#branch=master)
 
 pkgver() {
     cd $pkgname
@@ -44,10 +44,14 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build \
-        -D X11=disabled
-
-    meson compile -C build
+	local meson_options=(
+		-D wayland=enabled
+    -D X11=disabled
+    -D profile=default
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+  meson compile -C build
 }
 
 package() {
