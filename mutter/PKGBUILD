@@ -8,8 +8,8 @@ pkgdesc="Window manager and compositor for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgrel=1
-pkgver=45.0+30840+f2c55d647
+pkgrel=2
+pkgver=45.0+30805+7a44b112c
 
 url="https://gitlab.gnome.org/GNOME/mutter"
 
@@ -50,7 +50,7 @@ makedepends=(
 )
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/mutter.git)
+source=(git+https://gitlab.gnome.org/GNOME/mutter.git#commit=7a44b112c1b4c485dbd2093b7472f01bd42b4477)
 
 provides=("libmutter-13.so=0-64")
 
