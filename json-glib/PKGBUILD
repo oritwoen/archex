@@ -4,7 +4,7 @@
 
 pkgname=json-glib
 pkgver=1.8.1+1319+9434759
-pkgrel=5
+pkgrel=6
 pkgdesc="JSON library built on GLib"
 url="https://wiki.gnome.org/Projects/JsonGlib"
 arch=(x86_64)
@@ -14,7 +14,7 @@ depends=(glib2)
 makedepends=(gobject-introspection git meson gi-docgen docbook-xsl)
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/json-glib.git)
+source=(git+https://gitlab.gnome.org/GNOME/json-glib.git#branch=master)
 
 depends=(libg{lib,object,io}-2.0.so)
 provides=(libjson-glib-1.0.so)
@@ -30,10 +30,15 @@ pkgver() {
 }
 
 build() {
-	arch-meson json-glib build \
-		-D gtk_doc=disabled \
-		-D tests=false 
+	local meson_options=(
+		-D introspection=enabled
+		-D gtk_doc=disabled
+		-D man=false
+		-D tests=false
+		-D nls=enabled
+	)
 
+	arch-meson $pkgname build "${meson_options[@]}"
 	meson compile -C build
 }
 
