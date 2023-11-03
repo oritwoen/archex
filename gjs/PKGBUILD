@@ -8,7 +8,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=1.79.1+5350+0249c5e2
-pkgrel=4
+pkgrel=5
 
 url="https://wiki.gnome.org/Projects/Gjs"
 
@@ -34,7 +34,7 @@ makedepends=(
 )
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gjs.git)
+source=(git+https://gitlab.gnome.org/GNOME/gjs.git#branch=master)
 provides=(libgjs.so)
 
 pkgver() {
@@ -48,13 +48,21 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build \
-      -D profiler=disabled \
-      -D installed_tests=false \
-      -D skip_dbus_tests=true \
-      -D skip_gtk_tests=true
+	local meson_options=(
+		-D cairo=enabled
+		-D readline=enabled
+    -D profiler=disabled
+    -D installed_tests=false
+    -D dtrace=false
+    -D systemtap=false
+    -D bsymbolic_functions=true
+    -D skip_dbus_tests=true
+    -D skip_gtk_tests=true
+    -D verbose_logs=false
+	)
 
-    meson compile -C build
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
 }
 
 package() {
