@@ -8,7 +8,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=0.8.3+499+3f2882d
-pkgrel=2
+pkgrel=3
 
 url="https://gitlab.gnome.org/GNOME/libnotify"
 
@@ -16,16 +16,13 @@ license=(LGPL)
 
 depends=(gdk-pixbuf2)
 makedepends=(
-  docbook-xsl
-  gi-docgen
   git
   gobject-introspection
   gtk3
   meson
-  xmlto
 )
 
-source=(git+https://gitlab.gnome.org/GNOME/libnotify.git)
+source=(git+https://gitlab.gnome.org/GNOME/libnotify.git#branch=master)
 b2sums=(SKIP)
 
 provides=(libnotify.so)
@@ -41,13 +38,16 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build \
-        -D tests=false \
-        -D man=false \
-        -D gtk_doc=false \
+	local meson_options=(
+		-D tests=false
+		-D introspection=enabled
+        -D man=false
+        -D gtk_doc=false
         -D docbook_docs=disabled
+	)
 
-    meson compile -C build
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
 }
 
 package() {
