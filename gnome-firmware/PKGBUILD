@@ -6,14 +6,14 @@ pkgdesc="Manage firmware on devices supported by fwupd"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.1+333+a981bed
+pkgver=45.1+334+06132ab
 pkgrel=2
 
 url="https://gitlab.gnome.org/world/gnome-firmware"
 
 depends=(gtk4 glib2 fwupd libadwaita libxmlb systemd)
 makedepends=(meson)
-source=(git+https://gitlab.gnome.org/world/gnome-firmware.git)
+source=(git+https://gitlab.gnome.org/world/gnome-firmware.git#branch=master)
 sha256sums=('SKIP')
 
 pkgver() {
@@ -27,9 +27,17 @@ pkgver() {
 }
 
 build() {
-  arch-meson ${pkgname} build -D man=false
+    local meson_options=(
+        -D consolekit=false
+        -D systemd=true
+        -D man=false
+        -D elogind=false
+        -D devel=false
+    )
+    
+    arch-meson $pkgname build "${meson_options[@]}"
 
-  meson compile -C build
+    meson compile -C build
 }
 
 package() {
