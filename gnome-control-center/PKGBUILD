@@ -8,8 +8,8 @@ pkgdesc="GNOME's main interface to configure various aspects of the desktop"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=46.alpha+22959+c4337844e
-pkgrel=1
+pkgver=46.alpha+22979+79f1b8496
+pkgrel=2
 
 url="https://gitlab.gnome.org/GNOME/gnome-control-center"
 
@@ -69,7 +69,7 @@ makedepends=(git meson python modemmanager)
 
 b2sums=(SKIP SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-control-center.git
+source=(git+https://gitlab.gnome.org/GNOME/gnome-control-center.git#branch=main
         git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git)
 
 options=(!lto)
@@ -94,10 +94,19 @@ prepare() {
 
 
 build() {
-    CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type"
-
-    arch-meson $pkgname build \
-      -D tests=false \
+    local meson_options=(
+        -D deprecated-declarations=disabled
+        -D documentation=false
+        -D ibus=true
+        -D privileged_group=wheel
+        -D snap=true
+        -D tests=false
+        -D wayland=true
+        -D profile=default
+        -D malcontent=true
+    )
+    
+    arch-meson $pkgname build "${meson_options[@]}"
     
     meson compile -C build
 }
