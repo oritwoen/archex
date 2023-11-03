@@ -8,7 +8,7 @@ license=(CCPL:by-sa)
 
 arch=(any)
 pkgver=45.0+1438+2bc1c70
-pkgrel=3
+pkgrel=4
 
 url="https://gitlab.gnome.org/GNOME/gnome-backgrounds"
 
@@ -17,7 +17,7 @@ makedepends=(glib2 meson)
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-backgrounds.git)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-backgrounds.git#branch=main)
 
 pkgver() {
     cd $pkgname
