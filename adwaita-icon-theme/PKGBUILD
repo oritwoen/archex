@@ -9,7 +9,7 @@ license=(LGPL3 CCPL:by-sa)
 
 arch=(any)
 pkgver=45.0+3924+9a4eedfc6
-pkgrel=9
+pkgrel=10
 
 url="https://gitlab.gnome.org/GNOME/adwaita-icon-theme"
 
@@ -18,7 +18,7 @@ makedepends=(git gtk3)
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/adwaita-icon-theme.git)
+source=(git+https://gitlab.gnome.org/GNOME/adwaita-icon-theme.git#branch=master)
 
 provides=(adwaita-cursors)
 replaces=(adwaita-cursors)
