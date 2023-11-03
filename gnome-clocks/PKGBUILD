@@ -6,8 +6,8 @@ pkgdesc="Clocks applications for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0+2708+2e78a20
-pkgrel=2
+pkgver=45.0+2710+8a1ba5a
+pkgrel=1
 
 url="https://wiki.gnome.org/Apps/Clocks"
 
@@ -25,7 +25,7 @@ makedepends=(git vala meson yelp-tools gobject-introspection)
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-clocks.git)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-clocks.git#branch=master)
 
 pkgver() {
     cd $pkgname
@@ -38,11 +38,13 @@ pkgver() {
 }
 
 build() {
-    CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
+	local meson_options=(
+        -D profile=default
+        -D docs=false
+	)
 
-    arch-meson $pkgname build
-
-    meson compile -C build
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
 }
 
 package() {
