@@ -9,7 +9,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=0.15.7+3021+27bec544
-pkgrel=5
+pkgrel=6
 
 url="https://wiki.gnome.org/Projects/Folks"
 
@@ -17,7 +17,7 @@ depends=(libgee libxml2 evolution-data-server telepathy-glib)
 makedepends=(gobject-introspection vala git meson python-dbusmock)
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/folks.git)
+source=(git+https://gitlab.gnome.org/GNOME/folks.git#branch=master)
 provides=(libfolks.so libfolks-{dummy,eds}.so)
 
 pkgver() {
@@ -31,15 +31,22 @@ pkgver() {
 }
 
 build() {
-  	CFLAGS+=" -Wno-error=implicit-function-declaration -Wno-error=incompatible-function-pointer-types"
+	local meson_options=(
+		-D bluez_backend=true
+    -D eds_backend=true
+    -D ofono_backend=true
+    -D telepathy_backend=true
+    -D zeitgeist=false
+    -D import_tool=true
+    -D inspect_tool=true
+    -D profiling=false
+    -D tests=false
+    -D installed_tests=false
+    -D docs=false
+	)
 
-    local meson_options=(
-      -D tests=false
-    )
-
-    arch-meson folks build "${meson_options[@]}"
-    
-    meson compile -C build
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
 }
 
 package() {
