@@ -10,7 +10,7 @@ license=(GPL3)
 
 arch=(x86_64)
 pkgver=44.0+7077+d9b217481
-pkgrel=5
+pkgrel=6
 
 url=https://wiki.gnome.org/Apps/Geary
 
@@ -60,7 +60,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome-extra)
-source=(git+https://gitlab.gnome.org/GNOME/geary.git)
+source=(git+https://gitlab.gnome.org/GNOME/geary.git#branch=main)
 
 pkgver() {
     cd $pkgname
@@ -73,11 +73,13 @@ pkgver() {
 }
 
 build() {
-    CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type -Wno-error=incompatible-function-pointer-types"
-
     local meson_options=(
         -D profile=release
         -D valadoc=disabled
+        -D ref_tracking=disabled
+        -D contractor=disabled
+        -D libunwind=disabled
+        -D tnef=enabled
     )
   
   arch-meson $pkgname build "${meson_options[@]}"
