@@ -8,7 +8,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=46.alpha+4563+bed4c9b6
-pkgrel=2
+pkgrel=3
 
 url="https://wiki.gnome.org/Apps/Calendar"
 
@@ -50,9 +50,13 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build
+	local meson_options=(
+		-D tracing=false
+    -D profile=default
+	)
 
-    meson compile -C build
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
 }
 
 package() {
