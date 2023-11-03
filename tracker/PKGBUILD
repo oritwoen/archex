@@ -8,7 +8,7 @@ pkgdesc="SQLite-based RDF triplestore database with SPARQL interface"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=3.6.0+15454+088408718
+pkgver=3.6.0+15457+0fd866fc5
 pkgrel=2
 
 url="https://tracker.gnome.org/"
@@ -45,7 +45,7 @@ b2sums=(
 )
 source=(
     git+https://gitlab.gnome.org/GNOME/gvdb.git
-    git+https://gitlab.gnome.org/GNOME/tracker.git
+    git+https://gitlab.gnome.org/GNOME/tracker.git#branch=master
 )
 
 provides=(libtracker-sparql-3.0.so tracker3)
@@ -74,8 +74,17 @@ build() {
     local meson_options=(
         -D docs=false
         -D man=false
+        -D override_sqlite_version_check=false
+        -D stemmer=enabled
+        -D unicode_support=icu
+        -D bash_completion=true
+        -D systemd_user_services=true
         -D tests=false
-        -D test_utils=true
+        -D test_utils=false
+        -D tests_tap_protocol=false
+        -D introspection=enabled
+        -D vapi=enabled
+        -D soup=soup3
     )
     
     arch-meson tracker build "${meson_options[@]}"
