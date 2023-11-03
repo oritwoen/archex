@@ -8,7 +8,7 @@ pkgdesc="A simple GNOME 3 maps application"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=46.alpha+3822+0b0515b1
+pkgver=46.alpha+3824+0418e5be
 pkgrel=2
 
 url="https://wiki.gnome.org/Apps/Maps"
@@ -39,7 +39,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-maps.git)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-maps.git#branch=main)
 
 pkgver() {
     cd $pkgname
@@ -52,10 +52,15 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build
-  
+    local meson_options=(
+        -D profile=default
+    )
+    
+    arch-meson $pkgname build "${meson_options[@]}"
+    
     meson compile -C build
 }
+
 
 package() {
     meson install -C build --destdir "$pkgdir"
