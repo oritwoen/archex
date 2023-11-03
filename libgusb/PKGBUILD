@@ -4,7 +4,7 @@
 
 pkgname=libgusb
 pkgver=0.4.8+467+f2df58f
-pkgrel=2
+pkgrel=3
 pkgdesc='GObject wrapper for libusb1'
 url=https://github.com/hughsie/libgusb
 arch=(x86_64)
@@ -26,7 +26,7 @@ makedepends=(
 )
 
 b2sums=(SKIP)
-source=(git+https://github.com/hughsie/libgusb.git)
+source=(git+https://github.com/hughsie/libgusb.git#branch=main)
 
 pkgver() {
 	cd $pkgname
@@ -39,10 +39,16 @@ pkgver() {
 }
 
 build() {
-	arch-meson $pkgname build \
-		-D tests=false \
+	local meson_options=(
+		-D tests=false
+		-D vapi=true
+		-D usb_ids=/usr/share/hwdata/usb.ids
 		-D docs=false
-	
+		-D introspection=true
+		-D umockdev=disabled
+	)
+
+	arch-meson $pkgname build "${meson_options[@]}"
 	meson compile -C build
 }
 
