@@ -9,8 +9,8 @@ pkgdesc="Simple daemon to allow session software to update firmware"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.9.7+9334+06afa2a15
-pkgrel=2
+pkgver=1.9.8+9372+a644bd371
+pkgrel=1
 
 url="https://github.com/fwupd/fwupd" 
 
@@ -35,8 +35,8 @@ backup=('etc/fwupd/fwupd.conf'
         'etc/fwupd/remotes.d/vendor.conf'
 )
 
-b2sums=(SKIP)
-source=(git+https://github.com/fwupd/fwupd)
+b2sums=(SKIP SKIP)
+source=(git+https://github.com/fwupd/fwupd.git#branch=main fwupd.sysusers)
 
 provides=(libfwupd.so)
 
@@ -51,21 +51,88 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build \
-        -D docs=disabled \
-        -D man=false \
-        -D launchd=disabled \
-        -D tests=false \
-        -D supported_build=enabled \
+	local meson_options=(
+        -D consolekit=disabled
+        -D static_analysis=false
+        -D firmware-packager=true
+        -D docs=disabled
+        -D introspection=enabled
+        -D lvfs=true
+        -D man=false
+        -D libarchive=enabled
+        -D gudev=enabled
+        -D gusb=enabled
+        -D bluez=enabled
+        -D polkit=enabled
+        -D gnutls=enabled
+        -D sqlite=enabled
+        -D passim=enabled
+        -D lzma=enabled
+        -D cbor=enabled
+        -D plugin_acpi_phat=enabled
+        -D plugin_amdgpu=enabled
+        -D plugin_android_boot=disabled
+        -D plugin_bcm57xx=disabled
+        -D plugin_cfu=enabled
+        -D plugin_cpu=enabled
+        -D plugin_emmc=enabled
+        -D plugin_ep963x=enabled
+        -D plugin_fastboot=enabled
+        -D plugin_gpio=enabled
+        -D plugin_igsc=disabled
+        -D plugin_logitech_bulkcontroller=disabled
+        -D plugin_logitech_scribe=disabled
+        -D plugin_logitech_tap=disabled
+        -D plugin_parade_lspcon=disabled
+        -D plugin_pixart_rf=disabled
+        -D plugin_realtek_mst=disabled
+        -D plugin_synaptics_mst=disabled
+        -D plugin_synaptics_rmi=enabled
+        -D plugin_scsi=disabled
+        -D plugin_tpm=enabled
+        -D plugin_redfish=enabled
+        -D plugin_uefi_capsule=enabled
+        -D plugin_uefi_capsule_splash=true
+        -D plugin_uefi_pk=enabled
+        -D plugin_nitrokey=disabled
+        -D plugin_nvme=enabled
+        -D plugin_modem_manager=disabled
+        -D plugin_msr=disabled
+        -D plugin_mtd=enabled
+        -D plugin_flashrom=enabled
+        -D plugin_intel_me=disabled
+        -D plugin_intel_spi=false
+        -D plugin_vendor_example=false
+        -D plugin_uf2=enabled
+        -D plugin_upower=enabled
+        -D plugin_powerd=enabled
+        -D qubes=false
+        -D supported_build=enabled
+        -D systemd=enabled
+        -D systemd_unit_user=fwupd
+        -D launchd=disabled
+        -D elogind=disabled
+        -D tests=false
+        -D curl=enabled
+        -D efi_binary=true
+        -D metainfo=true
+        -D bash_completion=true
         -D fish_completion=false
-
-    meson configure build # Print config
-
-    #meson compile -C build
+        -D offline=enabled
+        -D compat_cli=false
+        -D hsi=enabled
+        -D thinklmi_compat=false
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
 }
 
 package() {
     meson install -C build --destdir "$pkgdir"
+
+    # Add fwupd user https://bugs.archlinux.org/task/79653
+    install -D -m644 fwupd.sysusers "${pkgdir}"/usr/lib/sysusers.d/fwupd.conf
 
     # Fixup mode to match polkit
     install -d -o root -g 102 -m 750 "${pkgdir}"/usr/share/polkit-1/rules.d
