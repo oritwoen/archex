@@ -4,7 +4,7 @@
 
 pkgname=glu
 pkgver=9.0.3+219+a2b96c7
-pkgrel=29
+pkgrel=30
 pkgdesc="Mesa OpenGL utility library"
 arch=('x86_64')
 url="https://gitlab.freedesktop.org/mesa/glu"
@@ -14,7 +14,7 @@ depends=('libgl' 'gcc-libs' 'glibc')
 makedepends=('meson')
 
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/mesa/glu.git)
+source=(git+https://gitlab.freedesktop.org/mesa/glu.git#branch=master)
 
 pkgver() {
 	cd $pkgname
@@ -27,7 +27,7 @@ pkgver() {
 }
 
 build() {
-	arch-meson $pkgname build
+	arch-meson $pkgname build -D gl_provider=gl
 
 	meson compile -C build
 }
