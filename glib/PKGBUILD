@@ -3,7 +3,7 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=glib2
-pkgver=2.78.1+27729+21624e78f
+pkgver=2.79.0+28131+7e7a6271f
 pkgrel=1
 pkgdesc="Low level core library"
 url="https://wiki.gnome.org/Projects/GLib"
@@ -31,8 +31,8 @@ makedepends=(
 )
 
 source=(
-  "git+https://gitlab.gnome.org/GNOME/glib.git#commit=21624e78f013ee8706483086e3086076d08fe242"
-  "git+https://gitlab.gnome.org/GNOME/gvdb.git"
+  "git+https://gitlab.gnome.org/GNOME/glib.git#branch=main"
+  "git+https://gitlab.gnome.org/GNOME/gvdb.git#branch=main"
   gio-querymodules.hook
   glib-compile-schemas.hook
 )
@@ -82,7 +82,7 @@ build() {
     -D glib_checks=false
     -D libelf=enabled
     -D multiarch=false
-    #-D introspection=disabled
+    -D introspection=disabled
   )
 
   arch-meson glib build "${meson_options[@]}"
