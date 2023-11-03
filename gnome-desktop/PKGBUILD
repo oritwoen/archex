@@ -8,7 +8,7 @@ pkgdesc="Library with common API for various GNOME modules"
 license=(GPL LGPL)
 
 arch=(x86_64)
-pkgrel=2
+pkgrel=3
 pkgver=44.0+6635+d5cad646
 
 url="https://gitlab.gnome.org/GNOME/gnome-desktop"
@@ -31,7 +31,7 @@ makedepends=(
 )
 
 provides=(libgnome-desktop-3.so libgnome-{bg,desktop,rr}-4.so)
-source=("git+https://gitlab.gnome.org/GNOME/gnome-desktop.git")
+source=("git+https://gitlab.gnome.org/GNOME/gnome-desktop.git#branch=master")
 b2sums=('SKIP')
 
 provides=(gnome-desktop-common gnome-desktop-4)
@@ -49,9 +49,19 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build \
-        -D desktop_docs=false \
+    local meson_options=(
+        -D desktop_docs=false
         -D debug_tools=false
+        -D introspection=true
+        -D udev=enabled
+        -D systemd=enabled
+        -D gtk_doc=false
+        -D installed_tests=false
+        -D build_gtk4=true
+        -D legacy_library=true
+    )
+    
+    arch-meson $pkgname build "${meson_options[@]}"
 
     meson compile -C build
 }
