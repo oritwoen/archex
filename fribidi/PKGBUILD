@@ -5,7 +5,7 @@
 
 pkgname=fribidi
 pkgver=1.0.13+420+b54871c
-pkgrel=5
+pkgrel=6
 pkgdesc="A Free Implementation of the Unicode Bidirectional Algorithm"
 url="https://github.com/fribidi/fribidi"
 arch=(x86_64)
@@ -20,7 +20,7 @@ makedepends=(
 )
 
 b2sums=(SKIP)
-source=(git+https://github.com/fribidi/fribidi.git)
+source=(git+https://github.com/fribidi/fribidi.git#branch=master)
 provides=(libfribidi.so)
 
 pkgver() {
@@ -35,7 +35,9 @@ pkgver() {
 
 build() {
 	local meson_options=(
+		-D deprecated=false
 		-D docs=false
+		-D bin=true
 		-D tests=false
 	)
 	
