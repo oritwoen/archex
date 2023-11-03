@@ -6,8 +6,8 @@ pkgdesc="Building blocks for modern adaptive GNOME applications"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.5.alpha+3898+5758745e
-pkgrel=2
+pkgver=1.5.alpha+3901+83257790
+pkgrel=1
 
 url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
 
@@ -22,7 +22,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome-core)
-source=(git+https://gitlab.gnome.org/GNOME/libadwaita.git)
+source=(git+https://gitlab.gnome.org/GNOME/libadwaita.git#branch=main)
 
 pkgver() {
     cd $pkgname
@@ -35,12 +35,19 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build \
-        -D tests=false \
+	local meson_options=(
+		-D profiling=false
+        -D introspection=enabled
+        -D vapi=true
+        -D gtk_doc=false
+        -D tests=false
         -D examples=false
-    
-    meson compile -C build
+	)
+
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
 }
+
 
 
 package() {
