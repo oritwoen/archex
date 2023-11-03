@@ -5,7 +5,7 @@
 
 pkgname=gsound
 pkgver=1.0.3+92+95d36d6
-pkgrel=27
+pkgrel=28
 pkgdesc='Small library for playing system sounds'
 arch=('x86_64')
 url='https://wiki.gnome.org/Projects/GSound'
@@ -15,7 +15,7 @@ depends=('glib2' 'glibc' 'libcanberra')
 makedepends=('gobject-introspection' 'meson' 'vala')
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gsound.git)
+source=(git+https://gitlab.gnome.org/GNOME/gsound.git#branch=master)
 
 pkgver() {
 	cd $pkgname
@@ -28,9 +28,13 @@ pkgver() {
 }
 
 build() {
-	arch-meson $pkgname build \
-		-D gtk_doc=true
-	
+	local meson_options=(
+		-D gtk_doc=false
+		-D introspection=true
+		-D enable_vala=true
+	)
+
+	arch-meson $pkgname build "${meson_options[@]}"
 	meson compile -C build
 }
 
