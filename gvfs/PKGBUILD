@@ -8,7 +8,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=1.52.2+6377+09b6a695
-pkgrel=2
+pkgrel=3
 
 url="https://wiki.gnome.org/Projects/gvfs"
 
@@ -49,7 +49,7 @@ makedepends=(
 groups=(gnome)
 source=(
     gvfsd.hook
-    git+https://gitlab.gnome.org/GNOME/gvfs.git
+    git+https://gitlab.gnome.org/GNOME/gvfs.git#branch=master
 )
 b2sums=(
     08a830600964d2c896d7f107d9558053a32eb6b9166433d6e29b58d4c38e318cbb7fdf7b8230cf72d433df65f4698b9ad86624bf7d3c30c883db325d51335189
@@ -71,9 +71,38 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build
-    
-    meson compile -C build
+	local meson_options=(
+		-D admin=true
+    -D afc=true
+    -D afp=true
+    -D archive=true
+    -D cdda=true
+    -D dnssd=true
+    -D goa=true
+    -D google=true
+    -D gphoto2=true
+    -D http=true
+    -D mtp=true
+    -D nfs=true
+    -D sftp=true
+    -D smb=true
+    -D udisks2=true
+    -D bluray=true
+    -D fuse=true
+    -D gcr=true
+    -D gcrypt=true
+    -D gudev=true
+    -D keyring=true
+    -D logind=true
+    -D libusb=true
+    -D devel_utils=false
+    -D installed_tests=false
+    -D man=false
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	
+	meson compile -C build
 }
 
 package() {
