@@ -6,7 +6,7 @@ pkgdesc="A simple image viewer for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0+647+19bf847
+pkgver=45.0+651+89e7104
 pkgrel=2
 
 url="https://gitlab.gnome.org/GNOME/loupe"
@@ -32,7 +32,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/loupe.git)
+source=(git+https://gitlab.gnome.org/GNOME/loupe.git#branch=main)
 
 pkgver() {
     cd $pkgname
@@ -45,9 +45,13 @@ pkgver() {
 }
 
 build() {
-    arch-meson $pkgname build
-    
-    meson compile -C build
+	local meson_options=(
+		-D profile=release
+    -D disable-glycin-sandbox=false
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
 }
 
 package() {
