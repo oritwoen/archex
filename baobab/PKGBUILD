@@ -8,7 +8,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=45.0+2229+a0c075a
-pkgrel=7
+pkgrel=8
 
 url="https://wiki.gnome.org/Apps/DiskUsageAnalyzer"
 
@@ -32,7 +32,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/baobab.git)
+source=(git+https://gitlab.gnome.org/GNOME/baobab.git#branch=main)
 
 pkgver() {
     cd $pkgname
