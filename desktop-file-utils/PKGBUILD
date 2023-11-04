@@ -1,0 +1,51 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Andreas Radke <andyrtr@archlinux.org>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Alexander Fehr <pizzapunk gmail com>
+
+pkgname=desktop-file-utils
+pkgdesc="Command line utilities for working with desktop entries"
+license=(GPL)
+
+arch=(x86_64)
+pkgver=0.27+370+2470d73
+pkgrel=1
+
+url="https://www.freedesktop.org/wiki/Software/desktop-file-utils"
+
+depends=(glib2)
+makedepends=(git meson)
+
+source=(
+  update-desktop-database.hook
+  git+https://gitlab.freedesktop.org/xdg/desktop-file-utils.git#branch=master
+)
+
+b2sums=(SKIP SKIP)
+
+
+pkgver() {
+	cd $pkgname
+
+    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+    echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local meson_options=(
+		-D ansi=false
+		-D gcov=false
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+	
+	install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 *.hook
+}
