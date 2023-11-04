@@ -7,8 +7,8 @@ pkgdesc='EDID and DisplayID library'
 license=(MIT)
 
 arch=(x86_64)
-pkgver=0.1.1
-pkgrel=3
+pkgver=0.2.0+dev+227+3034840
+pkgrel=2
 
 url="https://gitlab.freedesktop.org/emersion/libdisplay-info"
 
@@ -32,7 +32,7 @@ pkgver() {
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
-	echo ${_version}+${_commits}+${_commith}
+    echo ${_version/-/+}+${_commits}+${_commith}
 }
 
 build() {
