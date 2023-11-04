@@ -6,8 +6,8 @@ pkgdesc="Collection of data extractors for Tracker/Nepomuk"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=3.6.1+14337+29b0235d7
-pkgrel=2
+pkgver=3.6.2+14364+88d454301
+pkgrel=3
 
 url="https://wiki.gnome.org/Projects/Tracker"
 
@@ -39,7 +39,7 @@ makedepends=(
 
 b2sums=(SKIP)
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/tracker-miners.git)
+source=(git+https://gitlab.gnome.org/GNOME/tracker-miners.git#branch=master)
 
 provides=(tracker3-miners)
 replaces=(tracker3-miners)
