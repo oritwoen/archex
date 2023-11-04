@@ -9,7 +9,7 @@ pkgdesc="An open-source implementation of the OpenGL specification"
 license=('custom')
 
 arch=('x86_64')
-pkgver=24.0.0+devel+179840+4a627af0e36
+pkgver=24.0.0+devel+179916+655cbf203d1
 pkgrel=1
 
 url="https://www.mesa3d.org/"
