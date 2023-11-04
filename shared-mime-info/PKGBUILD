@@ -1,0 +1,58 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: AndyRTR <andyrtr@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=shared-mime-info
+pkgdesc="Freedesktop.org Shared MIME Info"
+license=('GPL2')
+
+arch=('x86_64')
+pkgver=2.3+1950+4037d1b
+pkgrel=1
+
+depends=('libxml2' 'glib2' 'glibc' 'gcc-libs')
+makedepends=('gettext' 'xmlto' 'docbook-xsl' 'git' 'meson')
+
+url="https://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/"
+
+
+b2sums=(
+	SKIP 
+	SKIP
+)
+source=(
+	update-mime-database.hook 
+	git+https://gitlab.freedesktop.org/xdg/shared-mime-info.git#branch=master
+)
+install=shared-mime-info.install
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local meson_options=(
+		-D update-mimedb=false
+		-D build-tools=true
+		-D build-translations=true
+		-D build-tests=false
+		-D xdgmime-path=${srcdir}/xdgmime
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	
+	meson compile -C build
+}
+
+package() {
+	DESTDIR="$pkgdir" meson install -C build
+	
+	# use a prefix to run it early enough - other hooks may depend on it - FS#72858
+  	install -Dm644 "$srcdir"/update-mime-database.hook "$pkgdir"/usr/share/libalpm/hooks/30-update-mime-database.hook
+}
