@@ -7,7 +7,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=0.9.1+687+5970778
-pkgrel=26
+pkgrel=27
 
 url="https://gitlab.gnome.org/GNOME/librest"
 
