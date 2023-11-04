@@ -1,0 +1,48 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Sven-Hendrik Haase <svenstaro@archlinux.org>
+# Contributor: Adrian Perez de Castro <aperez@igalia.com>
+
+pkgdesc='Client-side decorations library for Wayland clients'
+pkgname=libdecor
+license=('MIT')
+
+arch=(x86_64)
+pkgver=0.2.0+270+c6c780c
+pkgrel=1
+
+url=https://gitlab.freedesktop.org/libdecor/libdecor
+
+depends=('wayland' 'pango' 'dbus' 'gtk3')
+makedepends=('cmake' 'ninja' 'meson' 'wayland-protocols')
+
+source=(git+https://gitlab.freedesktop.org/libdecor/libdecor.git#branch=master)
+b2sums=(SKIP)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local meson_options=(
+		-D demo=false
+		-D dbus=enabled
+		-D install_demo=false
+		-D gtk=enabled
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "${pkgdir}"
+	
+	install -Dm644 "${pkgname}/LICENSE" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
