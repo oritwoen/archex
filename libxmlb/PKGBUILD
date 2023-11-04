@@ -1,0 +1,47 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Bruno Pagani <archange@archlinux.org>
+
+pkgname=libxmlb
+pkgdesc="Library to help create and query binary XML blobs"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=0.3.15+524+85a7f59
+pkgrel=1
+
+url="https://github.com/hughsie/libxmlb"
+
+depends=(glib2 libstemmer xz zstd)
+makedepends=(meson gobject-introspection)
+
+b2sums=(SKIP)
+source=(git+https://github.com/hughsie/libxmlb.git#branch=main)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local meson_options=(
+		-D gtkdoc=false
+		-D introspection=true
+		-D tests=false
+		-D stemmer=true
+		-D cli=true
+		-D zstd=true
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "${pkgdir}"
+}
