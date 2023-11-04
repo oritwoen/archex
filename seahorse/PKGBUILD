@@ -9,7 +9,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=43.0+5864+87a5e531
-pkgrel=2
+pkgrel=3
 
 url="https://wiki.gnome.org/Apps/Seahorse"
 
