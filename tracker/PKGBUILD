@@ -9,7 +9,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=3.6.0+15457+0fd866fc5
-pkgrel=2
+pkgrel=3
 
 url="https://tracker.gnome.org/"
 
@@ -80,7 +80,7 @@ build() {
         -D bash_completion=true
         -D systemd_user_services=true
         -D tests=false
-        -D test_utils=false
+        -D test_utils=true
         -D tests_tap_protocol=false
         -D introspection=enabled
         -D vapi=enabled
