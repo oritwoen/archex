@@ -7,7 +7,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=0.3.15+524+85a7f59
-pkgrel=1
+pkgrel=2
 
 url="https://github.com/hughsie/libxmlb"
 
