@@ -3,7 +3,7 @@
 
 pkgname=graphene
 pkgver=1.11.1+1246+ba99345
-pkgrel=3
+pkgrel=5
 pkgdesc="A thin layer of graphic data types"
 url="https://ebassi.github.io/graphene/"
 arch=(x86_64)
