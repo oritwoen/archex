@@ -53,9 +53,6 @@ makedepends=(
   'wayland-protocols'
   'xorgproto'
 
-  # valgrind deps
-  'valgrind'
-
   # d3d12 deps
   'directx-headers'
 
@@ -90,13 +87,13 @@ build() {
         -D android-libbacktrace=disabled
         -D dri3=enabled
         -D expat=enabled
-        -D gallium-drivers=radeonsi,swrast,zink,d3d12
+        -D gallium-drivers=radeonsi,swrast,zink
         -D gallium-extra-hud=true
         -D gallium-vdpau=enabled
         -D gallium-omx=bellagio
         -D gallium-va=enabled
         -D gallium-xa=disabled
-        -D gallium-nine=true
+        -D gallium-nine=false
         -D gallium-d3d10umd=false
         -D gallium-opencl=icd
         -D gallium-rusticl=true
@@ -131,6 +128,7 @@ build() {
         -D install-intel-gpu-tests=false
         -D selinux=false
         -D osmesa=true
+        -D tools=[]
         -D power8=disabled
         -D xlib-lease=enabled
         -D glx-direct=true
@@ -144,7 +142,7 @@ build() {
         -D vulkan-beta=true
         -D intel-clc=disabled
         -D video-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc
-        -D gallium-d3d12-video=enabled
+        -D gallium-d3d12-video=disabled
         -D min-windows-version=8
         -D xmlconfig=enabled
         -D intel-xe-kmd=disabled

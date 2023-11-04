@@ -34,6 +34,8 @@ depends=(
     alhp-mirrorlist
 
     #For custom makepkg
+    polly
+    openmp
     sccache
 )
 

@@ -27,7 +27,7 @@ pkgver() {
 }
 
 build() {
-	arch-meson $pkgname build -D gl_provider=gl
+	arch-meson $pkgname build -D gl_provider=glvnd
 
 	meson compile -C build
 }

@@ -1,0 +1,63 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Fabian Bornschein <fabiscafe-at-mailbox-dot-org>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=gnome-system-monitor
+pkgdesc="View current processes and monitor system state"
+license=(GPL)
+
+arch=(x86_64)
+pkgver=45.0.2+4938+eb9f1b7c
+pkgrel=2
+
+url="https://wiki.gnome.org/Apps/SystemMonitor"
+
+depends=(
+	cairo
+	dconf
+	gdk-pixbuf2
+	glib2
+	glibmm
+	gtk4
+	gtkmm-4.0
+	hicolor-icon-theme
+	libgtop
+	libhandy
+	librsvg
+	libsigc++
+	pango
+	polkit
+	systemd
+)
+
+makedepends=(
+	appstream-glib
+	git
+	meson
+	yelp-tools
+)
+
+b2sums=(SKIP)
+groups=(gnome)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-system-monitor.git#branch=master)
+
+pkgver() {
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+	
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson $pkgname build
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
