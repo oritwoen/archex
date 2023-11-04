@@ -1,0 +1,56 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+
+pkgname=orc
+pkgdesc="Optimized Inner Loop Runtime Compiler"
+license=(custom:BSD)
+
+arch=(x86_64)
+pkgver=orc+1610+1bc2a2f
+pkgrel=1
+
+url="https://gitlab.freedesktop.org/gstreamer/orc"
+
+depends=(glibc)
+makedepends=(
+	git
+	meson
+	valgrind
+)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.freedesktop.org/gstreamer/orc.git#branch=main)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local meson_options=(
+		-D orc-backend=all
+		-D orc-test=disabled
+		-D benchmarks=disabled
+		-D examples=disabled
+		-D gtk_doc=disabled
+		-D tests=disabled
+		-D tools=disabled
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+	
+	install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 orc/COPYING
+}
