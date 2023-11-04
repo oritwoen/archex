@@ -8,7 +8,7 @@ pkgdesc="GNOME's main interface to configure various aspects of the desktop"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=46.alpha+22980+0f1479262
+pkgver=46.alpha+22981+afde1d37e
 pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/gnome-control-center"
