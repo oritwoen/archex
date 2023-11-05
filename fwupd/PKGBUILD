@@ -10,7 +10,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=1.9.8+9383+2ee11e88d
-pkgrel=1
+pkgrel=2
 
 url="https://github.com/fwupd/fwupd" 
 
