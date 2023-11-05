@@ -1,0 +1,70 @@
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Ionut Biru <ibiru@archlinux.org>
+
+pkgname=vte
+pkgdesc="Virtual Terminal Emulator widget"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=+5330+f6658a23
+pkgrel=1
+
+url=https://wiki.gnome.org/Apps/Terminal/VTE
+
+makedepends=(
+	gtk3
+	gtk4
+	vala
+	cairo
+	pcre2
+	gperf
+	gnutls
+	fribidi
+	systemd
+	gobject-introspection
+)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/vte.git#branch=master)
+options=(!lto)
+
+provides=(vte-common vte3 vte4)
+replaces=(vte-common vte3 vte4)
+conflicts=(vte-common vte3 vte4)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local options=(
+		-D b_lto=false
+		-D _b_symbolic_functions=true
+		-D a11y=true
+		-D debugg=false
+		-D docs=false
+		-D gir=true
+		-D fribidi=true
+		-D glade=true
+		-D gnutls=true
+		-D gtk3=true
+		-D gtk4=true
+		-D icu=true
+		-D sixel=false
+		-D _systemd=true
+		-D vapi=true
+	)
+	
+	arch-meson $pkgname build "${options[@]}"
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
