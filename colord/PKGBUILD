@@ -12,44 +12,62 @@ pkgrel=86
 
 url="https://www.freedesktop.org/software/colord"
 
-depends=(lcms2 libgusb polkit sqlite dconf dbus libgudev shared-mime-info systemd)
-makedepends=(gobject-introspection vala sane bash-completion argyllcms git meson)
+depends=(
+	lcms2 
+	libgusb 
+	polkit 
+	sqlite 
+	dconf 
+	dbus 
+	libgudev 
+	shared-mime-info 
+	systemd
+)
+
+makedepends=(
+	gobject-introspection 
+	vala 
+	sane 
+	bash-completion
+	argyllcms
+)
 
 b2sums=(SKIP)
-source=(git+https://github.com/hughsie/colord)
-options=(!emptydirs)
+source=(git+https://github.com/hughsie/colord.git#branch=main)
 
 provides=(libcolorhug.so libcolord.so libcolord colord-sane)
 replaces=(shared-color-profiles colord-sane libcolord)
 conflicts=(shared-color-profiles colord-sane libcolord)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
-
-    echo ${_version}+${_commits}+${_commith}
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+	
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    arch-meson $pkgname build \
-        -D libcolordcompat=true \
-        -D sane=true \
-        -D vapi=true \
-        -D print_profiles=true \
-        -D tests=false \
-        -D daemon_user=colord \
-        -D man=false \
-        -D docs=false
-    
-    meson compile -C build
+	local options=(
+		-D libcolordcompat=true
+		-D sane=true
+		-D vapi=true
+		-D print_profiles=true
+		-D tests=false
+		-D daemon_user=colord
+		-D man=false
+		-D docs=false
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 
-    echo 'u colord - "Color management daemon" /var/lib/colord' |
-        install -Dm644 /dev/stdin "$pkgdir/usr/lib/sysusers.d/colord.conf"
+	echo 'u colord - "Color management daemon" /var/lib/colord' |
+		install -Dm644 /dev/stdin "$pkgdir/usr/lib/sysusers.d/colord.conf"
 }

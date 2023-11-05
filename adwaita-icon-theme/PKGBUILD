@@ -11,13 +11,17 @@ arch=(any)
 pkgver=45.0+3924+9a4eedfc6
 pkgrel=14
 
-url="https://gitlab.gnome.org/GNOME/adwaita-icon-theme"
+url=https://gitlab.gnome.org/GNOME/adwaita-icon-theme
 
-depends=(librsvg hicolor-icon-theme gtk-update-icon-cache)
-makedepends=(git gtk3)
+depends=(
+	librsvg 
+	hicolor-icon-theme 
+	gtk-update-icon-cache
+)
+
+makedepends=(gtk3)
 
 b2sums=(SKIP)
-groups=(gnome)
 source=(git+https://gitlab.gnome.org/GNOME/adwaita-icon-theme.git#branch=master)
 
 provides=(adwaita-cursors)
@@ -25,21 +29,21 @@ replaces=(adwaita-cursors)
 conflicts=(adwaita-cursors)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $4}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
-
-    echo ${_version}+${_commits}+${_commith}
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $4}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+	
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    arch-meson $pkgname build
-
-    meson compile -C build
+	arch-meson $pkgname build
+	
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }

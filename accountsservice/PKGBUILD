@@ -13,19 +13,16 @@ pkgrel=19
 url="https://gitlab.freedesktop.org/accountsservice/accountsservice"
 
 depends=(
-  glib2
-  libxcrypt
-  polkit
-  shadow
-  systemd
+	glib2
+	polkit
+	shadow
+	systemd
+	libxcrypt
 )
 
 makedepends=(
-  git
-  gobject-introspection
-  meson
-  vala
-  xmlto
+	vala
+	gobject-introspection
 )
 
 b2sums=(SKIP)
@@ -34,21 +31,32 @@ source=(git+https://gitlab.freedesktop.org/accountsservice/accountsservice.git#b
 provides=(libaccountsservice.so)
 
 pkgver() {
-	cd $pkgname
+  cd $pkgname
 
 	local _version=$( ./generate-version.sh)
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
-    echo ${_version}+${_commits}+${_commith}
+  echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local meson_options=(
+	local options=(
+		-D systemdsystemunitdir=''
+		-D gdmconffile=/etc/gdm/custom.conf
+		-D lightdmconffile=/etc/lightdm/lightdm.conf
 		-D admin_group=wheel
+		-D extra_admin_groups=[]
+		-D minimum_uid=1000
+		-D elogind=false
+		-D libxcrypt=true
+		-D introspection=true
+		-D vapi=true
+		-D docbook=false
+		-D gtk_doc=false
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	meson compile -C build
 }
 

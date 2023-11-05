@@ -29,6 +29,10 @@ depends=(
     pacman-mirrorlist
     coreutils
 
+	#devtools
+	git
+	meson
+
     #custom repos
     alhp-keyring
     alhp-mirrorlist

@@ -3,32 +3,31 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 # Contributor: Brice Carpentier <brice@daknet.org>
 
-pkgbase=cairo
 pkgname=cairo
+pkgdesc="2D graphics library with support for multiple output devices"
+
+arch=(x86_64)
 pkgver=1.18.1+12830+36193ec95
 pkgrel=12
-pkgdesc="2D graphics library with support for multiple output devices"
-url="https://cairographics.org/"
-arch=(x86_64)
+
+url=https://cairographics.org/
 license=(LGPL MPL)
 
 depends=(
-	fontconfig
-	freetype2
+	lzo
+	zlib
 	glib2
+	pixman
 	libpng
 	libx11
 	libxcb
 	libxext
+	freetype2
 	libxrender
-	lzo
-	pixman
-	zlib
+	fontconfig
 )
 
 makedepends=(
-	git
-	meson
 	valgrind
 )
 
@@ -41,11 +40,10 @@ provides=(
 	libcairo.so=2-64
 )
 
-
 pkgver() {
 	cd $pkgname
 	
-    local _version=$(python version.py)
+	local _version=$(python version.py)
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
@@ -53,7 +51,7 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
+	local options=(
 		-D dwrite=disabled
 		-D fontconfig=enabled
 		-D freetype=enabled
@@ -72,7 +70,7 @@ build() {
 		-D gtk_doc=false
 	)
 		
-	arch-meson cairo build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	meson compile -C build
 }
 

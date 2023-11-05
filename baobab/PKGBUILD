@@ -10,48 +10,42 @@ arch=(x86_64)
 pkgver=45.0+2229+a0c075a
 pkgrel=12
 
-url="https://wiki.gnome.org/Apps/DiskUsageAnalyzer"
+url=https://wiki.gnome.org/Apps/DiskUsageAnalyzer
 
 depends=(
-  dconf
-  gsettings-desktop-schemas
-  gtk4
-  libadwaita
-  librsvg
+	gtk4
+	dconf
+	librsvg
+	libadwaita
+	gsettings-desktop-schemas
 )
 
 makedepends=(
-  appstream-glib
-  git
-  gobject-introspection
-  meson
-  vala
-  yelp-tools
+	vala
+	yelp-tools
+	appstream-glib
+	gobject-introspection
 )
 
-
 b2sums=(SKIP)
-groups=(gnome)
 source=(git+https://gitlab.gnome.org/GNOME/baobab.git#branch=main)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
-
-    echo ${_version}+${_commits}+${_commith}
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+	
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-  	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
-
-    arch-meson $pkgname build
-
-    meson compile -C build
+	arch-meson $pkgname build
+	
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
