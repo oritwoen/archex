@@ -8,7 +8,7 @@ pkgdesc="View current processes and monitor system state"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0.2+4939+dfb51f5d
+pkgver=45.0.2+4952+5a53d540
 pkgrel=1
 
 url="https://wiki.gnome.org/Apps/SystemMonitor"
