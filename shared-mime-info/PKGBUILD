@@ -7,7 +7,7 @@ pkgdesc="Freedesktop.org Shared MIME Info"
 license=('GPL2')
 
 arch=('x86_64')
-pkgver=2.3+1956+04beba3
+pkgver=2.3+1963+0628b04
 pkgrel=1
 
 depends=('libxml2' 'glib2' 'glibc' 'gcc-libs')
