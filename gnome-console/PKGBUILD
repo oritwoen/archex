@@ -9,33 +9,41 @@ license=(GPL3)
 
 arch=(x86_64)
 pkgver=46.alpha+798+ee24f75
-pkgrel=4
+pkgrel=9
 
 url="https://gitlab.gnome.org/GNOME/console"
 
-depends=(vte4 libgtop libadwaita)
-makedepends=(git meson appstream-glib)
+depends=(
+	vte
+	libgtop 
+	libadwaita
+)
+
+makedepends=(appstream-glib)
 
 b2sums=(SKIP)
-groups=(gnome)
-source=($pkgname::git+https://gitlab.gnome.org/GNOME/console.git)
+source=($pkgname::git+https://gitlab.gnome.org/GNOME/console.git#branch=main)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
-
-    echo ${_version}+${_commits}+${_commith}
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+	
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    arch-meson $pkgname build
-  
-    meson compile -C build
+	local options=(
+		-D devel=false
+		-D tests=false
+	)
+	
+	arch-meson $pkgname build "${options[@]}"
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
