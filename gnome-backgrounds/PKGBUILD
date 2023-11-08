@@ -8,7 +8,7 @@ license=(CCPL:by-sa)
 
 arch=(any)
 pkgver=45.0+1438+2bc1c70
-pkgrel=9
+pkgrel=10
 
 url="https://gitlab.gnome.org/GNOME/gnome-backgrounds"
 
