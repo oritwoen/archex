@@ -9,7 +9,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=3.7.alpha+15467+ada9c9476
-pkgrel=1
+pkgrel=2
 
 url="https://tracker.gnome.org/"
 
