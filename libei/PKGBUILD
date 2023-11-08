@@ -1,8 +1,8 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=libei
-pkgver=1.1.0+998+05d79f6
-pkgrel=6
+pkgver=1.1.0+999+57e7cd7
+pkgrel=1
 pkgdesc="Library for Emulated Input"
 url="https://libinput.pages.freedesktop.org/libei/"
 arch=(x86_64)
