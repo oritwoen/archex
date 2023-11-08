@@ -7,7 +7,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=45.0+651+89e7104
-pkgrel=5
+pkgrel=6
 
 url="https://gitlab.gnome.org/GNOME/loupe"
 
