@@ -7,7 +7,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=+5330+f6658a23
-pkgrel=2
+pkgrel=3
 
 url=https://wiki.gnome.org/Apps/Terminal/VTE
 
