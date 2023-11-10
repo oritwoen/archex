@@ -3,110 +3,107 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=glib2
-pkgver=2.79.0+28158+85d93fb58
-pkgrel=2
 pkgdesc="Low level core library"
-url="https://wiki.gnome.org/Projects/GLib"
 license=(LGPL)
+
 arch=(x86_64)
+pkgver=2.79.0+28893+4144341e7
+pkgrel=2
+
+url="https://wiki.gnome.org/Projects/GLib"
 
 depends=(
-  libffi
-  libsysprof-capture
-  pcre2
-  util-linux-libs
-  zlib
+	zlib
+	pcre2
+	libffi
+	util-linux-libs
+	libsysprof-capture
 )
 
 makedepends=(
-  dbus
-  gettext
-  git
-  gtk-doc
-  libelf
-  meson
-  python
-  shared-mime-info
-  util-linux
+	dbus
+	libelf
+	python
+	gettext
+	util-linux
+	shared-mime-info
 )
 
 source=(
-  "git+https://gitlab.gnome.org/GNOME/glib.git#branch=main"
-  "git+https://gitlab.gnome.org/GNOME/gvdb.git#branch=main"
-  gio-querymodules.hook
-  glib-compile-schemas.hook
+	"git+https://gitlab.gnome.org/GNOME/glib.git#branch=main"
+	"git+https://gitlab.gnome.org/GNOME/gvdb.git#branch=main"
+	gio-querymodules.hook
+	glib-compile-schemas.hook
 )
 
-  depends=(
-    libffi.so
-    libmount.so
-  )
-  provides=(libgmodule-2.0.so=0-64 libglib-2.0.so=0-64 libgobject-2.0.so=0-64 libgio-2.0.so=0-64)
-  optdepends=(
-    'gvfs: most gio functionality'
-    'libelf: gresource inspection tool'
-    'python: gdbus-codegen, glib-genmarshal, glib-mkenums, gtester-report'
-  )
+depends=(
+	libffi.so
+	libmount.so
+)
 
-b2sums=('SKIP'
-        'SKIP'
-        '14c9211c0557f6d8d9a914f1b18b7e0e23f79f4abde117cb03ab119b95bf9fa9d7a712aa0a29beb266468aeb352caa3a9e4540503cfc9fe0bbaf764371832a96'
-        'd30d349b4cb4407839d9074ce08f5259b8a5f3ca46769aabc621f17d15effdb89c4bf19bd23603f6df3d59f8d1adaded0f4bacd0333afcab782f2d048c882858')
+provides=(libgmodule-2.0.so=0-64 libglib-2.0.so=0-64 libgobject-2.0.so=0-64 libgio-2.0.so=0-64)
+
+b2sums=(
+	'SKIP'
+	'SKIP'
+	'14c9211c0557f6d8d9a914f1b18b7e0e23f79f4abde117cb03ab119b95bf9fa9d7a712aa0a29beb266468aeb352caa3a9e4540503cfc9fe0bbaf764371832a96'
+	'd30d349b4cb4407839d9074ce08f5259b8a5f3ca46769aabc621f17d15effdb89c4bf19bd23603f6df3d59f8d1adaded0f4bacd0333afcab782f2d048c882858'
+)
+
+pkgver() {
+	cd glib
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
 
 prepare() {
-  cd glib
-
-  git submodule init
-  git submodule set-url subprojects/gvdb "$srcdir/gvdb"
-  git -c protocol.file.allow=always submodule update
+	cd glib
+	
+	git submodule init
+	git submodule set-url subprojects/gvdb "$srcdir/gvdb"
+	git -c protocol.file.allow=always submodule update
 }
 
 build() {
-  local meson_options=(
-    -D selinux=disabled
-    -D xattr=true
-    -D libmount=enabled
-    -D man=false
-    -D dtrace=false
-    -D systemtap=false
-    -D sysprof=disabled
-    -D gtk_doc=false
-    -D bsymbolic_functions=true
-    -D force_posix_threads=true
-    -D tests=false
-    -D installed_tests=false
-    -D nls=enabled
-    -D oss_fuzz=disabled
-    -D glib_debug=disabled
-    -D glib_assert=false
-    -D glib_checks=false
-    -D libelf=enabled
-    -D multiarch=false
-    -D introspection=disabled
-  )
-
-  arch-meson glib build "${meson_options[@]}"
-  meson compile -C build
-}
-
-pkgver() {
-    cd glib
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
-
-    echo ${_version}+${_commits}+${_commith}
+	local options=(
+		-D selinux=disabled
+		-D xattr=true
+		-D libmount=enabled
+		-D man=false
+		-D dtrace=false
+		-D systemtap=false
+		-D sysprof=disabled
+		-D gtk_doc=false
+		-D bsymbolic_functions=true
+		-D force_posix_threads=true
+		-D tests=false
+		-D installed_tests=false
+		-D nls=enabled
+		-D oss_fuzz=disabled
+		-D glib_debug=disabled
+		-D glib_assert=false
+		-D glib_checks=false
+		-D libelf=enabled
+		-D multiarch=false
+		-D introspection=disabled
+	)
+	
+	arch-meson glib build "${options[@]}"
+	meson compile -C build
 }
 
 package() {
-  meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
+	
+	install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 *.hook
+	touch "$pkgdir/usr/lib/gio/modules/.keep"
 
-  install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 *.hook
-  touch "$pkgdir/usr/lib/gio/modules/.keep"
-
-  #python -m compileall -d /usr/share/glib-2.0/codegen \
-  #  "$pkgdir/usr/share/glib-2.0/codegen"
-  #python -O -m compileall -d /usr/share/glib-2.0/codegen \
-  #  "$pkgdir/usr/share/glib-2.0/codegen"
+	python -m compileall -d /usr/share/glib-2.0/codegen \
+	  "$pkgdir/usr/share/glib-2.0/codegen"
+	python -O -m compileall -d /usr/share/glib-2.0/codegen \
+	  "$pkgdir/usr/share/glib-2.0/codegen"
 }
