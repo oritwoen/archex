@@ -9,7 +9,7 @@ license=(custom:BSD)
 
 arch=(x86_64)
 pkgver=orc+1610+1bc2a2f
-pkgrel=4
+pkgrel=5
 
 url="https://gitlab.freedesktop.org/gstreamer/orc"
 
