@@ -6,8 +6,8 @@ pkgdesc='Specifications of extended Wayland protocols'
 license=('MIT')
 
 arch=('any')
-pkgver=1.32+347+87e0ce4
-pkgrel=5
+pkgver=1.32+348+bde1c87
+pkgrel=1
 
 url='https://wayland.freedesktop.org/'
 makedepends=('wayland' 'meson' 'ninja')
