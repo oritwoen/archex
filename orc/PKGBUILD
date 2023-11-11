@@ -8,8 +8,8 @@ pkgdesc="Optimized Inner Loop Runtime Compiler"
 license=(custom:BSD)
 
 arch=(x86_64)
-pkgver=orc+1610+1bc2a2f
-pkgrel=6
+pkgver=0.4.34.1+1610+1bc2a2f
+pkgrel=2
 
 url="https://gitlab.freedesktop.org/gstreamer/orc"
 
@@ -26,7 +26,7 @@ source=(git+https://gitlab.freedesktop.org/gstreamer/orc.git#branch=main)
 pkgver() {
 	cd $pkgname
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $6}')
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
