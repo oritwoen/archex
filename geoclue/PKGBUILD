@@ -4,7 +4,7 @@
 
 pkgname=geoclue
 pkgver=2.7.1+1043+8a24f60
-pkgrel=13
+pkgrel=14
 pkgdesc="Modular geoinformation service built on the D-Bus messaging system"
 url="https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home"
 arch=(x86_64)
