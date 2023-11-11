@@ -8,7 +8,7 @@ pkgdesc="2D graphics library with support for multiple output devices"
 
 arch=(x86_64)
 pkgver=1.18.1+12832+f9358f26b
-pkgrel=3
+pkgrel=4
 
 url=https://cairographics.org/
 license=(LGPL MPL)
