@@ -9,7 +9,7 @@ license=('GPL')
 
 arch=('x86_64')
 pkgver=20221126+1139+0cc6da7
-pkgrel=5
+pkgrel=6
 
 url="https://github.com/iputils/iputils"
 
