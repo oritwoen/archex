@@ -7,26 +7,24 @@ pkgdesc="Single sign-on framework for GNOME"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=3.49.0+2855+7cf471f2
-pkgrel=6
+pkgver=3.49.0+2870+b33de3a9
+pkgrel=2
 
 url="https://wiki.gnome.org/Projects/GnomeOnlineAccounts"
 
 depends=(
-  gcr
-  json-glib
-  krb5
-  libnotify
-  librest
-  libsecret
-  webkit2gtk-4.1
+	gcr
+	krb5
+	librest
+	libsecret
+	json-glib
+	libnotify
+	webkit2gtk-4.1
 )
 
 makedepends=(
-  git
-  gobject-introspection
-  meson
-  vala
+	vala
+	gobject-introspection
 )
 
 b2sums=(SKIP)
@@ -37,45 +35,44 @@ replaces=(libgoa)
 conflicts=(libgoa)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+	
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    local meson_options=(
-        -D goabackend=true
-        -D inspector=false
-        -D exchange=true
-        -D fedora=true
-        -D google=true
-        -D google_client_id=44438659992-7kgjeitenc16ssihbtdjbgguch7ju55s.apps.googleusercontent.com
-        -D google_client_secret=-gMLuQyDiI0XrQS_vx_mhuYF
-        -D imap_smtp=true
-        -D kerberos=true
-        -D lastfm=true
-        -D lastfm_client_id=7a2461fe34c9c8124fb28ac750ba12fa
-        -D lastfm_client_secret=49ec391644459c417f3afe57ca246c5a
-        -D media_server=true
-        -D owncloud=true
-        -D windows_live=true
-        -D windows_live_client_id=0000000044067703
-        -D gtk_doc=false
-        -D introspection=true
-        -D template_file=''
-        -D man=false
-        -D vapi=true
-    )
-    
-    arch-meson $pkgname build "${meson_options[@]}"
-    
-    meson compile -C build
+	local options=(
+		-D goabackend=true
+		-D exchange=true
+		-D fedora=true
+		-D google=true
+		-D google_client_id=44438659992-7kgjeitenc16ssihbtdjbgguch7ju55s.apps.googleusercontent.com
+		-D google_client_secret=-gMLuQyDiI0XrQS_vx_mhuYF
+		-D imap_smtp=true
+		-D kerberos=true
+		-D lastfm=true
+		-D lastfm_client_id=7a2461fe34c9c8124fb28ac750ba12fa
+		-D lastfm_client_secret=49ec391644459c417f3afe57ca246c5a
+		-D media_server=true
+		-D owncloud=true
+		-D webdav=true
+		-D windows_live=true
+		-D windows_live_client_id=0000000044067703
+		-D gtk_doc=false
+		-D introspection=true
+		-D man=false
+		-D template_file=''
+		-D vapi=true
+	)
+	
+	arch-meson $pkgname build "${options[@]}"
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
