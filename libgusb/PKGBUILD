@@ -4,7 +4,7 @@
 
 pkgname=libgusb
 pkgver=0.4.9+469+860108f
-pkgrel=4
+pkgrel=5
 pkgdesc='GObject wrapper for libusb1'
 url=https://github.com/hughsie/libgusb
 arch=(x86_64)
