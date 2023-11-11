@@ -8,7 +8,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=1.6+393+8a8ab90
-pkgrel=23
+pkgrel=24
 
 url="https://wiki.gnome.org/msitools"
 
