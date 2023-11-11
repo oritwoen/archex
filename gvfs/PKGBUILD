@@ -8,7 +8,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=1.52.2+6378+9ebf4327
-pkgrel=1
+pkgrel=2
 
 url="https://wiki.gnome.org/Projects/gvfs"
 
