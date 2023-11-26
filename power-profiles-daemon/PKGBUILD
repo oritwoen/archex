@@ -1,0 +1,38 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Antonio Rojas <arojas@archlinux.org>
+# Contributor: tinywrkb <tinywrkb@gmail.com>
+
+pkgname=power-profiles-daemon
+pkgdesc='Makes power profiles handling available over D-Bus'
+license=(GPL3)
+
+arch=(x86_64)
+pkgver=0.13+272+be37aea
+pkgrel=1
+
+url=https://gitlab.freedesktop.org/hadess/power-profiles-daemon
+
+depends=(upower polkit)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.freedesktop.org/hadess/power-profiles-daemon.git#branch=main)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson $pkgname build
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
