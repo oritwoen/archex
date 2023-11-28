@@ -5,7 +5,7 @@
 
 pkgname=fribidi
 pkgver=1.0.13+420+b54871c
-pkgrel=17
+pkgrel=18
 pkgdesc="A Free Implementation of the Unicode Bidirectional Algorithm"
 url="https://github.com/fribidi/fribidi"
 arch=(x86_64)
