@@ -7,8 +7,8 @@ pkgdesc="Single sign-on framework for GNOME"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=3.49.0+2870+b33de3a9
-pkgrel=3
+pkgver=3.49.0+2878+0b5994a8
+pkgrel=1
 
 url="https://wiki.gnome.org/Projects/GnomeOnlineAccounts"
 
@@ -46,27 +46,10 @@ pkgver() {
 
 build() {
 	local options=(
-		-D goabackend=true
-		-D exchange=true
-		-D fedora=true
-		-D google=true
-		-D google_client_id=44438659992-7kgjeitenc16ssihbtdjbgguch7ju55s.apps.googleusercontent.com
-		-D google_client_secret=-gMLuQyDiI0XrQS_vx_mhuYF
+		-D exchange=false
+		-D fedora=false
 		-D imap_smtp=true
-		-D kerberos=true
-		-D lastfm=true
-		-D lastfm_client_id=7a2461fe34c9c8124fb28ac750ba12fa
-		-D lastfm_client_secret=49ec391644459c417f3afe57ca246c5a
-		-D media_server=true
-		-D owncloud=true
-		-D webdav=true
-		-D windows_live=true
-		-D windows_live_client_id=0000000044067703
-		-D gtk_doc=false
-		-D introspection=true
-		-D man=false
-		-D template_file=''
-		-D vapi=true
+		-D kerberos=false
 	)
 	
 	arch-meson $pkgname build "${options[@]}"
