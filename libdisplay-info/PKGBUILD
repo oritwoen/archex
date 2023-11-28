@@ -8,7 +8,7 @@ license=(MIT)
 
 arch=(x86_64)
 pkgver=0.2.0+dev+231+ae6cb52
-pkgrel=5
+pkgrel=6
 
 url="https://gitlab.freedesktop.org/emersion/libdisplay-info"
 
