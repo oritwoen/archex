@@ -10,8 +10,8 @@ pkgdesc='IIO accelerometer sensor to input device proxy'
 license=('GPL2')
 
 arch=('x86_64')
-pkgver=3.5+492+29c79c9
-pkgrel=8
+pkgver=3.5+495+a0ff1fe
+pkgrel=1
 
 url='https://gitlab.freedesktop.org/hadess/iio-sensor-proxy/'
 
