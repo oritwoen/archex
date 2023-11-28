@@ -8,8 +8,8 @@ pkgdesc="Next generation desktop shell"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0+18224+c6dc2c197
-pkgrel=11
+pkgver=45.0+18285+f55669982
+pkgrel=2
 
 url="https://wiki.gnome.org/Projects/GnomeShell"
 
@@ -18,7 +18,8 @@ makedepends=(git meson sassc asciidoc gtk-doc bash-completion gnome-control-cent
 
 groups=(gnome)
 b2sums=(SKIP SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-shell.git#commit=c6dc2c1974f909b9534e1c952e3a9212af410a28
+#commit=c6dc2c1974f909b9534e1c952e3a9212af410a28
+source=(git+https://gitlab.gnome.org/GNOME/gnome-shell.git
         git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git)
 
 pkgver() {
