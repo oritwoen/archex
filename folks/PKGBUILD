@@ -9,7 +9,7 @@ license=(LGPL)
 
 arch=(x86_64)
 pkgver=0.15.7+3021+27bec544
-pkgrel=17
+pkgrel=18
 
 url="https://wiki.gnome.org/Projects/Folks"
 
