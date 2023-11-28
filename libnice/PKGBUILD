@@ -3,8 +3,8 @@
 # Contributor: William Díaz <wdiaz@archlinux.us>
 
 pkgname=libnice
-pkgver=0.1.21.1+3041+504189ed
-pkgrel=23
+pkgver=0.1.21.1+3042+d053572c
+pkgrel=1
 pkgdesc="An implementation of the IETF's draft ICE (for p2p UDP data streams)"
 url="https://nice.freedesktop.org"
 arch=(x86_64)
