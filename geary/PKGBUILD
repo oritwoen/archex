@@ -9,8 +9,8 @@ pkgdesc='A lightweight email client for the GNOME desktop'
 license=(GPL3)
 
 arch=(x86_64)
-pkgver=44.0+7077+d9b217481
-pkgrel=17
+pkgver=44.0+7089+f10dc0638
+pkgrel=2
 
 url=https://wiki.gnome.org/Apps/Geary
 
