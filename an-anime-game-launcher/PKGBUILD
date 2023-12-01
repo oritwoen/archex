@@ -1,7 +1,7 @@
 # Maintainer: DrakeTDL <everyone@disroot.org>
 pkgname="an-anime-game-launcher"
 pkgver=3.9.2+808+5a6d713
-pkgrel=1
+pkgrel=2
 pkgdesc="A Launcher for a specific anime game with auto-patching, discord rpc and time tracking"
 arch=("x86_64")
 url="https://github.com/an-anime-team/an-anime-game-launcher"
