@@ -8,7 +8,7 @@ license=(GPL2)
 
 arch=(x86_64)
 pkgver=45.0+2232+a160f5f
-pkgrel=1
+pkgrel=2
 
 url=https://wiki.gnome.org/Apps/DiskUsageAnalyzer
 
