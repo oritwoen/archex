@@ -8,7 +8,7 @@ pkgdesc="Optimized Inner Loop Runtime Compiler"
 license=(custom:BSD)
 
 arch=(x86_64)
-pkgver=0.4.34.1+1610+1bc2a2f
+pkgver=0.4.34.1+1615+f327842
 pkgrel=2
 
 url="https://gitlab.freedesktop.org/gstreamer/orc"
