@@ -8,7 +8,7 @@ pkgdesc="GNOME standard icons"
 license=(LGPL3 CCPL:by-sa)
 
 arch=(any)
-pkgver=45.0+3930+ef8e707ff
+pkgver=45.0+3917+709725baa
 pkgrel=2
 
 url=https://gitlab.gnome.org/GNOME/adwaita-icon-theme
@@ -22,7 +22,8 @@ depends=(
 makedepends=(gtk3)
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/adwaita-icon-theme.git#branch=master)
+commit=709725baa9e17e8d0ca62eab7920162bfeda37b9  # tags/45.0^0
+source=(git+https://gitlab.gnome.org/GNOME/adwaita-icon-theme.git#commit=$commit)
 
 provides=(adwaita-cursors)
 replaces=(adwaita-cursors)
