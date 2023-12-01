@@ -7,8 +7,8 @@ pkgdesc="Low level core library"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=2.79.0+29029+ded497633
-pkgrel=1
+pkgver=2.79.0+29053+438f59b07
+pkgrel=2
 
 url="https://wiki.gnome.org/Projects/GLib"
 
