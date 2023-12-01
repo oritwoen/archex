@@ -7,7 +7,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgver=45.0+6681+41d0dc1d
-pkgrel=2
+pkgrel=3
 
 url="https://gitlab.gnome.org/GNOME/gnome-settings-daemon"
 
