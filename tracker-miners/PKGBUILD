@@ -6,8 +6,8 @@ pkgdesc="Collection of data extractors for Tracker/Nepomuk"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=3.6.2+14371+823f3fc02
-pkgrel=5
+pkgver=3.6.2+14372+e343655fd
+pkgrel=2
 
 url="https://wiki.gnome.org/Projects/Tracker"
 
