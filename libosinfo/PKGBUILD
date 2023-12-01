@@ -4,7 +4,7 @@
 
 pkgname=libosinfo
 pkgver=1.12.0+1947+5bbdd06
-pkgrel=1
+pkgrel=2
 pkgdesc='GObject based library API for managing information about operating systems, hypervisors and the (virtual) hardware devices they can support'
 arch=('x86_64')
 url='https://libosinfo.org/'
