@@ -10,7 +10,7 @@ license=(
 
 arch=(x86_64)
 pkgver=0.1.2+85+8b877e7
-pkgrel=1
+pkgrel=2
 
 url="https://gitlab.gnome.org/sophie-h/glycin"
 
