@@ -4,88 +4,100 @@
 
 pkgname=pacman
 pkgdesc="A library-based package manager with dependency support"
-license=('GPL')
+license=(GPL)
 
-arch=('x86_64')
-pkgver=6.0.1+7252+917b67f5
+arch=(x86_64)
+pkgver=6.0.1+7277+3c28c301
 pkgrel=1
 
-url="https://www.archlinux.org/pacman/"
+url="https://www.archlinux.org/pacman"
 
-groups=('base-devel')
 depends=(
-    curl
-    bash
-    grep
-    gawk
-    gpgme
-    glibc
-    gnupg
-    gettext
-    coreutils
-    libarchive 
-    alhp-keyring 
-    alhp-mirrorlist
-    pacman-mirrorlist
-    coreutils
+	curl
+	bash
+	grep
+	gawk
+	gpgme
+	glibc
+	gnupg
+	gettext
+	coreutils
+	libarchive
 
-	#devtools
+	# repos
+	alhp-keyring
+	alhp-mirrorlist
+	pacman-mirrorlist
+
+	# devtools
 	git
 	meson
 
-    #custom repos
-    alhp-keyring
-    alhp-mirrorlist
-
-    #For custom makepkg
-    polly
-    openmp
-    sccache
+	# makepkg
+	mold
+	pigz
+	polly
+	clang
+	libc++
+	pbzip2
+	ccache
+	openmp
+	sccache
 )
 
-makedepends=(
-    meson
-)
-
-source=(
-    pacman.conf
-    makepkg.conf
-    git+https://gitlab.archlinux.org/pacman/pacman.git
-)
 b2sums=(
-    SKIP
-    SKIP
-    SKIP
+	SKIP 
+	SKIP
+	SKIP
+)
+source=(
+	pacman.conf
+	makepkg.conf
+	git+https://gitlab.archlinux.org/pacman/pacman.git
 )
 
 provides=('libalpm.so')
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
-
-    echo ${_version}+${_commits}+${_commith}
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+	
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    arch-meson $pkgname build \
-        -D use-git-version=true \
-        -D pkg-ext='.pkg.tar.zst' \
-        -D src-ext='.src.tar.zst' \
-        -D doc=disabled
+	local options=(
+		-D use-git-version=true
+		-D pkg-ext='.pkg.tar.zst'
+		-D scriptlet-shell=/usr/bin/bash
+		-D ldconfig=/usr/bin/ldconfig
+		-D doc=disabled
+	)
 
-    meson compile -C build
+	
+	arch-meson $pkgname build "${options[@]}"
+	
+	meson compile -C build
 }
 
 
 package() {
-    DESTDIR="$pkgdir" meson install -C build
+	local unit
+	local wantsdir="$pkgdir/usr/lib/systemd/system/sockets.target.wants"
 
-    # install Arch specific stuff
-    install -dm755 "$pkgdir/etc"
-    install -m644 "$srcdir/pacman.conf" "$pkgdir/etc"
-    install -m644 "$srcdir/makepkg.conf" "$pkgdir/etc"
+	meson install -C build --destdir "$pkgdir"
+
+	# install Arch specific stuff
+	install -dm755 "$pkgdir/etc"
+	install -dm755 "$wantsdir"
+	
+	install -m644 "$srcdir/pacman.conf" "$pkgdir/etc"
+	install -m644 "$srcdir/makepkg.conf" "$pkgdir/etc"
+
+	for unit in dirmngr gpg-agent gpg-agent-{browser,extra,ssh} keyboxd; do
+		ln -s "../${unit}@.socket" "$wantsdir/${unit}@etc-pacman.d-gnupg.socket"
+	done
 }
