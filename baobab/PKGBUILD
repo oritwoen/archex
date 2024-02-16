@@ -7,8 +7,8 @@ pkgdesc="A graphical directory tree analyzer"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.0+2232+a160f5f
-pkgrel=2
+pkgver=45.0+2235+9501371
+pkgrel=1
 
 url=https://wiki.gnome.org/Apps/DiskUsageAnalyzer
 
@@ -41,6 +41,8 @@ pkgver() {
 }
 
 build() {
+	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
+
 	arch-meson $pkgname build
 	
 	meson compile -C build
