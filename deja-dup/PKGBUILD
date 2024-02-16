@@ -3,55 +3,57 @@
 
 pkgname=deja-dup
 pkgdesc='A trivial-to-use personal backup tool to protect against accidental data loss'
-license=('GPL')
+license=(GPL)
 
-arch=('x86_64')
-pkgver=45.2+3185+e3f42bed
-pkgrel=6
+arch=(x86_64)
+pkgver=46.0+3255+80f1b6e4
+pkgrel=1
 
-url='https://wiki.gnome.org/Apps/DejaDup'
+url=https://wiki.gnome.org/Apps/DejaDup
 
 depends=(
-  'duplicity'
-  'gvfs'
-  'libsecret'
-  'org.freedesktop.secrets'
-  'python-gobject'
-  'python-pydrive2'
-  'libadwaita'
-  'rclone'
+	gvfs
+	rclone
+	libsecret
+	duplicity
+	libadwaita
+	python-gobject
+	python-pydrive2
+	org.freedesktop.secrets
 )
 
 makedepends=(
-  'appstream-glib'
-  'itstool'
-  'meson'
-  'vala'
+	vala
+	itstool
+	appstream-glib
 )
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/World/deja-dup.git)
+source=(git+https://gitlab.gnome.org/World/deja-dup.git#branch=main)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2 {print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2 {print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-  	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
+	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
 
-    arch-meson $pkgname build \
-      -D enable_restic=true \
-      -D enable_borg=true
-  
-    meson compile -C build
+	local options=(
+		-D enable_restic=true
+		-D enable_borg=true
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
