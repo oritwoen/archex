@@ -7,36 +7,33 @@ pkgdesc="Contacts Manager for GNOME"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.0+3936+2a3f51d3
-pkgrel=14
+pkgver=46.alpha+3978+a19dac1f
+pkgrel=1
 
-url="https://wiki.gnome.org/Apps/Contacts"
+url=https://apps.gnome.org/Contacts
 
 depends=(
-  cairo
-  dconf
-  evolution-data-server
-  folks
-  gdk-pixbuf2
-  glib2
-  gnome-online-accounts
-  gtk4
-  hicolor-icon-theme
-  libadwaita
-  libgee
-  libgoa
-  libportal
-  libportal-gtk4
-  pango
-  qrencode
+	gtk4
+	glib2
+	pango
+	cairo
+	dconf
+	folks
+	libgee
+	qrencode
+	libportal
+	gdk-pixbuf2
+	libportal-gtk4
+	hicolor-icon-theme
+	evolution-data-server
+
+	gnome-online-accounts
 )
 
 makedepends=(
-  appstream-glib
-  git
-  gobject-introspection
-  meson
-  vala
+	vala
+	appstream-glib
+	gobject-introspection
 )
 
 b2sums=(SKIP)
@@ -44,29 +41,28 @@ groups=(gnome)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-contacts.git#branch=main)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    local meson_options=(
-        -D profile=default
-        -D camera=true
-        -D manpage=false
-        -D docs=false
-        -D goa=true
-    )
-    
-    arch-meson $pkgname build "${meson_options[@]}"
+	CFLAGS+=" -Wno-error=return-type"
+	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
 
-    meson compile -C build
+	local options=(
+		-D manpage=false
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
 }
 
 package() {
-  DESTDIR="$pkgdir" meson install -C build
+	DESTDIR="$pkgdir" meson install -C build
 }
