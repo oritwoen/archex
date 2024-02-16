@@ -10,46 +10,44 @@ arch=(x86_64)
 pkgver=1.6+393+8a8ab90
 pkgrel=27
 
-url="https://wiki.gnome.org/msitools"
+url=https://wiki.gnome.org/msitools
 
-depends=(glib2)
+depends=(
+	glib2
+)
+
 makedepends=(
-  git
-  gobject-introspection
-  meson
-  vala
+	vala
+	gobject-introspection
 )
 
 b2sums=(SKIP)
-source=("git+https://gitlab.gnome.org/GNOME/gcab.git#branch=master")
+source=(git+https://gitlab.gnome.org/GNOME/gcab.git#branch=master)
 
 provides=(libgcab-1.0.so)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 
 build() {
 	local meson_options=(
 		-D docs=false
-		-D introspection=true
-		-D nls=true
-        -D vapi=true
-        -D tests=false
-        -D installed_tests=false
+		-D tests=false
 	)
 	
 	arch-meson $pkgname build "${meson_options[@]}"
+
 	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
