@@ -8,33 +8,29 @@ pkgdesc="A simple GNOME 3 maps application"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=46.alpha+3826+04d5ecfc
-pkgrel=3
+pkgver=46.rc+3937+25363f71
+pkgrel=1
 
-url="https://wiki.gnome.org/Apps/Maps"
-
+url=https://apps.gnome.org/Maps
 
 depends=(
-  geoclue
-  geocode-glib-2
-  gjs
-  gtk4
-  libadwaita
-  libgweather-4
-  librest
-  libshumate
-  libxml2
-  dconf
-  hicolor-icon-theme
-  glib2
-  libportal
+	gjs
+	gtk4
+	glib2
+	dconf
+	libxml2
+	geoclue
+	librest
+	libportal
+	libadwaita
+	libshumate
+ 	libgweather-4
+	geocode-glib-2
+	hicolor-icon-theme
 )
 
 makedepends=(
-  git
-  gobject-introspection
-  meson
-  yelp-tools
+	gobject-introspection
 )
 
 b2sums=(SKIP)
@@ -42,26 +38,21 @@ groups=(gnome)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-maps.git#branch=main)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    local meson_options=(
-        -D profile=default
-    )
-    
-    arch-meson $pkgname build "${meson_options[@]}"
-    
-    meson compile -C build
+	arch-meson $pkgname build
+
+	meson compile -C build
 }
 
-
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
