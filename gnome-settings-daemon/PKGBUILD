@@ -3,81 +3,82 @@
 
 pkgname=gnome-settings-daemon
 pkgdesc="GNOME Settings Daemon"
-license=(GPL)
+license=(
+	GPL-2.0-or-later
+	LGPL-2.0-or-later
+)
+
 
 arch=(x86_64)
-pkgver=45.0+6681+41d0dc1d
-pkgrel=3
+pkgver=46.beta+6697+30bede3e
+pkgrel=1
 
-url="https://gitlab.gnome.org/GNOME/gnome-settings-daemon"
+url=https://gitlab.gnome.org/GNOME/gnome-settings-daemon
 
 depends=(
-  dconf
-  gcr-4
-  geoclue
-  geocode-glib-2
-  gnome-desktop
-  gsettings-desktop-schemas
-  gtk3
-  libcanberra-pulse
-  libgudev
-  libgweather-4
-  libnm
-  libnotify
-  librsvg
-  libwacom
-  nss
-  pulseaudio
-  pulseaudio-alsa
-  systemd
-  upower
+	gcr
+	nss
+	gtk3
+	dconf
+	libnm
+	upower
+	systemd
+	geoclue
+	librsvg
+	libwacom
+	libgudev
+	libnotify
+	libgweather-4
+	gnome-desktop
+	geocode-glib-2
+	libcanberra-pulse
+	pulse-native-provider
+	gsettings-desktop-schemas
 )
 
 makedepends=(
-  docbook-xsl
-  git
-  libxslt
-  meson
-  python
-  usbguard
+	python
+	libxslt
+	usbguard
+	python-packaging
 )
 
-b2sums=(SKIP)
+b2sums=(
+	SKIP
+	SKIP
+)
+
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git#branch=master)
+source=(
+	git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git#branch=master
+	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git#branch=master
+)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	cd $pkgname
+
+	git submodule init
+	git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
+	git -c protocol.file.allow=always submodule update
 }
 
 
 build() {
-    local meson_options=(
-        -D systemd=true
-        -D alsa=true
-        -D gudev=true
-        -D cups=true
-        -D network_manager=true
-        -D rfkill=true
-        -D smartcard=false
-        -D usb-protection=true
-        -D wayland=true
-        -D wwan=false
-        -D gcr3=false
-        -D colord=true
-    )
-    
-    arch-meson $pkgname build "${meson_options[@]}"
-    
-    meson compile -C build
+	arch-meson $pkgname build
+
+	meson compile -C build
 }
 
 package() {
-    DESTDIR="$pkgdir" meson install -C build
+	meson install -C build --destdir "$pkgdir"
 }
