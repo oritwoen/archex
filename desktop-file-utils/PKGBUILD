@@ -14,14 +14,16 @@ pkgrel=13
 url="https://www.freedesktop.org/wiki/Software/desktop-file-utils"
 
 depends=(glib2)
-makedepends=(git meson)
 
-source=(
-  update-desktop-database.hook
-  git+https://gitlab.freedesktop.org/xdg/desktop-file-utils.git#branch=master
+b2sums=(
+	SKIP 
+	SKIP
 )
 
-b2sums=(SKIP SKIP)
+source=(
+	update-desktop-database.hook
+	git+https://gitlab.freedesktop.org/xdg/desktop-file-utils.git#branch=master
+)
 
 
 pkgver() {
@@ -31,16 +33,12 @@ pkgver() {
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
-    echo ${_version}+${_commits}+${_commith}
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local meson_options=(
-		-D ansi=false
-		-D gcov=false
-	)
+	arch-meson $pkgname build
 	
-	arch-meson $pkgname build "${meson_options[@]}"
 	meson compile -C build
 }
 
