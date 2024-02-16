@@ -7,7 +7,7 @@ pkgname=cairo
 pkgdesc="2D graphics library with support for multiple output devices"
 
 arch=(x86_64)
-pkgver=1.18.1+12834+ee07a8118
+pkgver=1.18.1+12838+586c8acac
 pkgrel=1
 
 url=https://cairographics.org/
@@ -52,20 +52,7 @@ pkgver() {
 
 build() {
 	local options=(
-		-D dwrite=disabled
-		-D fontconfig=enabled
-		-D freetype=enabled
-		-D png=enabled
-		-D quartz=disabled
-		-D tee=enabled
-		-D xcb=enabled
-		-D xlib=enabled
-		-D xlib-xcb=enabled
-		-D zlib=enabled
 		-D tests=disabled
-		-D gtk2-utils=disabled
-		-D glib=enabled
-		-D spectre=disabled
 		-D symbol-lookup=disabled
 		-D gtk_doc=false
 	)
