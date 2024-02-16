@@ -3,33 +3,31 @@
 # Contributor: György Balló <ballogy@freestart.hu>
 
 pkgname=geoclue
-pkgver=2.7.1+1046+8fd18c9
-pkgrel=1
 pkgdesc="Modular geoinformation service built on the D-Bus messaging system"
-url="https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home"
-arch=(x86_64)
 license=(LGPL)
+
+arch=(x86_64)
+pkgver=2.7.1+1048+a9caa55
+pkgrel=1
+
+url=https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home
 
 depends=(
 	avahi
+	libsoup3
 	json-glib
 	libmm-glib
-	libsoup3
-)
-makedepends=(
-	git
-	gobject-introspection
-	libnotify
-	meson
-	systemd
-	vala
 )
 
-optdepends=('libnotify: Demo Agent')
-backup=(etc/geoclue/geoclue.conf)
+makedepends=(
+	vala
+	systemd
+	libnotify
+	gobject-introspection
+)
 
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/geoclue/geoclue.git)
+source=(git+https://gitlab.freedesktop.org/geoclue/geoclue.git#branch=master)
 
 # Mozilla API keys (see https://location.services.mozilla.com/api)
 # Note: These are for Arch Linux use ONLY. For your own distribution, please
@@ -48,14 +46,14 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
+	local options=(
 		-D gtk-doc=false
 		-D dbus-srv-user=geoclue
-		-D dbus-sys-dir=/usr/share/dbus-1/system.d
 		-D mozilla-api-key="$_mozilla_api_key"
 	)
 	
-	arch-meson geoclue build "${meson_options[@]}"
+	arch-meson geoclue build "${options[@]}"
+	
 	meson compile -C build
 }
 
@@ -67,7 +65,4 @@ package() {
 
 	echo 'd /var/lib/geoclue 0755 geoclue geoclue' |
 		install -Dm644 /dev/stdin "$pkgdir/usr/lib/tmpfiles.d/geoclue.conf"
-
-	#Fixup mode to match polkit
-	install -d -o root -g 102 -m 750 "$pkgdir/usr/share/polkit-1/rules.d"
 }
