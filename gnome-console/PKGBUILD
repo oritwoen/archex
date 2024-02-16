@@ -8,13 +8,13 @@ pkgdesc="A simple user-friendly terminal emulator for the GNOME desktop"
 license=(GPL3)
 
 arch=(x86_64)
-pkgver=46.alpha+801+3cb0a91
-pkgrel=2
+pkgver=46.alpha+816+810fa4b
+pkgrel=1
 
-url="https://gitlab.gnome.org/GNOME/console"
+url=https://gitlab.gnome.org/GNOME/console
 
 depends=(
-	vte
+	vte4
 	libgtop 
 	libadwaita
 )
@@ -35,12 +35,8 @@ pkgver() {
 }
 
 build() {
-	local options=(
-		-D devel=false
-		-D tests=false
-	)
-	
-	arch-meson $pkgname build "${options[@]}"
+	arch-meson $pkgname build
+
 	meson compile -C build
 }
 
