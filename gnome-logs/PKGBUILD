@@ -24,13 +24,12 @@ depends=(
 )
 
 makedepends=(
-	yelp-tools
 	appstream-glib
 )
 
 b2sums=(SKIP)
 groups=(gnome)
-source=("git+https://gitlab.gnome.org/GNOME/gnome-logs.git#branch=master")
+source=(git+https://gitlab.gnome.org/GNOME/gnome-logs.git#branch=master)
 
 pkgver() {
 	cd $pkgname
