@@ -6,122 +6,85 @@
 
 pkgname=fwupd
 pkgdesc="Simple daemon to allow session software to update firmware"
-license=(LGPL)
+license=(LGPL-2.1-or-later)
 
 arch=(x86_64)
-pkgver=1.9.10+9582+73981a9b3
+pkgver=2.0.0+9999+a36e85a04
 pkgrel=1
 
-url="https://github.com/fwupd/fwupd" 
+url=https://github.com/fwupd/fwupd
 
-depends=(libxmlb efivar python libsmbios libgusb
-         polkit shared-mime-info tpm2-tss flashrom
-         libjcat fwupd-efi gcab hicolor-icon-theme
-         bluez gnutls
-         libarchive.so libcurl.so libcbor.so
-         libjson-glib-1.0.so libgudev-1.0.so libmm-glib.so
-         libqmi-glib.so libprotobuf-c.so)
-
-makedepends=(meson valgrind gobject-introspection gi-docgen
-             python-cairo noto-fonts noto-fonts-cjk python-gobject vala
-             bash-completion python-pillow gnu-efi-libs)
-
-backup=('etc/fwupd/fwupd.conf'
-        'etc/fwupd/remotes.d/dell-esrt.conf'
-        'etc/fwupd/remotes.d/fwupd-tests.conf'
-        'etc/fwupd/remotes.d/lvfs-testing.conf'
-        'etc/fwupd/remotes.d/lvfs.conf'
-        'etc/fwupd/remotes.d/vendor-directory.conf'
-        'etc/fwupd/remotes.d/vendor.conf'
+depends=(
+	gcab
+	curl
+	bluez
+	libqmi
+	passim
+	efivar
+	polkit
+	python
+	gnutls
+	libcbor
+	libxmlb
+	libgusb
+	libjcat
+	libgudev
+	tpm2-tss
+	flashrom
+	libsmbios
+	fwupd-efi
+	json-glib
+	libmm-glib
+	libarchive
+	protobuf-c
+	shared-mime-info
+	hicolor-icon-theme
 )
 
-b2sums=(SKIP SKIP)
-source=(git+https://github.com/fwupd/fwupd.git#branch=main fwupd.sysusers)
+makedepends=(
+	vala
+	pandoc
+	valgrind
+	gi-docgen
+	noto-fonts
+	gnu-efi-libs
+	python-cairo
+	python-pillow
+	python-gobject
+	noto-fonts-cjk
+	bash-completion
+	gobject-introspection
+)
+
+b2sums=(
+	SKIP 
+	SKIP
+)
+
+source=(
+	fwupd.sysusers
+	git+https://github.com/fwupd/fwupd.git#branch=main 
+)
 
 provides=(libfwupd.so)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
 	local meson_options=(
-        -D consolekit=disabled
-        -D static_analysis=false
-        -D firmware-packager=true
-        -D docs=disabled
-        -D introspection=enabled
-        -D lvfs=true
-        -D man=false
-        -D libarchive=enabled
-        -D gudev=enabled
-        -D gusb=enabled
-        -D bluez=enabled
-        -D polkit=enabled
-        -D gnutls=enabled
-        -D sqlite=enabled
-        -D passim=enabled
-        -D lzma=enabled
-        -D cbor=enabled
-        -D plugin_acpi_phat=enabled
-        -D plugin_amdgpu=enabled
-        -D plugin_android_boot=disabled
-        -D plugin_bcm57xx=disabled
-        -D plugin_cfu=enabled
-        -D plugin_cpu=enabled
-        -D plugin_emmc=enabled
-        -D plugin_ep963x=enabled
-        -D plugin_fastboot=enabled
-        -D plugin_gpio=enabled
-        -D plugin_igsc=disabled
-        -D plugin_logitech_bulkcontroller=disabled
-        -D plugin_logitech_scribe=disabled
-        -D plugin_logitech_tap=disabled
-        -D plugin_parade_lspcon=disabled
-        -D plugin_pixart_rf=disabled
-        -D plugin_realtek_mst=disabled
-        -D plugin_synaptics_mst=disabled
-        -D plugin_synaptics_rmi=enabled
-        -D plugin_scsi=disabled
-        -D plugin_tpm=enabled
-        -D plugin_redfish=enabled
-        -D plugin_uefi_capsule=enabled
-        -D plugin_uefi_capsule_splash=true
-        -D plugin_uefi_pk=enabled
-        -D plugin_nitrokey=disabled
-        -D plugin_nvme=enabled
-        -D plugin_modem_manager=disabled
-        -D plugin_msr=disabled
-        -D plugin_mtd=enabled
-        -D plugin_flashrom=enabled
-        -D plugin_intel_me=disabled
-        -D plugin_intel_spi=false
-        -D plugin_vendor_example=false
-        -D plugin_uf2=enabled
-        -D plugin_upower=enabled
-        -D plugin_powerd=enabled
-        -D qubes=false
-        -D supported_build=enabled
-        -D systemd=enabled
-        -D systemd_unit_user=fwupd
-        -D launchd=disabled
-        -D elogind=disabled
-        -D tests=false
-        -D curl=enabled
-        -D efi_binary=true
-        -D metainfo=true
-        -D bash_completion=true
-        -D fish_completion=false
-        -D offline=enabled
-        -D compat_cli=false
-        -D hsi=enabled
-        -D thinklmi_compat=false
+		-D docs=disabled
+		-D launchd=disabled
+		-D elogind=disabled
+		-D tests=false
+		-D systemd_unit_user=fwupd
 	)
 	
 	arch-meson $pkgname build "${meson_options[@]}"
@@ -129,11 +92,8 @@ build() {
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 
-    # Add fwupd user https://bugs.archlinux.org/task/79653
-    install -D -m644 fwupd.sysusers "${pkgdir}"/usr/lib/sysusers.d/fwupd.conf
-
-    # Fixup mode to match polkit
-    install -d -o root -g 102 -m 750 "${pkgdir}"/usr/share/polkit-1/rules.d
+	# Add fwupd user https://bugs.archlinux.org/task/79653
+	install -D -m644 fwupd.sysusers "${pkgdir}"/usr/lib/sysusers.d/fwupd.conf
 }
