@@ -8,112 +8,120 @@ pkgdesc="GNOME's main interface to configure various aspects of the desktop"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=46.alpha+23129+a6538b26e
+pkgver=46.beta.2+23445+4924bb199
 pkgrel=1
 
-url="https://gitlab.gnome.org/GNOME/gnome-control-center"
+url=https://gitlab.gnome.org/GNOME/gnome-control-center
 
 depends=(
-  accountsservice
-  bolt
-  cairo
-  colord-gtk4
-  cups-pk-helper
-  dconf
-  fontconfig
-  gcr
-  gdk-pixbuf2
-  glib2
-  gnome-bluetooth-3.0
-  gnome-color-manager
-  gnome-desktop-4
-  gnome-online-accounts
-  gnome-settings-daemon
-  gnome-shell
-  gnutls
-  gsettings-desktop-schemas
-  gsound
-  gtk3
-  gtk4
-  hicolor-icon-theme
-  krb5
-  libadwaita
-  libcolord
-  libcups
-  libepoxy
-  libgoa
-  libgtop
-  libgudev
-  libibus
-  libmalcontent
-  libmm-glib
-  libnm
-  libnma-gtk4
-  libpulse
-  libpwquality
-  libsecret
-  libwacom
-  libx11
-  libxi
-  libxml2
-  pango
-  polkit
-  smbclient
-  sound-theme-freedesktop
-  tecla
-  udisks2
-  upower
+	gcr
+	gtk3
+	gtk4
+	bolt
+	krb5
+	glib2
+	dconf
+	cairo
+	fwupd
+	pango
+	tecla
+	upower
+	gnutls
+	gsound
+	polkit
+	udisks2
+	smbclient
+
+	libnm
+ 	libmm-glib
+	libnma-gtk4
+
+	libxi
+	libx11
+	libxml2
+	libgtop
+	libcups
+	libibus
+	libepoxy
+	libgudev
+	libwacom
+	libpulse
+	libsecret
+	libcolord
+	libadwaita
+	libpwquality
+	libmalcontent
+
+	openssh
+	fontconfig
+	colord-gtk4
+	gdk-pixbuf2
+	cups-pk-helper
+	networkmanager
+	accountsservice
+	hicolor-icon-theme
+	system-config-printer
+	sound-theme-freedesktop
+	
+	gnome-shell
+	gnome-desktop-4
+	gnome-color-manager
+	gnome-bluetooth-3.0
+	gnome-online-accounts
+	gnome-settings-daemon
+
+	power-profiles-daemon
+	gsettings-desktop-schemas
 )
 
-makedepends=(git meson python modemmanager)
+makedepends=(
+	python 
+	modemmanager
+)
 
-b2sums=(SKIP SKIP)
+b2sums=(
+	SKIP 
+	SKIP
+)
+
 groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-control-center.git#branch=main
-        git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git)
+source=(
+	git+https://gitlab.gnome.org/GNOME/gnome-control-center.git#branch=main
+	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git#branch=master
+)
 
-options=(!lto)
+#options=(!lto)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 prepare() {
-  cd $pkgname
+	cd $pkgname
 
-  git submodule init subprojects/gvc
-  git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
-  git -c protocol.file.allow=always submodule update
+	git submodule init subprojects/gvc
+	git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
+	git -c protocol.file.allow=always submodule update
 }
 
-
 build() {
-    local meson_options=(
-        -D deprecated-declarations=disabled
-        -D documentation=false
-        -D ibus=true
-        -D privileged_group=wheel
-        -D snap=true
-        -D tests=false
-        -D wayland=true
-        -D profile=default
-        -D malcontent=true
-    )
-    
-    arch-meson $pkgname build "${meson_options[@]}"
-    
-    meson compile -C build
+	local options=(
+		-D tests=false
+		-D malcontent=true
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
-
-    install -d -o root -g 102 -m 750 "$pkgdir/usr/share/polkit-1/rules.d"
+	meson install -C build --destdir "$pkgdir"
 }
 
