@@ -6,40 +6,43 @@ pkgdesc="Manage firmware on devices supported by fwupd"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.1+346+38ba0c6
+pkgver=45.1+357+d322e38
 pkgrel=1
 
-url="https://gitlab.gnome.org/world/gnome-firmware"
+url=https://gitlab.gnome.org/world/gnome-firmware
 
-depends=(gtk4 glib2 fwupd libadwaita libxmlb systemd)
-makedepends=(meson)
-source=(git+https://gitlab.gnome.org/world/gnome-firmware.git#branch=master)
-sha256sums=('SKIP')
+depends=(
+	gtk4
+	glib2
+	fwupd
+	systemd
+	libxmlb
+)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/World/gnome-firmware.git#branch=master)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    local meson_options=(
-        -D consolekit=false
-        -D systemd=true
-        -D man=false
-        -D elogind=false
-        -D devel=false
-    )
-    
-    arch-meson $pkgname build "${meson_options[@]}"
+	local options=(
+		-D consolekit=false
+		-D man=false
+	)
 
-    meson compile -C build
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
 }
 
 package() {
-  meson install -C build --destdir "${pkgdir}"
+	meson install -C build --destdir "${pkgdir}"
 }
