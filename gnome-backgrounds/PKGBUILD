@@ -7,33 +7,34 @@ pkgdesc="Background images and data for GNOME"
 license=(CCPL:by-sa)
 
 arch=(any)
-pkgver=45.0+1438+2bc1c70
-pkgrel=15
+pkgver=46.beta+1463+ec91f79
+pkgrel=1
 
-url="https://gitlab.gnome.org/GNOME/gnome-backgrounds"
+url=https://gitlab.gnome.org/GNOME/gnome-backgrounds
 
-depends=(webp-pixbuf-loader)
-makedepends=(glib2 meson)
+makedepends=(
+	glib2
+)
 
 b2sums=(SKIP)
 groups=(gnome)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-backgrounds.git#branch=main)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-  arch-meson $pkgname build
-  meson compile -C build
+	arch-meson $pkgname build
+	meson compile -C build
 }
 
 package() {
-  meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
