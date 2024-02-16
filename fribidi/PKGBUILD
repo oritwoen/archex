@@ -4,19 +4,17 @@
 # Contributor: Nezmer <Nezmer@gmail.com>
 
 pkgname=fribidi
-pkgver=1.0.13+420+b54871c
-pkgrel=19
 pkgdesc="A Free Implementation of the Unicode Bidirectional Algorithm"
-url="https://github.com/fribidi/fribidi"
-arch=(x86_64)
 license=(LGPL)
+
+arch=(x86_64)
+pkgver=1.0.13+422+5b9a242
+pkgrel=1
+
+url="https://github.com/fribidi/fribidi"
 
 depends=(
 	glibc
-)
-
-makedepends=(
-	meson
 )
 
 b2sums=(SKIP)
@@ -34,14 +32,13 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
+	local options=(
 		-D deprecated=false
 		-D docs=false
-		-D bin=true
 		-D tests=false
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	meson compile -C build
 }
 
