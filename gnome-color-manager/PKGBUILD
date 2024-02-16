@@ -9,30 +9,42 @@ arch=(x86_64)
 pkgver=3.36.1+2913+a53973f5
 pkgrel=2
 
-url="https://gitlab.gnome.org/GNOME/gnome-color-manager"
+url=https://gitlab.gnome.org/GNOME/gnome-color-manager
 
-depends=(shared-color-targets colord lcms2)
-makedepends=(yelp-tools git appstream-glib meson perl-sgmls)
+depends=(
+	gtk3
+	lcms2
+	glib2
+	colord
+)
+
+makedepends=(
+	perl-sgmls
+	appstream-glib
+)
 
 b2sums=(SKIP)
 groups=(gnome)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-color-manager.git#branch=master)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	arch-meson $pkgname build \
+	local options=(
 		-D tests=false
+	)
 
-    meson compile -C build
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
 }
 
 package() {
