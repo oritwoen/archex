@@ -1,0 +1,126 @@
+
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+
+pkgname=gtk
+pkgdesc="GObject-based multi-platform GUI toolkit"
+license=(LGPL)
+
+arch=(x86_64)
+pkgver=4.13.8+79318+ecbee35f93
+pkgrel=1
+
+url=https://www.gtk.org
+
+
+depends=(
+	glib2
+	cairo
+	dconf
+	pango
+	fribidi
+	wayland
+	tracker3
+	graphene
+	harfbuzz
+	iso-codes
+	fontconfig
+	gdk-pixbuf2
+	cantarell-fonts
+	shared-mime-info
+	desktop-file-utils
+	adwaita-icon-theme
+	gst-plugins-bad-libs
+
+	libxi
+	libgl
+	libx11
+	libpng
+	libegl
+	libcups
+	libtiff
+	librsvg
+	libjpeg
+	libxext
+	libepoxy
+	libxrandr
+	libxfixes
+	libcolord
+	libxrender
+	libxcursor
+	libxdamage
+	libxinerama
+	libxkbcommon
+	libcloudproviders
+)
+
+b2sums=(
+	SKIP
+	SKIP
+	SKIP
+	SKIP
+	SKIP
+)
+
+source=(
+	gtk4-querymodules.{hook,script}
+	gtk-update-icon-cache.{hook,script}
+	git+https://gitlab.gnome.org/GNOME/gtk.git#branch=main
+)
+
+provides=(
+	gtk4
+	libgtk-4.so=1-64
+	gtk-update-icon-cache
+)
+
+replaces=(
+	gtk4
+	gtk-update-icon-cache
+)
+
+conflicts=(
+	gtk4
+	gtk-update-icon-cache
+)
+
+pkgver() {
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local options=(
+		-D broadway-backend=true
+		-D cloudproviders=enabled
+		-D tracker=enabled
+		-D colord=enabled
+		-D build-demos=false
+		-D build-testsuite=false
+		-D build-examples=false
+		-D build-tests=false
+	)
+
+	#CFLAGS+=" -DG_DISABLE_CAST_CHECKS"
+	
+	arch-meson $pkgname build "${options[@]}"
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+
+	ln -s gtk4-update-icon-cache "$pkgdir/usr/bin/gtk-update-icon-cache"
+
+	install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 gtk4-querymodules.hook
+	install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 gtk-update-icon-cache.hook
+
+	install -D gtk4-querymodules.script "$pkgdir/usr/share/libalpm/scripts/gtk4-querymodules"
+	install -D gtk-update-icon-cache.script "$pkgdir/usr/share/libalpm/scripts/gtk-update-icon-cache"
+}
