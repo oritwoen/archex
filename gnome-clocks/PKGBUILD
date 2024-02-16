@@ -6,47 +6,48 @@ pkgdesc="Clocks applications for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0+2712+47b7849
+pkgver=45.0+2735+fb2ddbb
 pkgrel=1
 
-url="https://wiki.gnome.org/Apps/Clocks"
+url=https://wiki.gnome.org/Apps/Clocks
 
 depends=(
-    gtk4
-    geoclue
-    libadwaita
-    libgweather-4
-    geocode-glib-2
-    gnome-desktop-4
-    xdg-desktop-portal
+	gtk4
+	geoclue
+	libadwaita
+	libgweather-4
+	geocode-glib-2
+	gnome-desktop-4
+	xdg-desktop-portal
 )
 
-makedepends=(git vala meson yelp-tools gobject-introspection)
+makedepends=(
+	vala
+	gobject-introspection
+)
 
 b2sums=(SKIP)
 groups=(gnome)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-clocks.git#branch=master)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local meson_options=(
-        -D profile=default
-        -D docs=false
-	)
+	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
 
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build
+
 	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
