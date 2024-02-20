@@ -1,0 +1,49 @@
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: talone <talone@boxph.one>
+# Contributor: Igor Dyatlov <dyatlov.igor@protonmail.com>
+
+pkgname=authenticator
+pkgdesc="2FA code generator for GNOME"
+license=(GPL3)
+
+arch=(any)
+pkgver=4.4.0+1808+7411da1
+pkgrel=1
+
+url="https://gitlab.gnome.org/World/Authenticator"
+
+depends=(
+	zbar
+	pipewire
+	libsecret
+	libadwaita
+	gst-plugins-bad
+	gst-plugin-pipewire
+)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/World/authenticator.git#branch=master)
+options=(!lto)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	#CFLAGS+=" -DPW_ENABLE_DEPRECATED"
+
+	arch-meson $pkgname build
+
+	meson compile -C build
+}
+
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
