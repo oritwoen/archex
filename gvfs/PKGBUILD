@@ -4,56 +4,54 @@
 
 pkgname=(gvfs)
 pkgdesc="Virtual filesystem implementation for GIO"
-license=(LGPL)
+license=(LGPL-2.0-only)
 
 arch=(x86_64)
-pkgver=1.53.1+6386+d7cb21dc
-pkgrel=3
+pkgver=1.53.91+6450+435047ae
+pkgrel=1
 
 url="https://wiki.gnome.org/Projects/gvfs"
 
 depends=(
-  avahi
-  dconf
-  fuse3
-  gcr
-  gsettings-desktop-schemas
-  libarchive
-  libbluray
-  libcdio-paranoia
-  libgudev
-  libsecret
-  libsoup3
-  psmisc
-  udisks2
+	gcr
+	avahi
+	dconf
+	fuse3
+	psmisc
+	udisks2
+	gsettings-desktop-schemas
+
+	libgudev
+	libsoup3
+	libbluray
+	libsecret
+	libarchive
+	libcdio-paranoia
 )
 
 makedepends=(
-  dbus
-  docbook-xsl
-  git
-  gtk-doc
-  gtk3
-  libgdata
-  libgoa
-  libgphoto2
-  libimobiledevice
-  libmtp
-  libnfs
-  meson
-  openssh
-  python
-  smbclient
+	gtk3
+	dbus
+	libmtp
+	libgoa
+	libnfs
+	python
+	msgraph
+	openssh
+	libgdata
+	smbclient
+	libgphoto2
+	libimobiledevice
 )
 
 groups=(gnome)
-source=(
-    gvfsd.hook
-    git+https://gitlab.gnome.org/GNOME/gvfs.git#branch=master
-)
 b2sums=(
-    08a830600964d2c896d7f107d9558053a32eb6b9166433d6e29b58d4c38e318cbb7fdf7b8230cf72d433df65f4698b9ad86624bf7d3c30c883db325d51335189
-    SKIP
+	SKIP
+	SKIP
+)
+source=(
+	gvfsd.hook
+	git+https://gitlab.gnome.org/GNOME/gvfs.git#branch=master
 )
 
 provides=(gvfs-{smb,afc,gphoto2,goa,mtp,nfs,google})
@@ -61,125 +59,23 @@ replaces=(gvfs-{smb,afc,gphoto2,goa,mtp,nfs,google})
 conflicts=(gvfs-{smb,afc,gphoto2,goa,mtp,nfs,google})
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local meson_options=(
-		-D admin=true
-    -D afc=true
-    -D afp=true
-    -D archive=true
-    -D cdda=true
-    -D dnssd=true
-    -D goa=true
-    -D google=true
-    -D gphoto2=true
-    -D http=true
-    -D mtp=true
-    -D nfs=true
-    -D sftp=true
-    -D smb=true
-    -D udisks2=true
-    -D bluray=true
-    -D fuse=true
-    -D gcr=true
-    -D gcrypt=true
-    -D gudev=true
-    -D keyring=true
-    -D logind=true
-    -D libusb=true
-    -D devel_utils=false
-    -D installed_tests=false
-    -D man=false
-	)
-	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build
 	
 	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 
-    install -d -o root -g 102 -m 750 usr/share/polkit-1/rules.d
-    install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 *.hook
-}
-
-package_gvfs-smb() {
-  pkgdesc+=" (SMB/CIFS backend; Windows client)"
-  depends=(
-    "gvfs=$pkgver"
-    'smbclient>=4.12.0'
-  )
-
-  mv smb/* "$pkgdir"
-}
-
-package_gvfs-afc() {
-  pkgdesc+=" (AFC backend; Apple mobile devices)"
-  depends=(
-    "gvfs=$pkgver"
-    libimobiledevice
-    usbmuxd
-  )
-
-  mv afc/* "$pkgdir"
-}
-
-package_gvfs-gphoto2() {
-  pkgdesc+=" (gphoto2 backend; PTP camera, MTP media player)"
-  depends=(
-    "gvfs=$pkgver"
-    libgphoto2
-  )
-
-  mv gphoto2/* "$pkgdir"
-}
-
-package_gvfs-mtp() {
-  pkgdesc+=" (MTP backend; Android, media player)"
-  depends=(
-    "gvfs=$pkgver"
-    libmtp
-  )
-
-  mv mtp/* "$pkgdir"
-}
-
-package_gvfs-goa() {
-  pkgdesc+=" (Gnome Online Accounts backend; cloud storage)"
-  depends=(
-    "gvfs=$pkgver"
-    libgoa
-  )
-
-  mv goa/* "$pkgdir"
-}
-
-package_gvfs-nfs() {
-  pkgdesc+=" (NFS backend)"
-  depends=(
-    "gvfs=$pkgver"
-    libnfs
-  )
-  install=gvfs-nfs.install
-
-  mv nfs/* "$pkgdir"
-}
-
-package_gvfs-google() {
-  pkgdesc+=" (Google Drive backend)"
-  depends=(
-    "gvfs-goa=$pkgver"
-    libgdata
-  )
-
-  mv google/* "$pkgdir"
+	install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 *.hook
 }
