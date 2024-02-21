@@ -9,14 +9,23 @@ pkgname=iio-sensor-proxy
 pkgdesc='IIO accelerometer sensor to input device proxy'
 license=('GPL2')
 
-arch=('x86_64')
-pkgver=3.5+495+a0ff1fe
-pkgrel=2
+arch=(x86_64)
+pkgver=3.5+499+1f5069d
+pkgrel=1
 
-url='https://gitlab.freedesktop.org/hadess/iio-sensor-proxy/'
+url=https://gitlab.freedesktop.org/hadess/iio-sensor-proxy
 
-depends=('systemd' 'libgudev' 'glib2' 'polkit')
-makedepends=('gtk3' 'meson')
+depends=(
+	glib2
+	polkit
+	systemd
+	libgudev
+)
+
+makedepends=(
+	gtk3
+	meson
+)
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/hadess/iio-sensor-proxy.git#branch=master)
@@ -32,16 +41,7 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
-		-D udevrulesdir=auto
-		-D systemdsystemunitdir=auto
-		-D tests=false
-		-D gtk-tests=false
-		-D geoclue-user=geoclue
-		-D gtk_doc=false
-	)
-	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build
 	
 	meson compile -C build
 }
