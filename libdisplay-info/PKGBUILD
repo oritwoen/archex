@@ -7,20 +7,21 @@ pkgdesc='EDID and DisplayID library'
 license=(MIT)
 
 arch=(x86_64)
-pkgver=0.2.0+dev+231+ae6cb52
-pkgrel=7
+pkgver=0.2.0+dev+237+8d221c1
+pkgrel=1
 
-url="https://gitlab.freedesktop.org/emersion/libdisplay-info"
+url=https://gitlab.freedesktop.org/emersion/libdisplay-info
 
-depends=(glibc)
+depends=(
+	glibc
+)
+
 makedepends=(
 	hwdata
-	meson
-	ninja
 	python
 )
 
-provides=(libdisplay-info.so)
+provides=(libdisplay-info.so=1-64)
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/emersion/libdisplay-info.git#branch=main)
@@ -32,7 +33,7 @@ pkgver() {
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
-    echo ${_version/-/+}+${_commits}+${_commith}
+	echo ${_version/-/+}+${_commits}+${_commith}
 }
 
 build() {
