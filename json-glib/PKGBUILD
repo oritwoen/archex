@@ -10,8 +10,13 @@ url="https://wiki.gnome.org/Projects/JsonGlib"
 arch=(x86_64)
 license=(GPL)
 
-depends=(glib2)
-makedepends=(gobject-introspection git meson gi-docgen docbook-xsl)
+depends=(
+	glib2
+)
+
+makedepends=(
+	gobject-introspection
+)
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/GNOME/json-glib.git#branch=master)
@@ -30,15 +35,12 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
-		-D introspection=enabled
+	local options=(
 		-D gtk_doc=disabled
-		-D man=false
 		-D tests=false
-		-D nls=enabled
 	)
 
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	meson compile -C build
 }
 
