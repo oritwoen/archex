@@ -5,27 +5,35 @@
 
 pkgname=iputils
 pkgdesc="Network monitoring tools, including ping"
-license=('GPL')
+license=(
+	BSD-3-Clause
+	GPL-2.0-or-later
+)
 
-arch=('x86_64')
-pkgver=20221126+1141+2beff77
-pkgrel=3
+arch=(x86_64)
+pkgver=20240117+1198+3400f3a
+pkgrel=1
 
-url="https://github.com/iputils/iputils"
+url=https://github.com/iputils/iputils
 
-depends=('libcap' 'libidn2')
-makedepends=('perl-sgmls' 'git' 'docbook-xsl' 'meson' 'systemd' 'iproute')
+depends=(
+	libcap
+	libidn2
+)
+
+makedepends=(
+	systemd
+	iproute
+	perl-sgmls
+)
 
 b2sums=(SKIP)
 source=(git+https://github.com/iputils/iputils.git#branch=master)
 
-replaces=('netkit-base')
-conflicts=('netkit-base' 'arping')
-
 pkgver() {
 	cd $pkgname
 
-    local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2 {print $2}')
+	local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2 {print $2}')
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
@@ -33,27 +41,12 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
-		-D USE_CAP=true
-		-D USE_IDN=true
-		-D BUILD_ARPING=true
-		-D BUILD_CLOCKDIFF=true
-		-D BUILD_PING=true
-		-D BUILD_TRACEPATH=true
+	local options=(
 		-D BUILD_MANS=false
-		-D BUILD_HTML_MANS=false
-		-D NO_SETCAP_OR_SUID=true
-		-D SETCAP_OR_SUID_ARPING=false
-		-D SETCAP_OR_SUID_CLOCKDIFF=true
-		-D SETCAP_OR_SUID_PING=true
-		-D ARPING_DEFAULT_DEVICE=''
-		-D systemdunitdir=''
-		-D INSTALL_SYSTEMD_UNITS=false
-		-D USE_GETTEXT=true
 		-D SKIP_TESTS=true
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	
 	meson compile -C build
 }
