@@ -1,55 +1,55 @@
 # Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Fabian Bornschein <fabiscafe@archlinux.org>
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=libadwaita
 pkgdesc="Building blocks for modern adaptive GNOME applications"
-license=(LGPL)
+license=(LGPL-2.1-or-later)
 
 arch=(x86_64)
-pkgver=1.5.alpha+3904+42c04e03
+pkgver=1.5.rc+4025+c849d02c
 pkgrel=1
 
-url="https://gnome.pages.gitlab.gnome.org/libadwaita/"
+url=https://gnome.pages.gitlab.gnome.org/libadwaita
 
-depends=(appstream gtk4)
+depends=(
+	gtk
+	pango
+	glib2
+	fribidi
+	graphene
+	appstream
+)
+
 makedepends=(
-    git
-    vala
-    meson
-    sassc
-    gobject-introspection
+	vala
+	sassc
+	gobject-introspection
 )
 
 b2sums=(SKIP)
-groups=(gnome-core)
 source=(git+https://gitlab.gnome.org/GNOME/libadwaita.git#branch=main)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local meson_options=(
-		-D profiling=false
-        -D introspection=enabled
-        -D vapi=true
-        -D gtk_doc=false
-        -D tests=false
-        -D examples=false
+	local options=(
+		-D tests=false
+		-D examples=false
 	)
 
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	meson compile -C build
 }
 
-
-
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
