@@ -2,21 +2,29 @@
 # Contributor: Sven-Hendrik Haase <svenstaro@archlinux.org>
 # Contributor: Adrian Perez de Castro <aperez@igalia.com>
 
-pkgdesc='Client-side decorations library for Wayland clients'
 pkgname=libdecor
-license=('MIT')
+pkgdesc='Client-side decorations library for Wayland clients'
+license=(MIT)
 
 arch=(x86_64)
-pkgver=0.2.0+271+cc58dd2
+pkgver=0.2.2+287+8dc6b62
 pkgrel=1
 
 url=https://gitlab.freedesktop.org/libdecor/libdecor
 
-depends=('wayland' 'pango' 'dbus' 'gtk3')
-makedepends=('cmake' 'ninja' 'meson' 'wayland-protocols')
+depends=(
+	gtk3
+	dbus
+	pango
+	wayland
+)
 
-source=(git+https://gitlab.freedesktop.org/libdecor/libdecor.git#branch=master)
+makedepends=(
+	wayland-protocols
+)
+
 b2sums=(SKIP)
+source=(git+https://gitlab.freedesktop.org/libdecor/libdecor.git#branch=master)
 
 pkgver() {
 	cd $pkgname
@@ -29,14 +37,11 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
+	local options=(
 		-D demo=false
-		-D dbus=enabled
-		-D install_demo=false
-		-D gtk=enabled
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	
 	meson compile -C build
 }
