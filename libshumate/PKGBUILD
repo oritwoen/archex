@@ -1,4 +1,5 @@
 # Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: Fabian Bornschein <fabiscafe@archlinux.org>
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=libshumate
@@ -6,24 +7,27 @@ pkgdesc="Map widget for GTK 4"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.2.alpha+577+94b9559
-pkgrel=2
+pkgver=1.2.rc+610+8837c53
+pkgrel=1
 
-url="https://wiki.gnome.org/Projects/libshumate"
+url=https://wiki.gnome.org/Projects/libshumate
 
 depends=(
-	cairo
+	gtk
 	glib2
-	gtk4
-	libsoup3
+	cairo
+	pango
 	sqlite
+	graphene
+	libsoup3
+	json-glib
+	protobuf-c
+	gdk-pixbuf2
 )
 
 makedepends=(
-	git
-	gobject-introspection
-	meson
 	vala
+	gobject-introspection
 )
 
 b2sums=(SKIP)
@@ -40,16 +44,13 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
-		-D gir=true
-		-D vapi=true
+	local options=(
 		-D gtk_doc=false
-		-D demos=false
-		-D vector_renderer=true
 		-D sysprof=disabled
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
+
 	meson compile -C build
 }
 

@@ -3,26 +3,27 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 
 pkgname=libgusb
+pkgdesc='GObject wrapper for libusb1'
+
+arch=(x86_64)
 pkgver=0.4.9+476+8bef41c
 pkgrel=2
-pkgdesc='GObject wrapper for libusb1'
+
 url=https://github.com/hughsie/libgusb
-arch=(x86_64)
+
 license=(LGPL2.1)
 
 depends=(
 	glib2
-	json-glib
 	libusb
+	json-glib
 )
 
 makedepends=(
-	git
-	gobject-introspection
-	meson
-	python-setuptools
-	umockdev
 	vala
+	umockdev
+	python-setuptools
+	gobject-introspection
 )
 
 b2sums=(SKIP)
@@ -39,19 +40,15 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
+	local options=(
 		-D tests=false
-		-D vapi=true
-		-D usb_ids=/usr/share/hwdata/usb.ids
 		-D docs=false
-		-D introspection=true
-		-D umockdev=disabled
 	)
 
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	meson compile -C build
 }
 
 package() {
-	DESTDIR="${pkgdir}" ninja -C build install
+	meson install -C build --destdir "$pkgdir"
 }

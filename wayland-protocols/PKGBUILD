@@ -5,35 +5,39 @@ pkgname=wayland-protocols
 pkgdesc='Specifications of extended Wayland protocols'
 license=('MIT')
 
-arch=('any')
-pkgver=1.32+351+c4f5598
-pkgrel=2
+arch=(any)
+pkgver=1.33+355+5434607
+pkgrel=1
 
-url='https://wayland.freedesktop.org/'
-makedepends=('wayland' 'meson' 'ninja')
+url=https://wayland.freedesktop.org
+
+makedepends=(wayland)
 
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/wayland/wayland-protocols.git)
+source=(git+https://gitlab.freedesktop.org/wayland/wayland-protocols.git#branch=main)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    arch-meson $pkgname build \
-      -D tests=false
+	local options=(
+		-D tests=false
+	)
 
-    meson compile -C build
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
-    
-    install -Dm 644 $pkgname/COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+	meson install -C build --destdir "$pkgdir"
+
+	install -Dm 644 $pkgname/COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
 }

@@ -7,49 +7,51 @@ pkgdesc="Library for sending desktop notifications"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=0.8.3+500+7849c5d
-pkgrel=2
+pkgver=0.8.3+504+150af91
+pkgrel=1
 
-url="https://gitlab.gnome.org/GNOME/libnotify"
+url=https://gitlab.gnome.org/GNOME/libnotify
 
 license=(LGPL)
 
-depends=(gdk-pixbuf2)
-makedepends=(
-  git
-  gobject-introspection
-  gtk3
-  meson
+depends=(
+	gdk-pixbuf2
 )
 
-source=(git+https://gitlab.gnome.org/GNOME/libnotify.git#branch=master)
+makedepends=(
+	gtk3
+	xmlto
+	gobject-introspection
+)
+
 b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/libnotify.git#branch=master)
 
 provides=(libnotify.so)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local meson_options=(
+	local options=(
 		-D tests=false
-		-D introspection=enabled
-        -D man=false
-        -D gtk_doc=false
-        -D docbook_docs=disabled
+		-D man=false
+		-D gtk_doc=false
+		-D docbook_docs=disabled
 	)
 
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
+
 	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }

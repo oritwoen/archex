@@ -7,8 +7,8 @@ pkgdesc="Default file manager for GNOME"
 license=(GPL)
 
 arch=(x86_64)
-pkgrel=2
-pkgver=46.alpha.0+24516+e3fc57b35
+pkgrel=1
+pkgver=46.beta+24871+6d3f4a76d
 
 url="https://wiki.gnome.org/Apps/Files"
 
@@ -53,7 +53,7 @@ conflicts=(libnautilus-extension)
 pkgver() {
     cd $pkgname
     
-    local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2 {print $2}')
+        local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
     local _commits=$(git rev-list --count HEAD)
     local _commith=$(git rev-parse --short HEAD)
 

@@ -5,37 +5,35 @@
 
 pkgname=gnome-system-monitor
 pkgdesc="View current processes and monitor system state"
-license=(GPL)
+license=(GPL-2.0-or-later)
 
 arch=(x86_64)
-pkgver=46.alpha+4971+02e2bec4
-pkgrel=3
+pkgver=46.beta+5027+6f188055
+pkgrel=1
 
-url="https://wiki.gnome.org/Apps/SystemMonitor"
+url="https://apps.gnome.org/SystemMonitor"
 
 depends=(
+	gtk4
 	cairo
 	dconf
-	gdk-pixbuf2
 	glib2
-	glibmm
-	gtk4
-	gtkmm-4.0
-	hicolor-icon-theme
-	libgtop
-	libhandy
-	librsvg
-	libsigc++
 	pango
 	polkit
+	glibmm
 	systemd
+	gtkmm-4.0
+	gdk-pixbuf2
+	hicolor-icon-theme
+
+	libgtop
+	librsvg
+	libhandy
+	libsigc++
 )
 
 makedepends=(
 	appstream-glib
-	git
-	meson
-	yelp-tools
 )
 
 b2sums=(SKIP)

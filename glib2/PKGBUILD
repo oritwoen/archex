@@ -4,20 +4,19 @@
 
 pkgname=glib2
 pkgdesc="Low level core library"
-license=(LGPL)
+license=(LGPL-2.1-or-later)
 
 arch=(x86_64)
-pkgver=2.79.0+29053+438f59b07
-pkgrel=2
+pkgver=2.79.2+29930+36d40eb95
+pkgrel=1
 
-url="https://wiki.gnome.org/Projects/GLib"
+url=https://wiki.gnome.org/Projects/GLib
 
 depends=(
 	zlib
 	pcre2
 	libffi
 	util-linux-libs
-	libsysprof-capture
 )
 
 makedepends=(
@@ -29,26 +28,22 @@ makedepends=(
 	shared-mime-info
 )
 
+b2sums=(
+	SKIP
+	SKIP
+	SKIP
+	SKIP
+)
+
 source=(
-	"git+https://gitlab.gnome.org/GNOME/glib.git#branch=main"
-	"git+https://gitlab.gnome.org/GNOME/gvdb.git#branch=main"
 	gio-querymodules.hook
 	glib-compile-schemas.hook
+	git+https://gitlab.gnome.org/GNOME/glib.git#branch=main
+	git+https://gitlab.gnome.org/GNOME/gvdb.git#branch=main
 )
 
-depends=(
-	libffi.so
-	libmount.so
-)
+provides=(libg{lib,io,module,object,thread}-2.0.so=0-64)
 
-provides=(libgmodule-2.0.so=0-64 libglib-2.0.so=0-64 libgobject-2.0.so=0-64 libgio-2.0.so=0-64)
-
-b2sums=(
-	'SKIP'
-	'SKIP'
-	'14c9211c0557f6d8d9a914f1b18b7e0e23f79f4abde117cb03ab119b95bf9fa9d7a712aa0a29beb266468aeb352caa3a9e4540503cfc9fe0bbaf764371832a96'
-	'd30d349b4cb4407839d9074ce08f5259b8a5f3ca46769aabc621f17d15effdb89c4bf19bd23603f6df3d59f8d1adaded0f4bacd0333afcab782f2d048c882858'
-)
 
 pkgver() {
 	cd glib
@@ -71,25 +66,9 @@ prepare() {
 build() {
 	local options=(
 		-D selinux=disabled
-		-D xattr=true
-		-D libmount=enabled
-		-D man=false
-		-D dtrace=false
-		-D systemtap=false
-		-D sysprof=disabled
-		-D gtk_doc=false
-		-D bsymbolic_functions=true
-		-D force_posix_threads=true
+		-D man-pages=disabled
 		-D tests=false
-		-D installed_tests=false
-		-D nls=enabled
-		-D oss_fuzz=disabled
 		-D glib_debug=disabled
-		-D glib_assert=false
-		-D glib_checks=false
-		-D libelf=enabled
-		-D multiarch=false
-		-D introspection=disabled
 	)
 	
 	arch-meson glib build "${options[@]}"
@@ -103,7 +82,8 @@ package() {
 	touch "$pkgdir/usr/lib/gio/modules/.keep"
 
 	python -m compileall -d /usr/share/glib-2.0/codegen \
-	  "$pkgdir/usr/share/glib-2.0/codegen"
+		"$pkgdir/usr/share/glib-2.0/codegen"
+	
 	python -O -m compileall -d /usr/share/glib-2.0/codegen \
-	  "$pkgdir/usr/share/glib-2.0/codegen"
+		"$pkgdir/usr/share/glib-2.0/codegen"
 }

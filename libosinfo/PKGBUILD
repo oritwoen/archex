@@ -3,15 +3,30 @@
 # Contributor: Stefano Facchini <stefano.facchini@gmail.com>
 
 pkgname=libosinfo
-pkgver=1.12.0+1947+5bbdd06
-pkgrel=2
 pkgdesc='GObject based library API for managing information about operating systems, hypervisors and the (virtual) hardware devices they can support'
-arch=('x86_64')
-url='https://libosinfo.org/'
 license=('GPL' 'LGPL')
 
-depends=('gcc-libs' 'glib2' 'glibc' 'hwdata' 'libsoup3' 'libxml2' 'libxslt' 'osinfo-db')
-makedepends=('gobject-introspection' 'meson' 'vala')
+arch=(x86_64)
+pkgver=1.12.0+1947+5bbdd06
+pkgrel=2
+
+url=https://libosinfo.org/
+
+depends=(
+	glib2
+	glibc
+	hwdata
+	libxslt
+	libxml2
+	libsoup3
+	gcc-libs
+	osinfo-db
+)
+
+makedepends=(
+	vala
+	gobject-introspection
+)
 
 b2sums=(SKIP)
 source=(git+https://gitlab.com/libosinfo/libosinfo.git#branch=main)
@@ -27,17 +42,14 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
+	local options=(
 		-D enable-gtk-doc=false
-		-D enable-introspection=enabled
 		-D enable-tests=false
-		-D enable-vala=enabled
-		-D libsoup-abi=3.0
 		-D with-pci-ids-path=/usr/share/hwdata/pci.ids
 		-D with-usb-ids-path=/usr/share/hwdata/usb.ids
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	
 	meson compile -C build
 }

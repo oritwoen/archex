@@ -4,33 +4,29 @@
 
 pkgname=gjs
 pkgdesc="Javascript Bindings for GNOME"
-license=(GPL)
+license=(LGPL-2.0-or-later)
 
 arch=(x86_64)
-pkgver=1.79.1+5359+df2bbbbc
-pkgrel=6
+pkgver=1.79.3+5435+9a21de70
+pkgrel=1
 
-url="https://wiki.gnome.org/Projects/Gjs"
+url=https://wiki.gnome.org/Projects/Gjs
 
 depends=(
-  cairo
-  dconf
-  glib2
-  gobject-introspection-runtime
-  js102
-  js115
-  libffi
-  libgirepository
-  libsysprof-capture
-  libx11
-  readline
+	cairo
+	dconf
+	glib2
+	js115
+	libx11
+	libffi
+	readline
+	libgirepository
+	gobject-introspection-runtime
 )
 
 makedepends=(
-  dbus
-  git
-  gobject-introspection
-  meson
+	dbus
+	gobject-introspection
 )
 
 b2sums=(SKIP)
@@ -38,33 +34,30 @@ source=(git+https://gitlab.gnome.org/GNOME/gjs.git#branch=master)
 provides=(libgjs.so)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 "version:" meson.build | cut -d "'" -f 8)
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 "version:" meson.build | cut -d "'" -f 8)
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local meson_options=(
-		-D cairo=enabled
-		-D readline=enabled
-    -D profiler=disabled
-    -D installed_tests=false
-    -D dtrace=false
-    -D systemtap=false
-    -D bsymbolic_functions=true
-    -D skip_dbus_tests=true
-    -D skip_gtk_tests=true
-    -D verbose_logs=false
+	local options=(
+		-D profiler=disabled
+		-D installed_tests=false
+		-D bsymbolic_functions=true
+		-D skip_dbus_tests=true
+		-D skip_gtk_tests=true
+		-D verbose_logs=false
 	)
 
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
+
 	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }

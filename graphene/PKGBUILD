@@ -2,14 +2,19 @@
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=graphene
-pkgver=1.11.1+1246+ba99345
-pkgrel=13
 pkgdesc="A thin layer of graphic data types"
-url="https://ebassi.github.io/graphene/"
-arch=(x86_64)
 license=(MIT)
 
-makedepends=(git gtk-doc gobject-introspection meson glib2)
+arch=(x86_64)
+pkgver=1.11.1+1253+d03fb3d
+pkgrel=1
+
+url=https://ebassi.github.io/graphene
+
+makedepends=(
+	glib2
+	gobject-introspection
+)
 
 b2sums=(SKIP)
 source=(git+https://github.com/ebassi/graphene.git#branch=master)
@@ -27,22 +32,19 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
-		-D gtk_doc=false
-		-D gobject_types=true
-		-D introspection=enabled
-		-D gcc_vector=true
-		-D sse2=true
+	local options=(
 		-D arm_neon=false
 		-D tests=false
 		-D installed_tests=false
 	)
 
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
+
 	meson compile -C build
 }
 
 package() {
 	meson install -C build --destdir "$pkgdir"
+	
 	install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 graphene/LICENSE.txt
 }

@@ -8,52 +8,83 @@ pkgdesc="Next generation desktop shell"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0+18292+c4fcc8213
+pkgver=46.beta+18629+bd992f7dc
 pkgrel=1
 
-url="https://wiki.gnome.org/Projects/GnomeShell"
+url=https://wiki.gnome.org/Projects/GnomeShell
 
-depends=(unzip upower gjs mutter libibus libgdm libcanberra-pulse libsecret libsoup3 gtk4 accountsservice gnome-session gnome-settings-daemon gsettings-desktop-schemas libadwaita libgweather-4 libnma-gtk4 gnome-autoar gcr-4)
-makedepends=(git meson sassc asciidoc gtk-doc bash-completion gnome-control-center gobject-introspection evolution-data-server)
+depends=(
+	gcr
+	gjs
+	gtk4
+	unzip
+	mutter
+	upower
+	accountsservice
+	gsettings-desktop-schemas
+
+	libgdm
+	libibus
+	libsoup3
+	libsecret
+	libadwaita
+	libnma-gtk4
+	libgweather-4
+	libcanberra-pulse
+	
+	gnome-autoar
+	gnome-session
+	gnome-settings-daemon
+)
+
+makedepends=(
+	sassc
+	bash-completion
+	gnome-control-center
+	evolution-data-server
+	gobject-introspection
+)
+
+b2sums=(
+	SKIP
+	SKIP
+)
 
 groups=(gnome)
-b2sums=(SKIP SKIP)
-#commit=c6dc2c1974f909b9534e1c952e3a9212af410a28
-source=(git+https://gitlab.gnome.org/GNOME/gnome-shell.git
-        git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git)
+source=(
+	git+https://gitlab.gnome.org/GNOME/gnome-shell.git#branch=main
+	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git#branch=master
+)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 prepare() {
-    cd gnome-shell
+	cd $pkgname
 
-    git submodule init
-    git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
-    git -c protocol.file.allow=always submodule update
+	git submodule init
+	git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
+	git -c protocol.file.allow=always submodule update
 }
 
 build() {
-    arch-meson gnome-shell build \
-        -D camera_monitor=true \
-        -D extensions_tool=true \
-        -D extensions_app=true \
-        -D gtk_doc=false \
-        -D man=false \
-        -D tests=false \
-        -D networkmanager=true \
-        -D systemd=true
-  
-    meson compile -C build
+	local options=(
+		-D man=false
+		-D tests=false
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }

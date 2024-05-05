@@ -9,104 +9,76 @@ license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=45.0+31023+edbc9a208
+pkgver=46.rc+31680+ab8e145e2
 
-url="https://gitlab.gnome.org/GNOME/mutter"
+url=https://gitlab.gnome.org/GNOME/mutter
 
 depends=(
-  colord
-  dconf
-  gnome-desktop-4
-  gnome-settings-daemon
-  graphene
-  gsettings-desktop-schemas
-  iio-sensor-proxy
-  lcms2
-  libcanberra
-  libdisplay-info
-  libgudev
-  libinput
-  libei
-  libsm
-  libsysprof-capture
-  libxkbcommon-x11
-  libxkbfile
-  pipewire
-  startup-notification
-  xorg-xwayland
+	dconf
+	lcms2
+	colord
+	graphene
+	pipewire
+	xorg-xwayland
+	iio-sensor-proxy
+	startup-notification
+	gsettings-desktop-schemas
+
+	libei
+	libsm
+	libgudev
+	libinput
+	libxkbfile
+	libcanberra
+	libdisplay-info
+	libxkbcommon-x11
+
+	gnome-desktop
+	gnome-settings-daemon
 )
 
 makedepends=(
-  egl-wayland
-  gi-docgen
-  git
-  gobject-introspection
-  gtk3
-  meson
-  sysprof
-  wayland-protocols
-  xorg-server
-  xorg-server-xvfb
+	gtk3
+	egl-wayland
+	xorg-server
+	xorg-server-xvfb
+	wayland-protocols
+	gobject-introspection
 )
 
-#commit=7a44b112c1b4c485dbd2093b7472f01bd42b4477
-b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/mutter.git)
 
-provides=("libmutter-13.so=0-64")
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/mutter.git#branch=main)
+
+provides=(libmutter-13.so=0-64)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    local meson_options=(
-      -D opengl=true
-      -D gles2=true
-      -D egl=true
-      -D glx=true
-      -D wayland=true
-      -D xwayland=true
-      -D systemd=true
-      -D native_backend=true
-      -D remote_desktop=true
-      -D libgnome_desktop=true
-      -D egl_device=false
-      -D wayland_eglstream=false
-      -D udev=true
-      -D libwacom=true
-      -D sound_player=true
-      -D pango_ft2=true
-      -D startup_notification=true
-      -D sm=true
-      -D introspection=true
-      -D docs=false
-      -D cogl_tests=false
-      -D clutter_tests=false
-      -D core_tests=false
-      -D native_tests=false
-      -D tests=false
-      -D kvm_tests=false
-      -D tty_tests=false
-      -D profiler=false
-      -D installed_tests=false
-      -D verbose=true
-      -D catch=false
-      -D libdisplay_info=true
-    )
+	local options=(
+		-D cogl_tests=false
+		-D clutter_tests=false
+		-D core_tests=false
+		-D native_tests=false
+		-D tests=false
+		-D profiler=false
+		-D installed_tests=false
+	)
 
-    arch-meson mutter build "${meson_options[@]}"
-  
-    meson compile -C build
+	arch-meson mutter build "${options[@]}"
+
+	meson compile -C build
 }
 
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }

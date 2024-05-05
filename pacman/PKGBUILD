@@ -32,6 +32,7 @@ depends=(
 	# devtools
 	git
 	meson
+	cmake
 
 	# makepkg
 	mold
@@ -76,7 +77,6 @@ build() {
 		-D ldconfig=/usr/bin/ldconfig
 		-D doc=disabled
 	)
-
 	
 	arch-meson $pkgname build "${options[@]}"
 	

@@ -4,32 +4,30 @@
 pkgname=glycin
 pkgdesc="Sandboxed and extendable image decoding"
 license=(
-	'MPL2'
-	'LGPL2.1'
+	MPL2
+	LGPL-2.1-or-later
 )
 
 arch=(x86_64)
-pkgver=0.1.2+85+8b877e7
-pkgrel=2
+pkgver=1.0.beta+171+1757e9c
+pkgrel=1
 
-url="https://gitlab.gnome.org/sophie-h/glycin"
+url=https://gitlab.gnome.org/sophie-h/glycin
 
 depends=(
-	cairo
-	gdk-pixbuf2
-	glib2
 	gtk4
-	libjxl
-	librsvg
-	libxml2
+	cairo
+	glib2
 	pango
+	libjxl
+	libxml2
+	librsvg
+	gdk-pixbuf2
 )
 
 makedepends=(
-	git
-	libheif
-	meson
 	rust
+	libheif
 )
 
 b2sums=(SKIP)
@@ -46,13 +44,11 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
-		-D profile=release
-		-D loaders=glycin-heif,glycin-image-rs,glycin-jxl,glycin-svg
-		-D test_skip_install=true
+	local options=(
+		-D tests=false
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	
 	meson compile -C build
 }

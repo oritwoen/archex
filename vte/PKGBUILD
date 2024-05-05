@@ -6,8 +6,8 @@ pkgdesc="Virtual Terminal Emulator widget"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=+5330+f6658a23
-pkgrel=6
+pkgver=0.75.1+5397+bfd656e4
+pkgrel=1
 
 url=https://wiki.gnome.org/Apps/Terminal/VTE
 
@@ -35,7 +35,7 @@ conflicts=(vte-common vte3 vte4)
 pkgver() {
 	cd $pkgname
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _version=$(grep -m 1 version: meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
@@ -45,23 +45,10 @@ pkgver() {
 build() {
 	local options=(
 		-D b_lto=false
-		-D _b_symbolic_functions=true
-		-D a11y=true
-		-D debugg=false
-		-D docs=false
-		-D gir=true
-		-D fribidi=true
-		-D glade=true
-		-D gnutls=true
-		-D gtk3=true
-		-D gtk4=true
-		-D icu=true
-		-D sixel=false
-		-D _systemd=true
-		-D vapi=true
 	)
-	
-	arch-meson $pkgname build "${options[@]}"
+
+	arch-meson vte build "${options[@]}"
+
 	meson compile -C build
 }
 

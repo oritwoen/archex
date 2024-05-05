@@ -1,53 +1,54 @@
-# Maintainer: DrakeTDL <everyone@disroot.org>
+# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
+# Contributor: DrakeTDL <everyone@disroot.org>
+
 pkgname="an-anime-game-launcher"
-pkgver=3.9.2+808+5a6d713
-pkgrel=3
 pkgdesc="A Launcher for a specific anime game with auto-patching, discord rpc and time tracking"
-arch=("x86_64")
+license=(GPL3)
+
+arch=(x86_64)
+pkgver=3.9.4+833+fc9c650
+pkgrel=1
+
 url="https://github.com/an-anime-team/an-anime-game-launcher"
-license=("GPL3")
+
 depends=(
-  cabextract
-  curl
-  git
-  glibc
-  gtk4
-  iputils
-  libadwaita
-  tar
-  unzip
-  xdelta3
+	tar
+	gtk4
+	curl
+	unzip
+	glibc
+	xdelta3
+	iputils
+	gamemode
+	gamescope
+	libadwaita
+	cabextract
 )
-makedepends=(rust)
-optdepends=(
-  "mangohud: FPS Hud/GUI"
-  "gamemode: Game Optimizations"
-  "gamescope: a tool from Valve that allows for games to run in an isolated Xwayland instance"
+
+makedepends=(
+	rust
 )
+
+b2sums=(
+	SKIP
+	SKIP
+)
+
 source=(
-  "git+https://github.com/an-anime-team/an-anime-game-launcher.git"
-  "$pkgname.desktop"
+	"$pkgname.desktop"
+	git+https://github.com/an-anime-team/an-anime-game-launcher.git#branch=main
 )
-sha256sums=(
-  SKIP
-  "3bb15b29fd47e60ead712a67046daf42bd0ba5547d379ead6ea9bba37ea7b137"
-)
+
 options=(!lto)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 'version = ' Cargo.toml | awk -F '["]' '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
-
-    echo ${_version}+${_commits}+${_commith}
-}
-
-prepare() {
 	cd $pkgname
 
-	#git switch next
+	local _version=$(grep -m 1 'version = ' Cargo.toml | awk -F '["]' '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {

@@ -2,70 +2,73 @@
 # Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 # Contributor: Jan de Groot <jan@archlinux.org>
 
-
 pkgname=gnome-desktop
 pkgdesc="Library with common API for various GNOME modules"
-license=(GPL LGPL)
-
-arch=(x86_64)
-pkgrel=2
-pkgver=44.0+6636+7dbe267c
-
-url="https://gitlab.gnome.org/GNOME/gnome-desktop"
-
-makedepends=(
-  bubblewrap
-  git
-  gobject-introspection
-  gsettings-desktop-schemas
-  gtk-doc
-  gtk3
-  gtk4
-  iso-codes
-  libseccomp
-  libxkbcommon
-  meson
-  systemd
-  xkeyboard-config
-  yelp-tools
+license=(
+	GPL 
+	LGPL
 )
 
-provides=(libgnome-desktop-3.so libgnome-{bg,desktop,rr}-4.so)
-source=("git+https://gitlab.gnome.org/GNOME/gnome-desktop.git#branch=master")
-b2sums=('SKIP')
+arch=(x86_64)
+pkgrel=1
+pkgver=44.0+6638+8fb7ee85
 
-provides=(gnome-desktop-common gnome-desktop-4)
-replaces=(gnome-desktop-common gnome-desktop-4)
-conflicts=(gnome-desktop-common gnome-desktop-4)
+url=https://gitlab.gnome.org/GNOME/gnome-desktop
+
+makedepends=(
+	gtk3
+	gtk4
+	systemd
+	iso-codes
+	libseccomp
+	bubblewrap
+	libxkbcommon
+	xkeyboard-config
+	gobject-introspection
+	gsettings-desktop-schemas
+)
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-desktop.git#branch=master)
+
+provides=(
+	gnome-desktop-4
+	gnome-desktop-common
+	libgnome-desktop-3.so 
+	libgnome-{bg,desktop,rr}-4.so
+)
+
+replaces=(
+	gnome-desktop-4
+	gnome-desktop-common
+)
+
+conflicts=(
+	gnome-desktop-4
+	gnome-desktop-common
+)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    local meson_options=(
-        -D desktop_docs=false
-        -D debug_tools=false
-        -D introspection=true
-        -D udev=enabled
-        -D systemd=enabled
-        -D gtk_doc=false
-        -D installed_tests=false
-        -D build_gtk4=true
-        -D legacy_library=true
-    )
-    
-    arch-meson $pkgname build "${meson_options[@]}"
+	local options=(
+		-D desktop_docs=false
+		-D debug_tools=false
+	)
 
-    meson compile -C build
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }

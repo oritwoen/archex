@@ -10,10 +10,19 @@ arch=(x86_64)
 pkgver=1.5.11+591+2df68f8
 pkgrel=8
 
-url="https://github.com/anholt/libepoxy"
+url=https://github.com/anholt/libepoxy
 
-depends=(glibc libglvnd libx11)
-makedepends=(git meson mesa-libgl systemd doxygen graphviz)
+depends=(
+	glibc
+	libx11
+	libglvnd
+)
+
+makedepends=(
+	systemd
+	graphviz
+	mesa-libgl 
+)
 
 source=(git+https://github.com/anholt/libepoxy#branch=master)
 b2sums=(SKIP)
@@ -31,14 +40,11 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
-		-D docs=false
-		-D glx=yes
-		-D x11=true
+	local options=(
 		-D tests=false
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	
 	meson compile -C build
 }

@@ -9,10 +9,21 @@ arch=(x86_64)
 pkgver=0.9.1+687+5970778
 pkgrel=35
 
-url="https://gitlab.gnome.org/GNOME/librest"
+url=https://gitlab.gnome.org/GNOME/librest
 
-depends=(glib2 libxml2 libsoup3 json-glib)
-makedepends=(gobject-introspection git meson gi-docgen vala libadwaita gtksourceview5)
+depends=(
+	glib2 
+	libxml2
+	libsoup3
+	json-glib
+)
+
+makedepends=(
+	vala
+	libadwaita
+	gtksourceview5
+	gobject-introspection
+)
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/GNOME/librest.git#branch=master)
@@ -29,17 +40,14 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
-		-D ca_certificates=false
-		-D introspection=true
+	local options=(
 		-D vapi=true
 		-D examples=false
 		-D gtk_doc=false
-		-D soup2=false
 		-D tests=false
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 	
 	meson compile -C build
 }

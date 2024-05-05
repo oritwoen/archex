@@ -7,36 +7,53 @@ pkgdesc="A GNOME web browser based on the WebKit rendering engine"
 license=(GPL)
 
 arch=(x86_64)
-pkgrel=2
-pkgver=45.1+17889+293db2589
-url="https://wiki.gnome.org/Apps/Web"
+pkgrel=1
+pkgver=46.beta+17931+f4ee30907
 
-depends=(webkit2gtk-4.1 gcr libdazzle libhandy libarchive libportal-gtk3 libsoup3)
-makedepends=(docbook-xml startup-notification lsb-release gobject-introspection yelp-tools git meson)
+url=https://wiki.gnome.org/Apps/Web
+
+depends=(
+	gtk4
+	gcr-4
+	libsoup3
+	gstreamer
+	libadwaita
+	libarchive
+	webkitgtk-6.0
+	libportal-gtk4
+)
+
+makedepends=(
+	lsb-release
+	startup-notification
+	gobject-introspection
+)
 
 b2sums=(SKIP)
 groups=(gnome)
 source=(git+https://gitlab.gnome.org/GNOME/epiphany.git#branch=master)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    arch-meson $pkgname build \
-        -D unit_tests=disabled \
-        -D tech_preview=true \
-        -D developer_mode=true
+	local meson_options=(
+		-D tech_preview=true
+		-D unit_tests=disabled
+	)
+	
+	arch-meson $pkgname build "${meson_options[@]}"
 
-    meson compile -C build
+	meson compile -C build
 }
 
 package () {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
