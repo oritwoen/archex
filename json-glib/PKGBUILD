@@ -3,8 +3,8 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 
 pkgname=json-glib
-pkgver=1.8.1+1325+8410c32
-pkgrel=2
+pkgver=1.9.1+1405+4db3373
+pkgrel=1
 pkgdesc="JSON library built on GLib"
 url="https://wiki.gnome.org/Projects/JsonGlib"
 arch=(x86_64)

@@ -7,8 +7,8 @@ pkgdesc='GObject based library API for managing information about operating syst
 license=('GPL' 'LGPL')
 
 arch=(x86_64)
-pkgver=1.12.0+1947+5bbdd06
-pkgrel=2
+pkgver=1.12.0+1956+8f99c8f
+pkgrel=1
 
 url=https://libosinfo.org/
 

@@ -5,8 +5,8 @@ pkgdesc="Tecla is a keyboard layout viewer"
 license=(GPL3)
 
 arch=(x86_64)
-pkgver=45.0+99+fd89f76
-pkgrel=2
+pkgver=46.0+149+73fad8f
+pkgrel=1
 
 url="https://gitlab.gnome.org/GNOME/tecla"
 

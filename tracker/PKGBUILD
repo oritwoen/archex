@@ -8,8 +8,8 @@ pkgdesc="SQLite-based RDF triplestore database with SPARQL interface"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=3.7.alpha+15476+11b338716
-pkgrel=2
+pkgver=3.8.alpha+15773+7e2d732aa
+pkgrel=1
 
 url="https://tracker.gnome.org/"
 

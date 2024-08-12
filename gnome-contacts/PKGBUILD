@@ -7,7 +7,7 @@ pkgdesc="Contacts Manager for GNOME"
 license=(GPL2)
 
 arch=(x86_64)
-pkgver=46.alpha+3978+a19dac1f
+pkgver=46.0+4040+4ec2661b
 pkgrel=1
 
 url=https://apps.gnome.org/Contacts

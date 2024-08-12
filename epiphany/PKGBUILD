@@ -8,7 +8,7 @@ license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=46.beta+17931+f4ee30907
+pkgver=46.0+18071+87d5b240d
 
 url=https://wiki.gnome.org/Apps/Web
 

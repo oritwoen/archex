@@ -9,7 +9,7 @@ license=(
 )
 
 arch=(x86_64)
-pkgver=1.0.beta+171+1757e9c
+pkgver=1.0.1+242+48c1039
 pkgrel=1
 
 url=https://gitlab.gnome.org/sophie-h/glycin

@@ -1,0 +1,43 @@
+pkgname=alpaca
+pkgdesc="An Ollama client made with GTK4 and Adwaita"
+license=(GPL3)
+
+arch=(x86_64)
+pkgver=0.9.6.1+343+b60e01e
+pkgrel=1
+
+url=https://github.com/Jeffser/Alpaca
+
+depends=(
+	ollama
+	python-pillow
+	python-requests
+)
+
+makedepends=(
+	git
+	meson
+)
+
+b2sums=(SKIP)
+source=(git+https://github.com/jeffser/alpaca.git#branch=main)
+
+pkgver() {
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+	
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson $pkgname build
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}

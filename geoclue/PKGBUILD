@@ -7,7 +7,7 @@ pkgdesc="Modular geoinformation service built on the D-Bus messaging system"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=2.7.1+1048+a9caa55
+pkgver=2.7.1+1055+67eae6f
 pkgrel=1
 
 url=https://gitlab.freedesktop.org/geoclue/geoclue/-/wikis/home

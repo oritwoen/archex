@@ -1,0 +1,71 @@
+# Maintainer: anispwyn <anisphia_wynn_palettia@proton.me>
+
+pkgname=sleepy-launcher
+pkgdesc="Sleepy game launcher for Linux with telemetry disabling"
+license=(GPL3)
+
+arch=(x86_64)
+pkgver=1.0.1+933+9ae6f18
+pkgrel=1
+
+url=https://github.com/an-anime-team/sleepy-launcher
+
+depends=(
+	tar
+	gtk4
+	curl
+	unzip
+	glibc
+	xdelta3
+	iputils
+	gamemode
+	gamescope
+	libadwaita
+	cabextract
+)
+
+makedepends=(
+	rust
+)
+
+source=(
+	"$pkgname.desktop"
+	git+https://github.com/an-anime-team/sleepy-launcher.git#branch=main
+)
+
+b2sums=(
+	SKIP
+	SKIP
+)
+
+options=(!lto)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 'version = ' Cargo.toml | awk -F '["]' '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	cd $pkgname
+
+	cargo build --release
+}
+
+package() {
+	cd $pkgname
+	
+	install -dm755 "${pkgdir}/usr/lib/${pkgname}"
+	install -dm755 "${pkgdir}/usr/bin/"
+	
+	cp target/release/sleepy-launcher "${pkgdir}/usr/lib/${pkgname}/${pkgname}"
+	ln -s "/usr/lib/${pkgname}/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
+	
+	install -Dm644 "assets/images/icon.png" "${pkgdir}/usr/share/pixmaps/sleepy-launcher.png"
+	install -Dm644 "assets/images/icon.png" "${pkgdir}/usr/share/icons/moe.launcher.sleepy-launcher.png"
+	install -Dm644 "${srcdir}/sleepy-launcher.desktop" -t "${pkgdir}/usr/share/applications"
+}

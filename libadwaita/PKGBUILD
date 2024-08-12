@@ -7,13 +7,13 @@ pkgdesc="Building blocks for modern adaptive GNOME applications"
 license=(LGPL-2.1-or-later)
 
 arch=(x86_64)
-pkgver=1.5.rc+4025+c849d02c
+pkgver=1.6.alpha+4218+6063a352
 pkgrel=1
 
 url=https://gnome.pages.gitlab.gnome.org/libadwaita
 
 depends=(
-	gtk
+	gtk4
 	pango
 	glib2
 	fribidi

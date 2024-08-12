@@ -11,7 +11,7 @@ license=(
 )
 
 arch=(x86_64)
-pkgver=20240117+1198+3400f3a
+pkgver=20240117+1220+5de892d
 pkgrel=1
 
 url=https://github.com/iputils/iputils

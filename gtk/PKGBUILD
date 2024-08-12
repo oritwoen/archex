@@ -7,7 +7,7 @@ pkgdesc="GObject-based multi-platform GUI toolkit"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=4.13.8+79354+04f8170841
+pkgver=4.15.2+80525+58fe590eae
 pkgrel=1
 
 url=https://www.gtk.org

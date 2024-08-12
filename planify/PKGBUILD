@@ -6,7 +6,7 @@ pkgdesc="Task manager with Todoist support"
 license=('GPL-3.0-or-later')
 
 arch=(x86_64)
-pkgver=4.4.1+1465+38976941
+pkgver=4.8.2+1709+b6bec659
 pkgrel=1
 
 url="https://github.com/alainm23/planify"

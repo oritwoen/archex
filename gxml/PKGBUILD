@@ -11,7 +11,7 @@ pkgdesc="GObject-based XML parser and writer library"
 license=('LGPL')
 
 arch=('x86_64')
-pkgver=0.21.0+2114+fb7817a
+pkgver=0.20.5+2139+54a9251
 pkgrel=1
 
 url=https://wiki.gnome.org/GXml

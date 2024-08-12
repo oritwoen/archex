@@ -6,8 +6,8 @@ pkgdesc="Library for accessing RESTful web services"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=0.9.1+687+5970778
-pkgrel=35
+pkgver=0.9.1+703+23f2d27
+pkgrel=1
 
 url=https://gitlab.gnome.org/GNOME/librest
 

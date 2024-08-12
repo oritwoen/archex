@@ -6,7 +6,7 @@ pkgdesc="Virtual Terminal Emulator widget"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=0.75.1+5397+bfd656e4
+pkgver=0.77.0+5500+fd5511f2
 pkgrel=1
 
 url=https://wiki.gnome.org/Apps/Terminal/VTE

@@ -4,29 +4,35 @@
 
 pkgname=accountsservice
 pkgdesc="D-Bus interface for user account query and manipulation"
-license=(GPL3)
+license=(GPL-3.0-or-later)
 
 arch=(x86_64)
-pkgver=23.39.18+747+42aa71a
-pkgrel=30
+pkgver=24.17.41+770+001fb13
+pkgrel=1
 
 url="https://gitlab.freedesktop.org/accountsservice/accountsservice"
 
 depends=(
 	glib2
+	glibc
 	polkit
 	shadow
 	systemd
+	gcc-libs
 	libxcrypt
 )
 
 makedepends=(
 	vala
+	python-packaging
 	gobject-introspection
 )
 
-b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/accountsservice/accountsservice.git#branch=main)
+b2sums=(SKIP SKIP)
+source=(
+	accounts-daemon-restart.hook
+	git+https://gitlab.freedesktop.org/accountsservice/accountsservice.git#branch=main
+)
 
 provides=(libaccountsservice.so)
 
@@ -51,4 +57,7 @@ build() {
 
 package() {
 	meson install -C build --destdir "$pkgdir"
+	
+	install -Dt "$pkgdir/usr/share/libalpm/hooks" -m644 *.hook
+	install -d "$pkgdir/usr/share/accountsservice/interfaces"
 }

@@ -7,7 +7,7 @@ pkgdesc="Graphical interface for advanced GNOME 3 settings (Tweak Tool)"
 license=(GPL-3.0-or-later)
 
 arch=(any)
-pkgver=46.beta+2096+a53f2d2
+pkgver=47.alpha+2138+0f0bb13
 pkgrel=1
 
 url=https://wiki.gnome.org/Apps/Tweaks

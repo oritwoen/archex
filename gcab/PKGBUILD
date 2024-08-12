@@ -7,8 +7,8 @@ pkgdesc="A GObject library to create cabinet files"
 license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.6+393+8a8ab90
-pkgrel=27
+pkgver=1.6+395+1de093f
+pkgrel=1
 
 url=https://wiki.gnome.org/msitools
 
