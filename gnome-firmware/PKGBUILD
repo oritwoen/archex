@@ -2,7 +2,7 @@ pkgname=gnome-firmware
 
 arch=(x86_64)
 pkgver=47.alpha+412+c7bf77b
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 groups=(plain)
