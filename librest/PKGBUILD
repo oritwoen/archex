@@ -2,7 +2,7 @@ pkgname=librest
 
 arch=(x86_64)
 pkgver=0.9.1+703+23f2d27
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 groups=(plain)
