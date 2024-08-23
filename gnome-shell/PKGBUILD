@@ -2,7 +2,7 @@ pkgname=gnome-shell
 
 arch=(x86_64)
 pkgver=47.beta+19080+36e42badd
-pkgrel=1
+pkgrel=2
 
 b2sums=(
 	SKIP
