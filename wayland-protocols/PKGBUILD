@@ -2,7 +2,7 @@ pkgname=wayland-protocols
 
 arch=(any)
 pkgver=1.36+384+d1d185c
-pkgrel=3
+pkgrel=4
 
 b2sums=(SKIP)
 groups=(plain)
