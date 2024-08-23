@@ -2,7 +2,7 @@ pkgname=cairo
 
 arch=(x86_64)
 pkgver=1.18.1+12939+bbf385d35
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 groups=(plain)
