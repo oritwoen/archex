@@ -2,7 +2,7 @@ pkgname=gnome-color-manager
 
 arch=(x86_64)
 pkgver=3.36.1+2926+bd40923d
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 groups=(plain)
