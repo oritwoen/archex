@@ -1,62 +1,22 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=(gvfs)
-pkgdesc="Virtual filesystem implementation for GIO"
-license=(LGPL-2.0-only)
 
 arch=(x86_64)
-pkgver=1.53.91+6450+435047ae
+pkgver=1.55.91+6525+ac7fa3f1
 pkgrel=1
 
-url="https://wiki.gnome.org/Projects/gvfs"
-
-depends=(
-	gcr
-	avahi
-	dconf
-	fuse3
-	psmisc
-	udisks2
-	gsettings-desktop-schemas
-
-	libgudev
-	libsoup3
-	libbluray
-	libsecret
-	libarchive
-	libcdio-paranoia
-)
-
-makedepends=(
-	gtk3
-	dbus
-	libmtp
-	libgoa
-	libnfs
-	python
-	msgraph
-	openssh
-	libgdata
-	smbclient
-	libgphoto2
-	libimobiledevice
-)
-
-groups=(gnome)
+groups=(plain)
 b2sums=(
 	SKIP
 	SKIP
 )
 source=(
 	gvfsd.hook
-	git+https://gitlab.gnome.org/GNOME/gvfs.git#branch=master
+	git+https://gitlab.gnome.org/gnome/gvfs.git
 )
 
-provides=(gvfs-{smb,afc,gphoto2,goa,mtp,nfs,google})
-replaces=(gvfs-{smb,afc,gphoto2,goa,mtp,nfs,google})
-conflicts=(gvfs-{smb,afc,gphoto2,goa,mtp,nfs,google})
+provides=(gvfs-{smb,afc,gphoto2,goa,mtp,nfs,google,onedrive,dnssd,wsdd})
+replaces=(gvfs-{smb,afc,gphoto2,goa,mtp,nfs,google,onedrive,dnssd,wsdd})
+conflicts=(gvfs-{smb,afc,gphoto2,goa,mtp,nfs,google,onedrive,dnssd,wsdd})
 
 pkgver() {
 	cd $pkgname

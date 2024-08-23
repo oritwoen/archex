@@ -1,44 +1,13 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=libsoup3
-pkgver=3.5.1+3911+8afa8788
-pkgrel=1
-pkgdesc="HTTP client/server library for GNOME"
-url="https://wiki.gnome.org/Projects/libsoup"
-arch=(x86_64)
-license=(LGPL)
-depends=(
-	brotli
-	glib-networking
-	glib2
-	krb5
-	libnghttp2
-	libpsl
-	libsysprof-capture
-	sqlite
-)
-makedepends=(
-	git
-	gobject-introspection
-	meson
-	python-quart
-	samba
-	vala
-)
 
-depends=(
-	libbrotlidec.so
-	libgssapi_krb5.so
-	libg{lib,object,io}-2.0.so
-	libpsl.so
-)
-optdepends=('samba: Windows Domain SSO')
+arch=(x86_64)
+pkgver=3.5.2+3921+8bc81242
+pkgrel=1
+
 provides=(libsoup-3.0.so libsoup-3.0.so=0-64)
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/libsoup.git#branch=master)
+source=(git+https://gitlab.gnome.org/gnome/libsoup.git)
 
 pkgver() {
 	cd libsoup
@@ -52,19 +21,10 @@ pkgver() {
 
 build() {
 	local meson_options=(
-		-D gssapi=enabled
-		-D ntlm=disabled
-		-D brotli=enabled
-		-D tls_check=true
-		-D introspection=enabled
-		-D vapi=enabled
 		-D docs=disabled
-		-D doc_tests=false
 		-D tests=false
 		-D autobahn=disabled
-		-D installed_tests=false
 		-D sysprof=disabled
-		-D fuzzing=disabled
 		-D pkcs11_tests=disabled
 	)
 	

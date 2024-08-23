@@ -1,34 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Filipe Laíns (FFY00) <lains@archlinux.org>
-# Contributor: Eric Lehmann <katyl@katyl.info>
-# Contributor: Thomas Fanninger <thomas@fanninger.at>
-# Contributor: ultraviolet <ultravioletnanokitty@gmail.com>
-# Contributor: Pablo Lezeta <prflr88@gmail.com>
-
 pkgname=iio-sensor-proxy
-pkgdesc='IIO accelerometer sensor to input device proxy'
-license=('GPL2')
 
 arch=(x86_64)
-pkgver=3.5+499+1f5069d
+pkgver=3.5+502+fe56bdb
 pkgrel=1
 
-url=https://gitlab.freedesktop.org/hadess/iio-sensor-proxy
-
-depends=(
-	glib2
-	polkit
-	systemd
-	libgudev
-)
-
-makedepends=(
-	gtk3
-	meson
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/hadess/iio-sensor-proxy.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.freedesktop.org/hadess/iio-sensor-proxy.git)
 
 pkgver() {
 	cd $pkgname

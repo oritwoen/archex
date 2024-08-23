@@ -1,26 +1,12 @@
 pkgname=alpaca
-pkgdesc="An Ollama client made with GTK4 and Adwaita"
-license=(GPL3)
 
 arch=(x86_64)
-pkgver=0.9.6.1+343+b60e01e
+pkgver=1.1.1+676+ed54b28
 pkgrel=1
 
-url=https://github.com/Jeffser/Alpaca
-
-depends=(
-	ollama
-	python-pillow
-	python-requests
-)
-
-makedepends=(
-	git
-	meson
-)
-
 b2sums=(SKIP)
-source=(git+https://github.com/jeffser/alpaca.git#branch=main)
+groups=(plain)
+source=(git+https://github.com/jeffser/alpaca.git)
 
 pkgver() {
 	cd $pkgname

@@ -1,71 +1,13 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Laurent Carlier <lordheavym@gmail.com>
-# Contributor: Felix Yan <felixonmars@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-# Contributor: Andreas Radke <andyrtr@archlinux.org>
-
 pkgname=mesa
-pkgdesc="An open-source implementation of the OpenGL specification"
-license=('custom')
 
-arch=('x86_64')
-pkgver=24.1.0+devel+183859+68b3b1573b4
+arch=(x86_64)
+pkgver=24.3.0+devel+193929+fba1c3c721b
 pkgrel=1
 
-url="https://www.mesa3d.org/"
-
-makedepends=(
-  'clang'
-  'expat'
-  'libdrm'
-  'libelf'
-  'libglvnd'
-  'libunwind'
-  'libva'
-  'libvdpau'
-  'libx11'
-  'libxdamage'
-  'libxml2'
-  'libxrandr'
-  'libxshmfence'
-  'libxxf86vm'
-  'llvm'
-  'lm_sensors'
-  'rust'
-  'spirv-llvm-translator'
-  'spirv-tools'
-  'systemd'
-  'vulkan-icd-loader'
-  'wayland'
-  'xcb-util-keysyms'
-  'zstd'
-
-  # shared between mesa and lib32-mesa
-  'clang'
-  'cmake'
-  'elfutils'
-  'glslang'
-  'libclc'
-  'meson'
-  'python-mako'
-  'python-ply'
-  'rust-bindgen'
-  'wayland-protocols'
-  'xorgproto'
-
-  # d3d12 deps
-  'directx-headers'
-
-  # gallium-omx deps
-  'libomxil-bellagio'
-)
-
-b2sums=(SKIP SKIP)
-source=(
-    LICENSE
-    git+https://gitlab.freedesktop.org/mesa/mesa.git#branch=main
-)
-options=(!lto)
+b2sums=(SKIP)
+groups=(plain)
+source=(git+https://gitlab.freedesktop.org/mesa/mesa.git)
+#options=(!lto)
 
 provides=('mesa' 'opencl-mesa' 'vulkan-radeon' 'vulkan-mesa-layer' 'libva-mesa-driver' 'mesa-vdpau' 'vulkan-swrast' 'vulkan-driver' 'mesa-libgl' 'opengl-driver' 'opencl-driver')
 conflicts=('mesa' 'opencl-mesa' 'vulkan-radeon' 'vulkan-mesa-layer' 'libva-mesa-driver' 'mesa-vdpau' 'vulkan-swrast' 'mesa-libgl')
@@ -83,17 +25,34 @@ pkgver() {
 build() {
 	local options=(
 		-D platforms=x11,wayland
-		-D egl-native-platform=wayland
-		-D android-strict=false
+		#-D egl-native-platform=wayland
+		#-D android-strict=false
 		-D android-libbacktrace=disabled
-		-D gallium-drivers=svga,swrast,radeonsi
+		-D gallium-drivers=radeonsi,llvmpipe,softpipe,zink
 		-D gallium-extra-hud=true
+    -D gallium-vdpau=enabled
+    -D gallium-omx=bellagio
+    -D gallium-va=enabled
+    -D gallium-xa=disabled
 		-D gallium-nine=true
 		-D gallium-opencl=icd
 		-D gallium-rusticl=true
 		-D opencl-spirv=true
-		-D vulkan-drivers=amd
+		-D vulkan-drivers=amd,swrast
 		-D vulkan-layers=overlay,device-select
+    -D shared-glapi=enabled
+    -D gles1=disabled
+    -D gles2=enabled
+    -D glx=dri
+    -D egl=enabled
+    -D glvnd=enabled
+    -D microsoft-clc=disabled
+    -D llvm=enabled
+    -D shared-llvm=enabled
+    -D valgrind=disabled
+    -D libunwind=disabled
+    -D lmsensors=enabled
+    -D enable-glcpp-tests=false
 		-D osmesa=true
 		-D vulkan-beta=true
 		-D video-codecs=all
@@ -105,6 +64,4 @@ build() {
 
 package() {
 	meson install -C build --destdir "$pkgdir"
-
-	install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" "${srcdir}/LICENSE"
 }

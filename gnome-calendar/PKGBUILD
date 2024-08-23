@@ -1,38 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Maintainer: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
-# Maintainer: Jan de Groot <jgc@archlinux.org>
-
 pkgname=gnome-calendar
-pkgdesc="Simple and beautiful calendar application designed to perfectly fit the GNOME desktop"
-license=(GPL)
 
 arch=(x86_64)
-pkgver=47.alpha+4759+69237502
+pkgver=47.rc+4848+f482f352
 pkgrel=1
 
-url=https://wiki.gnome.org/Apps/Calendar
-
-depends=(
-	gtk4
-	dconf
-	glib2
-	pango
-	libical
-	geoclue
-	libsoup3
-	graphene
-	libadwaita
-	libgweather-4
-	libedataserverui4
-	hicolor-icon-theme
-	evolution-data-server
-	gsettings-desktop-schemas
-)
-
 b2sums=(SKIP)
-groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-calendar.git#branch=main)
-
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/gnome-calendar.git)
 
 pkgver() {
 	cd $pkgname

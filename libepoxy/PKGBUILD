@@ -1,33 +1,14 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Laurent Carlier <lordheavym@gmail.com>
-
 pkgname=libepoxy
-pkgdesc="Library handling OpenGL function pointer management"
-license=(MIT)
 
 arch=(x86_64)
-pkgver=1.5.11+591+2df68f8
-pkgrel=8
+pkgver=1.5.11+594+f13c13c
+pkgrel=1
 
-url=https://github.com/anholt/libepoxy
-
-depends=(
-	glibc
-	libx11
-	libglvnd
-)
-
-makedepends=(
-	systemd
-	graphviz
-	mesa-libgl 
-)
-
-source=(git+https://github.com/anholt/libepoxy#branch=master)
 b2sums=(SKIP)
+groups=(plain)
+source=(git+https://github.com/anholt/libepoxy.git)
 
-provides=(libepoxy.so)
+#provides=(libepoxy.so)
 
 pkgver() {
 	cd $pkgname

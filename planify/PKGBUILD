@@ -1,33 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Mark Wagie <mark dot wagie at proton dot me>
-
 pkgname=planify
-pkgdesc="Task manager with Todoist support"
-license=('GPL-3.0-or-later')
 
 arch=(x86_64)
-pkgver=4.8.2+1709+b6bec659
+pkgver=4.10.8+1809+291633ad
 pkgrel=1
 
-url="https://github.com/alainm23/planify"
-
-depends=(
-	gxml
-	granite7
-	libadwaita
-	webkitgtk-6.0
-	libportal-gtk4
-	gtksourceview5
-	evolution-data-server
-)
-
-makedepends=(
-	vala
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-source=(git+https://github.com/alainm23/planify.git#branch=master)
+groups=(plain)
+source=(git+https://github.com/alainm23/planify.git)
 
 pkgver() {
 	cd $pkgname

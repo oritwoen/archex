@@ -1,44 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-# Contributor: Brice Carpentier <brice@daknet.org>
-
 pkgname=cairo
-pkgdesc="2D graphics library with support for multiple output devices"
 
 arch=(x86_64)
-pkgver=1.18.1+12838+586c8acac
+pkgver=1.18.1+12939+bbf385d35
 pkgrel=1
 
-url=https://cairographics.org/
-license=(LGPL MPL)
-
-depends=(
-	lzo
-	zlib
-	glib2
-	pixman
-	libpng
-	libx11
-	libxcb
-	libxext
-	freetype2
-	libxrender
-	fontconfig
-)
-
-makedepends=(
-	valgrind
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/cairo/cairo.git#branch=master)
-provides=(
-	libcairo-gobject.so
-	libcairo-script-interpreter.so
-	libcairo.so
-	libcairo.so=2-64
-)
+groups=(plain)
+source=(git+https://gitlab.freedesktop.org/cairo/cairo.git)
 
 pkgver() {
 	cd $pkgname

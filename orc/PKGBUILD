@@ -1,27 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=orc
-pkgdesc="Optimized Inner Loop Runtime Compiler"
-license=(custom:BSD)
 
 arch=(x86_64)
-pkgver=0.4.34.1+1615+f327842
-pkgrel=2
-
-url="https://gitlab.freedesktop.org/gstreamer/orc"
-
-depends=(glibc)
-makedepends=(
-	git
-	meson
-	valgrind
-)
+pkgver=0.4.39.1+1786+8d61c24
+pkgrel=1
 
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/gstreamer/orc.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.freedesktop.org/gstreamer/orc.git)
 
 pkgver() {
 	cd $pkgname
@@ -35,13 +20,11 @@ pkgver() {
 
 build() {
 	local meson_options=(
-		-D orc-backend=all
 		-D orc-test=disabled
 		-D benchmarks=disabled
 		-D examples=disabled
 		-D gtk_doc=disabled
 		-D tests=disabled
-		-D tools=disabled
 	)
 	
 	arch-meson $pkgname build "${meson_options[@]}"

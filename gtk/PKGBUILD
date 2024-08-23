@@ -1,58 +1,10 @@
-
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-
 pkgname=gtk
-pkgdesc="GObject-based multi-platform GUI toolkit"
-license=(LGPL)
 
 arch=(x86_64)
-pkgver=4.15.2+80525+58fe590eae
+pkgver=4.15.6+81552+c03720879e
 pkgrel=1
 
-url=https://www.gtk.org
-
-
-depends=(
-	glib2
-	cairo
-	dconf
-	pango
-	fribidi
-	wayland
-	tracker3
-	graphene
-	harfbuzz
-	iso-codes
-	fontconfig
-	gdk-pixbuf2
-	cantarell-fonts
-	shared-mime-info
-	desktop-file-utils
-	adwaita-icon-theme
-	gst-plugins-bad-libs
-
-	libxi
-	libgl
-	libx11
-	libpng
-	libegl
-	libcups
-	libtiff
-	librsvg
-	libjpeg
-	libxext
-	libepoxy
-	libxrandr
-	libxfixes
-	libcolord
-	libxrender
-	libxcursor
-	libxdamage
-	libxinerama
-	libxkbcommon
-	libcloudproviders
-)
+groups=(plain)
 
 b2sums=(
 	SKIP
@@ -70,7 +22,7 @@ source=(
 
 provides=(
 	gtk4
-	libgtk-4.so=1-64
+	libgtk-4.so
 	gtk-update-icon-cache
 )
 

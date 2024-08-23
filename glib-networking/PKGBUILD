@@ -1,25 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-
 pkgname=glib-networking
-pkgdesc="Network extensions for GLib"
-license=(LGPL-2.1-or-later)
 
 arch=(x86_64)
-pkgver=2.80.alpha+1915+fbcda33
+pkgver=2.80.0+1966+bab0ce4
 pkgrel=1
 
-url=https://gitlab.gnome.org/GNOME/glib-networking
-
-depends=(
-	glib2
-	gnutls
-	libproxy
-	gsettings-desktop-schemas
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/glib-networking.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/glib-networking.git)
 
 pkgver() {
 	cd $pkgname

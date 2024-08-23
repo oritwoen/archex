@@ -1,25 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Giovanni Scafora <giovanni@archlinux.org>
-# Contributor: Nezmer <Nezmer@gmail.com>
-
 pkgname=fribidi
-pkgdesc="A Free Implementation of the Unicode Bidirectional Algorithm"
-license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.0.13+422+5b9a242
+pkgver=1.0.15+428+3826589
 pkgrel=1
 
-url="https://github.com/fribidi/fribidi"
-
-depends=(
-	glibc
-)
-
 b2sums=(SKIP)
-source=(git+https://github.com/fribidi/fribidi.git#branch=master)
-provides=(libfribidi.so)
+groups=(plain)
+source=(git+https://github.com/fribidi/fribidi.git)
 
 pkgver() {
 	cd $pkgname

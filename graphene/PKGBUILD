@@ -1,25 +1,14 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-
 pkgname=graphene
-pkgdesc="A thin layer of graphic data types"
-license=(MIT)
 
 arch=(x86_64)
-pkgver=1.11.1+1253+d03fb3d
+pkgver=1.11.1+1296+d63bd69
 pkgrel=1
 
-url=https://ebassi.github.io/graphene
-
-makedepends=(
-	glib2
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-source=(git+https://github.com/ebassi/graphene.git#branch=master)
+groups=(plain)
+source=(git+https://github.com/ebassi/graphene.git)
 
-provides=(libgraphene-1.0.so)
+#provides=(libgraphene-1.0.so)
 
 pkgver() {
 	cd $pkgname
@@ -35,6 +24,7 @@ build() {
 	local options=(
 		-D arm_neon=false
 		-D tests=false
+		-D sse2=false
 		-D installed_tests=false
 	)
 
@@ -45,6 +35,4 @@ build() {
 
 package() {
 	meson install -C build --destdir "$pkgdir"
-	
-	install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 graphene/LICENSE.txt
 }

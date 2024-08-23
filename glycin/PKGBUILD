@@ -1,47 +1,23 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Fabian Bornschein <fabiscafe@archlinux.org>
-
 pkgname=glycin
-pkgdesc="Sandboxed and extendable image decoding"
-license=(
-	MPL2
-	LGPL-2.1-or-later
-)
 
 arch=(x86_64)
-pkgver=1.0.1+242+48c1039
+pkgver=1.1.beta+340+e45df65
 pkgrel=1
 
-url=https://gitlab.gnome.org/sophie-h/glycin
-
-depends=(
-	gtk4
-	cairo
-	glib2
-	pango
-	libjxl
-	libxml2
-	librsvg
-	gdk-pixbuf2
-)
-
-makedepends=(
-	rust
-	libheif
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/sophie-h/glycin.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/sophie-h/glycin.git)
 
 pkgver() {
 	cd $pkgname
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _version=$(grep -m 1 version: meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
 
 	echo ${_version}+${_commits}+${_commith}
 }
+
 
 build() {
 	local options=(
@@ -52,7 +28,6 @@ build() {
 	
 	meson compile -C build
 }
-
 
 package() {
 	meson install -C build --destdir "$pkgdir" --no-rebuild

@@ -1,36 +1,13 @@
-# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=vte
-pkgdesc="Virtual Terminal Emulator widget"
-license=(LGPL)
 
 arch=(x86_64)
-pkgver=0.77.0+5500+fd5511f2
+pkgver=0.79.0+5600+9e703435
 pkgrel=1
 
-url=https://wiki.gnome.org/Apps/Terminal/VTE
-
-makedepends=(
-	gtk3
-	gtk4
-	vala
-	cairo
-	pcre2
-	gperf
-	gnutls
-	fribidi
-	systemd
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/vte.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/vte.git)
 options=(!lto)
-
-provides=(vte-common vte3 vte4)
-replaces=(vte-common vte3 vte4)
-conflicts=(vte-common vte3 vte4)
 
 pkgver() {
 	cd $pkgname
@@ -43,11 +20,14 @@ pkgver() {
 }
 
 build() {
+	CFLAGS+=" -Wno-error=invalid-constexpr"
+
 	local options=(
 		-D b_lto=false
+		-D gtk3=false
 	)
 
-	arch-meson vte build "${options[@]}"
+	arch-meson $pkgname build "${options[@]}"
 
 	meson compile -C build
 }

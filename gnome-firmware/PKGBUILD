@@ -1,26 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Bruno Pagani <archange@archlinux.org>
-
 pkgname=gnome-firmware
-pkgdesc="Manage firmware on devices supported by fwupd"
-license=(GPL2)
 
 arch=(x86_64)
-pkgver=47.alpha+401+43dcaf1
+pkgver=47.alpha+412+c7bf77b
 pkgrel=1
 
-url=https://gitlab.gnome.org/world/gnome-firmware
-
-depends=(
-	gtk4
-	glib2
-	fwupd
-	systemd
-	libxmlb
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/World/gnome-firmware.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/world/gnome-firmware.git)
 
 pkgver() {
 	cd $pkgname
@@ -34,7 +20,6 @@ pkgver() {
 
 build() {
 	local options=(
-		-D consolekit=false
 		-D man=false
 	)
 

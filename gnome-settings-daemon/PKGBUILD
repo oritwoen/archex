@@ -1,57 +1,18 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-
 pkgname=gnome-settings-daemon
-pkgdesc="GNOME Settings Daemon"
-license=(
-	GPL-2.0-or-later
-	LGPL-2.0-or-later
-)
-
 
 arch=(x86_64)
-pkgver=46.beta+6697+30bede3e
+pkgver=47.beta+6739+b0988296
 pkgrel=1
-
-url=https://gitlab.gnome.org/GNOME/gnome-settings-daemon
-
-depends=(
-	gcr
-	nss
-	gtk3
-	dconf
-	libnm
-	upower
-	systemd
-	geoclue
-	librsvg
-	libwacom
-	libgudev
-	libnotify
-	libgweather-4
-	gnome-desktop
-	geocode-glib-2
-	libcanberra-pulse
-	pulse-native-provider
-	gsettings-desktop-schemas
-)
-
-makedepends=(
-	python
-	libxslt
-	usbguard
-	python-packaging
-)
 
 b2sums=(
 	SKIP
 	SKIP
 )
 
-groups=(gnome)
+groups=(plain)
 source=(
-	git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git#branch=master
-	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git#branch=master
+	git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git
+	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git
 )
 
 pkgver() {
@@ -69,9 +30,8 @@ prepare() {
 
 	git submodule init
 	git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
-	git -c protocol.file.allow=always submodule update
+	git -c protocol.file.allow=always -c protocol.allow=never submodule update
 }
-
 
 build() {
 	arch-meson $pkgname build

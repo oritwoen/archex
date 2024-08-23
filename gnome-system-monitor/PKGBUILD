@@ -1,44 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Fabian Bornschein <fabiscafe-at-mailbox-dot-org>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=gnome-system-monitor
-pkgdesc="View current processes and monitor system state"
-license=(GPL-2.0-or-later)
 
 arch=(x86_64)
-pkgver=46.beta+5027+6f188055
+pkgver=47.beta+5175+ad0ba3af
 pkgrel=1
 
-url="https://apps.gnome.org/SystemMonitor"
-
-depends=(
-	gtk4
-	cairo
-	dconf
-	glib2
-	pango
-	polkit
-	glibmm
-	systemd
-	gtkmm-4.0
-	gdk-pixbuf2
-	hicolor-icon-theme
-
-	libgtop
-	librsvg
-	libhandy
-	libsigc++
-)
-
-makedepends=(
-	appstream-glib
-)
-
 b2sums=(SKIP)
-groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-system-monitor.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-system-monitor.git)
 
 pkgver() {
 	cd $pkgname

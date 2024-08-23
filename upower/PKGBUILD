@@ -1,33 +1,14 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=upower
-pkgdesc="Abstraction for enumerating power devices, listening to device events and querying history and statistics"
-license=(GPL)
 
 arch=(x86_64)
-pkgver=1.90.2+1671+8dcf544
-pkgrel=23
-
-url="https://upower.freedesktop.org"
-
-depends=(
-	systemd
-	usbmuxd
-	libgudev
-	libimobiledevice
-)
-
-makedepends=(
-	python
-	gobject-introspection
-)
+pkgver=1.90.4+1730+d7005f6
+pkgrel=1
 
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/upower/upower.git#commit=8dcf54440d7eb58b75d7982bc1c29ee35dccf0c2)
+groups=(plain)
+source=(git+https://gitlab.freedesktop.org/upower/upower.git)
 
-provides=(libupower-glib.so)
+#provides=(libupower-glib.so)
 
 pkgver() {
 	cd $pkgname
@@ -43,11 +24,6 @@ build() {
 	local options=(
 		-D man=false
 		-D gtk-doc=false
-		-D introspection=enabled
-		-D udevrulesdir=auto
-		-D udevhwdbdir=auto
-		-D os_backend=linux
-		-D idevice=auto
 	)
 	
 	arch-meson $pkgname build "${options[@]}"

@@ -1,27 +1,11 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: talone <talone@boxph.one>
-# Contributor: Igor Dyatlov <dyatlov.igor@protonmail.com>
-
 pkgname=authenticator
-pkgdesc="2FA code generator for GNOME"
-license=(GPL3)
 
-arch=(any)
-pkgver=4.4.0+1808+7411da1
+arch=(x86_64)
+pkgver=4.5.0+1847+acd7ac7
 pkgrel=1
 
-url="https://gitlab.gnome.org/World/Authenticator"
-
-depends=(
-	zbar
-	pipewire
-	libsecret
-	libadwaita
-	gst-plugins-bad
-	gst-plugin-pipewire
-)
-
 b2sums=(SKIP)
+groups=(plain)
 source=(git+https://gitlab.gnome.org/World/authenticator.git#branch=master)
 options=(!lto)
 
@@ -42,7 +26,6 @@ build() {
 
 	meson compile -C build
 }
-
 
 package() {
 	meson install -C build --destdir "$pkgdir"

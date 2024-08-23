@@ -1,34 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Stéphane Gaudreault <stephane@archlinux.org>
-# Contributor: Tobias Powalowski <tpowa@archlinux.org>
-# Contributor: Aaron Griffin <aaron@archlinux.org>
-
 pkgname=iputils
-pkgdesc="Network monitoring tools, including ping"
-license=(
-	BSD-3-Clause
-	GPL-2.0-or-later
-)
 
 arch=(x86_64)
-pkgver=20240117+1220+5de892d
+pkgver=20240117+1227+0f12e6d
 pkgrel=1
 
-url=https://github.com/iputils/iputils
-
-depends=(
-	libcap
-	libidn2
-)
-
-makedepends=(
-	systemd
-	iproute
-	perl-sgmls
-)
-
 b2sums=(SKIP)
-source=(git+https://github.com/iputils/iputils.git#branch=master)
+groups=(plain)
+source=(git+https://github.com/iputils/iputils.git)
 
 pkgver() {
 	cd $pkgname

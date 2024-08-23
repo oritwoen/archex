@@ -1,26 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=gnome-tweaks
-pkgdesc="Graphical interface for advanced GNOME 3 settings (Tweak Tool)"
-license=(GPL-3.0-or-later)
 
 arch=(any)
-pkgver=47.alpha+2138+0f0bb13
+pkgver=47.alpha+2140+c48d0a3
 pkgrel=1
 
-url=https://wiki.gnome.org/Apps/Tweaks
-
-depends=(
-	libhandy
-	python-gobject
-	gnome-settings-daemon
-)
-
 b2sums=(SKIP)
-groups=(gnome-extra)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-tweaks.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-tweaks.git)
 
 pkgver() {
 	cd $pkgname

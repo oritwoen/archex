@@ -1,34 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
-
 pkgname=gnome-clocks
-pkgdesc="Clocks applications for GNOME"
-license=(GPL)
 
 arch=(x86_64)
-pkgver=46.0+2786+95bfc20
+pkgver=46.0+2801+023b97a
 pkgrel=1
 
-url=https://wiki.gnome.org/Apps/Clocks
-
-depends=(
-	gtk4
-	geoclue
-	libadwaita
-	libgweather-4
-	geocode-glib-2
-	gnome-desktop-4
-	xdg-desktop-portal
-)
-
-makedepends=(
-	vala
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-clocks.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-clocks.git)
 
 pkgver() {
 	cd $pkgname
@@ -41,8 +19,6 @@ pkgver() {
 }
 
 build() {
-	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
-
 	arch-meson $pkgname build
 
 	meson compile -C build

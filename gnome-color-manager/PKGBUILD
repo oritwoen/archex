@@ -1,31 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
-
 pkgname=gnome-color-manager
-pkgdesc="GNOME Color Profile Tools"
-license=(GPL2)
 
 arch=(x86_64)
-pkgver=3.36.1+2918+2062132b
+pkgver=3.36.1+2926+bd40923d
 pkgrel=1
 
-url=https://gitlab.gnome.org/GNOME/gnome-color-manager
-
-depends=(
-	gtk3
-	lcms2
-	glib2
-	colord
-)
-
-makedepends=(
-	perl-sgmls
-	appstream-glib
-)
-
 b2sums=(SKIP)
-groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-color-manager.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-color-manager.git)
 
 pkgver() {
 	cd $pkgname

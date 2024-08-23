@@ -1,37 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=epiphany
-pkgdesc="A GNOME web browser based on the WebKit rendering engine"
-license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=46.0+18071+87d5b240d
-
-url=https://wiki.gnome.org/Apps/Web
-
-depends=(
-	gtk4
-	gcr-4
-	libsoup3
-	gstreamer
-	libadwaita
-	libarchive
-	webkitgtk-6.0
-	libportal-gtk4
-)
-
-makedepends=(
-	lsb-release
-	startup-notification
-	gobject-introspection
-)
+pkgver=47.beta+18258+a8fb2d3a4
 
 b2sums=(SKIP)
-groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/epiphany.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/epiphany.git#branch=main)
 
 pkgver() {
 	cd $pkgname

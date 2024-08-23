@@ -1,35 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Fabian Bornschein <fabiscafe-at-mailbox-dot-org>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-
 pkgname=gnome-logs
-pkgdesc="A log viewer for the systemd journal"
-license=(GPL)
 
 arch=(x86_64)
-pkgver=45.0+1355+8b7d44d
+pkgver=45.0+1357+f335a03
 pkgrel=1
 
-url="https://wiki.gnome.org/Apps/Logs"
-
-depends=(
-	gtk4
-	dconf
-	glib2
-	pango
-	systemd
-	libadwaita
-	hicolor-icon-theme
-	gsettings-desktop-schemas
-)
-
-makedepends=(
-	appstream-glib
-)
-
 b2sums=(SKIP)
-groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-logs.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/gnome-logs.git)
 
 pkgver() {
 	cd $pkgname
@@ -42,10 +19,6 @@ pkgver() {
 }
 
 build() {
-	local options=(
-		-D man=false
-	)
-	
 	arch-meson $pkgname build "${options[@]}"
 	meson compile -C build
 }

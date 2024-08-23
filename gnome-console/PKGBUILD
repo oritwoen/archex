@@ -1,28 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
-# Contributor: Igor Dyatlov <dyatlov.igor@gmail.com>
-
 pkgname=gnome-console
-pkgdesc="A simple user-friendly terminal emulator for the GNOME desktop"
-license=(GPL3)
 
 arch=(x86_64)
-pkgver=47.alpha+900+8cafdbe
+pkgver=47.rc+949+4680290
 pkgrel=1
 
-url=https://gitlab.gnome.org/GNOME/console
-
-depends=(
-	vte4
-	libgtop 
-	libadwaita
-)
-
-makedepends=(appstream-glib)
-
 b2sums=(SKIP)
-source=($pkgname::git+https://gitlab.gnome.org/GNOME/console.git#branch=main)
+groups=(plain)
+source=($pkgname::git+https://gitlab.gnome.org/GNOME/console.git)
 
 pkgver() {
 	cd $pkgname

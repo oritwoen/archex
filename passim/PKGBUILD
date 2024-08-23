@@ -1,37 +1,14 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-
 pkgname=passim
-pkgdesc="A local caching server. Named after the Latin word for “here, there and everywhere”."
-license=(LGPL)
 
 arch=(x86_64)
-pkgver=0.1.9+144+1d0ee03
+pkgver=0.1.9+162+ea66af7
 pkgrel=1
 
-url="https://github.com/hughsie/passim" 
-
-depends=(
-  avahi
-  glib2 libgio-2.0.so
-  gnutls
-  hicolor-icon-theme
-  libsoup3 libsoup-3.0.so
-)
-
-makedepends=(
-  cmake
-  gobject-introspection
-  meson
-  systemd
-)
-
 b2sums=(SKIP)
-source=(git+https://github.com/hughsie/passim.git#branch=main)
+groups=(plain)
+source=(git+https://github.com/hughsie/passim.git)
 
-provides=(libpassim.so)
-backup=(
-  etc/passim.conf
-)
+#provides=(libpassim.so)
 
 pkgver() {
     cd $pkgname

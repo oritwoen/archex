@@ -1,61 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Maxime Gauduin <alucryd@archlinux.org>
-# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
-# Contributor: sebikul <sebikul@gmail.com>
-# Contributor: Massimiliano Torromeo <massimiliano.torromeo@gmail.com>
-
 pkgname=geary
-pkgdesc='A lightweight email client for the GNOME desktop'
-license=(GPL3)
 
 arch=(x86_64)
-pkgver=44.0+7109+920343e57
+pkgver=46.0+7146+3bc6452f6
 pkgrel=1
 
-url=https://wiki.gnome.org/Apps/Geary
-
-depends=(
-	icu
-	gcr
-	gtk3
-	dconf
-	cairo
-	folks
-	glib2
-	pango
-	glibc
-	sqlite
-	libgee
-	gsound
-	gmime3
-	gspell
-	libpeas
-	enchant
-	libxml2
-	libytnef
-	libsoup3
-	libhandy
-	libsecret
-	iso-codes
-	json-glib
-	libstemmer
-	gdk-pixbuf2
-	at-spi2-core
-	webkit2gtk-4.1
-	hicolor-icon-theme
-	gnome-online-accounts
-	org.freedesktop.secrets
-)
-
-makedepends=(
-	vala
-	appstream-glib
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-groups=(gnome-extra)
-source=(git+https://gitlab.gnome.org/GNOME/geary.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/geary.git)
 
 pkgver() {
 	cd $pkgname
@@ -68,9 +19,6 @@ pkgver() {
 }
 
 build() {
-	CFLAGS+=" -Wno-error=int-conversion"
-	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
-
 	local options=(
 		-D profile=release
 		-D valadoc=disabled

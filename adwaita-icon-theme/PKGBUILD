@@ -1,29 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Lukas Fleischer <lfleischer@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=adwaita-icon-theme
-pkgdesc="GNOME standard icons"
-license=(LGPL3 CCPL:by-sa)
 
 arch=(any)
-pkgver=46.2+3967+6dfc180cc
+pkgver=47.beta+3973+3dedf8207
 pkgrel=1
 
-url=https://gitlab.gnome.org/GNOME/adwaita-icon-theme
-
-depends=(
-	librsvg 
-	hicolor-icon-theme 
-	gtk-update-icon-cache
-)
-
-makedepends=(gtk3)
-
 b2sums=(SKIP)
-commit=709725baa9e17e8d0ca62eab7920162bfeda37b9  # tags/45.0^0
-source=(git+https://gitlab.gnome.org/GNOME/adwaita-icon-theme.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/adwaita-icon-theme.git)
 
 provides=(adwaita-cursors)
 replaces=(adwaita-cursors)

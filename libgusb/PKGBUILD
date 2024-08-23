@@ -1,33 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Maxime Gauduin <alucryd@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=libgusb
-pkgdesc='GObject wrapper for libusb1'
 
 arch=(x86_64)
-pkgver=0.4.9+476+8bef41c
-pkgrel=2
-
-url=https://github.com/hughsie/libgusb
-
-license=(LGPL2.1)
-
-depends=(
-	glib2
-	libusb
-	json-glib
-)
-
-makedepends=(
-	vala
-	umockdev
-	python-setuptools
-	gobject-introspection
-)
+pkgver=0.4.9+479+048bd6b
+pkgrel=1
 
 b2sums=(SKIP)
-source=(git+https://github.com/hughsie/libgusb.git#branch=main)
+groups=(plain)
+source=(git+https://github.com/hughsie/libgusb.git)
 
 pkgver() {
 	cd $pkgname

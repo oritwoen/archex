@@ -1,43 +1,18 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Marie Piontek <marie@kaifa.ch>
-# Contributor: Maxim Korotkov <maximkorotkov4@gmail.com>
-
 pkgname=an-anime-game-launcher
-pkgdesc="A Launcher for a specific anime game with auto-patching, discord rpc and time tracking"
-license=(GPL3)
 
 arch=(x86_64)
 pkgver=3.11.0+956+85ba5b0
 pkgrel=1
 
-url="https://github.com/an-anime-team/an-anime-game-launcher"
-
-depends=(
-	tar
-	gtk4
-	curl
-	unzip
-	glibc
-	xdelta3
-	iputils
-	gamemode
-	gamescope
-	libadwaita
-	cabextract
-)
-
-makedepends=(
-	rust
-)
-
+groups=(plain)
 b2sums=(
 	SKIP
 	SKIP
 )
 
 source=(
-	"$pkgname.desktop"
-	git+https://github.com/an-anime-team/an-anime-game-launcher.git#branch=main
+	$pkgname.desktop
+	git+https://github.com/an-anime-team/an-anime-game-launcher.git
 )
 
 options=(!lto)

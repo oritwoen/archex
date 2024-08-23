@@ -1,60 +1,20 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-# Contributor: Flamelab <panosfilip@gmail.com>
-
 pkgname=gnome-shell
-pkgdesc="Next generation desktop shell"
-license=(GPL)
 
 arch=(x86_64)
-pkgver=46.beta+18629+bd992f7dc
+pkgver=47.beta+19080+36e42badd
 pkgrel=1
-
-url=https://wiki.gnome.org/Projects/GnomeShell
-
-depends=(
-	gcr
-	gjs
-	gtk4
-	unzip
-	mutter
-	upower
-	accountsservice
-	gsettings-desktop-schemas
-
-	libgdm
-	libibus
-	libsoup3
-	libsecret
-	libadwaita
-	libnma-gtk4
-	libgweather-4
-	libcanberra-pulse
-	
-	gnome-autoar
-	gnome-session
-	gnome-settings-daemon
-)
-
-makedepends=(
-	sassc
-	bash-completion
-	gnome-control-center
-	evolution-data-server
-	gobject-introspection
-)
 
 b2sums=(
 	SKIP
 	SKIP
 )
 
-groups=(gnome)
 source=(
 	git+https://gitlab.gnome.org/GNOME/gnome-shell.git#branch=main
 	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git#branch=master
 )
+
+groups=(plain)
 
 pkgver() {
 	cd $pkgname
@@ -67,11 +27,9 @@ pkgver() {
 }
 
 prepare() {
-	cd $pkgname
+	ln -s libgnome-volume-control gvc
 
-	git submodule init
-	git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
-	git -c protocol.file.allow=always submodule update
+	cd $pkgbase
 }
 
 build() {
@@ -80,6 +38,8 @@ build() {
 		-D tests=false
 	)
 
+	export MESON_PACKAGE_CACHE_DIR="$srcdir"
+	
 	arch-meson $pkgname build "${options[@]}"
 
 	meson compile -C build

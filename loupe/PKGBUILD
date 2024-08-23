@@ -1,38 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Fabian Bornschein <fabiscafe@archlinux.org>
-
 pkgname=loupe
-pkgdesc="A simple image viewer for GNOME"
-license=(GPL)
 
 arch=(x86_64)
-pkgver=47.alpha+943+e458872
+pkgver=47.beta.1+1050+6a63d9e
 pkgrel=1
 
-url="https://gitlab.gnome.org/GNOME/loupe"
-
-depends=(
-  cairo
-  glib2
-  glycin
-  graphene
-  gtk4
-  hicolor-icon-theme
-  lcms2
-  libadwaita
-  libgweather-4
-)
-
-makedepends=(
-  git
-  itstool
-  meson
-  rust
-)
-
 b2sums=(SKIP)
-groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/loupe.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/loupe.git)
 
 pkgver() {
     cd $pkgname
@@ -46,8 +20,6 @@ pkgver() {
 
 build() {
 	local meson_options=(
-		-D profile=release
-    -D disable-glycin-sandbox=false
 	)
 	
 	arch-meson $pkgname build "${meson_options[@]}"

@@ -1,44 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=gnome-contacts
-pkgdesc="Contacts Manager for GNOME"
-license=(GPL2)
 
 arch=(x86_64)
-pkgver=46.0+4040+4ec2661b
+pkgver=47.alpha+4070+44852a35
 pkgrel=1
 
-url=https://apps.gnome.org/Contacts
-
-depends=(
-	gtk4
-	glib2
-	pango
-	cairo
-	dconf
-	folks
-	libgee
-	qrencode
-	libportal
-	gdk-pixbuf2
-	libportal-gtk4
-	hicolor-icon-theme
-	evolution-data-server
-
-	gnome-online-accounts
-)
-
-makedepends=(
-	vala
-	appstream-glib
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-contacts.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-contacts.git)
 
 pkgver() {
 	cd $pkgname
@@ -51,8 +19,8 @@ pkgver() {
 }
 
 build() {
-	CFLAGS+=" -Wno-error=return-type"
-	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
+	#CFLAGS+=" -Wno-error=return-type"
+	#CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
 
 	local options=(
 		-D manpage=false

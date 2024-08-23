@@ -1,23 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Balló György <ballogyor+arch at gmail dot com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=gsound
-pkgdesc='Small library for playing system sounds'
-license=(LGPL-2.1-or-later)
 
 arch=(x86_64)
 pkgver=1.0.3+93+5f6a56f
 pkgrel=1
 
-url=https://wiki.gnome.org/Projects/GSound
-
-depends=('glib2' 'glibc' 'libcanberra')
-makedepends=('gobject-introspection' 'meson' 'vala')
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gsound.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/gsound.git)
 
 pkgver() {
 	cd $pkgname

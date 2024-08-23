@@ -1,40 +1,17 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=accountsservice
-pkgdesc="D-Bus interface for user account query and manipulation"
-license=(GPL-3.0-or-later)
 
 arch=(x86_64)
-pkgver=24.17.41+770+001fb13
-pkgrel=1
+pkgver=24.27.62+791+4d57fd3
+pkgrel=2
 
-url="https://gitlab.freedesktop.org/accountsservice/accountsservice"
-
-depends=(
-	glib2
-	glibc
-	polkit
-	shadow
-	systemd
-	gcc-libs
-	libxcrypt
-)
-
-makedepends=(
-	vala
-	python-packaging
-	gobject-introspection
-)
-
+groups=(plain)
 b2sums=(SKIP SKIP)
 source=(
 	accounts-daemon-restart.hook
-	git+https://gitlab.freedesktop.org/accountsservice/accountsservice.git#branch=main
+	git+https://gitlab.freedesktop.org/accountsservice/accountsservice.git
 )
 
-provides=(libaccountsservice.so)
+#provides=(libaccountsservice.so)
 
 pkgver() {
 	cd $pkgname

@@ -1,43 +1,16 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=colord
-pkgdesc="System daemon for managing color devices"
-license=(GPL2)
 
 arch=(x86_64)
-pkgver=1.4.8+1903+f4fdb66
+pkgver=1.4.8+1904+4a5a8ac
 pkgrel=1
 
-url="https://www.freedesktop.org/software/colord"
-
-depends=(
-	lcms2 
-	libgusb 
-	polkit 
-	sqlite 
-	dconf 
-	dbus 
-	libgudev 
-	shared-mime-info 
-	systemd
-)
-
-makedepends=(
-	gobject-introspection 
-	vala 
-	sane 
-	bash-completion
-	argyllcms
-)
-
 b2sums=(SKIP)
-source=(git+https://github.com/hughsie/colord.git#branch=main)
+groups=(plain)
+source=(git+https://github.com/hughsie/colord.git)
 
-provides=(libcolorhug.so libcolord.so libcolord colord-sane)
-replaces=(shared-color-profiles colord-sane libcolord)
-conflicts=(shared-color-profiles colord-sane libcolord)
+provides=(colord-sane libcolord)
+replaces=(colord-sane libcolord)
+conflicts=(colord-sane libcolord)
 
 pkgver() {
 	cd $pkgname

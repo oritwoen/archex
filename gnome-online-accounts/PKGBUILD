@@ -1,34 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=gnome-online-accounts
-pkgdesc="Single sign-on framework for GNOME"
-license=(LGPL)
 
 arch=(x86_64)
-pkgver=3.49.2+2955+6d1c7368
+pkgver=3.51.2+3343+e6bc205f
 pkgrel=1
 
-url=https://wiki.gnome.org/Projects/GnomeOnlineAccounts
-
-depends=(
-	gcr
-	krb5
-	librest
-	libsecret
-	json-glib
-	libnotify
-	webkit2gtk-4.1
-)
-
-makedepends=(
-	vala
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-online-accounts.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-online-accounts.git)
 
 provides=(
 	libgoa
@@ -50,6 +28,11 @@ pkgver() {
 }
 
 build() {
+	local options=(
+		-D documentation=false
+		-D man=false
+	)
+
 	arch-meson $pkgname build "${options[@]}"
 	
 	meson compile -C build

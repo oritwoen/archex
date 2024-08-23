@@ -1,35 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Balló György <ballogyor+arch at gmail dot com>
-
 pkgname=deja-dup
-pkgdesc='A trivial-to-use personal backup tool to protect against accidental data loss'
-license=(GPL)
 
 arch=(x86_64)
-pkgver=46.0+3255+80f1b6e4
+pkgver=47.alpha+3496+71fd6ae5
 pkgrel=1
 
-url=https://wiki.gnome.org/Apps/DejaDup
-
-depends=(
-	gvfs
-	rclone
-	libsecret
-	duplicity
-	libadwaita
-	python-gobject
-	python-pydrive2
-	org.freedesktop.secrets
-)
-
-makedepends=(
-	vala
-	itstool
-	appstream-glib
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/World/deja-dup.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/World/deja-dup.git)
 
 pkgver() {
 	cd $pkgname
@@ -42,8 +19,6 @@ pkgver() {
 }
 
 build() {
-	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
-
 	local options=(
 		-D enable_restic=true
 		-D enable_borg=true

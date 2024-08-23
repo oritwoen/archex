@@ -1,24 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=gnome-backgrounds
-pkgdesc="Background images and data for GNOME"
-license=(CCPL:by-sa)
 
 arch=(any)
-pkgver=46.beta+1463+ec91f79
+pkgver=47.beta+1499+5685d8f
 pkgrel=1
 
-url=https://gitlab.gnome.org/GNOME/gnome-backgrounds
-
-makedepends=(
-	glib2
-)
-
 b2sums=(SKIP)
-groups=(gnome)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-backgrounds.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/gnome-backgrounds.git)
 
 pkgver() {
 	cd $pkgname

@@ -1,34 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=baobab
-pkgdesc="A graphical directory tree analyzer"
-license=(GPL2)
 
 arch=(x86_64)
-pkgver=45.0+2235+9501371
+pkgver=47.beta+2311+5ab48df
 pkgrel=1
 
-url=https://wiki.gnome.org/Apps/DiskUsageAnalyzer
-
-depends=(
-	gtk4
-	dconf
-	librsvg
-	libadwaita
-	gsettings-desktop-schemas
-)
-
-makedepends=(
-	vala
-	yelp-tools
-	appstream-glib
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/baobab.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/baobab.git)
 
 pkgver() {
 	cd $pkgname

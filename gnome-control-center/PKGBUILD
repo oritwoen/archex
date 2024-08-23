@@ -1,94 +1,23 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Fabian Bornschein <fabiscafe-cat-mailbox-dog-org>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=gnome-control-center
-pkgdesc="GNOME's main interface to configure various aspects of the desktop"
-license=(GPL2)
 
 arch=(x86_64)
-pkgver=47.alpha+24144+b82621a36
+pkgver=47.rc+24407+ab7a750c6
 pkgrel=1
-
-url=https://gitlab.gnome.org/GNOME/gnome-control-center
-
-depends=(
-	gcr
-	gtk3
-	gtk4
-	bolt
-	krb5
-	glib2
-	dconf
-	cairo
-	fwupd
-	pango
-	tecla
-	upower
-	gnutls
-	gsound
-	polkit
-	udisks2
-	smbclient
-
-	libnm
- 	libmm-glib
-	libnma-gtk4
-
-	libxi
-	libx11
-	libxml2
-	libgtop
-	libcups
-	libibus
-	libepoxy
-	libgudev
-	libwacom
-	libpulse
-	libsecret
-	libcolord
-	libadwaita
-	libpwquality
-	libmalcontent
-
-	openssh
-	fontconfig
-	colord-gtk4
-	gdk-pixbuf2
-	cups-pk-helper
-	networkmanager
-	accountsservice
-	hicolor-icon-theme
-	system-config-printer
-	sound-theme-freedesktop
-	
-	gnome-shell
-	gnome-desktop-4
-	gnome-color-manager
-	gnome-bluetooth-3.0
-	gnome-online-accounts
-	gnome-settings-daemon
-
-	power-profiles-daemon
-	gsettings-desktop-schemas
-)
-
-makedepends=(
-	python 
-	modemmanager
-)
 
 b2sums=(
 	SKIP 
 	SKIP
 )
 
-groups=(gnome)
 source=(
 	git+https://gitlab.gnome.org/GNOME/gnome-control-center.git#branch=main
 	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git#branch=master
 )
+
+groups=(plain)
+provides=(gnome-keybindings)
+replaces=(gnome-keybindings)
+conflicts=(gnome-keybindings)
 
 #options=(!lto)
 
@@ -107,13 +36,12 @@ prepare() {
 
 	git submodule init subprojects/gvc
 	git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
-	git -c protocol.file.allow=always submodule update
+	git -c protocol.file.allow=always -c protocol.allow=never submodule update
 }
 
 build() {
 	local options=(
 		-D tests=false
-		-D malcontent=true
 	)
 
 	arch-meson $pkgname build "${options[@]}"

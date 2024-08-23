@@ -1,33 +1,11 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=pango
-pkgdesc="A library for layout and rendering of text"
-license=(LGPL)
 
 arch=(x86_64)
-pkgver=1.53.0+6401+831f8d06
+pkgver=1.54.0+6423+01547b26
 pkgrel=1
 
-url="https://www.pango.org/"
-
-depends=(
-  cairo
-  fribidi
-  harfbuzz
-  libthai
-  libxft
-)
-
-makedepends=(
-  git
-  gobject-introspection
-  meson
-)
-
 b2sums=('SKIP')
-source=(git+https://gitlab.gnome.org/GNOME/pango.git#branch=main)
+source=(git+https://gitlab.gnome.org/gnome/pango.git)
 
 provides=(libpango{,cairo,ft2,xft}-1.0.so libpango-1.0.so=0-64)
 
@@ -43,15 +21,8 @@ pkgver() {
 
 build() {
 	local meson_options=(
-		-D gtk_doc=false
-		-D introspection=enabled
-    -D install-tests=false
-    -D fontconfig=enabled
-    -D sysprof=disabled
-    -D libthai=enabled
-    -D cairo=enabled
-    -D xft=enabled
-    -D freetype=enabled
+		-D build-testsuite=false
+        -D build-examples=false
 	)
 
 	arch-meson $pkgname build "${meson_options[@]}"

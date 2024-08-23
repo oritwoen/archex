@@ -1,56 +1,14 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-# Contributor: Michael Kanis <mkanis_at_gmx_dot_de>
-
 pkgname=mutter
-pkgdesc="Window manager and compositor for GNOME"
-license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=46.rc+31680+ab8e145e2
-
-url=https://gitlab.gnome.org/GNOME/mutter
-
-depends=(
-	dconf
-	lcms2
-	colord
-	graphene
-	pipewire
-	xorg-xwayland
-	iio-sensor-proxy
-	startup-notification
-	gsettings-desktop-schemas
-
-	libei
-	libsm
-	libgudev
-	libinput
-	libxkbfile
-	libcanberra
-	libdisplay-info
-	libxkbcommon-x11
-
-	gnome-desktop
-	gnome-settings-daemon
-)
-
-makedepends=(
-	gtk3
-	egl-wayland
-	xorg-server
-	xorg-server-xvfb
-	wayland-protocols
-	gobject-introspection
-)
-
+pkgver=47.beta+32470+dc637e95a
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/mutter.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/mutter.git)
 
-provides=(libmutter-13.so=0-64)
+#provides=(libmutter-15.so=0-64)
 
 pkgver() {
 	cd $pkgname
@@ -64,11 +22,11 @@ pkgver() {
 
 build() {
 	local options=(
+		-D x11=false
 		-D cogl_tests=false
 		-D clutter_tests=false
-		-D core_tests=false
-		-D native_tests=false
-		-D tests=false
+		-D mutter_tests=false
+		-D tests=disabled
 		-D profiler=false
 		-D installed_tests=false
 	)
@@ -77,7 +35,6 @@ build() {
 
 	meson compile -C build
 }
-
 
 package() {
 	meson install -C build --destdir "$pkgdir"

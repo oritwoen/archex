@@ -1,74 +1,32 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
-# Contributor: Jan de Groot <jgc@archlinux.org>
-
 pkgname=nautilus
-pkgdesc="Default file manager for GNOME"
-license=(GPL)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=47.alpha+25179+d98967693
-
-url="https://wiki.gnome.org/Apps/Files"
-
-depends=(
-  cairo
-  dconf
-  gdk-pixbuf2
-  glib2
-  gnome-autoar
-  gnome-desktop-4
-  gstreamer
-  gst-plugins-base-libs
-  gtk4
-  gvfs
-  hicolor-icon-theme
-  libadwaita
-  libcloudproviders
-  libgexiv2
-  libportal
-  libportal-gtk4
-  pango
-  tracker3
-)
-
-makedepends=(
-  appstream-glib
-  gi-docgen
-  git
-  gobject-introspection
-  meson
-  tracker3-miners
-)
+pkgver=47.rc+25412+13e252ae1
 
 b2sums=(SKIP)
-groups=(gnome-apps)
-source=(git+https://gitlab.gnome.org/GNOME/nautilus.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/nautilus.git)
 
 provides=(libnautilus-extension)
 replaces=(libnautilus-extension)
 conflicts=(libnautilus-extension)
 
 pkgver() {
-    cd $pkgname
-    
-        local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
 
-    echo ${_version}+${_commits}+${_commith}
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
+	CFLAGS+=" -Wno-error=sometimes-uninitialized"
+
 	local meson_options=(
-		-D docs=false
-    -D extensions=true
-    -D introspection=true
-    -D packagekit=true
-    -D selinux=false
-    -D cloudproviders=true
-    -D tests=none
+		-D tests=none
 	)
 	
 	arch-meson $pkgname build "${meson_options[@]}"
@@ -77,5 +35,5 @@ build() {
 }
 
 package () {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }

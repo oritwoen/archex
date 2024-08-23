@@ -1,35 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Jan de Groot <jan@archlinux.org>
-
 pkgname=gnome-desktop
-pkgdesc="Library with common API for various GNOME modules"
-license=(
-	GPL 
-	LGPL
-)
 
 arch=(x86_64)
 pkgrel=1
-pkgver=44.0+6638+8fb7ee85
-
-url=https://gitlab.gnome.org/GNOME/gnome-desktop
-
-makedepends=(
-	gtk3
-	gtk4
-	systemd
-	iso-codes
-	libseccomp
-	bubblewrap
-	libxkbcommon
-	xkeyboard-config
-	gobject-introspection
-	gsettings-desktop-schemas
-)
+pkgver=44.1+6649+954eb835
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-desktop.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/GNOME/gnome-desktop.git)
 
 provides=(
 	gnome-desktop-4

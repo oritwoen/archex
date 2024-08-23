@@ -1,36 +1,11 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=gjs
-pkgdesc="Javascript Bindings for GNOME"
-license=(LGPL-2.0-or-later)
 
 arch=(x86_64)
-pkgver=1.79.3+5435+9a21de70
+pkgver=1.81.90+5609+b3e8a599
 pkgrel=1
 
-url=https://wiki.gnome.org/Projects/Gjs
-
-depends=(
-	cairo
-	dconf
-	glib2
-	js115
-	libx11
-	libffi
-	readline
-	libgirepository
-	gobject-introspection-runtime
-)
-
-makedepends=(
-	dbus
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gjs.git#branch=master)
+source=(git+https://gitlab.gnome.org/gnome/gjs.git)
 provides=(libgjs.so)
 
 pkgver() {
@@ -47,10 +22,8 @@ build() {
 	local options=(
 		-D profiler=disabled
 		-D installed_tests=false
-		-D bsymbolic_functions=true
 		-D skip_dbus_tests=true
 		-D skip_gtk_tests=true
-		-D verbose_logs=false
 	)
 
 	arch-meson $pkgname build "${options[@]}"

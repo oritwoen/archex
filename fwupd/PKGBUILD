@@ -1,72 +1,20 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Bruno Pagani <archange@archlinux.org>
-# Contributor: Filipe Laíns (FFY00) <lains@archlinux.org>
-# Contributor: Frederik Schwan <freswa at archlinux dot org>
-# Contributor: Mirco Tischler <mt-ml at gmx dot de>
-
 pkgname=fwupd
-pkgdesc="Simple daemon to allow session software to update firmware"
-license=(LGPL-2.1-or-later)
 
 arch=(x86_64)
-pkgver=2.0.0+10492+74aa49431
+pkgver=2.0.0+10895+4ead6cd9f
 pkgrel=1
-
-url=https://github.com/fwupd/fwupd
-
-depends=(
-	gcab
-	curl
-	bluez
-	libqmi
-	passim
-	efivar
-	polkit
-	python
-	gnutls
-	libcbor
-	libxmlb
-	libgusb
-	libjcat
-	libgudev
-	tpm2-tss
-	flashrom
-	libsmbios
-	fwupd-efi
-	json-glib
-	libmm-glib
-	libarchive
-	protobuf-c
-	shared-mime-info
-	hicolor-icon-theme
-)
-
-makedepends=(
-	vala
-	pandoc
-	valgrind
-	gi-docgen
-	noto-fonts
-	gnu-efi-libs
-	python-cairo
-	python-pillow
-	python-gobject
-	noto-fonts-cjk
-	bash-completion
-	gobject-introspection
-)
 
 b2sums=(
 	SKIP 
 	SKIP
 )
-
+groups=(plain)
 source=(
 	fwupd.sysusers
-	git+https://github.com/fwupd/fwupd.git#branch=main 
+	git+https://github.com/fwupd/fwupd.git
 )
 
-provides=(libfwupd.so)
+#provides=(libfwupd.so)
 
 pkgver() {
 	cd $pkgname
@@ -81,9 +29,10 @@ pkgver() {
 build() {
 	local meson_options=(
 		-D docs=disabled
+		-D man=false
 		-D launchd=disabled
-		-D elogind=disabled
 		-D tests=false
+		-D umockdev_tests=disabled
 		-D systemd_unit_user=fwupd
 	)
 	

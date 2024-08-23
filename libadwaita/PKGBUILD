@@ -1,34 +1,12 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Fabian Bornschein <fabiscafe@archlinux.org>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-
 pkgname=libadwaita
-pkgdesc="Building blocks for modern adaptive GNOME applications"
-license=(LGPL-2.1-or-later)
 
 arch=(x86_64)
-pkgver=1.6.alpha+4218+6063a352
+pkgver=1.6.rc+4387+5f25bf1f
 pkgrel=1
 
-url=https://gnome.pages.gitlab.gnome.org/libadwaita
-
-depends=(
-	gtk4
-	pango
-	glib2
-	fribidi
-	graphene
-	appstream
-)
-
-makedepends=(
-	vala
-	sassc
-	gobject-introspection
-)
-
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/libadwaita.git#branch=main)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/libadwaita.git)
 
 pkgver() {
 	cd $pkgname

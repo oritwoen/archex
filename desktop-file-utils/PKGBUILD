@@ -1,28 +1,17 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Andreas Radke <andyrtr@archlinux.org>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Alexander Fehr <pizzapunk gmail com>
-
 pkgname=desktop-file-utils
-pkgdesc="Command line utilities for working with desktop entries"
-license=(GPL)
 
 arch=(x86_64)
-pkgver=0.27+370+2470d73
-pkgrel=13
-
-url="https://www.freedesktop.org/wiki/Software/desktop-file-utils"
-
-depends=(glib2)
+pkgver=0.27+372+67d09f0
+pkgrel=1
 
 b2sums=(
 	SKIP 
 	SKIP
 )
-
+groups=(plain)
 source=(
 	update-desktop-database.hook
-	git+https://gitlab.freedesktop.org/xdg/desktop-file-utils.git#branch=master
+	git+https://gitlab.freedesktop.org/xdg/desktop-file-utils.git
 )
 
 

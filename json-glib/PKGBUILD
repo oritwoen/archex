@@ -1,27 +1,13 @@
-# Maintainer: Dominik Opyd (oritwoen) <dominik.opyd@gmail.com>
-# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
-# Contributor: Ionut Biru <ibiru@archlinux.org>
-
 pkgname=json-glib
-pkgver=1.9.1+1405+4db3373
-pkgrel=1
-pkgdesc="JSON library built on GLib"
-url="https://wiki.gnome.org/Projects/JsonGlib"
+
 arch=(x86_64)
-license=(GPL)
-
-depends=(
-	glib2
-)
-
-makedepends=(
-	gobject-introspection
-)
+pkgver=1.9.3+1474+0027968
+pkgrel=1
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/json-glib.git#branch=master)
+groups=(plain)
+source=(git+https://gitlab.gnome.org/gnome/json-glib.git)
 
-depends=(libg{lib,object,io}-2.0.so)
 provides=(libjson-glib-1.0.so)
 
 pkgver() {
@@ -36,8 +22,12 @@ pkgver() {
 
 build() {
 	local options=(
+		-D documentation=disabled
 		-D gtk_doc=disabled
+		-D man=false
 		-D tests=false
+		-D conformance=false
+		-D installed_tests=false
 	)
 
 	arch-meson $pkgname build "${options[@]}"
