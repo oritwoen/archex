@@ -1,7 +1,7 @@
 pkgname=gnome-maps
 
 arch=(x86_64)
-pkgver=47.rc+4151+dab52d0d
+pkgver=47.rc+4152+1f95bb6c
 pkgrel=1
 
 b2sums=(SKIP)
