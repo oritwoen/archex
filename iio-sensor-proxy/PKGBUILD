@@ -2,7 +2,7 @@ pkgname=iio-sensor-proxy
 
 arch=(x86_64)
 pkgver=3.5+502+fe56bdb
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 groups=(plain)
