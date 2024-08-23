@@ -1,8 +1,8 @@
 pkgname=epiphany
 
 arch=(x86_64)
-pkgrel=1
-pkgver=47.beta+18258+a8fb2d3a4
+pkgrel=2
+pkgver=47.beta+18263+3866eba4a
 
 b2sums=(SKIP)
 groups=(plain)
@@ -19,6 +19,8 @@ pkgver() {
 }
 
 build() {
+	CFLAGS+=" -Wno-error=declaration-after-statement"
+
 	local meson_options=(
 		-D tech_preview=true
 		-D unit_tests=disabled
