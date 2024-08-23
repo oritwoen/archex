@@ -2,7 +2,7 @@ pkgname=upower
 
 arch=(x86_64)
 pkgver=1.90.4+1730+d7005f6
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 groups=(plain)
