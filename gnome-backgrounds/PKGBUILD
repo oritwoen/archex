@@ -2,7 +2,7 @@ pkgname=gnome-backgrounds
 
 arch=(any)
 pkgver=47.beta+1499+5685d8f
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 groups=(plain)
