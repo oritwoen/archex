@@ -7,7 +7,7 @@ pkgdesc="A library-based package manager with dependency support"
 license=(GPL)
 
 arch=(x86_64)
-pkgver=6.0.1+7277+3c28c301
+pkgver=7.0.0+7418+6ba5c20e
 pkgrel=1
 
 url="https://www.archlinux.org/pacman"
