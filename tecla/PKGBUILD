@@ -2,7 +2,7 @@ pkgname=tecla
 
 arch=(x86_64)
 pkgver=47.beta+155+57d3398
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 groups=(plain)
