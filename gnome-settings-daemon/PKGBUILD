@@ -2,7 +2,7 @@ pkgname=gnome-settings-daemon
 
 arch=(x86_64)
 pkgver=47.beta+6744+bb5a680b
-pkgrel=2
+pkgrel=3
 
 b2sums=(
 	SKIP
