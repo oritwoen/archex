@@ -1,8 +1,8 @@
 pkgname=libadwaita
 
 arch=(x86_64)
-pkgver=1.6.rc+4387+5f25bf1f
-pkgrel=1
+pkgver=1.6.rc+4388+90dae5aa
+pkgrel=2
 
 b2sums=(SKIP)
 groups=(plain)
