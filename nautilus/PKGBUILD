@@ -1,8 +1,8 @@
 pkgname=nautilus
 
 arch=(x86_64)
-pkgrel=2
-pkgver=47.rc+25413+a32aee478
+pkgrel=1
+pkgver=47.rc+25416+70763c312
 
 b2sums=(SKIP)
 groups=(plain)
