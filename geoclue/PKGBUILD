@@ -2,7 +2,7 @@ pkgname=geoclue
 
 arch=(x86_64)
 pkgver=2.7.1+1075+8e7ffea
-pkgrel=5
+pkgrel=6
 
 b2sums=(SKIP)
 groups=(plain)
