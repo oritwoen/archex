@@ -1,8 +1,8 @@
 pkgname=gnome-online-accounts
 
 arch=(x86_64)
-pkgver=3.51.2+3349+2421065e
-pkgrel=3
+pkgver=3.51.2+3354+cb64b393
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
