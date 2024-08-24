@@ -1,8 +1,8 @@
 pkgname=papers
 
 arch=(x86_64)
-pkgver=47.beta+10090+aaa2999c
-pkgrel=4
+pkgver=47.beta+10091+d98d4202
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/incubator/papers.git)
