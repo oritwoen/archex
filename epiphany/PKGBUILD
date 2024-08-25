@@ -2,7 +2,7 @@ pkgname=epiphany
 
 arch=(x86_64)
 pkgrel=1
-pkgver=47.beta+18266+b3d496400
+pkgver=47.beta+18267+2f11a569c
 
 b2sums=(SKIP)
 groups=(plain)
