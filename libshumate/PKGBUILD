@@ -1,8 +1,8 @@
 pkgname=libshumate
 
 arch=(x86_64)
-pkgver=1.3.rc+658+70ecf71
-pkgrel=5
+pkgver=1.3.rc+659+33a6588
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
