@@ -1,7 +1,7 @@
 pkgname=gtk
 
 arch=(x86_64)
-pkgver=4.15.6+81576+aeac103fbc
+pkgver=4.15.6+81598+83b387e782
 pkgrel=1
 
 groups=(plain)
