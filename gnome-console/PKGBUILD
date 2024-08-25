@@ -1,8 +1,8 @@
 pkgname=gnome-console
 
 arch=(x86_64)
-pkgver=47.rc+953+b1df883
-pkgrel=4
+pkgver=47.rc+959+efbc2d2
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
