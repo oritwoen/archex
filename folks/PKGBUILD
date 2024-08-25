@@ -2,7 +2,7 @@ pkgname=folks
 
 arch=(x86_64)
 pkgver=0.15.10+3045+ed9dd294
-pkgrel=6
+pkgrel=7
 
 b2sums=(SKIP)
 groups=(plain)
