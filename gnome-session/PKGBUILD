@@ -2,7 +2,7 @@ pkgname=gnome-session
 
 arch=(x86_64)
 pkgver=46.0+6761+ee0b5585
-pkgrel=5
+pkgrel=6
 
 b2sums=(SKIP)
 groups=(plain)
@@ -22,7 +22,7 @@ build() {
 	local options=(
 		-D docbook=false
         -D man=false
-        #-D x11=false
+        -D x11=false
 	)
 
 	arch-meson $pkgname build "${options[@]}"
