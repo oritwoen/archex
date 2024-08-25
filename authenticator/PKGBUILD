@@ -2,7 +2,7 @@ pkgname=authenticator
 
 arch=(x86_64)
 pkgver=4.5.0+1847+acd7ac7
-pkgrel=9
+pkgrel=10
 
 b2sums=(SKIP)
 groups=(plain)
