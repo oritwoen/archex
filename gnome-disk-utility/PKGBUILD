@@ -1,7 +1,7 @@
 pkgname=gnome-disk-utility
 
 arch=(x86_64)
-pkgver=47.alpha+4162+13d6fc99
+pkgver=47.alpha+4163+a66e70d7
 pkgrel=1
 
 b2sums=(SKIP)
