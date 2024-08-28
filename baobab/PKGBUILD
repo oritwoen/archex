@@ -1,7 +1,7 @@
 pkgname=baobab
 
 arch=(x86_64)
-pkgver=47.beta+2321+aac0e2b
+pkgver=47.beta+2324+71c9d99
 pkgrel=1
 
 b2sums=(SKIP)
