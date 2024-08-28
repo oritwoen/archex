@@ -1,8 +1,8 @@
 pkgname=libxmlb
 
 arch=(x86_64)
-pkgver=0.3.20+590+eff5f49
-pkgrel=6
+pkgver=0.3.20+591+825a16e
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
