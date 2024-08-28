@@ -1,8 +1,8 @@
 pkgname=libgusb
 
 arch=(x86_64)
-pkgver=0.4.9+479+048bd6b
-pkgrel=6
+pkgver=0.4.9+480+371e851
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
