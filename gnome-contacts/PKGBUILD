@@ -2,7 +2,7 @@ pkgname=gnome-contacts
 
 arch=(x86_64)
 pkgver=47.alpha+4070+44852a35
-pkgrel=6
+pkgrel=7
 
 b2sums=(SKIP)
 groups=(plain)
