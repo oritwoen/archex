@@ -1,8 +1,8 @@
 pkgname=showtime
 
 arch=(x86_64)
-pkgver=47.alpha+178+ea95f3a
-pkgrel=5
+pkgver=47.alpha+191+5b696ee
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
