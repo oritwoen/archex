@@ -1,7 +1,7 @@
 pkgname=libadwaita
 
 arch=(x86_64)
-pkgver=1.6.rc+4409+626c21f8
+pkgver=1.6.0+4417+3e0a8c20
 pkgrel=1
 
 b2sums=(SKIP)
