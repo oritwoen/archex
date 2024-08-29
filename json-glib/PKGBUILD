@@ -2,7 +2,7 @@ pkgname=json-glib
 
 arch=(x86_64)
 pkgver=1.9.3+1474+0027968
-pkgrel=7
+pkgrel=8
 
 b2sums=(SKIP)
 groups=(plain)
