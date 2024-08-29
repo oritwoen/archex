@@ -2,7 +2,7 @@ pkgname=graphene
 
 arch=(x86_64)
 pkgver=1.11.1+1296+d63bd69
-pkgrel=7
+pkgrel=8
 
 b2sums=(SKIP)
 groups=(plain)
