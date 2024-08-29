@@ -2,7 +2,7 @@ pkgname=glycin
 
 arch=(x86_64)
 pkgver=1.1.beta+340+e45df65
-pkgrel=8
+pkgrel=9
 
 b2sums=(SKIP)
 groups=(plain)
