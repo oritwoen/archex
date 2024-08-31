@@ -1,4 +1,5 @@
 import { execa } from 'execa';
+import { $ } from 'execa';
 import { stat, readdir, readFile, writeFile, access } from 'node:fs/promises';
 
 const getPKGLine = async (keyword) => {
@@ -41,7 +42,7 @@ for (const entry of dirs) {
 
 		await writeFile("PKGBUILD", updt);
 
-		const { stdout } = await execa('paru', ['-U', '--localrepo', '--skipreview', '--noconfirm', '--sudoloop'], { all: true }).pipeAll(process.stdout);
+		await execa({verbose: 'full'})`paru -U --localrepo --skipreview --noconfirm --sudoloop`;
 
 		const nextVersion = await getPKGLine('pkgver');
 		const nextRelease = await getPKGLine('pkgrel');
@@ -51,7 +52,7 @@ for (const entry of dirs) {
 
 		const commit = `chore(pkg): update \`${pkgName}\` from \`${prevBuild}\` to \`${nextBuild}\``
 
-		await execa('git', ['commit', '-m', commit, '--', 'PKGBUILD']);
+		await $`git commit -m ${commit} -- PKGBUILD`
 	} catch (error) {
 		console.log(error);
 	}

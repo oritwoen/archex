@@ -4,3 +4,4 @@ firefox
 prepare
 base/devel/archex-commit-hook
 node_modules
+**/.SRCINFO

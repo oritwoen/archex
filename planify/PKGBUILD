@@ -1,7 +1,7 @@
 pkgname=planify
 
 arch=(x86_64)
-pkgver=4.10.8+1809+291633ad
+pkgver=4.11.0+1853+59a426de
 pkgrel=1
 
 b2sums=(SKIP)
