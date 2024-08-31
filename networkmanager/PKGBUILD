@@ -1,0 +1,61 @@
+pkgname=networkmanager
+
+arch=(x86_64)
+pkgver=1.51.0+33470+851c411df0
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://gitlab.freedesktop.org/networkmanager/networkmanager.git)
+
+provides=(libnm)
+replaces=(libnm)
+conflicts=(libnm)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version: meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local options=(
+		# platform
+		-D dist_version="$pkgver-$pkgrel"
+		-D session_tracking_consolekit=false
+		-D suspend_resume=systemd
+		-D modify_system=true
+		-D selinux=false
+
+		# features
+		-D iwd=true
+		-D teamdctl=true
+
+		# configuration plugins
+		-D config_plugins_default=keyfile
+		-D ifupdown=false
+
+		# handlers for resolv.conf
+		-D netconfig=no
+		-D config_dns_rc_manager_default=symlink
+
+		# miscellaneous
+		-D vapi=true
+		-D tests=no
+		-D more_asserts=no
+		-D more_logging=false
+		-D valgrind=no
+		-D qt=false
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
