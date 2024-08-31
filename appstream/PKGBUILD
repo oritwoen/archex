@@ -1,0 +1,38 @@
+pkgname=appstream
+
+arch=(x86_64)
+pkgver=1.0.4+4500+6cf3949d
+pkgrel=1
+
+b2sums=(SKIP)
+groups=(plain)
+source=(git+https://github.com/ximion/appstream.git)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2 {print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local options=(
+		-D vapi=true
+        -D qt=true
+		-D qt-versions=5,6
+        -D compose=true
+        -D apidocs=false
+        -D install-docs=false
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
