@@ -2,7 +2,7 @@ pkgname=adwaita-icon-theme
 
 arch=(any)
 pkgver=47.beta+3973+3dedf8207
-pkgrel=16
+pkgrel=17
 
 b2sums=(SKIP)
 groups=(plain)
