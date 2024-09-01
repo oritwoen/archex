@@ -2,7 +2,7 @@ pkgname=wayland
 
 arch=(x86_64)
 pkgver=1.23.90+2604+6c4a695
-pkgrel=7
+pkgrel=8
 
 b2sums=(SKIP)
 groups=(plain)
