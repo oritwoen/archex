@@ -1,0 +1,34 @@
+pkgname=lz4
+
+arch=(x86_64)
+pkgver=1.10.0+3535+e0781fbe
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://github.com/lz4/lz4.git)
+
+pkgver() {
+	cd $pkgname/build/meson
+
+	local _version=$(python GetLz4LibraryVersion.py ../../lib/lz4.h)
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local options=(
+		-D align-test=false
+		-D debug-level=0
+		-D programs=true
+	)
+
+	arch-meson $pkgname/build/meson build "${options[@]}"
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
