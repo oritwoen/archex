@@ -1,8 +1,8 @@
 pkgname=gnome-desktop
 
 arch=(x86_64)
-pkgrel=8
-pkgver=44.1+6649+954eb835
+pkgrel=1
+pkgver=44.1+6650+f27670d4
 
 b2sums=(SKIP)
 groups=(plain)
