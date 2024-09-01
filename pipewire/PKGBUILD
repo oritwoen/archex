@@ -1,0 +1,48 @@
+pkgname=pipewire
+
+arch=(x86_64)
+pkgver=1.3.0+12774+d59158529
+pkgrel=1
+
+b2sums=(SKIP)
+install=pipewire.install
+source=(git+https://gitlab.freedesktop.org/pipewire/pipewire.git)
+
+provides=(pipewire-jack pipewire-audio pipewire-pulse alsa-card-profiles gst-plugin-pipewire libpipewire jack libjack.so=0-64 libpipewire-0.3.so=0-64 libpipewire-0.3.so=0-64)
+replaces=(pipewire-jack pipewire-audio pipewire-pulse alsa-card-profiles gst-plugin-pipewire libpipewire jack)
+conflicts=(pipewire-jack pipewire-audio pipewire-pulse alsa-card-profiles gst-plugin-pipewire libpipewire jack)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local options=(
+		-D examples=disabled
+		-D tests=disabled
+		-D systemd-system-service=enabled
+		-D selinux=disabled
+		-D jack-devel=true
+		-D libjack-path=/usr/lib
+		-D bluez5-codec-lc3plus=disabled
+		-D vulkan=enabled
+		-D udevrulesdir=/usr/lib/udev/rules.d
+		-D session-managers=[]
+		-D rlimits-install=false
+		-D snap=disabled
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+}
