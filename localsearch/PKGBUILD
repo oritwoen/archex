@@ -1,8 +1,8 @@
 pkgname=localsearch
 
 arch=(x86_64)
-pkgver=3.8.beta+14633+67c3fd209
-pkgrel=2
+pkgver=3.8.beta+14639+4b5230e48
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
