@@ -2,30 +2,27 @@ pkgname=seahorse
 
 arch=(x86_64)
 pkgver=43.0+5889+41ecc1b6
-pkgrel=4
+pkgrel=19
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/GNOME/seahorse.git)
 
 pkgver() {
-    cd $pkgname
-    
-    local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-    local _commits=$(git rev-list --count HEAD)
-    local _commith=$(git rev-parse --short HEAD)
+	cd $pkgname
+	
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
 
-    echo ${_version}+${_commits}+${_commith}
+	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-    #CFLAGS+=" -Wno-error=int-conversion -Wno-error=return-type"
+	arch-meson $pkgname build
 
-    arch-meson $pkgname build
-  
-    meson compile -C build
+	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir "$pkgdir"
 }
