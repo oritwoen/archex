@@ -2,10 +2,10 @@ pkgname=deja-dup
 
 arch=(x86_64)
 pkgver=47.alpha+3507+5d12377a
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/World/deja-dup.git)
+source=(git+https://gitlab.gnome.org/world/deja-dup.git)
 
 pkgver() {
 	cd $pkgname
