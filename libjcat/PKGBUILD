@@ -1,7 +1,7 @@
 pkgname=libjcat
 
 arch=(x86_64)
-pkgver=0.2.2+201+5097f02
+pkgver=0.2.2+203+443fa68
 pkgrel=1
 
 b2sums=(SKIP)
