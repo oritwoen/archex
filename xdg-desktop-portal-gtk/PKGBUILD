@@ -1,8 +1,8 @@
 pkgname=xdg-desktop-portal-gtk
 
 arch=(x86_64)
-pkgver=1.15.2+694+8857e0c
-pkgrel=2
+pkgver=1.15.2+695+37a3c57
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/flatpak/xdg-desktop-portal-gtk.git)
