@@ -1,11 +1,11 @@
 pkgname=gnome-contacts
 
 arch=(x86_64)
-pkgver=47.alpha+4071+d420fc48
-pkgrel=17
+pkgver=47.alpha+4074+5b309ddd
+pkgrel=1
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-contacts.git)
+source=(git+https://gitlab.gnome.org/gnome/gnome-contacts.git)
 
 pkgver() {
 	cd $pkgname
