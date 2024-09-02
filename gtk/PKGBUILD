@@ -1,8 +1,8 @@
 pkgname=gtk
 
 arch=(x86_64)
-pkgver=4.15.7+81728+0277e26152
-pkgrel=17
+pkgver=4.15.7+81731+6e54589d9e
+pkgrel=1
 
 b2sums=(
 	SKIP
@@ -15,7 +15,7 @@ b2sums=(
 source=(
 	gtk4-querymodules.{hook,script}
 	gtk-update-icon-cache.{hook,script}
-	git+https://gitlab.gnome.org/GNOME/gtk.git#branch=main
+	git+https://gitlab.gnome.org/gnome/gtk.git
 )
 
 # libedataserverui4 libportal-gtk4
