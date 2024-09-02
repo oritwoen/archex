@@ -1,8 +1,8 @@
 pkgname=at-spi2-core
 
 arch=(x86_64)
-pkgver=2.53.90+6034+35cedf26
-pkgrel=20
+pkgver=2.53.90+6035+790432eb
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/at-spi2-core.git)
