@@ -1,7 +1,7 @@
 pkgname=mesa
 
 arch=(x86_64)
-pkgver=24.3.0+devel+194302+5be6f3b089c
+pkgver=24.3.0+devel+194306+ec0c103b329
 pkgrel=1
 
 b2sums=(SKIP)
