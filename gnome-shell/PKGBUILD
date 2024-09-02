@@ -1,8 +1,8 @@
 pkgname=gnome-shell
 
 arch=(x86_64)
-pkgver=47.rc+19116+5445b705f
-pkgrel=2
+pkgver=47.rc+19119+31591727c
+pkgrel=1
 
 b2sums=(
 	SKIP
@@ -10,8 +10,8 @@ b2sums=(
 )
 
 source=(
-	git+https://gitlab.gnome.org/GNOME/gnome-shell.git
-	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git
+	git+https://gitlab.gnome.org/gnome/gnome-shell.git
+	git+https://gitlab.gnome.org/gnome/libgnome-volume-control.git
 )
 
 pkgver() {
