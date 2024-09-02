@@ -2,7 +2,7 @@ pkgname=wireplumber
 
 arch=(x86_64)
 pkgver=0.5.5+2692+479523ab
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 install=wireplumber.install
@@ -27,7 +27,6 @@ build() {
 		-D doc=disabled #TODO: fix to upstream required (doxygen)
 		-D system-lua=true
 		-D elogind=disabled
-		-D systemd-system-service=true
 		-D tests=false
 		-D dbus-tests=false
 	)
