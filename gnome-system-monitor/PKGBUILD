@@ -1,11 +1,11 @@
 pkgname=gnome-system-monitor
 
 arch=(x86_64)
-pkgver=47.rc+5198+17a7ab85
-pkgrel=17
+pkgver=47.rc+5199+b6d93394
+pkgrel=1
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-system-monitor.git)
+source=(git+https://gitlab.gnome.org/gnome/gnome-system-monitor.git)
 
 pkgver() {
 	cd $pkgname
