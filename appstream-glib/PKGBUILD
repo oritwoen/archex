@@ -2,7 +2,7 @@ pkgname=appstream-glib
 
 arch=(x86_64)
 pkgver=0.8.4+2146+7d75c04
-pkgrel=3
+pkgrel=18
 
 b2sums=(SKIP)
 groups=(plain)
