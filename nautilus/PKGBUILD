@@ -1,11 +1,11 @@
 pkgname=nautilus
 
 arch=(x86_64)
-pkgrel=17
-pkgver=47.rc+25436+9c40621e2
+pkgrel=1
+pkgver=47.rc+25439+7545a7e90
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/nautilus.git)
+source=(git+https://gitlab.gnome.org/gnome/nautilus.git)
 
 provides=(libnautilus-extension)
 replaces=(libnautilus-extension)
