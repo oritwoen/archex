@@ -2,10 +2,10 @@ pkgname=seahorse
 
 arch=(x86_64)
 pkgver=43.0+5889+41ecc1b6
-pkgrel=20
+pkgrel=21
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/seahorse.git)
+source=(git+https://gitlab.gnome.org/gnome/seahorse.git)
 
 pkgver() {
 	cd $pkgname
