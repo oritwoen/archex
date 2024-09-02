@@ -4,8 +4,11 @@ arch=(x86_64)
 pkgver=2.0.3+1135+90656a9
 pkgrel=17
 
-b2sums=(SKIP)
-source=(git+https://github.com/morganamilo/paru.git)
+b2sums=(SKIP SKIP)
+source=(
+	paru.conf
+	git+https://github.com/morganamilo/paru.git
+)
 
 options=(!lto)
 
@@ -34,8 +37,10 @@ build() {
 package() {
 	cd $pkgname
 
-	cargo install --path . --root "${pkgdir}"/usr
+	cargo install --path . --root "${pkgdir}/usr"
 
-	install -Dm644 man/paru.8 "$pkgdir/usr/share/man/man8/paru.8"
-	install -Dm644 man/paru.conf.5 "$pkgdir/usr/share/man/man5/paru.conf.5"
+	install -Dm644 ${srcdir}/paru.conf ${pkgdir}/etc/paru.conf
+
+	install -Dm644 man/paru.8 ${pkgdir}/usr/share/man/man8/paru.8
+	install -Dm644 man/paru.conf.5 ${pkgdir}/usr/share/man/man5/paru.conf.5
 }

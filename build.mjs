@@ -26,7 +26,7 @@ for await (const pkg of packages) {
 
 		await storage.setItem(pkg, updt)
 
-		await execa('paru', ['-B', dir, '--localrepo', '--skipreview', '--noconfirm', '--sudoloop'], { stdio: 'inherit'})
+		await execa('paru', ['-B', dir, '--noconfirm'], { stdio: 'inherit'})
 
 		const updatedFile = await storage.getItem(pkg)
 		const nextVersion = updatedFile.match(/^pkgver=(.+)$/m)[1]
