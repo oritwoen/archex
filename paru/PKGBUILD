@@ -1,0 +1,36 @@
+pkgname=paru
+
+arch=(x86_64)
+pkgver=2.0.3+1135+90656a9
+pkgrel=15
+
+b2sums=(SKIP)
+source=(git+https://github.com/morganamilo/paru.git)
+
+options=(!lto)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 'version = ' Cargo.toml | awk -F '["]' '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	cd $pkgname
+
+	cargo fetch
+}
+
+build() {
+	cd $pkgname
+
+	cargo build --release
+}
+
+package() {
+	cargo install --path $pkgname --root "${pkgdir}"/usr
+}
