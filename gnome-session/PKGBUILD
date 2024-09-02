@@ -2,10 +2,10 @@ pkgname=gnome-session
 
 arch=(x86_64)
 pkgver=46.0+6763+a897fbf7
-pkgrel=17
+pkgrel=18
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-session.git)
+source=(git+https://gitlab.gnome.org/gnome/gnome-session.git)
 
 pkgver() {
 	cd $pkgname
