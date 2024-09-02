@@ -2,7 +2,7 @@ pkgname=gnome-control-center
 
 arch=(x86_64)
 pkgver=47.rc+24467+a12e90876
-pkgrel=1
+pkgrel=2
 
 b2sums=(
 	SKIP 
@@ -10,8 +10,8 @@ b2sums=(
 )
 
 source=(
-	git+https://gitlab.gnome.org/GNOME/gnome-control-center.git#branch=main
-	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git#branch=master
+	git+https://gitlab.gnome.org/gnome/gnome-control-center.git
+	git+https://gitlab.gnome.org/gnome/libgnome-volume-control.git
 )
 
 provides=(gnome-keybindings)
