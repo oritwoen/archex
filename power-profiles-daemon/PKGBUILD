@@ -1,8 +1,8 @@
 pkgname=power-profiles-daemon
 
 arch=(x86_64)
-pkgver=0.21+501+2935038
-pkgrel=2
+pkgver=0.21+502+1b17e3c
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
