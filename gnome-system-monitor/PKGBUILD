@@ -2,7 +2,7 @@ pkgname=gnome-system-monitor
 
 arch=(x86_64)
 pkgver=47.rc+5198+17a7ab85
-pkgrel=1
+pkgrel=16
 
 b2sums=(SKIP)
 groups=(plain)
