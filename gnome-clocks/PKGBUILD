@@ -1,8 +1,8 @@
 pkgname=gnome-clocks
 
 arch=(x86_64)
-pkgver=46.0+2823+97100c0
-pkgrel=16
+pkgver=46.0+2824+268c924
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-clocks.git)
