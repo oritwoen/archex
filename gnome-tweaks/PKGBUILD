@@ -2,7 +2,7 @@ pkgname=gnome-tweaks
 
 arch=(any)
 pkgver=47.alpha+2141+7b95525
-pkgrel=21
+pkgrel=22
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-tweaks.git)
