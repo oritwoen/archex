@@ -2,7 +2,7 @@ pkgname=deja-dup
 
 arch=(x86_64)
 pkgver=47.alpha+3506+9cb52fb6
-pkgrel=17
+pkgrel=18
 
 b2sums=(SKIP)
 groups=(plain)
