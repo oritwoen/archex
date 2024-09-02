@@ -2,7 +2,7 @@ pkgname=appstream
 
 arch=(x86_64)
 pkgver=1.0.4+4500+6cf3949d
-pkgrel=21
+pkgrel=22
 
 b2sums=(SKIP)
 groups=(plain)
