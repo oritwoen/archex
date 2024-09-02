@@ -1,7 +1,7 @@
 pkgname=webkitgtk-6.0
 
 arch=(x86_64)
-pkgrel=9
+pkgrel=10
 pkgver=2.45.91
 
 b2sums=(SKIP)
@@ -10,31 +10,37 @@ source=(https://webkitgtk.org/releases/webkitgtk-$pkgver.tar.xz)
 options=(!debug !lto)
 
 #for libedataserverui4
-#provides=(libwebkitgtk-6.0.so libwebkitgtk-6.0.so=4-64)
+provides=(libwebkitgtk-6.0.so libwebkitgtk-6.0.so=4-64)
+
+prepare() {
+	cd webkitgtk-$pkgver
+
+	#cmake -LAH
+}
 
 build() {
-  local cmake_options=(
-    -DPORT=GTK
-    -DCMAKE_BUILD_TYPE=Release
-    -DCMAKE_INSTALL_PREFIX=/usr
-    -DCMAKE_INSTALL_LIBDIR=lib
-    -DCMAKE_INSTALL_LIBEXECDIR=lib
-    -DCMAKE_SKIP_RPATH=ON
-    -DUSE_GTK4=ON
-    -DUSE_LIBBACKTRACE=OFF
-    -DUSE_SOUP2=OFF
-    -DENABLE_DOCUMENTATION=OFF
-    -DENABLE_MINIBROWSER=ON
-  )
+	local options=(
+		-DPORT=GTK
+		-DCMAKE_BUILD_TYPE=Release
+		-DCMAKE_INSTALL_PREFIX=/usr
+		-DCMAKE_INSTALL_LIBDIR=lib
+		-DCMAKE_INSTALL_LIBEXECDIR=lib
+		-DCMAKE_SKIP_RPATH=ON
+		-DUSE_GTK4=ON
+		-DUSE_LIBBACKTRACE=OFF
+		-DUSE_SOUP2=OFF
+		-DENABLE_DOCUMENTATION=OFF
+		-DENABLE_MINIBROWSER=ON
+	)
 
-  # JITted code crashes when CET is used
-  CFLAGS+=' -fcf-protection=none'
-  CXXFLAGS+=' -fcf-protection=none'
+	# JITted code crashes when CET is used
+	#CFLAGS+=' -fcf-protection=none'
+	#CXXFLAGS+=' -fcf-protection=none'
 
-  cmake -S webkitgtk-$pkgver -B build -G Ninja "${cmake_options[@]}"
-  cmake --build build
+	cmake -S webkitgtk-$pkgver -B build -G Ninja "${options[@]}"
+	cmake --build build
 }
 
 package() {
-  DESTDIR="$pkgdir" cmake --install build
+	DESTDIR="$pkgdir" cmake --install build
 }
