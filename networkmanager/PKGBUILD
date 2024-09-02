@@ -1,7 +1,7 @@
 pkgname=networkmanager
 
 arch=(x86_64)
-pkgver=1.51.0+33478+abbaa9b629
+pkgver=1.51.0+33479+c9fefcd095
 pkgrel=1
 
 b2sums=(SKIP)
