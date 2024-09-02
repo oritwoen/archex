@@ -2,10 +2,10 @@ pkgname=folks
 
 arch=(x86_64)
 pkgver=0.15.10+3045+ed9dd294
-pkgrel=30
+pkgrel=31
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/folks.git)
+source=(git+https://gitlab.gnome.org/gnome/folks.git)
 
 pkgver() {
 	cd $pkgname
