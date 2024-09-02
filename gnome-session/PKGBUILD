@@ -1,7 +1,7 @@
 pkgname=gnome-session
 
 arch=(x86_64)
-pkgver=46.0+6762+f706f873
+pkgver=46.0+6763+a897fbf7
 pkgrel=1
 
 b2sums=(SKIP)
