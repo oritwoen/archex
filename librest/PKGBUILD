@@ -5,7 +5,6 @@ pkgver=0.9.1+703+23f2d27
 pkgrel=25
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/librest.git)
 #provides=(librest{,-extras}-1.0.so)
 

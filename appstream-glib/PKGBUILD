@@ -5,7 +5,6 @@ pkgver=0.8.4+2146+7d75c04
 pkgrel=21
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://github.com/hughsie/appstream-glib.git)
 
 pkgver() {

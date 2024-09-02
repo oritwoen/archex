@@ -8,7 +8,7 @@ b2sums=(
 	SKIP 
 	SKIP
 )
-groups=(plain)
+
 source=(
 	fwupd.sysusers
 	git+https://github.com/fwupd/fwupd.git

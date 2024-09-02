@@ -5,7 +5,6 @@ pkgver=0.15.10+3045+ed9dd294
 pkgrel=29
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/GNOME/folks.git)
 
 pkgver() {

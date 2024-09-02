@@ -5,7 +5,6 @@ pkgver=1.0.3+93+5f6a56f
 pkgrel=25
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/GNOME/gsound.git)
 
 pkgver() {

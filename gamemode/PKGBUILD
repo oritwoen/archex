@@ -5,7 +5,6 @@ pkgver=1.8.1+701+715a138
 pkgrel=19
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://github.com/feralinteractive/gamemode.git)
 
 pkgver() {

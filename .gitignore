@@ -1,7 +1,5 @@
-firefox
 **/pkg
 **/src
-prepare
-base/devel/archex-commit-hook
-node_modules
 **/.SRCINFO
+
+node_modules

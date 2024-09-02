@@ -5,7 +5,6 @@ pkgver=47.beta+1499+5685d8f
 pkgrel=25
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/gnome-backgrounds.git)
 
 pkgver() {

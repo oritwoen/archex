@@ -14,8 +14,6 @@ source=(
 	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git
 )
 
-groups=(plain)
-
 pkgver() {
 	cd $pkgname
 

@@ -8,7 +8,7 @@ b2sums=(
 	SKIP 
 	SKIP
 )
-groups=(plain)
+
 source=(
 	update-desktop-database.hook
 	git+https://gitlab.freedesktop.org/xdg/desktop-file-utils.git

@@ -5,7 +5,6 @@ pkgver=47.alpha+197+c236366
 pkgrel=16
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/incubator/showtime.git)
 
 pkgver() {

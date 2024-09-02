@@ -4,7 +4,6 @@ arch=(x86_64)
 pkgver=3.12.0+972+b245449
 pkgrel=19
 
-groups=(plain)
 b2sums=(
 	SKIP
 	SKIP

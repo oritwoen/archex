@@ -5,7 +5,6 @@ pkgver=45.0+1359+1952fc3
 pkgrel=16
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/gnome-logs.git)
 
 pkgver() {

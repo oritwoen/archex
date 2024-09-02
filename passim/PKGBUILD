@@ -5,7 +5,6 @@ pkgver=0.1.9+165+c1fa205
 pkgrel=1
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://github.com/hughsie/passim.git)
 
 #provides=(libpassim.so)

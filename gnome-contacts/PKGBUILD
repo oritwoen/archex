@@ -5,7 +5,6 @@ pkgver=47.alpha+4071+d420fc48
 pkgrel=16
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-contacts.git)
 
 pkgver() {

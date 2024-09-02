@@ -5,7 +5,6 @@ pkgver=1.90.5+1736+b4697db
 pkgrel=16
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.freedesktop.org/upower/upower.git)
 
 #provides=(libupower-glib.so)

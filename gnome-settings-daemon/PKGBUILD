@@ -9,7 +9,6 @@ b2sums=(
 	SKIP
 )
 
-groups=(plain)
 source=(
 	git+https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git
 	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git

@@ -14,7 +14,6 @@ source=(
 	git+https://gitlab.gnome.org/GNOME/libgnome-volume-control.git#branch=master
 )
 
-groups=(plain)
 provides=(gnome-keybindings)
 replaces=(gnome-keybindings)
 conflicts=(gnome-keybindings)

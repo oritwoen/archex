@@ -5,7 +5,6 @@ pkgver=47.0+4891+eea9a921
 pkgrel=1
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/gnome-calendar.git)
 
 pkgver() {

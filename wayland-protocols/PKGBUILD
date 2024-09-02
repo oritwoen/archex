@@ -5,7 +5,6 @@ pkgver=1.37+386+4878e02
 pkgrel=17
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.freedesktop.org/wayland/wayland-protocols.git)
 
 pkgver() {

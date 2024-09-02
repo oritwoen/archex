@@ -5,7 +5,6 @@ pkgver=2.80.0+1966+bab0ce4
 pkgrel=27
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/glib-networking.git)
 
 pkgver() {

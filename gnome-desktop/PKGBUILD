@@ -5,7 +5,6 @@ pkgrel=17
 pkgver=44.1+6650+f27670d4
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/GNOME/gnome-desktop.git)
 
 provides=(

@@ -5,7 +5,6 @@ pkgver=47.alpha+4170+acfce6f2
 pkgrel=16
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/gnome-disk-utility.git)
 
 pkgver() {

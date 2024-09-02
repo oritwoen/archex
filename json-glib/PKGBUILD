@@ -5,7 +5,6 @@ pkgver=1.10.1+1477+8a00639
 pkgrel=17
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/json-glib.git)
 
 provides=(libjson-glib-1.0.so)

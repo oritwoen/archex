@@ -13,8 +13,11 @@ There will be no `pacman external repo` for this and if you want to use these pa
 
 ### Prepare:
 - Clone the repository to your own computer.
-- Go to: `base/devel/pacman`
-- Run: `makepkg -iCcsf`
+- Go to: `pacman`
+- Run: `makepkg -iCcf`
+
+- Go to: `paru`
+- Run: `makepkg -iCcf`
 
 This will prepare your repository to build and optimize for your hardware.
 
@@ -22,16 +25,10 @@ This will prepare your repository to build and optimize for your hardware.
 Go to the specific folder and build/install the package from the console via `makepkg`.
 
 ### 2 method:
-Use a ready-made script from this repository that will build and install all packages from a given group for you.
+Use a ready-made script from this repository that will build packages for you and also create repo.
 
-- `./build.sh` - will build and install all packages from the root folder
-- `./build.sh gnome` - will build and install all packages in the `gnome` folder
-- `./build.sh base/devel` – will build and install all packages from the `base/devel` folder
-
-and so on.
-
-
-
+- `pnpm install`
+- `node build.mjs` - will build and create repo for all packages
 
 
 

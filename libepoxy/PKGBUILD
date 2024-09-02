@@ -5,10 +5,7 @@ pkgver=1.5.11+594+f13c13c
 pkgrel=25
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://github.com/anholt/libepoxy.git)
-
-#provides=(libepoxy.so)
 
 pkgver() {
 	cd $pkgname

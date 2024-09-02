@@ -5,7 +5,6 @@ pkgver=47.alpha+3506+9cb52fb6
 pkgrel=18
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/World/deja-dup.git)
 
 pkgver() {

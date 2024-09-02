@@ -1,8 +1,8 @@
 pkgname=gjs
 
 arch=(x86_64)
-pkgver=1.81.90+5618+704447ca
-pkgrel=1
+pkgver=1.81.90+5631+6beff451
+pkgrel=17
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gjs.git)

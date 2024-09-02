@@ -5,7 +5,6 @@ pkgver=3.5+502+fe56bdb
 pkgrel=25
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.freedesktop.org/hadess/iio-sensor-proxy.git)
 
 pkgver() {

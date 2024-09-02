@@ -2,10 +2,9 @@ pkgname=planify
 
 arch=(x86_64)
 pkgver=4.11.0+1853+59a426de
-pkgrel=1
+pkgrel=18
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://github.com/alainm23/planify.git)
 
 pkgver() {

@@ -5,7 +5,6 @@ pkgrel=16
 pkgver=47.rc+32602+b0e90c652
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/mutter.git)
 
 #provides=(libmutter-15.so=0-64)

@@ -5,7 +5,6 @@ pkgrel=25
 pkgver=2.45.91
 
 b2sums=(SKIP)
-groups=(plain)
 source=(https://webkitgtk.org/releases/webkitgtk-$pkgver.tar.xz)
 options=(!debug !lto)
 

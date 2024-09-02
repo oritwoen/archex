@@ -5,7 +5,6 @@ pkgver=1.6.0+4426+d793b253
 pkgrel=16
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/libadwaita.git)
 
 pkgver() {

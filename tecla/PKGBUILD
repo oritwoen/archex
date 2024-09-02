@@ -5,7 +5,6 @@ pkgver=47.rc+158+dcc037c
 pkgrel=16
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/tecla.git)
 
 pkgver() {

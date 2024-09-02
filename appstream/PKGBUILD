@@ -5,7 +5,6 @@ pkgver=1.0.4+4500+6cf3949d
 pkgrel=22
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://github.com/ximion/appstream.git)
 
 pkgver() {

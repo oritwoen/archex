@@ -5,7 +5,6 @@ pkgver=24.3.0+devel+194297+c447c6fe17e
 pkgrel=1
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.freedesktop.org/mesa/mesa.git)
 #options=(!lto)
 

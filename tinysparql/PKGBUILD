@@ -5,7 +5,6 @@ pkgver=3.8.rc+16162+809b5fa9e
 pkgrel=16
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.gnome.org/gnome/tinysparql.git)
 
 provides=(libtinysparql-3.0.so tracker3)

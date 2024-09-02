@@ -5,7 +5,6 @@ pkgver=1.18.3+12950+39ba22d7e
 pkgrel=3
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.freedesktop.org/cairo/cairo.git)
 
 pkgver() {

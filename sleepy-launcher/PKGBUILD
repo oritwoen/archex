@@ -8,7 +8,7 @@ source=(
 	$pkgname.desktop
 	git+https://github.com/an-anime-team/sleepy-launcher.git
 )
-groups=(plain)
+
 b2sums=(
 	SKIP
 	SKIP

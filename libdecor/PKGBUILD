@@ -5,7 +5,6 @@ pkgver=0.2.2+295+c2bd8ad
 pkgrel=25
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.freedesktop.org/libdecor/libdecor.git)
 
 pkgver() {

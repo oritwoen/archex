@@ -4,7 +4,6 @@ arch=(x86_64)
 pkgver=24.27.62+791+4d57fd3
 pkgrel=58
 
-groups=(plain)
 b2sums=(SKIP SKIP)
 source=(
 	accounts-daemon-restart.hook

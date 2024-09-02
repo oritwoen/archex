@@ -1,63 +1,46 @@
+import { createStorage } from "unstorage";
+import fsDriver from "unstorage/drivers/fs";
+
 import { execa } from 'execa';
-import { $ } from 'execa';
-import { stat, readdir, readFile, writeFile, access } from 'node:fs/promises';
 
-const getPKGLine = async (keyword) => {
-	let file = await readFile("PKGBUILD", "utf8");
-	let lines = file.split(/\r?\n/);
+const storage = createStorage({
+	driver: fsDriver({ base: "./" }),
+});
 
-	let value = 0;
-	for (const line of lines) {
-		if (!line.startsWith(keyword)) continue;
+const packages = await storage.getKeys();
 
-		value = line.split('=')[1];
-
-		break;
-	};
-
-	return value || null;
-}
-
-const dirs = await readdir('.');
-
-for (const entry of dirs) {
-	const meta = await stat(entry);
-
-	if (meta.isFile()) continue;
-
-	const pkgbuild = await access(`${entry}/PKGBUILD`).then(() => true).catch(() => false);
-
-	if (pkgbuild === false) continue;
-
-	process.chdir(entry);
+for await (const pkg of packages) {
+	if (!pkg.endsWith('PKGBUILD')) continue
 
 	try {
-		const pkgName = await getPKGLine('pkgname');
+		const path = pkg.replace(':', '/')
+		const dir = path.split('/')[0]
 
-		const prevVersion = await getPKGLine('pkgver');
-		const prevRelease = await getPKGLine('pkgrel');
+		const file = await storage.getItem(pkg)
 
-		const file = await readFile("PKGBUILD", "utf8");
+		const pkgName = file.match(/^pkgname=(.+)$/m)[1]
+		const prevVersion = file.match(/^pkgver=(.+)$/m)[1]
+		const prevRelease = file.match(/^pkgrel=(.+)$/m)[1]
+
 		const updt = file.replace(/pkgrel=\d+/g, `pkgrel=${parseInt(prevRelease) + 1}`);
 
-		await writeFile("PKGBUILD", updt);
+		await storage.setItem(pkg, updt)
 
-		await execa({verbose: 'full'})`paru -U --localrepo --skipreview --noconfirm --sudoloop`;
+		await execa('paru', ['-B', dir, '--localrepo', '--skipreview', '--noconfirm', '--sudoloop'], { stdio: 'inherit'})
 
-		const nextVersion = await getPKGLine('pkgver');
-		const nextRelease = await getPKGLine('pkgrel');
+		const updatedFile = await storage.getItem(pkg)
+		const nextVersion = updatedFile.match(/^pkgver=(.+)$/m)[1]
+		const nextRelease = updatedFile.match(/^pkgrel=(.+)$/m)[1]
 
 		const prevBuild = `${prevVersion}-${prevRelease}`;
 		const nextBuild = `${nextVersion}-${nextRelease}`;
 
 		const commit = `chore(pkg): update \`${pkgName}\` from \`${prevBuild}\` to \`${nextBuild}\``
 
-		await $`git commit -m ${commit} -- PKGBUILD`
-	} catch (error) {
-		console.log(error);
+		await execa('git', ['commit', '-m', commit, '--', path], { stdio: 'inherit'})
+	} catch (err) {
+		console.error(err)
 	}
-
-	process.chdir('../')
-
-	await execa('git', ['push']);
 }
+
+await execa('git', ['push'], { stdio: 'inherit'})

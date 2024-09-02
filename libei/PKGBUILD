@@ -12,7 +12,7 @@ b2sums=(
 	SKIP 
 	SKIP
 )
-groups=(plain)
+
 source=(
 	git+https://github.com/nemequ/munit.git
 	git+https://gitlab.freedesktop.org/libinput/libei.git

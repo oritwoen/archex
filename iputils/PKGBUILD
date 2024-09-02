@@ -5,7 +5,6 @@ pkgver=20240117+1227+0f12e6d
 pkgrel=25
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://github.com/iputils/iputils.git)
 
 pkgver() {

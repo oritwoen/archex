@@ -5,7 +5,6 @@ pkgver=1.0.15+428+3826589
 pkgrel=29
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://github.com/fribidi/fribidi.git)
 
 pkgver() {

@@ -5,7 +5,6 @@ pkgver=0.21+502+1b17e3c
 pkgrel=1
 
 b2sums=(SKIP)
-groups=(plain)
 source=(git+https://gitlab.freedesktop.org/hadess/power-profiles-daemon.git)
 
 pkgver() {
