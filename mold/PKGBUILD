@@ -1,0 +1,38 @@
+pkgname=mold
+
+arch=(x86_64)
+pkgver=2.33.0+6880+e1ace5ea
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://github.com/rui314/mold)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(sed -n '47p' CMakeLists.txt | grep -oP 'VERSION \K[0-9.]+')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	cmake \
+		-S ${pkgname} \
+		-B build \
+		-D CMAKE_BUILD_TYPE='None' \
+		-D CMAKE_INSTALL_PREFIX='/usr' \
+		-D CMAKE_INSTALL_LIBEXECDIR='lib' \
+		-D MOLD_ENABLE_QEMU_TESTS=OFF \
+		-D MOLD_LTO=ON \
+		-D MOLD_USE_MOLD=ON \
+		-D MOLD_USE_SYSTEM_MIMALLOC=ON \
+		-D MOLD_USE_SYSTEM_TBB=ON
+
+	cmake --build build
+}
+
+package() {
+	DESTDIR="$pkgdir" cmake --install build
+}
