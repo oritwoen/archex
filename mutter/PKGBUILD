@@ -2,7 +2,7 @@ pkgname=mutter
 
 arch=(x86_64)
 pkgrel=1
-pkgver=47.beta+32595+736082f41
+pkgver=47.rc+32602+b0e90c652
 
 b2sums=(SKIP)
 groups=(plain)
