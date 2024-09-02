@@ -1,8 +1,8 @@
 pkgname=geoclue
 
 arch=(x86_64)
-pkgver=2.7.1+1086+63455a3
-pkgrel=18
+pkgver=2.7.1+1087+3fce430
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/geoclue/geoclue.git)
