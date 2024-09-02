@@ -1,8 +1,8 @@
 pkgname=geary
 
 arch=(x86_64)
-pkgver=46.0+7146+3bc6452f6
-pkgrel=11
+pkgver=46.0+7147+1ccebab53
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
