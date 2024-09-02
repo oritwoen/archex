@@ -2,10 +2,10 @@ pkgname=gnome-color-manager
 
 arch=(x86_64)
 pkgver=3.36.1+2927+378883ae
-pkgrel=17
+pkgrel=18
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/gnome-color-manager.git)
+source=(git+https://gitlab.gnome.org/gnome/gnome-color-manager.git)
 
 pkgver() {
 	cd $pkgname
