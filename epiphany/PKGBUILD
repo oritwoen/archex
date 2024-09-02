@@ -1,11 +1,11 @@
 pkgname=epiphany
 
 arch=(x86_64)
-pkgrel=4
-pkgver=47.rc+18282+9c3e3123d
+pkgrel=1
+pkgver=47.rc+18283+ecb63a6b4
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/GNOME/epiphany.git#branch=main)
+source=(git+https://gitlab.gnome.org/gnome/epiphany.git)
 
 pkgver() {
 	cd $pkgname
