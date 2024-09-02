@@ -2,7 +2,7 @@ pkgname=glib2
 
 arch=(x86_64)
 pkgver=2.83.0+30709+8fdb8c44c
-pkgrel=17
+pkgrel=18
 
 b2sums=(
 	SKIP
@@ -14,8 +14,8 @@ b2sums=(
 source=(
 	gio-querymodules.hook
 	glib-compile-schemas.hook
-	git+https://gitlab.gnome.org/GNOME/glib.git
-	git+https://gitlab.gnome.org/GNOME/gvdb.git
+	git+https://gitlab.gnome.org/gnome/glib.git
+	git+https://gitlab.gnome.org/gnome/gvdb.git
 )
 
 replaces=(glib2-devel)
