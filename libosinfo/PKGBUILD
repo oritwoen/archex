@@ -2,7 +2,7 @@ pkgname=libosinfo
 
 arch=(x86_64)
 pkgver=1.12.0+1956+8f99c8f
-pkgrel=9
+pkgrel=10
 
 b2sums=(SKIP)
 groups=(plain)
