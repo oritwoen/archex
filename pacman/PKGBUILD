@@ -1,0 +1,57 @@
+pkgname=pacman
+
+arch=(x86_64)
+pkgver=7.0.0+7418+6ba5c20e
+pkgrel=15
+
+b2sums=(SKIP SKIP SKIP SKIP SKIP)
+source=(
+	rust.conf
+	pacman.conf
+	makepkg.conf
+	alpm.sysusers
+	git+https://gitlab.archlinux.org/pacman/pacman.git
+)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local options=(
+		-D use-git-version=true
+		-D scriptlet-shell=/usr/bin/bash
+		-D ldconfig=/usr/bin/ldconfig
+		-D doc=disabled
+		-D doxygen=disabled
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir "$pkgdir"
+
+	# install Arch specific stuff
+	install -dm755 "$pkgdir/etc"
+	install -m644 "$srcdir/pacman.conf" "$pkgdir/etc"
+	install -m644 "$srcdir/makepkg.conf" "$pkgdir/etc"
+	install -D -m644 "$srcdir/alpm.sysusers" "${pkgdir}"/usr/lib/sysusers.d/alpm.conf
+	install -m644 "$srcdir/rust.conf" "$pkgdir/etc/makepkg.conf.d"
+
+	local wantsdir="$pkgdir/usr/lib/systemd/system/sockets.target.wants"
+	install -dm755 "$wantsdir"
+
+	local unit
+	for unit in dirmngr gpg-agent gpg-agent-{browser,extra,ssh} keyboxd; do
+		ln -s "../${unit}@.socket" "$wantsdir/${unit}@etc-pacman.d-gnupg.socket"
+	done
+}
