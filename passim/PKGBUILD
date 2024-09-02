@@ -2,7 +2,7 @@ pkgname=passim
 
 arch=(x86_64)
 pkgver=0.1.9+163+6b3f536
-pkgrel=3
+pkgrel=4
 
 b2sums=(SKIP)
 groups=(plain)
