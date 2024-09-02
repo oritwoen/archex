@@ -1,8 +1,8 @@
 pkgname=cairo
 
 arch=(x86_64)
-pkgver=1.18.1+12939+bbf385d35
-pkgrel=11
+pkgver=1.18.3+12942+ad53e74fd
+pkgrel=1
 
 b2sums=(SKIP)
 groups=(plain)
