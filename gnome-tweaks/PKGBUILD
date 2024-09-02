@@ -2,7 +2,7 @@ pkgname=gnome-tweaks
 
 arch=(any)
 pkgver=47.alpha+2141+7b95525
-pkgrel=6
+pkgrel=21
 
 b2sums=(SKIP)
 groups=(plain)
