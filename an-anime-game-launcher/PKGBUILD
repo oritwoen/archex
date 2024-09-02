@@ -1,8 +1,8 @@
 pkgname=an-anime-game-launcher
 
 arch=(x86_64)
-pkgver=3.11.0+956+85ba5b0
-pkgrel=17
+pkgver=3.12.0+972+b245449
+pkgrel=1
 
 groups=(plain)
 b2sums=(
