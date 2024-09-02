@@ -22,15 +22,20 @@ pkgver() {
 prepare() {
 	cd $pkgname
 
-	cargo fetch
+	cargo fetch --locked
 }
 
 build() {
 	cd $pkgname
 
-	cargo build --release
+	cargo build --frozen --release
 }
 
 package() {
-	cargo install --path $pkgname --root "${pkgdir}"/usr
+	cd $pkgname
+
+	cargo install --path . --root "${pkgdir}"/usr
+
+	install -Dm644 man/paru.8 "$pkgdir/usr/share/man/man8/paru.8"
+	install -Dm644 man/paru.conf.5 "$pkgdir/usr/share/man/man5/paru.conf.5"
 }
