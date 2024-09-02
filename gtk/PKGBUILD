@@ -2,7 +2,7 @@ pkgname=gtk
 
 arch=(x86_64)
 pkgver=4.15.7+81728+0277e26152
-pkgrel=16
+pkgrel=17
 
 b2sums=(
 	SKIP
@@ -18,9 +18,11 @@ source=(
 	git+https://gitlab.gnome.org/GNOME/gtk.git#branch=main
 )
 
+# libedataserverui4 libportal-gtk4
 provides=(
 	gtk4
 	libgtk-4.so
+	libgtk-4.so=1-64
 	gtk-update-icon-cache
 )
 
@@ -55,8 +57,6 @@ build() {
 		-D build-examples=false
 		-D build-tests=false
 	)
-
-	#CFLAGS+=" -DG_DISABLE_CAST_CHECKS"
 	
 	arch-meson $pkgname build "${options[@]}"
 	
