@@ -2,7 +2,7 @@ pkgname=gamemode
 
 arch=(x86_64)
 pkgver=1.8.1+701+715a138
-pkgrel=18
+pkgrel=19
 
 b2sums=(SKIP)
 groups=(plain)
