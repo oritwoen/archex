@@ -1,7 +1,7 @@
 pkgname=gsettings-desktop-schemas
 
 arch=(x86_64)
-pkgver=47.rc+1735+789e14d
+pkgver=47.rc+1737+8bf41c5
 pkgrel=1
 
 b2sums=(SKIP)
