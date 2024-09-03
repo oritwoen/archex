@@ -1,0 +1,56 @@
+pkgname=node
+
+arch=(x86_64)
+pkgver=23+0+0+42193+298dea0c635
+pkgrel=3
+
+b2sums=(SKIP)
+source=(git+https://github.com/nodejs/node.git)
+
+provides=(nodejs)
+replaces=(nodejs)
+conflicts=(nodejs)
+
+pkgver() {
+	cd $pkgname
+
+	local _major=$(grep '#define NODE_MAJOR_VERSION' src/node_version.h | awk '{print $3}')
+	local _minor=$(grep '#define NODE_MINOR_VERSION' src/node_version.h | awk '{print $3}')
+	local _patch=$(grep '#define NODE_PATCH_VERSION' src/node_version.h | awk '{print $3}')
+
+	local _version=${_major}+${_minor}+${_patch}
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	cd $pkgname
+	
+	# needs more open files
+	ulimit -n 4096
+
+	./configure \
+		--prefix=/usr \
+		--without-npm \
+		--with-intl=system-icu \
+		--shared-libuv \
+		--shared-nghttp2 \
+		--shared-nghttp3 \
+		--shared-ngtcp2 \
+		--shared-openssl \
+		--shared-zlib \
+		--shared-brotli \
+		--shared-cares
+		# --shared-v8
+		# --shared-http-parser
+
+	make
+}
+
+package() {
+	cd $pkgname
+
+	make DESTDIR="$pkgdir" install
+}
