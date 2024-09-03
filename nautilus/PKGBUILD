@@ -2,7 +2,7 @@ pkgname=nautilus
 
 arch=(x86_64)
 pkgrel=1
-pkgver=47.rc+25439+7545a7e90
+pkgver=47.rc+25442+c1eb7cf2c
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/nautilus.git)
