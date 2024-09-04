@@ -1,7 +1,7 @@
 pkgname=tinysparql
 
 arch=(x86_64)
-pkgver=3.8.rc+16166+246f260dd
+pkgver=3.8.rc+16170+279ed1f6b
 pkgrel=1
 
 b2sums=(SKIP)
