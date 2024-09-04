@@ -2,7 +2,7 @@ pkgname=wireplumber
 
 arch=(x86_64)
 pkgver=0.5.5+2692+479523ab
-pkgrel=20
+pkgrel=21
 
 b2sums=(SKIP)
 install=wireplumber.install
