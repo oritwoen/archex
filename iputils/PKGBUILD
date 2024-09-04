@@ -1,7 +1,7 @@
 pkgname=iputils
 
 arch=(x86_64)
-pkgver=20240117+1252+cc292dc
+pkgver=20240117+1255+54aaf2e
 pkgrel=1
 
 b2sums=(SKIP)
