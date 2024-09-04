@@ -1,7 +1,7 @@
 pkgname=json-glib
 
 arch=(x86_64)
-pkgver=1.10.1+1478+38f188f
+pkgver=1.10.1+1483+a608e6c
 pkgrel=1
 
 b2sums=(SKIP)
