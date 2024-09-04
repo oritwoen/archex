@@ -2,7 +2,7 @@ pkgname=appstream
 
 arch=(x86_64)
 pkgver=1.0.4+4500+6cf3949d
-pkgrel=27
+pkgrel=28
 
 b2sums=(SKIP)
 source=(git+https://github.com/ximion/appstream.git)
@@ -20,11 +20,9 @@ pkgver() {
 build() {
 	local options=(
 		-D vapi=true
-        -D qt=true
-		-D qt-versions=5,6
-        -D compose=true
-        -D apidocs=false
-        -D install-docs=false
+		-D compose=true
+		-D apidocs=false
+		-D install-docs=false
 	)
 
 	arch-meson $pkgname build "${options[@]}"
