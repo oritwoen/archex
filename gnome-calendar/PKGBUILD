@@ -1,7 +1,7 @@
 pkgname=gnome-calendar
 
 arch=(x86_64)
-pkgver=47.0+4896+a2f7d580
+pkgver=47.0+4900+a0180d70
 pkgrel=1
 
 b2sums=(SKIP)
