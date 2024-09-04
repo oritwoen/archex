@@ -1,8 +1,8 @@
 pkgname=deja-dup
 
 arch=(x86_64)
-pkgver=47.alpha+3507+5d12377a
-pkgrel=4
+pkgver=47.alpha+3508+ab78c9e2
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/world/deja-dup.git)
