@@ -1,8 +1,8 @@
 pkgname=node
 
 arch=(x86_64)
-pkgver=23+0+0+42193+298dea0c635
-pkgrel=3
+pkgver=23+0+0+42202+a1a3cafc38e
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/nodejs/node.git)
