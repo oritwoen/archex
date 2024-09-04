@@ -1,8 +1,8 @@
 pkgname=tecla
 
 arch=(x86_64)
-pkgver=47.rc+158+dcc037c
-pkgrel=19
+pkgver=47.rc+161+f1ef1d2
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/tecla.git)
