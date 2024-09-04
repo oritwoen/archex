@@ -2,10 +2,13 @@ pkgname=gjs
 
 arch=(x86_64)
 pkgver=1.81.90+5631+6beff451
-pkgrel=17
+pkgrel=22
 
-b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/gnome/gjs.git)
+b2sums=(SKIP SKIP)
+source=(
+	git+https://gitlab.gnome.org/gnome/gjs.git
+	git+https://gitlab.gnome.org/GNOME/gobject-introspection-tests.git
+)
 provides=(libgjs.so)
 
 pkgver() {
@@ -20,7 +23,12 @@ pkgver() {
 
 prepare() {
 	cd $pkgname
+
+	git submodule init
+	git submodule set-url subprojects/gobject-introspection-tests "${srcdir}/gobject-introspection-tests"
+	git -c protocol.file.allow=always -c protocol.allow=never submodule update
 }
+
 
 build() {
 	local options=(
