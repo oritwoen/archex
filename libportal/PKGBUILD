@@ -2,7 +2,7 @@ pkgname=libportal
 
 arch=(x86_64)
 pkgver=0.8.1+408+26c1500
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://github.com/flatpak/libportal.git)
@@ -21,6 +21,8 @@ build() {
 	local options=(
 		-D docs=false
 		-D tests=false
+		-D backend-qt5=disabled
+		-D backend-qt6=disabled
 	)
 
 	arch-meson $pkgname build "${options[@]}"
