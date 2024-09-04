@@ -1,7 +1,7 @@
 pkgname=alpaca
 
 arch=(x86_64)
-pkgver=2.0.0+775+50aad8c
+pkgver=2.0.0+777+abbdbf1
 pkgrel=1
 
 b2sums=(SKIP)
