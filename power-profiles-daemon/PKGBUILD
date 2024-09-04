@@ -1,11 +1,11 @@
 pkgname=power-profiles-daemon
 
 arch=(x86_64)
-pkgver=0.22+508+469d835
+pkgver=0.22+510+e4f250c
 pkgrel=1
 
 b2sums=(SKIP)
-source=(git+https://gitlab.freedesktop.org/hadess/power-profiles-daemon.git)
+source=(git+https://gitlab.freedesktop.org/upower/power-profiles-daemon.git)
 
 pkgver() {
 	cd $pkgname
@@ -18,15 +18,15 @@ pkgver() {
 }
 
 build() {
-    local options=(
-        -D pylint=disabled
-        -D tests=false
-        -D manpage=disabled
-    )
-    
-    arch-meson $pkgname build "${options[@]}"
-    
-    meson compile -C build
+	local options=(
+		-D pylint=disabled
+		-D tests=false
+		-D manpage=disabled
+	)
+
+	arch-meson $pkgname build "${options[@]}"
+
+	meson compile -C build
 }
 
 package() {
