@@ -2,7 +2,7 @@ pkgname=loupe
 
 arch=(x86_64)
 pkgver=47.beta.1+1081+2412fb9
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/loupe.git)
