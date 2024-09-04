@@ -1,7 +1,7 @@
 pkgname=gtk
 
 arch=(x86_64)
-pkgver=4.15.7+81732+b18c6b5781
+pkgver=4.15.7+81748+d4b45526b2
 pkgrel=1
 
 b2sums=(
