@@ -1,0 +1,41 @@
+pkgname=libblockdev
+
+arch=(x86_64)
+pkgver=3.1.1+2859+f9eb41d6
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://github.com/storaged-project/libblockdev.git)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -oP 'AC_INIT\(\[.*\], \[\K[0-9.]+(?=\])' configure.ac)
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	NOCONFIGURE=1 ${pkgname}/autogen.sh
+}
+
+build() {
+	cd $pkgname
+
+	local options=(
+		--prefix=/usr
+		--sysconfdir=/etc
+	)
+
+	./configure "${options[@]}"
+
+	make
+}
+
+package() {
+	cd $pkgname
+
+	make DESTDIR="$pkgdir" install
+}
