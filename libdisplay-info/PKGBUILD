@@ -1,0 +1,26 @@
+pkgname=libdisplay-info
+
+arch=(x86_64)
+pkgver=0.3.0+dev+4766+f387161
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://gitlab.freedesktop.org/emersion/libdisplay-info.git)
+
+pkgver() {
+	local _version=$(grep -m 1 version ${pkgname}/meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version/-/+}+${_commits}+${_commith}
+}
+
+build() {
+	arch-meson ${pkgname} build
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir ${pkgdir}
+}
