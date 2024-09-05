@@ -1,0 +1,49 @@
+pkgname=udisks
+
+arch=(x86_64)
+pkgver=2+11+0+3944+55d1ff386
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://github.com/storaged-project/udisks.git)
+
+pkgver() {
+	cd $pkgname
+
+	local _major=$(grep 'm4_define(\[udisks_major_version' ./configure.ac | awk -F'[][]' '{print $4}')
+	local _minor=$(grep 'm4_define(\[udisks_minor_version' ./configure.ac | awk -F'[][]' '{print $4}')
+	local _micro=$(grep 'm4_define(\[udisks_micro_version' ./configure.ac | awk -F'[][]' '{print $4}')
+
+	local _version=${_major}+${_minor}+${_micro}
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	NOCONFIGURE=1 ${pkgname}/autogen.sh
+}
+
+build() {
+	cd $pkgname
+
+	local options=(
+		--prefix=/usr
+		--sbindir=/usr/bin
+		--sysconfdir=/etc
+		--libexecdir=/usr/lib
+		--localstatedir=/var
+		--disable-static
+	)
+
+	./configure "${options[@]}"
+
+	make
+}
+
+package() {
+	cd $pkgname
+
+	make DESTDIR="$pkgdir" install
+}
