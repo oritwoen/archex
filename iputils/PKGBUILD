@@ -1,8 +1,8 @@
 pkgname=iputils
 
 arch=(x86_64)
-pkgver=20240117+1255+54aaf2e
-pkgrel=3
+pkgver=20240905+1261+6d1f6e0
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/iputils/iputils.git)
