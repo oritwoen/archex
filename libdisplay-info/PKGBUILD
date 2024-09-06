@@ -1,7 +1,7 @@
 pkgname=libdisplay-info
 
 arch=(x86_64)
-pkgver=0.3.0+dev+4766+f387161
+pkgver=0.3.0+dev++
 pkgrel=1
 
 b2sums=(SKIP)
