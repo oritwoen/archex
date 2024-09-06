@@ -1,17 +1,16 @@
 import { createStorage } from "unstorage";
-import fsDriver from "unstorage/drivers/fs";
+import driver from "unstorage/drivers/fs-lite";
 
 import { execa } from 'execa';
 
 const storage = createStorage({
-	driver: fsDriver({ base: "./" }),
+	driver: driver({ base: "." }),
 });
 
 const packages = await storage.getKeys();
+const pkgbuild = packages.filter(pkg => pkg.endsWith('PKGBUILD'))
 
-for await (const pkg of packages) {
-	if (!pkg.endsWith('PKGBUILD')) continue
-
+for await (const pkg of pkgbuild) {
 	try {
 		const path = pkg.replace(':', '/')
 		const dir = path.split('/')[0]
