@@ -1,7 +1,7 @@
 pkgname=gspell
 
 arch=(x86_64)
-pkgver=1.13.2+4762+f85ac89
+pkgver=1.13.2++
 pkgrel=1
 
 b2sums=(SKIP)
