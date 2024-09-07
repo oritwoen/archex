@@ -1,8 +1,8 @@
 pkgname=gnome-disk-utility
 
 arch=(x86_64)
-pkgver=47.alpha+4173+64883f12
-pkgrel=3
+pkgver=47.alpha+4174+796856ee
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-disk-utility.git)
