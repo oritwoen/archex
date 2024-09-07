@@ -1,7 +1,7 @@
 pkgname=libhandy
 
 arch=(x86_64)
-pkgver=1.8.0+4760+debf1d7
+pkgver=1.8.0++
 pkgrel=1
 
 b2sums=(SKIP)
