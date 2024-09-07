@@ -1,7 +1,7 @@
 pkgname=gnome-text-editor
 
 arch=(x86_64)
-pkgver=47.rc+2083+3755804
+pkgver=47.rc+2084+2020720
 pkgrel=1
 
 b2sums=(SKIP)
