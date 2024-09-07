@@ -1,7 +1,7 @@
 pkgname=gnome-connections
 
 arch=(x86_64)
-pkgver=47.beta+821+b685dcb
+pkgver=47.beta+823+a53aca1
 pkgrel=1
 
 b2sums=(SKIP)
