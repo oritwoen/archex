@@ -1,8 +1,8 @@
 pkgname=json-glib
 
 arch=(x86_64)
-pkgver=1.10.1+1483+a608e6c
-pkgrel=2
+pkgver=1.10.1+1495+c52c242
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/json-glib.git)
