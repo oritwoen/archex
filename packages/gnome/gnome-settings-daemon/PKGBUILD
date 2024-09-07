@@ -1,8 +1,8 @@
 pkgname=gnome-settings-daemon
 
 arch=(x86_64)
-pkgver=47.rc+6779+b90584a0
-pkgrel=3
+pkgver=47.rc+6780+985ba52a
+pkgrel=1
 
 b2sums=(
 	SKIP
