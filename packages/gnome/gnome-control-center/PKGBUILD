@@ -1,7 +1,7 @@
 pkgname=gnome-control-center
 
 arch=(x86_64)
-pkgver=47.rc+24485+24232e01b
+pkgver=47.rc+24490+74339eb1e
 pkgrel=1
 
 b2sums=(
