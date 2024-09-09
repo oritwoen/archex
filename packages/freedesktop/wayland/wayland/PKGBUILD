@@ -2,7 +2,7 @@ pkgname=wayland
 
 arch=(x86_64)
 pkgver=1.23.90+2604+6c4a695
-pkgrel=32
+pkgrel=33
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/wayland/wayland.git)
