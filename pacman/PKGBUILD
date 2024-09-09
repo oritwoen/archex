@@ -1,8 +1,8 @@
 pkgname=pacman
 
 arch=(x86_64)
-pkgver=7.0.0+7418+6ba5c20e
-pkgrel=24
+pkgver=7.0.0+7419+7bc5d55b
+pkgrel=1
 
 b2sums=(SKIP SKIP SKIP SKIP SKIP)
 source=(
