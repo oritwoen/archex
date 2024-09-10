@@ -1,8 +1,8 @@
 pkgname=glib-networking
 
 arch=(x86_64)
-pkgver=2.80.0+1966+bab0ce4
-pkgrel=37
+pkgver=2.80.0+1967+bbc8832
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/glib-networking.git)
