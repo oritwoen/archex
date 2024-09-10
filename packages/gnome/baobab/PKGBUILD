@@ -1,8 +1,8 @@
 pkgname=baobab
 
 arch=(x86_64)
-pkgver=47.beta+2357+5524b1d
-pkgrel=2
+pkgver=47.beta+2365+4e60333
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/baobab.git)
