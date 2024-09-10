@@ -1,8 +1,8 @@
 pkgname=libportal
 
 arch=(x86_64)
-pkgver=0.8.1+408+26c1500
-pkgrel=7
+pkgver=0.8.1+415+6939ad6
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/flatpak/libportal.git)
