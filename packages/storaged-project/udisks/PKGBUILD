@@ -1,8 +1,8 @@
 pkgname=udisks
 
 arch=(x86_64)
-pkgver=2+11+0+3944+55d1ff386
-pkgrel=5
+pkgver=2+11+0+3945+3c667fd66
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/storaged-project/udisks.git)
