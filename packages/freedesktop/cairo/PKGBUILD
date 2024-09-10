@@ -2,7 +2,7 @@ pkgname=cairo
 
 arch=(x86_64)
 pkgver=1.18.3+12955+65a29e787
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/cairo/cairo.git)
