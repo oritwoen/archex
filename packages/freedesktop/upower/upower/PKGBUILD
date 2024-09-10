@@ -2,7 +2,7 @@ pkgname=upower
 
 arch=(x86_64)
 pkgver=1.90.5+1737+cca76c8
-pkgrel=7
+pkgrel=8
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/upower/upower.git)
