@@ -1,7 +1,7 @@
 pkgname=at-spi2-core
 
 arch=(x86_64)
-pkgver=2.53.90+6038+047de939
+pkgver=2.53.90+6042+d88150f4
 pkgrel=1
 
 b2sums=(SKIP)
