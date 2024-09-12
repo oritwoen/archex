@@ -2,7 +2,7 @@ pkgname=gnome-logs
 
 arch=(x86_64)
 pkgver=45.0+1359+1952fc3
-pkgrel=26
+pkgrel=27
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-logs.git)
