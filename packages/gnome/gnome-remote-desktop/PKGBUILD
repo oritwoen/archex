@@ -1,7 +1,7 @@
 pkgname=gnome-remote-desktop
 
 arch=(x86_64)
-pkgver=47.rc+1460+6e544de
+pkgver=47.rc+1467+7ecb80c
 pkgrel=1
 
 b2sums=(SKIP)
