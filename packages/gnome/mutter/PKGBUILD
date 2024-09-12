@@ -2,7 +2,7 @@ pkgname=mutter
 
 arch=(x86_64)
 pkgrel=1
-pkgver=47.rc+32629+ffc3eb4ef
+pkgver=47.rc+32643+969f3a5ae
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/mutter.git)
