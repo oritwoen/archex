@@ -2,7 +2,7 @@ pkgname=iio-sensor-proxy
 
 arch=(x86_64)
 pkgver=3.5+502+fe56bdb
-pkgrel=36
+pkgrel=37
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/hadess/iio-sensor-proxy.git)
