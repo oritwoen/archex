@@ -1,8 +1,8 @@
 pkgname=gnome-connections
 
 arch=(x86_64)
-pkgver=47.beta+823+a53aca1
-pkgrel=2
+pkgver=47.beta+827+297a2c3
+pkgrel=1
 
 b2sums=(SKIP)
 source=(${pkgname}::git+https://gitlab.gnome.org/gnome/connections.git)
