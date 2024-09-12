@@ -1,7 +1,7 @@
 pkgname=(gvfs)
 
 arch=(x86_64)
-pkgver=1.55.91+6526+d20b1cd8
+pkgver=1.55.91+6529+5e532c97
 pkgrel=1
 
 b2sums=(
