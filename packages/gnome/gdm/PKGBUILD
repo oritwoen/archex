@@ -1,7 +1,7 @@
 pkgname=gdm
 
 arch=(x86_64)
-pkgver=47.alpha+9676+8ff3039e5
+pkgver=47.rc+9680+969ffab48
 pkgrel=1
 
 b2sums=(SKIP)
