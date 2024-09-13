@@ -1,7 +1,7 @@
 pkgname=upower
 
 arch=(x86_64)
-pkgver=1.90.5+1739+88031e5
+pkgver=1.90.5+1741+131ab3a
 pkgrel=1
 
 b2sums=(SKIP)
