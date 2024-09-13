@@ -1,7 +1,7 @@
 pkgname=orc
 
 arch=(x86_64)
-pkgver=0.4.39.1+1793+9b60000
+pkgver=0.4.40.1+1796+06d19aa
 pkgrel=1
 
 b2sums=(SKIP)
