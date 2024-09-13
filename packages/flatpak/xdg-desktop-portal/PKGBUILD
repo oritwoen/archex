@@ -1,7 +1,7 @@
 pkgname=xdg-desktop-portal
 
 arch=(x86_64)
-pkgver=1.19.0+2040+959b36e
+pkgver=1.19.0+2041+4db11f7
 pkgrel=1
 
 b2sums=(SKIP)
