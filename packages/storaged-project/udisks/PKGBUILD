@@ -1,7 +1,7 @@
 pkgname=udisks
 
 arch=(x86_64)
-pkgver=2+11+0+3947+367fbc95c
+pkgver=2+11+0+3948+25fa7acd1
 pkgrel=1
 
 b2sums=(SKIP)
