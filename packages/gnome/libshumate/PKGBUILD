@@ -1,8 +1,8 @@
 pkgname=libshumate
 
 arch=(x86_64)
-pkgver=1.3.0+668+8c28428
-pkgrel=8
+pkgver=1.4.alpha+670+bf12057
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/libshumate.git)
