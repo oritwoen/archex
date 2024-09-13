@@ -2,7 +2,7 @@ pkgname=libnotify
 
 arch=(x86_64)
 pkgver=0.8.3+504+150af91
-pkgrel=36
+pkgrel=37
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/libnotify.git)
