@@ -2,7 +2,7 @@ pkgname=colord
 
 arch=(x86_64)
 pkgver=1.4.8+1904+4a5a8ac
-pkgrel=42
+pkgrel=43
 
 b2sums=(SKIP)
 source=(git+https://github.com/hughsie/colord.git)
