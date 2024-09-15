@@ -1,8 +1,8 @@
 pkgname=gnome-remote-desktop
 
 arch=(x86_64)
-pkgver=47.rc+1467+7ecb80c
-pkgrel=2
+pkgver=47.0+1473+af2989f
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-remote-desktop.git)
