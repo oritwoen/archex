@@ -1,7 +1,7 @@
 pkgname=librsvg
 
 arch=(x86_64)
-pkgver=2.59.0+9731+8f6aa725
+pkgver=2.59.0+9737+46d65c68
 pkgrel=1
 
 b2sums=(SKIP)
