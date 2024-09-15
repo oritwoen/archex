@@ -2,7 +2,7 @@ pkgname=gnome-boxes
 
 arch=(x86_64)
 pkgver=47.beta+6299+dbd92910
-pkgrel=8
+pkgrel=9
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-boxes.git)
