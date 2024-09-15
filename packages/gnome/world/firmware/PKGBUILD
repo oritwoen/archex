@@ -1,8 +1,8 @@
 pkgname=gnome-firmware
 
 arch=(x86_64)
-pkgver=47.0+422+de34a84
-pkgrel=2
+pkgver=47.0+423+cfc5bdc
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/world/gnome-firmware.git)
