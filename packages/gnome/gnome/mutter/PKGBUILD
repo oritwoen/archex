@@ -2,12 +2,13 @@ pkgname=mutter
 
 arch=(x86_64)
 pkgrel=1
-pkgver=47.rc+32647+af250506f
+pkgver=47.0+32669+75b8d3a16
 
-b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/gnome/mutter.git)
-
-#provides=(libmutter-15.so=0-64)
+b2sums=(SKIP SKIP)
+source=(
+	git+https://gitlab.gnome.org/gnome/gvdb.git
+	git+https://gitlab.gnome.org/gnome/mutter.git
+)
 
 pkgver() {
 	cd $pkgname

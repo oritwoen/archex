@@ -1,32 +1,32 @@
-pkgname=gnome-builder
+pkgname=glycin
 
 arch=(x86_64)
-pkgver=47.rc+19108+7508e17d0
-pkgrel=3
+pkgver=1.1.0+345+902aa03
+pkgrel=2
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/gnome/gnome-builder.git)
+source=(git+https://gitlab.gnome.org/sophie-h/glycin.git)
 
 pkgver() {
-	cd ${pkgname}
+	cd $pkgname
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _version=$(grep -m 1 version: meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
-	
+
 	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
 	local options=(
-		-D network_tests=false
+		-D tests=false
 	)
-
+	
 	arch-meson ${pkgname} build ${options[@]}
 	
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir ${pkgdir}
+	meson install -C build --destdir ${pkgdir} --no-rebuild
 }

@@ -12,8 +12,8 @@ const pkgbuild = packages.filter(pkg => pkg.endsWith('PKGBUILD'))
 
 for await (const pkg of pkgbuild) {
 	try {
-		const path = pkg.replace(':', '/')
-		const dir = path.split('/')[0]
+		const pth = pkg.replaceAll(':', '/')
+		const dir = pkg.split(':').slice(0, -1).join('/')
 
 		const file = await storage.getItem(pkg)
 
@@ -36,7 +36,7 @@ for await (const pkg of pkgbuild) {
 
 		const commit = `chore(pkg): update \`${pkgName}\` from \`${prevBuild}\` to \`${nextBuild}\``
 
-		await execa('git', ['commit', '-m', commit, '--', path], { stdio: 'inherit'})
+		await execa('git', ['commit', '-m', commit, '--', pth], { stdio: 'inherit'})
 	} catch (err) {
 		console.error(err)
 	}

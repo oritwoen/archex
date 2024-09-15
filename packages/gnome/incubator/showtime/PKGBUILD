@@ -1,7 +1,7 @@
 pkgname=showtime
 
 arch=(x86_64)
-pkgver=47.alpha+211+3ad6164
+pkgver=47.alpha+237+5691247
 pkgrel=1
 
 b2sums=(SKIP)

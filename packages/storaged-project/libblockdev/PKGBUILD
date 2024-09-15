@@ -1,8 +1,8 @@
 pkgname=libblockdev
 
 arch=(x86_64)
-pkgver=3.1.1+2859+f9eb41d6
-pkgrel=1
+pkgver=3.2.0+2873+f9c69850
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://github.com/storaged-project/libblockdev.git)

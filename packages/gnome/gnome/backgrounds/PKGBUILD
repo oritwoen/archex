@@ -1,11 +1,11 @@
-pkgname=geary
+pkgname=gnome-backgrounds
 
-arch=(x86_64)
-pkgver=46.0+7148+e91606b25
-pkgrel=2
+arch=(any)
+pkgver=47.beta+1499+5685d8f
+pkgrel=38
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/gnome/geary.git)
+source=(git+https://gitlab.gnome.org/gnome/gnome-backgrounds.git)
 
 pkgver() {
 	cd $pkgname
@@ -18,17 +18,10 @@ pkgver() {
 }
 
 build() {
-	local options=(
-		-D profile=release
-		-D valadoc=disabled
-		-D libunwind=disabled
-	)
-
-	arch-meson $pkgname build "${options[@]}"
-
+	arch-meson $pkgname build
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "${pkgdir}"
+	meson install -C build --destdir "$pkgdir"
 }

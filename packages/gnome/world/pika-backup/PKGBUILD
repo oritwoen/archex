@@ -2,7 +2,7 @@ pkgname=pika-backup
 
 arch=(x86_64)
 pkgver=0.6.2+1589+f03327c
-pkgrel=32
+pkgrel=38
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/world/pika-backup.git)

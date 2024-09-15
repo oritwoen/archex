@@ -1,29 +1,25 @@
-pkgname=adwaita-icon-theme
+pkgname=gnome-tweaks
 
 arch=(any)
-pkgver=47.beta+3973+3dedf8207
-pkgrel=51
+pkgver=47.alpha+2141+7b95525
+pkgrel=34
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/gnome/adwaita-icon-theme.git)
-
-provides=(adwaita-cursors)
-replaces=(adwaita-cursors)
-conflicts=(adwaita-cursors)
+source=(git+https://gitlab.gnome.org/gnome/gnome-tweaks.git)
 
 pkgver() {
 	cd $pkgname
-	
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $4}')
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
 	local _commith=$(git rev-parse --short HEAD)
-	
+
 	echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
 	arch-meson $pkgname build
-	
+
 	meson compile -C build
 }
 
