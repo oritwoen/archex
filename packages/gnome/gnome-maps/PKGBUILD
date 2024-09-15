@@ -2,7 +2,7 @@ pkgname=gnome-maps
 
 arch=(x86_64)
 pkgver=48.rc+4203+dfaafd11
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-maps.git)
