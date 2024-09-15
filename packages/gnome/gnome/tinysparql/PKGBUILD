@@ -2,7 +2,7 @@ pkgname=tinysparql
 
 arch=(x86_64)
 pkgver=3.8.rc+16190+7ca46ac4f
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/tinysparql.git)
