@@ -1,7 +1,7 @@
 pkgname=papers
 
 arch=(x86_64)
-pkgver=47.0+10155+659775a94
+pkgver=47.0+10156+03ebf0ede
 pkgrel=1
 
 b2sums=(SKIP)
