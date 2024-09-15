@@ -1,8 +1,8 @@
 pkgname=fwupd
 
 arch=(x86_64)
-pkgver=2.0.0+11098+9c15b769d
-pkgrel=3
+pkgver=2.0.0+11102+4ca2389fa
+pkgrel=1
 
 b2sums=(
 	SKIP 
