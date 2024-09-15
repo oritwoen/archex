@@ -1,8 +1,8 @@
 pkgname=gnome-online-accounts
 
 arch=(x86_64)
-pkgver=3.51.4+3389+8ec42400
-pkgrel=2
+pkgver=3.53.0+3391+cd9fd0d1
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-online-accounts.git)
