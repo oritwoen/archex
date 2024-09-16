@@ -2,7 +2,7 @@ pkgname=glu
 
 arch=(x86_64)
 pkgver=9.0.3+219+a2b96c7
-pkgrel=83
+pkgrel=84
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/mesa/glu.git)
