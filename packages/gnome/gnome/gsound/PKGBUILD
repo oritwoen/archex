@@ -2,7 +2,7 @@ pkgname=gsound
 
 arch=(x86_64)
 pkgver=1.0.3+93+5f6a56f
-pkgrel=39
+pkgrel=40
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gsound.git)
