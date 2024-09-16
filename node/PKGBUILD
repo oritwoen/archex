@@ -1,7 +1,7 @@
 pkgname=node
 
 arch=(x86_64)
-pkgver=23+0+0+42345+53ede878a51
+pkgver=23+0+0+42346+c1afd2c8e32
 pkgrel=1
 
 b2sums=(SKIP)
