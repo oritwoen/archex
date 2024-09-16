@@ -1,8 +1,8 @@
 pkgname=passim
 
 arch=(x86_64)
-pkgver=0.1.9+165+c1fa205
-pkgrel=16
+pkgver=0.1.9+166+c4741dd
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/hughsie/passim.git)
