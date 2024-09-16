@@ -2,7 +2,7 @@ pkgname=gnome-session
 
 arch=(x86_64)
 pkgver=46.0+6763+a897fbf7
-pkgrel=31
+pkgrel=32
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-session.git)
