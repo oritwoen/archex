@@ -2,7 +2,7 @@ pkgname=shared-mime-info
 
 arch=(x86_64)
 pkgver=2.4+2031+815b520
-pkgrel=39
+pkgrel=40
 
 b2sums=(
 	SKIP 
