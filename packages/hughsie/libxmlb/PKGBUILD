@@ -1,8 +1,8 @@
 pkgname=libxmlb
 
 arch=(x86_64)
-pkgver=0.3.20+593+76516b9
-pkgrel=16
+pkgver=0.3.20+594+323cee9
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/hughsie/libxmlb.git)
