@@ -1,7 +1,7 @@
 pkgname=glycin
 
 arch=(x86_64)
-pkgver=1.1.1+347+ce58882
+pkgver=1.1.1+348+11088de
 pkgrel=1
 
 b2sums=(SKIP)
