@@ -1,8 +1,8 @@
 pkgname=gnome-tweaks
 
 arch=(any)
-pkgver=47.alpha+2141+7b95525
-pkgrel=34
+pkgver=47.alpha+2142+b7ac66e
+pkgrel=4
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-tweaks.git)
