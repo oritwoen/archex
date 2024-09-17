@@ -1,8 +1,8 @@
 pkgname=gjs
 
 arch=(x86_64)
-pkgver=1.81.90+5635+098ea830
-pkgrel=6
+pkgver=1.82.0+5637+50723b98
+pkgrel=1
 
 b2sums=(SKIP SKIP)
 source=(
