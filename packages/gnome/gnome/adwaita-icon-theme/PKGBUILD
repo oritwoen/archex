@@ -1,8 +1,8 @@
 pkgname=adwaita-icon-theme
 
 arch=(any)
-pkgver=47.beta+3973+3dedf8207
-pkgrel=57
+pkgver=47.0+3974+4a5238759
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/adwaita-icon-theme.git)
