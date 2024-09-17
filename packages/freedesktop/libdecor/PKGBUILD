@@ -2,7 +2,7 @@ pkgname=libdecor
 
 arch=(x86_64)
 pkgver=0.2.2+295+c2bd8ad
-pkgrel=43
+pkgrel=44
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/libdecor/libdecor.git)
