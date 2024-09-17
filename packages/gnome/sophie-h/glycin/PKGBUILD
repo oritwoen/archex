@@ -2,7 +2,7 @@ pkgname=glycin
 
 arch=(x86_64)
 pkgver=1.1.1+348+11088de
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/sophie-h/glycin.git)
