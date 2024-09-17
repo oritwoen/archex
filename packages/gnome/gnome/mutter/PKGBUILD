@@ -2,7 +2,7 @@ pkgname=mutter
 
 arch=(x86_64)
 pkgrel=1
-pkgver=47.0+32669+75b8d3a16
+pkgver=47.0+32671+1247452d1
 
 b2sums=(SKIP SKIP)
 source=(
@@ -30,6 +30,9 @@ build() {
 		-D profiler=false
 		-D installed_tests=false
 	)
+
+	# Inject gvdb
+	export MESON_PACKAGE_CACHE_DIR="$srcdir"
 
 	arch-meson mutter build "${options[@]}"
 
