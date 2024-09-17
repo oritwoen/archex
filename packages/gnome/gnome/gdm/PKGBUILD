@@ -1,8 +1,8 @@
 pkgname=gdm
 
 arch=(x86_64)
-pkgver=47.0+9683+9c78ff6d0
-pkgrel=2
+pkgver=47.0+9685+6b76b9360
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gdm.git)
