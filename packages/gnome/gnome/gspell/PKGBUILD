@@ -2,7 +2,7 @@ pkgname=gspell
 
 arch=(x86_64)
 pkgver=1.14.0++
-pkgrel=6
+pkgrel=7
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gspell.git)
