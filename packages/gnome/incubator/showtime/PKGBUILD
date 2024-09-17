@@ -1,8 +1,8 @@
 pkgname=showtime
 
 arch=(x86_64)
-pkgver=47.alpha+237+5691247
-pkgrel=1
+pkgver=47.alpha+238+54791cb
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/incubator/showtime.git)
