@@ -1,7 +1,7 @@
 pkgname=pipewire
 
 arch=(x86_64)
-pkgver=1.3.0+12816+ec5684302
+pkgver=1.3.0+12818+911a601b9
 pkgrel=1
 
 b2sums=(SKIP)
