@@ -1,8 +1,8 @@
 pkgname=webkitgtk-6.0
 
 arch=(x86_64)
-pkgrel=43
-pkgver=2.45.92
+pkgrel=44
+pkgver=2.46.0
 
 b2sums=(SKIP)
 source=(https://webkitgtk.org/releases/webkitgtk-$pkgver.tar.xz)
