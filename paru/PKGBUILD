@@ -1,8 +1,8 @@
 pkgname=paru
 
 arch=(x86_64)
-pkgver=2.0.3+1135+90656a9
-pkgrel=35
+pkgver=2.0.4+1158+9177d82
+pkgrel=1
 
 b2sums=(SKIP SKIP)
 source=(
