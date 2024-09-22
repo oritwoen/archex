@@ -2,7 +2,7 @@ pkgname=folks
 
 arch=(x86_64)
 pkgver=0.15.10+3045+ed9dd294
-pkgrel=48
+pkgrel=49
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/folks.git)
