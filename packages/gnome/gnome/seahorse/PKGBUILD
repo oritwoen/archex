@@ -1,8 +1,8 @@
 pkgname=seahorse
 
 arch=(x86_64)
-pkgver=43.0+5891+7caa4021
-pkgrel=6
+pkgver=47.0.1+5898+c6fcd381
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/seahorse.git)
