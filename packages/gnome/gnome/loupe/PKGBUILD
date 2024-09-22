@@ -1,7 +1,7 @@
 pkgname=loupe
 
 arch=(x86_64)
-pkgver=47.0+1105+0bdfd71
+pkgver=47.0+1111+450a500
 pkgrel=1
 
 b2sums=(SKIP)
