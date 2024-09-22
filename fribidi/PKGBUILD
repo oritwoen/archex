@@ -2,7 +2,7 @@ pkgname=fribidi
 
 arch=(x86_64)
 pkgver=1.0.15+428+3826589
-pkgrel=51
+pkgrel=52
 
 b2sums=(SKIP)
 source=(git+https://github.com/fribidi/fribidi.git)
