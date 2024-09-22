@@ -1,7 +1,7 @@
 pkgname=tuba
 
 arch=(any)
-pkgver=0.8.4+1791+2a1b0663
+pkgver=0.8.4+1795+1f462234
 pkgrel=1
 
 b2sums=(SKIP)
