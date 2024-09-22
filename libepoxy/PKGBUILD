@@ -2,7 +2,7 @@ pkgname=libepoxy
 
 arch=(x86_64)
 pkgver=1.5.11+594+f13c13c
-pkgrel=45
+pkgrel=46
 
 b2sums=(SKIP)
 source=(git+https://github.com/anholt/libepoxy.git)
