@@ -2,7 +2,7 @@ pkgname=libnice
 
 arch=(x86_64)
 pkgver=0.1.22.1+3055+55ff684d
-pkgrel=15
+pkgrel=16
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/libnice/libnice.git)
