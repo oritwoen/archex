@@ -1,8 +1,8 @@
 pkgname=nautilus
 
 arch=(x86_64)
-pkgrel=1
-pkgver=48.alpha+25534+0c08db0ac
+pkgrel=2
+pkgver=48.alpha+25536+597b7db8e
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/nautilus.git)
@@ -22,8 +22,6 @@ pkgver() {
 }
 
 build() {
-	CFLAGS+=" -Wno-error=sometimes-uninitialized"
-
 	local meson_options=(
 		-D tests=none
 	)
