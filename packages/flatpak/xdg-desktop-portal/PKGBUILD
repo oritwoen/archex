@@ -1,8 +1,8 @@
 pkgname=xdg-desktop-portal
 
 arch=(x86_64)
-pkgver=1.19.0+2052+f6ae3a8
-pkgrel=9
+pkgver=1.19.0+2055+b529f76
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/flatpak/xdg-desktop-portal.git)
