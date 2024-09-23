@@ -2,7 +2,7 @@ pkgname=pipewire
 
 arch=(x86_64)
 pkgver=1.3.0+12852+63b4728d8
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 install=pipewire.install
