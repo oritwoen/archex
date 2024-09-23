@@ -2,7 +2,7 @@ pkgname=libjcat
 
 arch=(x86_64)
 pkgver=0.2.2+208+d29501a
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://github.com/hughsie/libjcat.git)
