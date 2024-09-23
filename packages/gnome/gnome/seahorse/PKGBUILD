@@ -1,7 +1,7 @@
 pkgname=seahorse
 
 arch=(x86_64)
-pkgver=47.0.1+5898+c6fcd381
+pkgver=47.0.1+5899+300850b9
 pkgrel=1
 
 b2sums=(SKIP)
