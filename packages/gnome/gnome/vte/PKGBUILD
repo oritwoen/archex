@@ -2,7 +2,7 @@ pkgname=vte
 
 arch=(x86_64)
 pkgver=0.79.0+5605+c8838779
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/vte.git)
@@ -19,8 +19,6 @@ pkgver() {
 }
 
 build() {
-	#CFLAGS+=" -Wno-error=invalid-constexpr"
-
 	local options=(
 		-D gtk3=false
 	)
