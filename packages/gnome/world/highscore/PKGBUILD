@@ -1,7 +1,7 @@
 pkgname=highscore
 
 arch=(x86_64)
-pkgver=0.1.0+898+1c39a96b
+pkgver=0.1.0+935+2835edce
 pkgrel=1
 
 b2sums=(SKIP)
