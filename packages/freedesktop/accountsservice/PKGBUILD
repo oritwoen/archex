@@ -2,7 +2,7 @@ pkgname=accountsservice
 
 arch=(x86_64)
 pkgver=24.27.62+791+4d57fd3
-pkgrel=82
+pkgrel=83
 
 b2sums=(SKIP SKIP)
 source=(
