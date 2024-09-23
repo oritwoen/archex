@@ -2,7 +2,7 @@ pkgname=baobab
 
 arch=(x86_64)
 pkgver=47.0+2371+e18c727
-pkgrel=3
+pkgrel=4
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/baobab.git)
@@ -18,8 +18,6 @@ pkgver() {
 }
 
 build() {
-	CFLAGS+=" -Wno-error=incompatible-function-pointer-types"
-
 	arch-meson $pkgname build
 	
 	meson compile -C build
