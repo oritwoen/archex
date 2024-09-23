@@ -1,7 +1,7 @@
 pkgname=webkitgtk-6.0
 
 arch=(x86_64)
-pkgrel=47
+pkgrel=48
 pkgver=2.46.0
 
 b2sums=(SKIP)
@@ -31,10 +31,6 @@ build() {
 		-DENABLE_DOCUMENTATION=OFF
 		-DENABLE_MINIBROWSER=ON
 	)
-
-	# JITted code crashes when CET is used
-	#CFLAGS+=' -fcf-protection=none'
-	#CXXFLAGS+=' -fcf-protection=none'
 
 	cmake -S webkitgtk-$pkgver -B build -G Ninja "${options[@]}"
 	cmake --build build
