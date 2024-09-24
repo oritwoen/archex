@@ -2,7 +2,7 @@ pkgname=gnome-system-monitor
 
 arch=(x86_64)
 pkgver=47.0+5217+77986bc1
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-system-monitor.git)
