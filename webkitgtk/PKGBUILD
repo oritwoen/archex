@@ -1,7 +1,7 @@
 pkgname=webkitgtk
 
 arch=(x86_64)
-pkgrel=54
+pkgrel=55
 pkgver=2.46.0
 
 b2sums=(SKIP)
@@ -9,7 +9,9 @@ source=(https://webkitgtk.org/releases/webkitgtk-$pkgver.tar.xz)
 options=(!debug !lto)
 
 #for libedataserverui4
-provides=(libwebkitgtk-6.0.so libwebkitgtk-6.0.so=4-64)
+provides=(libwebkitgtk-6.0.so libwebkitgtk-6.0.so=4-64 webkitgtk-6.0)
+replaces=(webkitgtk-6.0)
+conflicts=(webkitgtk-6.0)
 
 prepare() {
 	cd webkitgtk-$pkgver
