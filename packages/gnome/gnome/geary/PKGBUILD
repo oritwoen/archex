@@ -2,7 +2,7 @@ pkgname=geary
 
 arch=(x86_64)
 pkgver=46.0+7151+1ad0a5960
-pkgrel=11
+pkgrel=12
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/geary.git)
