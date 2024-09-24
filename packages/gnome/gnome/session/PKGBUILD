@@ -2,7 +2,7 @@ pkgname=gnome-session
 
 arch=(x86_64)
 pkgver=47.0.1+6766+51f1872f
-pkgrel=6
+pkgrel=7
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-session.git)
@@ -20,15 +20,15 @@ pkgver() {
 build() {
 	local options=(
 		-D docbook=false
-        -D man=false
-        #-D x11=false //not ready
+		-D man=false
+		-D x11=true
 	)
 
-	arch-meson $pkgname build "${options[@]}"
+	arch-meson $pkgname build ${options[@]}
 
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
