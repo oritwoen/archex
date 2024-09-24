@@ -1,7 +1,7 @@
 pkgname=mesa
 
 arch=(x86_64)
-pkgver=24.3.0+devel+195436+dc7723f7886
+pkgver=24.3.0+devel+195437+56adf421107
 pkgrel=1
 
 b2sums=(SKIP)
@@ -23,7 +23,7 @@ pkgver() {
 
 build() {
 	local options=(
-		-D platforms=x11,wayland
+		-D platforms=wayland
 		#-D egl-native-platform=wayland
 		#-D android-strict=false
 		-D android-libbacktrace=disabled
