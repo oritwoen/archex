@@ -1,4 +1,4 @@
-pkgname=webkitgtk-6.0
+pkgname=webkitgtk
 
 arch=(x86_64)
 pkgrel=54
@@ -30,6 +30,7 @@ build() {
 		-DUSE_SOUP2=OFF
 		-DENABLE_DOCUMENTATION=OFF
 		-DENABLE_MINIBROWSER=ON
+		-D ENABLE_X11_TARGET=OFF
 	)
 
 	cmake -S webkitgtk-$pkgver -B build -G Ninja "${options[@]}"
