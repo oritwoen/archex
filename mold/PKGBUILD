@@ -1,8 +1,8 @@
 pkgname=mold
 
 arch=(x86_64)
-pkgver=2.33.0+6901+0ee12e41
-pkgrel=6
+pkgver=2.33.0+6902+3711ddb9
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/rui314/mold)
