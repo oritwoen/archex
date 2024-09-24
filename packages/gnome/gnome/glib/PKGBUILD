@@ -2,7 +2,7 @@ pkgname=glib2
 
 arch=(x86_64)
 pkgver=2.83.0+30818+84b6f747c
-pkgrel=4
+pkgrel=5
 
 b2sums=(
 	SKIP
@@ -18,9 +18,9 @@ source=(
 	git+https://gitlab.gnome.org/gnome/gvdb.git
 )
 
-replaces=(glib2-devel)
-conflicts=(glib2-devel)
-provides=(glib2-devel libg{lib,io,module,object,thread}-2.0.so=0-64)
+#replaces=(glib2-devel)
+#conflicts=(glib2-devel)
+#provides=(libg{lib,io,module,object,thread}-2.0.so)
 
 pkgver() {
 	cd glib
