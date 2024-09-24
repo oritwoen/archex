@@ -2,7 +2,7 @@ pkgname=localsearch
 
 arch=(x86_64)
 pkgver=3.8.0+14674+1d99e4cc1
-pkgrel=8
+pkgrel=9
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/localsearch.git)
