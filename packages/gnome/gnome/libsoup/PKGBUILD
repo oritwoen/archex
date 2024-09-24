@@ -2,7 +2,7 @@ pkgname=libsoup3
 
 arch=(x86_64)
 pkgver=3.6.0+3928+a35222dd
-pkgrel=6
+pkgrel=7
 
 provides=(libsoup-3.0.so libsoup-3.0.so=0-64)
 
