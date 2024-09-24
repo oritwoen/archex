@@ -1,8 +1,8 @@
 pkgname=tuba
 
 arch=(any)
-pkgver=0.8.4+1795+1f462234
-pkgrel=5
+pkgver=0.8.4+1797+e77fb48e
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/geopJr/tuba.git)
