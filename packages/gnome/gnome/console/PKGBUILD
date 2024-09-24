@@ -2,7 +2,7 @@ pkgname=gnome-console
 
 arch=(x86_64)
 pkgver=48.alpha+1013+a93699a
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 source=($pkgname::git+https://gitlab.gnome.org/gnome/console.git)
