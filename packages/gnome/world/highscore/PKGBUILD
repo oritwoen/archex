@@ -2,7 +2,7 @@ pkgname=highscore
 
 arch=(x86_64)
 pkgver=0.1.0+936+c8c04f59
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/world/highscore.git)
