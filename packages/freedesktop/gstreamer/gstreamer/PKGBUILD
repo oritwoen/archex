@@ -1,0 +1,101 @@
+pkgname=gstreamer
+
+arch=(x86_64)
+pkgver=1.25.0.1+120520+5801e17160
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://gitlab.freedesktop.org/gstreamer/gstreamer.git)
+
+pkgver() {
+	cd $pkgname
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+provides=(gst-plugins-base gst-plugins-base-libs)
+replaces=(gst-plugins-base gst-plugins-base-libs)
+conflicts=(gst-plugins-base gst-plugins-base-libs)
+
+build() {
+	local options=(
+		-D vaapi=enabled
+		-D gst-examples=disabled
+
+		# External subprojects
+		-D libnice=disabled
+
+		# Other options
+		-D orc-source=system
+
+		# License-related feature options
+		-D gpl=enabled
+
+		# Common options specific to GStreamer, automatically inherited by subprojects.
+		-D extra-checks=disabled
+		-D benchmarks=disabled
+		-D qt5=disabled
+		-D qt6=disabled
+		-D tools=enabled
+		-D webrtc=enabled
+
+		# Common options shared by other projects, automatically inherited by subprojects.
+		#-D glib_debug=disabled
+		#-D glib_assert=false
+		#-D glib_checks=false
+		-D tests=disabled
+		-D examples=disabled
+
+		-D gst-plugins-base:libvisual=disabled
+		-D gst-plugins-base:tremor=disabled
+
+		-D gst-plugins-good:rpicamsrc=disabled
+
+
+		-D gst-plugins-bad:debugutils=disabled
+		-D gst-plugins-bad:aja=disabled
+		-D gst-plugins-bad:amfcodec=disabled
+		-D gst-plugins-bad:directfb=disabled
+		-D gst-plugins-bad:directshow=disabled
+		-D gst-plugins-bad:flite=disabled
+		-D gst-plugins-bad:gs=disabled
+		-D gst-plugins-bad:iqa=disabled
+		-D gst-plugins-bad:nvcomp=disabled
+		-D gst-plugins-bad:nvcodec=disabled
+		-D gst-plugins-bad:onnx=disabled
+		-D gst-plugins-bad:openni2=disabled
+		-D gst-plugins-bad:opensles=disabled
+		-D gst-plugins-bad:qt6d3d11=disabled
+		-D gst-plugins-bad:tinyalsa=disabled
+		-D gst-plugins-bad:voaacenc=disabled
+		-D gst-plugins-bad:voamrwbenc=disabled
+		-D gst-plugins-bad:wasapi=disabled
+		-D gst-plugins-bad:wasapi2=disabled
+
+		-D gst-plugins-bad:svtjpegxs=disabled
+		-D gst-plugins-bad:magicleap=disabled
+		-D gst-plugins-bad:cuda-nvmm=disabled
+
+		-D gst-plugins-ugly:sidplay=disabled
+
+		#-D gstreamer:gst_debug=false
+		#-D gstreamer:tracer_hooks=false
+
+		#-D gstreamer:libunwind=disabled
+		#-D gstreamer:libdw=disabled
+		-D gstreamer:dbghelp=disabled
+		#-D gstreamer:coretracers=disabled
+	)
+	
+	arch-meson ${pkgname} build ${options[@]}
+	
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir ${pkgdir}
+}
