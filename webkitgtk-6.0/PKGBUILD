@@ -1,7 +1,7 @@
 pkgname=webkitgtk-6.0
 
 arch=(x86_64)
-pkgrel=53
+pkgrel=54
 pkgver=2.46.0
 
 b2sums=(SKIP)
