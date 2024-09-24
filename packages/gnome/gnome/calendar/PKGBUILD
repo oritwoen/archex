@@ -2,7 +2,7 @@ pkgname=gnome-calendar
 
 arch=(x86_64)
 pkgver=47.1+4931+127199e2
-pkgrel=8
+pkgrel=9
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-calendar.git)
