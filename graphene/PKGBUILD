@@ -2,7 +2,7 @@ pkgname=graphene
 
 arch=(x86_64)
 pkgver=1.11.1+1296+d63bd69
-pkgrel=51
+pkgrel=52
 
 b2sums=(SKIP)
 source=(git+https://github.com/ebassi/graphene.git)
