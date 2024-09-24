@@ -2,7 +2,7 @@ pkgname=gcr-4
 
 arch=(x86_64)
 pkgver=4.3.0+2032+dd3776c
-pkgrel=10
+pkgrel=11
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gcr.git)
