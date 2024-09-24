@@ -2,7 +2,7 @@ pkgname=gamemode
 
 arch=(x86_64)
 pkgver=1.8.2+702+c54d6d4
-pkgrel=27
+pkgrel=28
 
 b2sums=(SKIP)
 source=(git+https://github.com/feralinteractive/gamemode.git)
