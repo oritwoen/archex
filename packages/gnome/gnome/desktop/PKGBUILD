@@ -1,7 +1,7 @@
 pkgname=gnome-desktop
 
 arch=(x86_64)
-pkgrel=39
+pkgrel=40
 pkgver=44.1+6650+f27670d4
 
 b2sums=(SKIP)
