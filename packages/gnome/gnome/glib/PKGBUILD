@@ -2,7 +2,7 @@ pkgname=glib2
 
 arch=(x86_64)
 pkgver=2.83.0+30818+84b6f747c
-pkgrel=5
+pkgrel=6
 
 b2sums=(
 	SKIP
@@ -20,7 +20,7 @@ source=(
 
 #replaces=(glib2-devel)
 #conflicts=(glib2-devel)
-#provides=(libg{lib,io,module,object,thread}-2.0.so)
+provides=(libg{lib,io,module,object,thread}-2.0.so=0-64)
 
 pkgver() {
 	cd glib
