@@ -2,7 +2,7 @@ pkgname=libhighscore
 
 arch=(x86_64)
 pkgver=0.1.0+76+8ebc3ac
-pkgrel=5
+pkgrel=6
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/alicem/libhighscore.git)
