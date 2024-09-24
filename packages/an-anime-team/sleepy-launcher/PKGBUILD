@@ -2,7 +2,7 @@ pkgname=sleepy-launcher
 
 arch=(x86_64)
 pkgver=1.2.1+1002+9fbd46b
-pkgrel=26
+pkgrel=27
 
 source=(
 	$pkgname.desktop
@@ -29,7 +29,7 @@ pkgver() {
 prepare() {
 	cd $pkgname
 
-	cargo fetch --locked
+	cargo fetch --locked --target $(rustc -vV | sed -n 's/host: //p')
 }
 
 build() {
