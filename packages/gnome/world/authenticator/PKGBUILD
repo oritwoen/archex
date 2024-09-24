@@ -2,7 +2,7 @@ pkgname=authenticator
 
 arch=(x86_64)
 pkgver=4.5.0+1849+72c1f5d
-pkgrel=10
+pkgrel=11
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/world/authenticator.git)
