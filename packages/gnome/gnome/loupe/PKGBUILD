@@ -2,7 +2,7 @@ pkgname=loupe
 
 arch=(x86_64)
 pkgver=47.0+1123+f6e347e
-pkgrel=1
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/loupe.git)
@@ -17,14 +17,25 @@ pkgver() {
     echo ${_version}+${_commits}+${_commith}
 }
 
+prepare() {
+	cd ${pkgname}
+
+	export CARGO_HOME="$srcdir/build/cargo-home"
+
+	cargo fetch --locked --target $(rustc -vV | sed -n 's/host: //p')
+}
+
 build() {
-	local meson_options=(
+	local options=(
+		-D x11=disabled
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build "${options[@]}"
+
 	meson compile -C build
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+cd .
+    #meson install -C build --destdir ${pkgdir} --no-rebuild
 }
