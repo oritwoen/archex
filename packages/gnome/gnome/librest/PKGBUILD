@@ -2,7 +2,7 @@ pkgname=librest
 
 arch=(x86_64)
 pkgver=0.9.1+703+23f2d27
-pkgrel=45
+pkgrel=46
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/librest.git)
