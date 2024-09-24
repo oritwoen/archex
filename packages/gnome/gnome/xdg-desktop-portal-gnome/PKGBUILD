@@ -2,7 +2,7 @@ pkgname=xdg-desktop-portal-gnome
 
 arch=(x86_64)
 pkgver=48.alpha+665+0cec3bc
-pkgrel=5
+pkgrel=6
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/xdg-desktop-portal-gnome.git)
