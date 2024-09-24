@@ -1,8 +1,8 @@
 pkgname=mutter
 
 arch=(x86_64)
-pkgrel=4
-pkgver=47.0+32713+bce2790f7
+pkgrel=1
+pkgver=47.0+32714+2666aabde
 
 b2sums=(SKIP SKIP)
 source=(
