@@ -2,7 +2,7 @@ pkgname=power-profiles-daemon
 
 arch=(x86_64)
 pkgver=0.23+514+96e1a8a
-pkgrel=17
+pkgrel=18
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/upower/power-profiles-daemon.git)
