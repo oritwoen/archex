@@ -2,7 +2,7 @@ pkgname=gnome-text-editor
 
 arch=(x86_64)
 pkgver=48.alpha+2102+a577843
-pkgrel=4
+pkgrel=5
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-text-editor.git)
