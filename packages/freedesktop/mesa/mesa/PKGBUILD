@@ -1,7 +1,7 @@
 pkgname=mesa
 
 arch=(x86_64)
-pkgver=24.3.0+devel+195437+56adf421107
+pkgver=24.3.0+devel+195444+7e48cbb029a
 pkgrel=1
 
 b2sums=(SKIP)
@@ -29,7 +29,7 @@ build() {
 		-D android-libbacktrace=disabled
 		-D gallium-drivers=radeonsi,llvmpipe,softpipe,zink
 		-D gallium-extra-hud=true
-		-D gallium-vdpau=enabled
+		-D gallium-vdpau=disabled
 		-D gallium-va=enabled
 		-D gallium-xa=disabled
 		-D gallium-nine=true
@@ -41,7 +41,7 @@ build() {
 		-D shared-glapi=enabled
 		-D gles1=disabled
 		-D gles2=enabled
-		-D glx=dri
+		-D glx=disabled
 		-D egl=enabled
 		-D glvnd=enabled
 		-D microsoft-clc=disabled
@@ -52,6 +52,7 @@ build() {
 		-D lmsensors=enabled
 		-D enable-glcpp-tests=false
 		-D osmesa=true
+		-D xlib-lease=disabled
 		-D vulkan-beta=true
 		-D video-codecs=all
 	)
