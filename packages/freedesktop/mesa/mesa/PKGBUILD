@@ -1,7 +1,7 @@
 pkgname=mesa
 
 arch=(x86_64)
-pkgver=24.3.0+devel+195444+7e48cbb029a
+pkgver=24.3.0+devel+195452+ec59d56c52f
 pkgrel=1
 
 b2sums=(SKIP)
@@ -23,13 +23,13 @@ pkgver() {
 
 build() {
 	local options=(
-		-D platforms=wayland
+		-D platforms=wayland,x11
 		#-D egl-native-platform=wayland
 		#-D android-strict=false
 		-D android-libbacktrace=disabled
 		-D gallium-drivers=radeonsi,llvmpipe,softpipe,zink
 		-D gallium-extra-hud=true
-		-D gallium-vdpau=disabled
+		-D gallium-vdpau=enabled
 		-D gallium-va=enabled
 		-D gallium-xa=disabled
 		-D gallium-nine=true
@@ -41,7 +41,7 @@ build() {
 		-D shared-glapi=enabled
 		-D gles1=disabled
 		-D gles2=enabled
-		-D glx=disabled
+		-D glx=dri
 		-D egl=enabled
 		-D glvnd=enabled
 		-D microsoft-clc=disabled
@@ -52,7 +52,6 @@ build() {
 		-D lmsensors=enabled
 		-D enable-glcpp-tests=false
 		-D osmesa=true
-		-D xlib-lease=disabled
 		-D vulkan-beta=true
 		-D video-codecs=all
 	)
