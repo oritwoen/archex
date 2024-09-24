@@ -2,7 +2,7 @@ pkgname=gnome-backgrounds
 
 arch=(any)
 pkgver=47.0+1500+f1c1f85
-pkgrel=6
+pkgrel=7
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-backgrounds.git)
