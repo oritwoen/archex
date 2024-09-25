@@ -1,8 +1,8 @@
 pkgname=librsvg
 
 arch=(x86_64)
-pkgver=2.59.0+9737+46d65c68
-pkgrel=13
+pkgver=2.59.0+9741+d40e30d3
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/librsvg.git)
