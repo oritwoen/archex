@@ -2,7 +2,7 @@ pkgname=desktop-file-utils
 
 arch=(x86_64)
 pkgver=0.27+372+67d09f0
-pkgrel=61
+pkgrel=62
 
 b2sums=(
 	SKIP 
