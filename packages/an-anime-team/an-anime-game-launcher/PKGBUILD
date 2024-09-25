@@ -2,7 +2,7 @@ pkgname=an-anime-game-launcher
 
 arch=(x86_64)
 pkgver=3.12.1+977+44a2c74
-pkgrel=33
+pkgrel=34
 
 b2sums=(
 	SKIP
