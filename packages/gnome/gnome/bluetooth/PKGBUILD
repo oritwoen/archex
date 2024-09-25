@@ -2,7 +2,7 @@ pkgname=gnome-bluetooth
 
 arch=(x86_64)
 pkgver=47.0+3810+4e0e55a7
-pkgrel=3
+pkgrel=4
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-bluetooth.git)
