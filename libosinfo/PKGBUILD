@@ -2,7 +2,7 @@ pkgname=libosinfo
 
 arch=(x86_64)
 pkgver=1.12.0+1956+8f99c8f
-pkgrel=60
+pkgrel=61
 
 b2sums=(SKIP)
 source=(git+https://gitlab.com/libosinfo/libosinfo.git)
