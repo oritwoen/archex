@@ -1,8 +1,8 @@
 pkgname=gstreamer
 
 arch=(x86_64)
-pkgver=1.25.0.1+120521+4670e1c809
-pkgrel=3
+pkgver=1.25.0.1+120522+7e3f9df9a5
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/gstreamer/gstreamer.git)
