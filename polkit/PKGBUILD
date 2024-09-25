@@ -2,7 +2,7 @@ pkgname=polkit
 
 arch=(x86_64)
 pkgver=126+1249+d68a3b4
-pkgrel=24
+pkgrel=25
 
 b2sums=(SKIP)
 source=(git+https://github.com/polkit-org/polkit.git)
