@@ -2,7 +2,7 @@ pkgname=libdisplay-info
 
 arch=(x86_64)
 pkgver=0.3.0+dev++
-pkgrel=28
+pkgrel=29
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/emersion/libdisplay-info.git)
