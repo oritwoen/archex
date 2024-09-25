@@ -1,8 +1,8 @@
 pkgname=epiphany
 
 arch=(x86_64)
-pkgrel=3
-pkgver=47.0+18350+c19b261f5
+pkgrel=1
+pkgver=47.0+18352+5382f0d61
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/epiphany.git)
