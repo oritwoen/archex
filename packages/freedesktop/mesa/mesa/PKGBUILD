@@ -1,8 +1,8 @@
 pkgname=mesa
 
 arch=(x86_64)
-pkgver=24.3.0+devel+195452+ec59d56c52f
-pkgrel=2
+pkgver=24.3.0+devel+195465+c4d6d9254ab
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/mesa/mesa.git)
