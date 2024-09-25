@@ -2,7 +2,7 @@ pkgname=gnome-autoar
 
 arch=(x86_64)
 pkgver=0.4.5+300+7ca0791
-pkgrel=45
+pkgrel=46
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-autoar.git)
