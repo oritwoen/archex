@@ -2,7 +2,7 @@ pkgname=libadwaita
 
 arch=(x86_64)
 pkgver=1.7.alpha+4481+3831be51
-pkgrel=8
+pkgrel=9
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/libadwaita.git)
