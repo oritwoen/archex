@@ -2,7 +2,7 @@ pkgname=gsettings-desktop-schemas
 
 arch=(x86_64)
 pkgver=47.1+1755+e06b358
-pkgrel=11
+pkgrel=12
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gsettings-desktop-schemas.git)
