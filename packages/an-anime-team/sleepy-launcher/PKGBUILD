@@ -2,7 +2,7 @@ pkgname=sleepy-launcher
 
 arch=(x86_64)
 pkgver=1.2.1+1002+9fbd46b
-pkgrel=34
+pkgrel=35
 
 source=(
 	$pkgname.desktop
