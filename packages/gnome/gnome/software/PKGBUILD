@@ -1,0 +1,39 @@
+pkgname=gnome-software
+
+arch=(x86_64)
+pkgrel=1
+pkgver=48.alpha+13494+a0ab4e668
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/gnome-software.git)
+
+pkgver() {
+	cd ${pkgname}
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+	local options=(
+		-D tests=false
+		-D man=false
+		-D packagekit=false
+		-D fwupd=false #TODO: fix build with true
+		-D flatpak=false
+		-D malcontent=false
+		-D gtk_doc=false
+		-D sysprof=disabled
+	)
+	
+	arch-meson ${pkgname} build ${options[@]}
+	
+	meson compile -C build
+}
+
+package () {
+	meson install -C build --destdir ${pkgdir}
+}
