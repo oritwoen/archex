@@ -1,8 +1,8 @@
 pkgname=networkmanager
 
 arch=(x86_64)
-pkgver=1.51.1+33519+d7d775db82
-pkgrel=10
+pkgver=1.51.1+33525+a8329587c8
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/networkmanager/networkmanager.git)
