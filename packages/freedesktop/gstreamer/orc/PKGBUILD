@@ -2,7 +2,7 @@ pkgname=orc
 
 arch=(x86_64)
 pkgver=0.4.40.1+1796+06d19aa
-pkgrel=23
+pkgrel=24
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/gstreamer/orc.git)
