@@ -1,16 +1,18 @@
-pkgname=libsoup3
+pkgname=libsoup
 
 arch=(x86_64)
 pkgver=3.6.0+3928+a35222dd
-pkgrel=13
+pkgrel=14
 
-provides=(libsoup-3.0.so libsoup-3.0.so=0-64)
+provides=(libsoup-3.0.so libsoup-3.0.so=0-64 libsoup3)
+replaces=(libsoup3)
+conflicts=(libsoup3)
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/libsoup.git)
 
 pkgver() {
-	cd libsoup
+	cd ${pkgname}
 	
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -20,7 +22,7 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
+	local options=(
 		-D docs=disabled
 		-D tests=false
 		-D autobahn=disabled
@@ -28,11 +30,11 @@ build() {
 		-D pkcs11_tests=disabled
 	)
 	
-	arch-meson libsoup build "${meson_options[@]}"
+	arch-meson ${pkgname} build ${options[@]}
 	
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
