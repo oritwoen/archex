@@ -2,7 +2,7 @@ pkgname=vte
 
 arch=(x86_64)
 pkgver=0.79.0+5605+c8838779
-pkgrel=11
+pkgrel=12
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/vte.git)
