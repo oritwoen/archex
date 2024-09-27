@@ -1,8 +1,8 @@
 pkgname=evolution-data-server
 
 arch=(x86_64)
-pkgrel=2
-pkgver=3.55.1+17467+32ea32164
+pkgrel=1
+pkgver=3.55.1+17468+b37082d4e
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/evolution-data-server.git)
