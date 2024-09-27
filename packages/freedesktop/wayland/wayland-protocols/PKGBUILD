@@ -2,7 +2,7 @@ pkgname=wayland-protocols
 
 arch=(any)
 pkgver=1.37+390+f30b27a
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/wayland/wayland-protocols.git)
