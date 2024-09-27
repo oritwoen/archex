@@ -2,7 +2,7 @@ pkgname=glycin
 
 arch=(x86_64)
 pkgver=1.1.1+348+11088de
-pkgrel=9
+pkgrel=20
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/sophie-h/glycin.git)
@@ -15,6 +15,14 @@ pkgver() {
 	local _commith=$(git rev-parse --short HEAD)
 
 	echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	cd ${pkgname}
+
+	export CARGO_HOME="$srcdir/build/cargo-home"
+
+	cargo fetch --target $(rustc -vV | sed -n 's/host: //p')
 }
 
 build() {
