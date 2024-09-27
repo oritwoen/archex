@@ -1,7 +1,7 @@
 pkgname=gstreamer
 
 arch=(x86_64)
-pkgver=1.25.0.1+120524+2d91521dfc
+pkgver=1.25.0.1+120537+e758ffa2cf
 pkgrel=1
 
 b2sums=(SKIP)
