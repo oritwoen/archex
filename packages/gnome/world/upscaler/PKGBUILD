@@ -2,7 +2,7 @@ pkgname=upscaler
 
 arch=(x86_64)
 pkgver=1.3.3+427+2191427
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/world/upscaler.git)
