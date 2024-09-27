@@ -1,7 +1,7 @@
 pkgname=gnome-usage
 
 arch=(x86_64)
-pkgver=46.0+939+6550dc7
+pkgver=46.0+940+967c3d8
 pkgrel=1
 
 b2sums=(SKIP)
