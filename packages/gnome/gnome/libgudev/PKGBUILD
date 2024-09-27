@@ -2,7 +2,7 @@ pkgname=libgudev
 
 arch=(x86_64)
 pkgver=238+88+bd531e8
-pkgrel=47
+pkgrel=48
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/libgudev.git)
