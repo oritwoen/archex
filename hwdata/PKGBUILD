@@ -1,8 +1,8 @@
 pkgname=hwdata
 
 arch=(x86_64)
-pkgver=0.387++
-pkgrel=35
+pkgver=0.387+7633+ab065687
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://github.com/vcrhonek/hwdata.git)
