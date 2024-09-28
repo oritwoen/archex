@@ -1,8 +1,8 @@
 pkgname=loupe
 
 arch=(x86_64)
-pkgver=47.0+1129+6a191b5
-pkgrel=2
+pkgver=47.0+1136+ace2566
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/loupe.git)
