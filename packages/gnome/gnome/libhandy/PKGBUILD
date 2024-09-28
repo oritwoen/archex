@@ -1,8 +1,8 @@
 pkgname=libhandy
 
 arch=(x86_64)
-pkgver=1.8.0++
-pkgrel=23
+pkgver=1.8.0+7716+6d084587
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/libhandy.git)
