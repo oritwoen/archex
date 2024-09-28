@@ -2,7 +2,7 @@ pkgname=alpaca
 
 arch=(x86_64)
 pkgver=2.0.5+861+b488b64
-pkgrel=6
+pkgrel=15
 
 b2sums=(SKIP)
 source=(git+https://github.com/jeffser/alpaca.git)
