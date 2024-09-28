@@ -1,8 +1,8 @@
 pkgname=libdisplay-info
 
 arch=(x86_64)
-pkgver=0.3.0+dev++
-pkgrel=35
+pkgver=0.3.0+dev+7638+88582033
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/emersion/libdisplay-info.git)
