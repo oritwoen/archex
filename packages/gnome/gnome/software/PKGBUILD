@@ -1,8 +1,8 @@
 pkgname=gnome-software
 
 arch=(x86_64)
-pkgrel=2
-pkgver=48.alpha+13494+a0ab4e668
+pkgrel=1
+pkgver=48.alpha+13499+dd39fba97
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-software.git)
