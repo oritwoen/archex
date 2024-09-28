@@ -1,7 +1,7 @@
 pkgname=evolution-data-server
 
 arch=(x86_64)
-pkgrel=1
+pkgrel=3
 pkgver=3.55.1+17468+b37082d4e
 
 b2sums=(SKIP)
