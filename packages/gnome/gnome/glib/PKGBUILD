@@ -1,7 +1,7 @@
 pkgname=glib2
 
 arch=(x86_64)
-pkgver=2.83.0+30866+0012d1921
+pkgver=2.83.0+30870+019de2cbb
 pkgrel=1
 
 b2sums=(
