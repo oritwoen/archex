@@ -2,7 +2,7 @@ pkgname=libsoup2
 
 arch=(x86_64)
 pkgver=2.74.3+3001+4a6b9178
-pkgrel=2
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/libsoup.git#tag=2.74.3)
