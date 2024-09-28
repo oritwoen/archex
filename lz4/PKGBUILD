@@ -2,7 +2,7 @@ pkgname=lz4
 
 arch=(x86_64)
 pkgver=1.10.0+3535+e0781fbe
-pkgrel=58
+pkgrel=65
 
 b2sums=(SKIP)
 source=(git+https://github.com/lz4/lz4.git)
