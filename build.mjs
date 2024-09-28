@@ -4,7 +4,7 @@ import driver from "unstorage/drivers/fs-lite";
 import { execa } from 'execa';
 
 const storage = createStorage({
-	driver: driver({ base: "." }),
+	driver: driver({ base: "./pkgs" }),
 });
 
 const packages = await storage.getKeys();
@@ -12,6 +12,8 @@ const pkgbuild = packages.filter(pkg => pkg.endsWith('PKGBUILD'))
 
 for await (const pkg of pkgbuild) {
 	try {
+		await execa('sudo', ['rm', '-rf', '/var/lib/aurbuild'], { stdio: 'inherit'})
+
 		const pth = pkg.replaceAll(':', '/')
 		const dir = pkg.split(':').slice(0, -1).join('/')
 
@@ -25,7 +27,11 @@ for await (const pkg of pkgbuild) {
 
 		await storage.setItem(pkg, updt)
 
-		await execa('paru', ['-B', dir, '--noconfirm'], { stdio: 'inherit'})
+		let localRepo = 'chroot';
+
+		if (dir.startsWith('gnome')) localRepo = 'gnome'
+
+		await execa('paru', ['-B', dir, '--noconfirm', '--localrepo', localRepo], { stdio: 'inherit'})
 
 		const updatedFile = await storage.getItem(pkg)
 		const nextVersion = updatedFile.match(/^pkgver=(.+)$/m)[1]
