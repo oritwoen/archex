@@ -1,8 +1,8 @@
 pkgname=libgdata
 
 arch=(x86_64)
-pkgver=0.19.0++
-pkgrel=23
+pkgver=0.19.0+7714+9d257a2c
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/libgdata.git)
