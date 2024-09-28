@@ -2,7 +2,7 @@ pkgname=appstream
 
 arch=(x86_64)
 pkgver=1.0.4+4510+3203d61a
-pkgrel=21
+pkgrel=30
 
 b2sums=(SKIP)
 source=(git+https://github.com/ximion/appstream.git)
