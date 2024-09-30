@@ -1,7 +1,7 @@
 pkgname=pipewire
 
 arch=(x86_64)
-pkgver=1.3.0+12872+0e5d8fdc3
+pkgver=1.3.0+12878+273a2b65a
 pkgrel=1
 
 b2sums=(SKIP)
@@ -22,18 +22,47 @@ pkgver() {
 	echo ${_version}+${_commits}+${_commith}
 }
 
+depends=(
+	sbc
+	sdl2
+	opus
+	avahi
+	systemd
+	gstreamer
+	gst-plugins-base
+	webrtc-audio-processing-1
+
+	lilv
+	libpulse
+	libmysofa
+	libsndfile
+	libcanberra
+)
+
+makedepends=(
+	git
+	meson
+	jack2
+	bluez-libs
+)
+
 build() {
 	local options=(
 		-D examples=disabled
 		-D tests=disabled
 		-D selinux=disabled
-		-D jack-devel=true
-		-D libjack-path=/usr/lib
-		-D bluez5-codec-lc3plus=disabled
-		-D vulkan=enabled
-		-D udevrulesdir=/usr/lib/udev/rules.d
-		-D session-managers=[]
-		-D rlimits-install=false
+		#-D jack-devel=true
+		#-D libjack-path=/usr/lib
+		#-D bluez5-codec-lc3plus=disabled
+		#-D vulkan=enabled
+		#-D udevrulesdir=/usr/lib/udev/rules.d
+		#-D session-managers=[]
+		#-D rlimits-install=false
+		-D x11=disabled
+		-D x11-xfixes=disabled
+		-D legacy-rtkit=false
+		-D flatpak=disabled
+		-D libffado=disabled
 		-D snap=disabled
 	)
 
