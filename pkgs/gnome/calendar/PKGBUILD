@@ -1,4 +1,4 @@
-pkgname=gnome-calendar
+pkgname=calendar
 
 arch=(x86_64)
 pkgver=47.1+4931+127199e2
@@ -8,7 +8,7 @@ b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-calendar.git)
 
 pkgver() {
-	cd $pkgname
+	cd gnome-calendar
 
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -18,11 +18,11 @@ pkgver() {
 }
 
 build() {
-	arch-meson $pkgname build
+	arch-meson gnome-calendar build
 	
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
