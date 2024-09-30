@@ -12,8 +12,6 @@ const pkgbuild = packages.filter(pkg => pkg.endsWith('PKGBUILD'))
 
 for await (const pkg of pkgbuild) {
 	try {
-		await execa('sudo', ['rm', '-rf', '/var/lib/aurbuild'], { stdio: 'inherit'})
-
 		const pth = pkg.replaceAll(':', '/')
 		const dir = pkg.split(':').slice(0, -1).join('/')
 

@@ -1,5 +1,6 @@
 **/pkg
 **/src
 **/.SRCINFO
+**/*.log
 
 node_modules
