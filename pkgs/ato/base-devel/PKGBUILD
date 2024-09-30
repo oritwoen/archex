@@ -1,0 +1,15 @@
+pkgname=base-devel
+pkgver=1.1
+pkgrel=11
+
+depends=(
+	sed
+	sudo
+	gawk
+	grep
+	mold
+	clang
+	pacman
+	fakeroot
+	archlinux-keyring
+)
