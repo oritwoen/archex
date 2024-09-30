@@ -1,6 +1,6 @@
 pkgname=base-devel
 pkgver=1.1
-pkgrel=11
+pkgrel=13
 
 depends=(
 	sed
@@ -10,6 +10,8 @@ depends=(
 	mold
 	clang
 	pacman
+	pkgconf
+	gettext
 	fakeroot
 	archlinux-keyring
 )
