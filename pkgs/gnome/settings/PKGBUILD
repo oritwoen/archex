@@ -1,0 +1,75 @@
+pkgname=settings
+
+arch=(x86_64)
+pkgver=48.alpha+24541+8f5c939bb
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/gnome-control-center.git)
+
+replaces=(gnome-keybindings gnome-control-center)
+
+depends=(
+	gtk4
+	tecla
+	colord
+	udisks2
+	smbclient
+	colord-gtk4
+	accountsservice
+
+	gnome-desktop-4
+	gnome-bluetooth-3.0
+	gnome-settings-daemon
+	gnome-online-accounts
+
+	libgoa
+	libibus
+	libgtop
+	libpulse
+	libcolord
+	libadwaita
+	libnma-gtk4
+	libpwquality
+)
+
+makedepends=(
+	git
+	meson
+)
+
+pkgver() {
+	cd gnome-control-center
+
+	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	cd gnome-control-center
+
+	#git submodule init subprojects/gvc
+	#git submodule set-url subprojects/gvc "$srcdir/libgnome-volume-control"
+	#git -c protocol.file.allow=always -c protocol.allow=never submodule update
+}
+
+build() {
+	local options=(
+		-D ibus=true #TODO: verify
+		-D snap=false
+		-D tests=false
+		-D wellbeing=enabled
+	)
+
+	arch-meson gnome-control-center build ${options[@]}
+
+	meson compile -C build
+}
+
+package() {
+	meson install -C build --destdir ${pkgdir}
+}
+
