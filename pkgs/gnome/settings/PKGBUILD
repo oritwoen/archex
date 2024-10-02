@@ -2,7 +2,7 @@ pkgname=settings
 
 arch=(x86_64)
 pkgver=48.alpha+24541+8f5c939bb
-pkgrel=1
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-control-center.git)
@@ -18,9 +18,9 @@ depends=(
 	colord-gtk4
 	accountsservice
 
+	settings-daemon #gnome-settings-daemon
 	gnome-desktop-4
 	gnome-bluetooth-3.0
-	gnome-settings-daemon
 	gnome-online-accounts
 
 	libgoa
