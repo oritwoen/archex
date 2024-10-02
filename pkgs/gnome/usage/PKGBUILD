@@ -1,14 +1,30 @@
-pkgname=gnome-usage
+pkgname=usage
 
 arch=(x86_64)
-pkgver=46.0+940+967c3d8
-pkgrel=2
+pkgver=46.0+941+2f13e77
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-usage.git)
 
+replaces=(gnome-usage)
+
+depends=(
+	gtk4
+
+	libgee
+	libgtop
+	libadwaita
+)
+
+makedepends=(
+	git
+	vala
+	meson
+)
+
 pkgver() {
-	cd $pkgname
+	cd gnome-usage
 	
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -18,11 +34,11 @@ pkgver() {
 }
 
 build() {
-	arch-meson $pkgname build
+	arch-meson gnome-usage build
 
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
