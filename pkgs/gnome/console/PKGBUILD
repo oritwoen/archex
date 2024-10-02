@@ -1,11 +1,26 @@
-pkgname=gnome-console
+pkgname=console
 
 arch=(x86_64)
-pkgver=48.alpha+1016+c0e8202
+pkgver=48.alpha+1022+6966d54
 pkgrel=1
 
 b2sums=(SKIP)
-source=($pkgname::git+https://gitlab.gnome.org/gnome/console.git)
+source=(git+https://gitlab.gnome.org/gnome/console.git)
+
+replaces=(gnome-console)
+
+depends=(
+	vte4
+	pango
+
+	libgtop
+	libadwaita
+)
+
+makedepends=(
+	git
+	meson
+)
 
 pkgver() {
 	cd $pkgname
@@ -24,5 +39,5 @@ build() {
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
