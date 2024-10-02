@@ -1,11 +1,22 @@
 pkgname=libadwaita
 
 arch=(x86_64)
-pkgver=1.7.alpha+4489+89857658
+pkgver=1.7.alpha+4495+daa4586f
 pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/libadwaita.git)
+
+depends=(
+	gtk4
+	appstream
+)
+
+makedepends=(
+	git
+	meson
+	sassc
+)
 
 pkgver() {
 	cd $pkgname
@@ -19,14 +30,18 @@ pkgver() {
 
 build() {
 	local options=(
+		-D introspection=disabled #TODO: verify
+		-D vapi=false #TODO: verify
+
 		-D tests=false
 		-D examples=false
 	)
 
-	arch-meson $pkgname build "${options[@]}"
+	arch-meson $pkgname build ${options[@]}
+
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
