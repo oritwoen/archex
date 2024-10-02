@@ -1,4 +1,4 @@
-pkgname=gnome-contacts
+pkgname=contacts
 
 arch=(x86_64)
 pkgver=47.0+4077+80772da7
@@ -7,8 +7,25 @@ pkgrel=13
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-contacts.git)
 
+replaces=(gnome-contacts)
+
+depends=(
+	gtk4
+	folks
+	qrencode
+
+	libadwaita
+	libportal-gtk4
+)
+
+makedepends=(
+	git
+	vala
+	meson
+)
+
 pkgver() {
-	cd $pkgname
+	cd gnome-contacts
 
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -22,11 +39,11 @@ build() {
 		-D manpage=false
 	)
 
-	arch-meson $pkgname build "${options[@]}"
+	arch-meson gnome-contacts build ${options[@]}
 
 	meson compile -C build
 }
 
 package() {
-	DESTDIR="$pkgdir" meson install -C build
+	meson install -C build --destdir ${pkgdir}
 }
