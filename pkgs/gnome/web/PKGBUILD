@@ -1,14 +1,36 @@
-pkgname=epiphany
+pkgname=web
 
 arch=(x86_64)
-pkgrel=3
-pkgver=47.0+18352+5382f0d61
+pkgrel=1
+pkgver=47.0+18366+17b72a398
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/epiphany.git)
 
+replaces=(epiphany)
+
+depends=(
+	gtk4
+	gcr-4
+	cairo
+	gstreamer
+	iso-codes
+	gdk-pixbuf2
+	webkitgtk-6.0
+	gsettings-desktop-schemas
+
+	libadwaita
+	libportal-gtk4
+)
+
+makedepends=(
+	git
+	meson
+	itstool
+)
+
 pkgver() {
-	cd $pkgname
+	cd epiphany
 
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -18,18 +40,17 @@ pkgver() {
 }
 
 build() {
-	CFLAGS+=" -Wno-error=declaration-after-statement"
+	#CFLAGS+=" -Wno-error=declaration-after-statement"
 
 	local meson_options=(
-		-D tech_preview=true
 		-D unit_tests=disabled
 	)
 	
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson epiphany build ${options[@]}
 
 	meson compile -C build
 }
 
 package () {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
