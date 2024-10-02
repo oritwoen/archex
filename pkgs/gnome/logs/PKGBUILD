@@ -1,4 +1,4 @@
-pkgname=gnome-logs
+pkgname=logs
 
 arch=(x86_64)
 pkgver=45.0+1360+699e519
@@ -7,8 +7,22 @@ pkgrel=20
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-logs.git)
 
+replaces=(gnome-logs)
+
+depends=(
+	gtk4
+
+	libadwaita
+)
+
+makedepends=(
+	git
+	meson
+	itstool
+)
+
 pkgver() {
-	cd $pkgname
+	cd gnome-logs
 
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $6}')
 	local _commits=$(git rev-list --count HEAD)
@@ -18,10 +32,11 @@ pkgver() {
 }
 
 build() {
-	arch-meson $pkgname build "${options[@]}"
+	arch-meson gnome-logs build
+
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
