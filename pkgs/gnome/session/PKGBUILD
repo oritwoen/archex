@@ -1,4 +1,4 @@
-pkgname=gnome-session
+pkgname=session
 
 arch=(x86_64)
 pkgver=47.0.1+6766+51f1872f
@@ -7,8 +7,24 @@ pkgrel=13
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-session.git)
 
+provides=(gnome-session)
+replaces=(gnome-session)
+conflicts=(gnome-session)
+
+depends=(
+	gtk3
+	systemd
+
+	gnome-desktop
+)
+
+makedepends=(
+	git
+	meson
+)
+
 pkgver() {
-	cd $pkgname
+	cd gnome-session
 
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -21,10 +37,10 @@ build() {
 	local options=(
 		-D docbook=false
 		-D man=false
-		-D x11=true
+		-D x11=false
 	)
 
-	arch-meson $pkgname build ${options[@]}
+	arch-meson gnome-session build ${options[@]}
 
 	meson compile -C build
 }
