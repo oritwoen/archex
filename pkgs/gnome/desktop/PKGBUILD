@@ -1,13 +1,14 @@
-pkgname=gnome-desktop
+pkgname=desktop
 
 arch=(x86_64)
-pkgrel=50
-pkgver=44.1+6650+f27670d4
+pkgrel=1
+pkgver=44.1+6651+3bd4bdde
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-desktop.git)
 
 provides=(
+	gnome-desktop
 	gnome-desktop-4
 	gnome-desktop-common
 	libgnome-desktop-3.so 
@@ -15,17 +16,32 @@ provides=(
 )
 
 replaces=(
+	gnome-desktop
 	gnome-desktop-4
 	gnome-desktop-common
 )
 
 conflicts=(
+	gnome-desktop
 	gnome-desktop-4
 	gnome-desktop-common
 )
 
+depends=(
+	gtk3
+	gtk4
+	systemd
+	gdk-pixbuf2
+)
+
+makedepends=(
+	git
+	meson
+	gobject-introspection
+)
+
 pkgver() {
-	cd $pkgname
+	cd gnome-desktop
 
 	local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -38,13 +54,15 @@ build() {
 	local options=(
 		-D desktop_docs=false
 		-D debug_tools=false
+		-D introspection=true #TODO: verify if false
+		-D legacy_library=true #TODO: verify if false
 	)
 
-	arch-meson $pkgname build "${options[@]}"
+	arch-meson gnome-desktop build ${options[@]}
 
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
