@@ -1,12 +1,30 @@
 pkgname=vte
 
 arch=(x86_64)
-pkgver=0.79.0+5605+c8838779
-pkgrel=14
+pkgver=0.79.0+5607+c90b078e
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/vte.git)
-options=(!lto)
+#options=(!lto)
+
+provides=(vte3 vte4 vte-common)
+replaces=(vte3 vte4 vte-common)
+conflicts=(vte3 vte4 vte-common)
+
+depends=(
+	gtk4
+	cairo
+	pango
+	systemd
+)
+
+makedepends=(
+	git
+	vala
+	meson
+	gobject-introspection
+)
 
 pkgver() {
 	cd $pkgname
@@ -20,6 +38,8 @@ pkgver() {
 
 build() {
 	local options=(
+		-D a11y=true #TODO: verify
+		-D gir=true #TODO: verify
 		-D gtk3=false
 	)
 
