@@ -7,6 +7,18 @@ pkgrel=63
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/folks.git)
 
+depends=(
+	libgee
+	evolution-data-server
+)
+
+makedepends=(
+	git
+	vala
+	meson
+	gobject-introspection
+)
+
 pkgver() {
 	cd $pkgname
 
@@ -18,15 +30,15 @@ pkgver() {
 }
 
 build() {
-	local meson_options=(
+	local options=(
 		-D telepathy_backend=false
 		-D tests=false
 	)
 
-	arch-meson $pkgname build "${meson_options[@]}"
+	arch-meson $pkgname build ${options[@]}
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
