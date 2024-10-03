@@ -1,13 +1,39 @@
 pkgname=mutter
 
 arch=(x86_64)
-pkgrel=1
-pkgver=47.0+32717+9eadeec742
+pkgrel=2
+pkgver=47.0+32728+077eb80a8d
 
 b2sums=(SKIP SKIP)
 source=(
 	git+https://gitlab.gnome.org/gnome/gvdb.git
 	git+https://gitlab.gnome.org/gnome/mutter.git
+)
+
+depends=(
+	gtk4
+	pango
+	graphene
+	gdk-pixbuf2
+	startup-notification
+
+	xorg-xwayland
+	gnome-desktop-4
+	settings-daemon
+	gsettings-desktop-schemas
+
+	libei
+	libinput
+	libxkbfile
+	libpipewire
+	libdisplay-info
+)
+
+makedepends=(
+	git
+	meson
+	wayland-protocols
+	gobject-introspection
 )
 
 pkgver() {
@@ -23,6 +49,7 @@ pkgver() {
 build() {
 	local options=(
 		-D x11=false
+		-D sm=false #TODO: verify
 		-D cogl_tests=false
 		-D clutter_tests=false
 		-D mutter_tests=false
@@ -34,11 +61,11 @@ build() {
 	# Inject gvdb
 	export MESON_PACKAGE_CACHE_DIR="$srcdir"
 
-	arch-meson mutter build "${options[@]}"
+	arch-meson mutter build ${options[@]}
 
 	meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+	meson install -C build --destdir ${pkgdir}
 }
