@@ -2,7 +2,7 @@ pkgname=contacts
 
 arch=(x86_64)
 pkgver=47.0+4077+80772da7
-pkgrel=29
+pkgrel=30
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-contacts.git)
