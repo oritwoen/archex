@@ -2,7 +2,7 @@ pkgname=settings-daemon
 
 arch=(x86_64)
 pkgver=47.1+6793+a223d90d
-pkgrel=17
+pkgrel=18
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-settings-daemon.git)
