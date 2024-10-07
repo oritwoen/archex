@@ -1,7 +1,7 @@
 pkgname=desktop
 
 arch=(x86_64)
-pkgrel=15
+pkgrel=16
 pkgver=44.1+6651+3bd4bdde
 
 b2sums=(SKIP)
