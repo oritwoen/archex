@@ -1,19 +1,32 @@
 pkgname=files
 
 arch=(x86_64)
-pkgrel=3
-pkgver=48.alpha+25536+597b7db8e
+pkgrel=15
+pkgver=48.alpha+25541+cfca36a69
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/nautilus.git)
+
+depends=(
+	gnome-autoar
+	gnome-desktop-4
+
+	libportal
+	libportal-gtk4
+
+	libadwaita
+)
 
 makedepends=(
 	git
 	meson
 )
 
+#provides=(nautilus libnautilus-extension)
+replaces=(nautilus libnautilus-extension)
+
 pkgver() {
-	cd ${pkgname}
+	cd nautilus
 
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -33,7 +46,7 @@ build() {
 		-D tests=none
 	)
 	
-	arch-meson ${pkgname} build ${options[@]}
+	arch-meson nautilus build ${options[@]}
 	
 	meson compile -C build
 }
