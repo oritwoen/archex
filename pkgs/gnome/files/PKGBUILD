@@ -1,7 +1,7 @@
 pkgname=files
 
 arch=(x86_64)
-pkgrel=20
+pkgrel=21
 pkgver=48.alpha+25541+cfca36a69
 
 b2sums=(SKIP)
