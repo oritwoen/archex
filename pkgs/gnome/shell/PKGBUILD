@@ -2,7 +2,7 @@ pkgname=shell
 
 arch=(x86_64)
 pkgver=47.0+19158+fa3124568
-pkgrel=2
+pkgrel=13
 
 b2sums=(SKIP SKIP)
 source=(
