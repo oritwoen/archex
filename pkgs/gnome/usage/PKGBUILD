@@ -2,7 +2,7 @@ pkgname=usage
 
 arch=(x86_64)
 pkgver=46.0+941+2f13e77
-pkgrel=13
+pkgrel=14
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-usage.git)
