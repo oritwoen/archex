@@ -2,7 +2,7 @@ pkgname=settings
 
 arch=(x86_64)
 pkgver=48.alpha+24541+8f5c939bb
-pkgrel=15
+pkgrel=16
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-control-center.git)
