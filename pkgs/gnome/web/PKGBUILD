@@ -1,7 +1,7 @@
 pkgname=web
 
 arch=(x86_64)
-pkgrel=16
+pkgrel=17
 pkgver=47.0+18366+17b72a398
 
 b2sums=(SKIP)
