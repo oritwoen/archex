@@ -1,44 +1,27 @@
-pkgname=calendar
+pkgname=gnome-calendar
 
 arch=(x86_64)
-pkgver=47.1+4932+32e1b7ee
-pkgrel=19
+pkgver=47.1+4968+3f8ca3f4
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-calendar.git)
 
-replaces=(gnome-calendar)
-
-depends=(
-	libical
-	libadwaita
-	libedataserverui4
-
-	geoclue
-	gsettings-desktop-schemas
-)
-
-makedepends=(
-	git
-	meson
-)
-
 pkgver() {
-	cd gnome-calendar
+  cd ${pkgname}
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-	local _commits=$(git rev-list --count HEAD)
-	local _commith=$(git rev-parse --short HEAD)
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
 
-	echo ${_version}+${_commits}+${_commith}
+  echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	arch-meson gnome-calendar build
-	
-	meson compile -C build
+  arch-meson ${pkgname} build
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir ${pkgdir}
+  meson install -C build --destdir ${pkgdir}
 }
