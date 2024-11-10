@@ -1,43 +1,28 @@
-pkgname=console
+pkgname=gnome-console
 
 arch=(x86_64)
-pkgver=48.alpha+1022+6966d54
-pkgrel=19
+pkgver=48.alpha+1030+eda4026
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/console.git)
 
-replaces=(gnome-console)
-
-depends=(
-	vte4
-	pango
-
-	libgtop
-	libadwaita
-)
-
-makedepends=(
-	git
-	meson
-)
-
 pkgver() {
-	cd $pkgname
-	
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-	local _commits=$(git rev-list --count HEAD)
-	local _commith=$(git rev-parse --short HEAD)
-	
-	echo ${_version}+${_commits}+${_commith}
+  cd console
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	arch-meson $pkgname build
+  arch-meson console build
 
-	meson compile -C build
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir ${pkgdir}
+  meson install -C build --destdir ${pkgdir}
 }
