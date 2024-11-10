@@ -7,38 +7,26 @@ pkgrel=81
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/folks.git)
 
-depends=(
-	libgee
-	evolution-data-server
-)
-
-makedepends=(
-	git
-	vala
-	meson
-	gobject-introspection
-)
-
 pkgver() {
-	cd $pkgname
+  cd ${pkgname}
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-	local _commits=$(git rev-list --count HEAD)
-	local _commith=$(git rev-parse --short HEAD)
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
 
-	echo ${_version}+${_commits}+${_commith}
+  echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local options=(
-		-D telepathy_backend=false
-		-D tests=false
-	)
+  local options=(
+    -D telepathy_backend=false
+    -D tests=false
+  )
 
-	arch-meson $pkgname build ${options[@]}
-	meson compile -C build
+  arch-meson ${pkgname} build ${options[@]}
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir ${pkgdir}
+  meson install -C build --destdir ${pkgdir}
 }
