@@ -1,50 +1,34 @@
-pkgname=session
+pkgname=gnome-session
 
 arch=(x86_64)
-pkgver=47.0.1+6766+51f1872f
-pkgrel=30
+pkgver=47.0.1+6768+39ef6f6c
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-session.git)
 
-provides=(gnome-session)
-replaces=(gnome-session)
-conflicts=(gnome-session)
-
-depends=(
-	gtk3
-	systemd
-
-	gnome-desktop
-)
-
-makedepends=(
-	git
-	meson
-)
-
 pkgver() {
-	cd gnome-session
+  cd ${pkgname}
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-	local _commits=$(git rev-list --count HEAD)
-	local _commith=$(git rev-parse --short HEAD)
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
 
-	echo ${_version}+${_commits}+${_commith}
+  echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local options=(
-		-D docbook=false
-		-D man=false
-		-D x11=false
-	)
+  local options=(
+    -D docbook=false
+    -D man=false
+    -D x11=false
+  )
 
-	arch-meson gnome-session build ${options[@]}
+  arch-meson ${pkgname} build ${options[@]}
 
-	meson compile -C build
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir ${pkgdir}
+  meson install -C build --destdir ${pkgdir}
 }
