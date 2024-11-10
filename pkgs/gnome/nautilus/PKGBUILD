@@ -1,0 +1,42 @@
+pkgname=nautilus
+
+arch=(x86_64)
+pkgrel=4
+pkgver=48.alpha+25571+f79bbcce9
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/nautilus.git)
+
+provides=(libnautilus-extension)
+replaces=(libnautilus-extension)
+conflicts=(libnautilus-extension)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  local options=(
+    -D extensions=true
+    -D introspection=false #TODO: verify
+
+    -D packagekit=false
+    -D cloudproviders=false #TODO: verify
+
+    -D tests=none
+  )
+
+  arch-meson ${pkgname} build ${options[@]}
+
+  meson compile -C build
+}
+
+package () {
+  meson install -C build --destdir ${pkgdir}
+}
