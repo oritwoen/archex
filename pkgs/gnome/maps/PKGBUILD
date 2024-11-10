@@ -1,48 +1,28 @@
-pkgname=maps
+pkgname=gnome-maps
 
 arch=(x86_64)
-pkgver=48.alpha+4216+dc8f4458
-pkgrel=18
+pkgver=48.alpha+4226+02325ba1
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-maps.git)
 
-replaces=(gnome-maps)
-
-depends=(
-	gjs
-	gtk4
-	geoclue
-
-	librest
-	libportal
-	libadwaita
-	libshumate
-	libgweather-4
-)
-
-makedepends=(
-	git
-	meson
-	gobject-introspection
-)
-
 pkgver() {
-	cd gnome-maps
+  cd ${pkgname}
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-	local _commits=$(git rev-list --count HEAD)
-	local _commith=$(git rev-parse --short HEAD)
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
 
-	echo ${_version}+${_commits}+${_commith}
+  echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	arch-meson gnome-maps build
+  arch-meson ${pkgname} build
 
-	meson compile -C build
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir ${pkgdir}
+  meson install -C build --destdir ${pkgdir}
 }
