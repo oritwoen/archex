@@ -1,58 +1,28 @@
-pkgname=settings-daemon
+pkgname=gnome-settings-daemon
 
 arch=(x86_64)
-pkgver=47.1+6793+a223d90d
-pkgrel=19
+pkgver=47.1+6798+49e5f8ed
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-settings-daemon.git)
 
-provides=(gnome-settings-daemon)
-replaces=(gnome-settings-daemon)
-conflicts=(gnome-settings-daemon)
-
-depends=(
-	upower
-	polkit
-	systemd
-	geoclue
-	geocode-glib-2
-
-	gnome-desktop
-
-	libnm
-	libwacom
-	libnotify
-	libgweather-4
-	libcanberra-pulse
-)
-
-makedepends=(
-	git
-	meson
-)
-
 pkgver() {
-	cd gnome-settings-daemon
+  cd ${pkgname}
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-	local _commits=$(git rev-list --count HEAD)
-	local _commith=$(git rev-parse --short HEAD)
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
 
-	echo ${_version}+${_commits}+${_commith}
+  echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local options=(
-		-D smartcard=false #TODO: verify
-		-D wwan=false #TODO: verify
-	)
+  arch-meson ${pkgname} build
 
-	arch-meson gnome-settings-daemon build ${options[@]}
-
-	meson compile -C build
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir ${pkgdir}
+  meson install -C build --destdir ${pkgdir}
 }
