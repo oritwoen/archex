@@ -1,69 +1,45 @@
-pkgname=shell
+pkgname=gnome-shell
 
 arch=(x86_64)
-pkgver=47.0+19158+fa3124568
-pkgrel=18
+pkgver=47.0+19219+69bb44563
+pkgrel=3
 
 b2sums=(SKIP SKIP)
 source=(
-	git+https://gitlab.gnome.org/gnome/gnome-shell.git 
-	git+https://gitlab.gnome.org/gnome/libgnome-volume-control.git)
-
-provides=(gnome-shell)
-replaces=(gnome-shell)
-conflicts=(gnome-shell)
-
-depends=(
-	gjs
-	mutter
-	systemd
-	settings
-	gobject-introspection
-	evolution-data-server
-
-	gnome-autoar
-
-	bash-completion
-
-	libical
-)
-
-makedepends=(
-	git
-	meson
-	sassc
+  git+https://gitlab.gnome.org/gnome/gnome-shell.git
+  git+https://gitlab.gnome.org/gnome/libgnome-volume-control.git
 )
 
 pkgver() {
-	cd gnome-shell
+  cd ${pkgname}
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-	local _commits=$(git rev-list --count HEAD)
-	local _commith=$(git rev-parse --short HEAD)
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
 
-	echo ${_version}+${_commits}+${_commith}
+  echo ${_version}+${_commits}+${_commith}
 }
 
 prepare() {
-	# Inject gvc
-	ln -s libgnome-volume-control gvc
+  # Inject gvc
+  ln -s libgnome-volume-control gvc
 
-	cd gnome-shell
+  cd ${pkgname}
 }
 
 build() {
-	local options=(
-		-D man=false
-		-D tests=false
-	)
+  local options=(
+    -D man=false
+    -D tests=false
+  )
 
-	export MESON_PACKAGE_CACHE_DIR="$srcdir"
-	
-	arch-meson gnome-shell build ${options[@]}
+  export MESON_PACKAGE_CACHE_DIR="$srcdir"
 
-	meson compile -C build
+  arch-meson ${pkgname} build ${options[@]}
+
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir ${pkgdir}
+  meson install -C build --destdir ${pkgdir}
 }
