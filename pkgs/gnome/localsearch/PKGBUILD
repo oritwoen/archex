@@ -1,0 +1,36 @@
+pkgname=localsearch
+
+arch=(x86_64)
+pkgver=3.8.0+14692+c578b192d
+pkgrel=2
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/localsearch.git)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+provides=(tracker3-miners)
+
+build() {
+  local options=(
+    -D functional_tests=false
+    -D sandbox_tests=false
+    -D man=false
+  )
+
+  arch-meson ${pkgname} build ${options[@]}
+
+  meson compile -C build
+}
+
+package() {
+    meson install -C build --destdir "$pkgdir"
+}
