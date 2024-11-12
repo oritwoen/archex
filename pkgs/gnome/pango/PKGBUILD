@@ -1,0 +1,35 @@
+pkgname=pango
+
+arch=(x86_64)
+pkgver=1.55.0+6503+7c3492c3
+pkgrel=2
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/pango.git)
+
+#gspell
+provides=(libpango-1.0.so=0-64)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  local options=(
+    -D build-testsuite=false
+    -D build-examples=false
+  )
+
+  arch-meson ${pkgname} build ${options[@]}
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+}
