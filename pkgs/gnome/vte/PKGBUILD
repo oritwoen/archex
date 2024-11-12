@@ -1,53 +1,36 @@
 pkgname=vte
 
 arch=(x86_64)
-pkgver=0.79.0+5607+c90b078e
-pkgrel=17
+pkgver=0.79.0+5624+d99a527c
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/vte.git)
-#options=(!lto)
 
 provides=(vte3 vte4 vte-common)
 replaces=(vte3 vte4 vte-common)
 conflicts=(vte3 vte4 vte-common)
 
-depends=(
-	gtk4
-	cairo
-	pango
-	systemd
-)
-
-makedepends=(
-	git
-	vala
-	meson
-	gobject-introspection
-)
-
 pkgver() {
-	cd $pkgname
+  cd ${pkgname}
 
-	local _version=$(grep -m 1 version: meson.build | awk -F"'" '{print $2}')
-	local _commits=$(git rev-list --count HEAD)
-	local _commith=$(git rev-parse --short HEAD)
+  local _version=$(grep -m 1 version: meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
 
-	echo ${_version}+${_commits}+${_commith}
+  echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local options=(
-		-D a11y=true #TODO: verify
-		-D gir=true #TODO: verify
-		-D gtk3=false
-	)
+  local options=(
+    -D gtk3=true
+  )
 
-	arch-meson $pkgname build "${options[@]}"
+  arch-meson ${pkgname} build "${options[@]}"
 
-	meson compile -C build
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+  meson install -C build --destdir ${pkgdir}
 }
