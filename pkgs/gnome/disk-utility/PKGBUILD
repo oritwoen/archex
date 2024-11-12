@@ -2,7 +2,7 @@ pkgname=gnome-disk-utility
 
 arch=(x86_64)
 pkgver=47.alpha+4197+dfef85eb
-pkgrel=1
+pkgrel=3
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-disk-utility.git)
@@ -17,6 +17,12 @@ pkgver() {
   echo ${_version}+${_commits}+${_commith}
 }
 
+prepare() {
+  cd ${pkgname}
+
+  cargo fetch --locked --target $(rustc -vV | sed -n 's/host: //p')
+}
+
 build() {
   local options=(
     -D man=false
@@ -27,5 +33,5 @@ build() {
 }
 
 package() {
-  meson install -C build --destdir ${pkgdir}
+  meson install -C build --destdir ${pkgdir} --no-rebuild
 }
