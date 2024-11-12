@@ -1,11 +1,15 @@
-pkgname=gnome-backgrounds
+pkgname=gnome-bluetooth
 
-arch=(any)
-pkgver=47.0+1503+a23b8c6
+arch=(x86_64)
+pkgver=47.1+3818+91e874ed
 pkgrel=1
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/gnome/gnome-backgrounds.git)
+source=(git+https://gitlab.gnome.org/gnome/gnome-bluetooth.git)
+
+provides=(gnome-bluetooth-3.0)
+replaces=(gnome-bluetooth-3.0)
+conflicts=(gnome-bluetooth-3.0)
 
 pkgver() {
   cd ${pkgname}
