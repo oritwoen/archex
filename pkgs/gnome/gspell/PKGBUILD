@@ -1,16 +1,16 @@
-pkgname=pango
+pkgname=gspell
 
 arch=(x86_64)
-pkgver=1.55.0+6503+7c3492c3
-pkgrel=3
+pkgver=1.14.0+735+719723a
+pkgrel=1
 
 b2sums=(SKIP)
-source=(git+https://gitlab.gnome.org/gnome/pango.git)
+source=(git+https://gitlab.gnome.org/gnome/gspell.git)
 
-pkgver() {
+pkgver() { 
   cd ${pkgname}
 
-  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _version=$(grep -m 2 version meson.build | awk -F"'" 'NR==2 {print $2}')
   local _commits=$(git rev-list --count HEAD)
   local _commith=$(git rev-parse --short HEAD)
 
@@ -19,8 +19,9 @@ pkgver() {
 
 build() {
   local options=(
-    -D build-testsuite=false
-    -D build-examples=false
+    -D gtk_doc=false
+    -D tests=false
+    -D install_tests=false
   )
 
   arch-meson ${pkgname} build ${options[@]}
