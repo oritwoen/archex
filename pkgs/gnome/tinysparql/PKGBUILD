@@ -1,0 +1,36 @@
+pkgname=tinysparql
+
+arch=(x86_64)
+pkgver=3.8.0+16200+8efbfc5e9
+pkgrel=2
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/tinysparql.git)
+
+provides=(tracker3)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  local options=(
+    -D docs=false
+    -D man=false
+    -D tests=false
+  )
+
+  arch-meson ${pkgname} build ${options[@]}
+
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+}
