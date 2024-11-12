@@ -1,71 +1,45 @@
 pkgname=mutter
 
 arch=(x86_64)
-pkgrel=19
-pkgver=47.0+32728+077eb80a8d
+pkgrel=2
+pkgver=47.0+32851+dbf1edefd
 
 b2sums=(SKIP SKIP)
 source=(
-	git+https://gitlab.gnome.org/gnome/gvdb.git
-	git+https://gitlab.gnome.org/gnome/mutter.git
-)
-
-depends=(
-	gtk4
-	pango
-	graphene
-	gdk-pixbuf2
-	startup-notification
-
-	xorg-xwayland
-	gnome-desktop-4
-	settings-daemon
-	gsettings-desktop-schemas
-
-	libei
-	libinput
-	libxkbfile
-	libpipewire
-	libdisplay-info
-)
-
-makedepends=(
-	git
-	meson
-	wayland-protocols
-	gobject-introspection
+  git+https://gitlab.gnome.org/gnome/gvdb.git
+  git+https://gitlab.gnome.org/gnome/mutter.git
 )
 
 pkgver() {
-	cd $pkgname
+  cd ${pkgname}
 
-	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
-	local _commits=$(git rev-list --count HEAD)
-	local _commith=$(git rev-parse --short HEAD)
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
 
-	echo ${_version}+${_commits}+${_commith}
+  echo ${_version}+${_commits}+${_commith}
 }
 
 build() {
-	local options=(
-		-D x11=false
-		-D sm=false #TODO: verify
-		-D cogl_tests=false
-		-D clutter_tests=false
-		-D mutter_tests=false
-		-D tests=disabled
-		-D profiler=false
-		-D installed_tests=false
-	)
+  local options=(
+    -D x11=true #TODO: verify
+    -D sm=true #TODO: verify
+    -D cogl_tests=false
+    -D clutter_tests=false
+    -D mutter_tests=false
+    -D tests=disabled
+    -D profiler=false
+    -D installed_tests=false
+  )
 
-	# Inject gvdb
-	export MESON_PACKAGE_CACHE_DIR="$srcdir"
+  # Inject gvdb
+  export MESON_PACKAGE_CACHE_DIR="$srcdir"
 
-	arch-meson mutter build ${options[@]}
+  arch-meson ${pkgname} build ${options[@]}
 
-	meson compile -C build
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir ${pkgdir}
+  meson install -C build --destdir ${pkgdir}
 }
