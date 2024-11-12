@@ -1,0 +1,36 @@
+pkgname=gtksourceview
+
+arch=(x86_64)
+pkgver=5.15.0+7509+99fe83ef
+pkgrel=2
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/gtksourceview.git)
+
+provides=(gtksourceview5)
+replaces=(gtksourceview5)
+conflicts=(gtksourceview5)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  local options=(
+   -D build-testsuite=false
+  )
+
+  arch-meson ${pkgname} build ${options[@]}
+
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+}
