@@ -1,0 +1,32 @@
+pkgname=adwaita-icon-theme
+
+arch=(any)
+pkgver=47.0+3982+5be46d508
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/adwaita-icon-theme.git)
+
+provides=(adwaita-cursors)
+replaces=(adwaita-cursors)
+conflicts=(adwaita-cursors)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $4}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  arch-meson ${pkgname} build
+
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+}
