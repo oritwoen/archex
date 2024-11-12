@@ -1,17 +1,16 @@
 pkgname=at-spi2-core
 
 arch=(x86_64)
-pkgver=2.54.0+6043+2b2085e3
-pkgrel=22
+pkgver=2.54.0+6055+eaeeb531
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/at-spi2-core.git)
 
-#gtk2, gtk3, steam-native-runtime webkig2gtk-4.1 webkitgtk-6.0
 provides=(atk)
 
 pkgver() {
-	cd $pkgname
+	cd ${pkgname}
 
 	local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
 	local _commits=$(git rev-list --count HEAD)
@@ -21,15 +20,15 @@ pkgver() {
 }
 
 build() {
-	local options=(
-		-D default_bus=dbus-broker
-	)
+  local options=(
+    -D default_bus=dbus-broker
+  )
 
-	arch-meson $pkgname build "${options[@]}"
+  arch-meson ${pkgname} build ${options[@]}
 
-	meson compile -C build
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+  meson install -C build --destdir ${pkgdir}
 }
