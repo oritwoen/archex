@@ -1,0 +1,42 @@
+pkgname=librsvg
+
+arch=(x86_64)
+pkgver=2.59.2+9904+773fac388
+pkgrel=5
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/librsvg.git)
+
+#ffmpeg
+provides=(librsvg-2.so=2-64)
+
+pkgver() {
+  cd $pkgname
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+  cd ${pkgname}
+
+  cargo fetch --locked --target $(rustc -vV | sed -n 's/host: //p')
+}
+
+build() {
+  local options=(
+    -D docs=disabled
+    -D tests=false
+    -D avif=enabled
+  )
+
+  arch-meson ${pkgname} build ${options[@]}
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir} --no-rebuild
+}
