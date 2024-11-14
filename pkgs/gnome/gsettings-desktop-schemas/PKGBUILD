@@ -1,0 +1,31 @@
+pkgname=gsettings-desktop-schemas
+
+arch=(x86_64)
+pkgver=47.1+1761+d5f69a0
+pkgrel=2
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/gsettings-desktop-schemas.git)
+
+provides=(gsettings-system-schemas)
+replaces=(gsettings-system-schemas)
+conflicts=(gsettings-system-schemas)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  arch-meson ${pkgname} build
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+}
