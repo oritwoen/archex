@@ -1,0 +1,35 @@
+pkgname=gcr4
+
+arch=(x86_64)
+pkgver=4.3.0+2036+573d6e0
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/gcr.git)
+
+provides=(gcr-4)
+replaces=(gcr-4)
+conflicts=(gcr-4)
+
+pkgver() {
+  cd gcr
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  local options=(
+    -D gtk_doc=false
+  )
+
+  arch-meson gcr build ${options[@]}
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+}
