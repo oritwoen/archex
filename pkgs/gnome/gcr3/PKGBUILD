@@ -1,0 +1,37 @@
+pkgname=gcr3
+
+arch=(x86_64)
+pkgver=3.41.0+1791+4efdfcc
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/gcr.git#branch=gcr-3-41)
+
+#gnome-keyring #shotwell
+replaces=(gcr)
+provides=(gcr)
+conflicts=(gcr)
+
+pkgver() {
+  cd gcr
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  local options=(
+    -D gtk_doc=false
+    -D ssh_agent=false
+  )
+
+  arch-meson gcr build ${options[@]}
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+}
