@@ -1,0 +1,40 @@
+pkgname=accountsservice
+
+arch=(x86_64)
+pkgver=24.41.66+795+5d2fefd
+pkgrel=1
+
+b2sums=(SKIP SKIP)
+source=(
+	accounts-daemon-restart.hook
+	git+https://gitlab.freedesktop.org/accountsservice/accountsservice.git
+)
+
+#provides=(libaccountsservice.so)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$( ./generate-version.sh)
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  local options=(
+    -D admin_group=wheel
+    -D create_homed=true
+  )
+
+  arch-meson ${pkgname} build ${options[@]}
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+
+  install -d ${pkgdir}/usr/share/accountsservice/interfaces
+  install -Dt ${pkgdir}/usr/share/libalpm/hooks -m644 *.hook
+}
