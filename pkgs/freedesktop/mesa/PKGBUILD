@@ -1,15 +1,16 @@
 pkgname=mesa
 
 arch=(x86_64)
-pkgver=24.3.0+devel+195659+a74ebffc6a6
-pkgrel=1
+pkgver=25.0.0+devel+197744+4d231561275
+pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.freedesktop.org/mesa/mesa.git)
 #options=(!lto)
 
 provides=('mesa' 'opencl-mesa' 'vulkan-radeon' 'vulkan-mesa-layer' 'libva-mesa-driver' 'mesa-vdpau' 'vulkan-swrast' 'vulkan-driver' 'mesa-libgl' 'opengl-driver' 'opencl-driver')
-conflicts=('mesa' 'opencl-mesa' 'vulkan-radeon' 'vulkan-mesa-layer' 'libva-mesa-driver' 'mesa-vdpau' 'vulkan-swrast' 'mesa-libgl')
+replaces=('mesa' 'opencl-mesa' 'vulkan-radeon' 'vulkan-mesa-layer' 'libva-mesa-driver' 'mesa-vdpau' 'vulkan-swrast' 'mesa-libgl' 'vulkan-radeon')
+conflicts=('mesa' 'opencl-mesa' 'vulkan-radeon' 'vulkan-mesa-layer' 'libva-mesa-driver' 'mesa-vdpau' 'vulkan-swrast' 'mesa-libgl' 'vulkan-radeon')
 
 pkgver() {
 	cd $pkgname
@@ -22,44 +23,43 @@ pkgver() {
 }
 
 build() {
-	local options=(
-		-D platforms=wayland,x11
-		#-D egl-native-platform=wayland
-		#-D android-strict=false
-		-D android-libbacktrace=disabled
-		-D gallium-drivers=radeonsi,llvmpipe,softpipe,zink
-		-D gallium-extra-hud=true
-		-D gallium-vdpau=enabled
-		-D gallium-va=enabled
-		-D gallium-xa=disabled
-		-D gallium-nine=true
-		-D gallium-opencl=icd
-		-D gallium-rusticl=true
-		-D opencl-spirv=true
-		-D vulkan-drivers=amd,swrast
-		-D vulkan-layers=overlay,device-select
-		-D shared-glapi=enabled
-		-D gles1=disabled
-		-D gles2=enabled
-		-D glx=dri
-		-D egl=enabled
-		-D glvnd=enabled
-		-D microsoft-clc=disabled
-		-D llvm=enabled
-		-D shared-llvm=enabled
-		-D valgrind=disabled
-		-D libunwind=disabled
-		-D lmsensors=enabled
-		-D enable-glcpp-tests=false
-		-D osmesa=true
-		-D vulkan-beta=true
-		-D video-codecs=all
-	)
+  local options=(
+    -D platforms=wayland,x11
+    #-D egl-native-platform=wayland
+    #-D android-strict=false
+    -D android-libbacktrace=disabled
+    -D gallium-drivers=radeonsi,llvmpipe,softpipe,zink
+    -D gallium-extra-hud=true
+    -D gallium-vdpau=enabled
+    -D gallium-va=enabled
+    -D gallium-xa=disabled
+    -D gallium-nine=true
+    -D gallium-opencl=icd
+    -D gallium-rusticl=true
+    -D vulkan-drivers=amd,swrast
+    -D vulkan-layers=overlay,device-select
+    -D shared-glapi=enabled
+    -D gles1=disabled
+    -D gles2=enabled
+    -D glx=dri
+    -D egl=enabled
+    -D glvnd=enabled
+    -D microsoft-clc=disabled
+    -D llvm=enabled
+    -D shared-llvm=enabled
+    -D valgrind=disabled
+    -D libunwind=disabled
+    -D lmsensors=enabled
+    -D enable-glcpp-tests=false
+    -D osmesa=true
+    -D vulkan-beta=true
+    -D video-codecs=all
+  )
 
-	arch-meson $pkgname build "${options[@]}"
-	meson compile -C build
+  arch-meson ${pkgname} build ${options[@]}
+  meson compile -C build
 }
 
 package() {
-	meson install -C build --destdir "$pkgdir"
+  meson install -C build --destdir ${pkgdir}
 }
