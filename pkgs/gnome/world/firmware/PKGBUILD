@@ -1,0 +1,31 @@
+pkgname=gnome-firmware
+
+arch=(x86_64)
+pkgver=48.alpha+459+9ec5ad9
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/world/gnome-firmware.git)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  local options=(
+    -D man=false
+  )
+
+  arch-meson ${pkgname} build ${options[@]}
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+}
