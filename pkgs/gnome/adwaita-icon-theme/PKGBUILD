@@ -1,7 +1,7 @@
 pkgname=adwaita-icon-theme
 
 arch=(any)
-pkgver=47.0+3982+5be46d508
+pkgver=48.alpha+3991+a1c8a0f61
 pkgrel=1
 
 b2sums=(SKIP)
