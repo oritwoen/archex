@@ -1,8 +1,8 @@
 pkgname=localsearch
 
 arch=(x86_64)
-pkgver=3.8.0+14692+c578b192d
-pkgrel=2
+pkgver=3.8.1+14795+a83ce4755
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/localsearch.git)
@@ -32,5 +32,5 @@ build() {
 }
 
 package() {
-    meson install -C build --destdir "$pkgdir"
+    meson install -C build --destdir ${pkgdir}
 }
