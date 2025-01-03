@@ -1,7 +1,7 @@
 pkgname=tecla
 
 arch=(x86_64)
-pkgver=47.0+193+5d3cd5c
+pkgver=47.0+197+336f14b
 pkgrel=1
 
 b2sums=(SKIP)
