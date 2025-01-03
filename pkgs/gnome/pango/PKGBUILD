@@ -1,8 +1,8 @@
 pkgname=pango
 
 arch=(x86_64)
-pkgver=1.55.0+6503+7c3492c3
-pkgrel=3
+pkgver=1.56.0+6574+b8025922
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/pango.git)
