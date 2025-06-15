@@ -1,12 +1,27 @@
 pkgname=loupe
 
 arch=(x86_64)
-pkgver=47.1+1159+5409203
-pkgrel=3
+pkgver=48.1+1402+cf8d17f
+pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/loupe.git)
 
+depends=(
+  gtk4
+  libadwaita
+  libgweather-4
+)
+
+makedepends=(
+  git
+  rust
+  meson
+  itstool
+
+  mold
+  clang
+)
 
 pkgver() {
   cd ${pkgname}
