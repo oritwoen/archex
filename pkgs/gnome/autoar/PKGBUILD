@@ -7,8 +7,23 @@ pkgrel=52
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-autoar.git)
 
+depends=(
+  gtk3
+)
+
+makedepends=(
+  git
+  vala
+  meson
+  glib2-devel
+  gobject-introspection
+
+  mold
+  clang
+)
+
 pkgver() {
-  cd $pkgname
+  cd ${pkgname}
 
   local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
   local _commits=$(git rev-list --count HEAD)
