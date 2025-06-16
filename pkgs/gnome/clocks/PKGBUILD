@@ -1,11 +1,30 @@
 pkgname=gnome-clocks
 
 arch=(x86_64)
-pkgver=47.0+2842+46954c3
+pkgver=48.0+2910+5c558c6
 pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-clocks.git)
+
+depends=(
+  gtk4
+  geoclue
+  gnome-desktop-4
+
+  libadwaita
+  libgweather-4
+)
+
+makedepends=(
+  git
+  vala
+  meson
+  itstool
+
+  mold
+  clang
+)
 
 pkgver() {
   cd ${pkgname}
