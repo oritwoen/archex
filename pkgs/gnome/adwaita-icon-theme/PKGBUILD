@@ -1,7 +1,7 @@
 pkgname=adwaita-icon-theme
 
 arch=(any)
-pkgver=48.alpha+3991+a1c8a0f61
+pkgver=48.0+4000+8c8ffbbad
 pkgrel=1
 
 b2sums=(SKIP)
@@ -10,6 +10,15 @@ source=(git+https://gitlab.gnome.org/gnome/adwaita-icon-theme.git)
 provides=(adwaita-cursors)
 replaces=(adwaita-cursors)
 conflicts=(adwaita-cursors)
+
+makedepends=(
+  git
+  meson
+  gtk-update-icon-cache
+
+  mold
+  clang
+)
 
 pkgver() {
   cd ${pkgname}
