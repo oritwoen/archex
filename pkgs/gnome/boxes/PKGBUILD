@@ -1,11 +1,36 @@
 pkgname=gnome-boxes
 
 arch=(x86_64)
-pkgver=48.alpha+6310+74a2ade0
+pkgver=49.alpha+6361+5cbde9c4
 pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-boxes.git)
+
+depends=(
+  gtk3
+  gtk4
+  spice-gtk
+  webkit2gtk-4.1
+
+  libhandy
+  libosinfo
+  libvirt-glib
+
+  libportal
+  libportal-gtk3
+)
+
+makedepends=(
+  git
+  vala
+  meson
+  itstool
+  gobject-introspection
+
+  mold
+  clang
+)
 
 pkgver() {
   cd ${pkgname}
