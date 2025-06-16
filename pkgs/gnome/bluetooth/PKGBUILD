@@ -1,7 +1,7 @@
 pkgname=gnome-bluetooth
 
 arch=(x86_64)
-pkgver=47.1+3818+91e874ed
+pkgver=47.1+3862+7cd8c7a2
 pkgrel=1
 
 b2sums=(SKIP)
@@ -10,6 +10,24 @@ source=(git+https://gitlab.gnome.org/gnome/gnome-bluetooth.git)
 provides=(gnome-bluetooth-3.0)
 replaces=(gnome-bluetooth-3.0)
 conflicts=(gnome-bluetooth-3.0)
+
+depends=(
+  gtk4
+  gsound
+  upower
+  libnotify
+  libadwaita
+)
+
+makedepends=(
+  git
+  meson
+  glib2-devel
+  gobject-introspection
+
+  mold
+  clang
+)
 
 pkgver() {
   cd ${pkgname}
