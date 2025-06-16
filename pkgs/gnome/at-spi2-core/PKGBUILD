@@ -1,13 +1,23 @@
 pkgname=at-spi2-core
 
 arch=(x86_64)
-pkgver=2.54.0+6055+eaeeb531
+pkgver=2.57.0+6164+7949918f
 pkgrel=2
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/at-spi2-core.git)
 
 provides=(atk)
+
+makedepends=(
+  git
+  meson
+  glib2-devel
+  gobject-introspection
+
+  mold
+  clang
+)
 
 pkgver() {
 	cd ${pkgname}
@@ -22,6 +32,7 @@ pkgver() {
 build() {
   local options=(
     -D default_bus=dbus-broker
+    -D x11=disabled
   )
 
   arch-meson ${pkgname} build ${options[@]}
