@@ -1,11 +1,28 @@
 pkgname=gnome-contacts
 
 arch=(x86_64)
-pkgver=47.0+4079+d27745c2
+pkgver=49.alpha+4160+ea3b3394
 pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-contacts.git)
+
+depends=(
+  gtk4
+  folks
+  qrencode
+  libadwaita
+  libportal-gtk4
+)
+
+makedepends=(
+  git
+  vala
+  meson
+
+  mold
+  clang
+)
 
 pkgver() {
   cd ${pkgname}
