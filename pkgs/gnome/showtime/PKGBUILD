@@ -1,0 +1,41 @@
+pkgname=showtime
+
+arch=(x86_64)
+pkgver=48.1+494+238a5a5
+pkgrel=1
+
+b2sums=(SKIP)
+source=(git+https://gitlab.gnome.org/gnome/showtime.git)
+
+depends=(
+  gtk4
+  libadwaita
+)
+
+makedepends=(
+  git
+  meson
+  blueprint-compiler
+
+  mold
+  clang
+)
+
+pkgver() {
+  cd ${pkgname}
+
+  local _version=$(grep -m 1 version meson.build | awk -F"'" '{print $2}')
+  local _commits=$(git rev-list --count HEAD)
+  local _commith=$(git rev-parse --short HEAD)
+
+  echo ${_version}+${_commits}+${_commith}
+}
+
+build() {
+  arch-meson ${pkgname} build
+  meson compile -C build
+}
+
+package() {
+  meson install -C build --destdir ${pkgdir}
+}
