@@ -1,11 +1,30 @@
 pkgname=gnome-calendar
 
 arch=(x86_64)
-pkgver=47.1+4968+3f8ca3f4
+pkgver=49.alpha+5225+05eb4651
 pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/gnome-calendar.git)
+
+depends=(
+  geoclue
+  gsettings-desktop-schemas
+
+  libical
+  libadwaita
+  libedataserverui4
+)
+
+makedepends=(
+  git
+  meson
+  glib2-devel
+  blueprint-compiler
+
+  mold
+  clang
+)
 
 pkgver() {
   cd ${pkgname}
