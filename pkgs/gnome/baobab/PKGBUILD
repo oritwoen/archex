@@ -1,11 +1,26 @@
 pkgname=baobab
 
 arch=(x86_64)
-pkgver=47.0+2377+bce73ae
+pkgver=48.0+2399+6c1ecdc
 pkgrel=1
 
 b2sums=(SKIP)
 source=(git+https://gitlab.gnome.org/gnome/baobab.git)
+
+depends=(
+  gtk4
+  libadwaita
+)
+
+makedepends=(
+  git
+  vala
+  meson
+  itstool
+
+  mold
+  clang
+)
 
 pkgver() {
   cd ${pkgname}
@@ -26,4 +41,3 @@ build() {
 package() {
   meson install -C build --destdir ${pkgdir}
 }
-
