@@ -1,0 +1,55 @@
+pkgname=nexus-cli
+
+arch=(x86_64)
+pkgver=0.8.17+224+cf79ed5
+pkgrel=1
+
+b2sums=(
+	SKIP
+)
+
+source=(
+	git+https://github.com/nexus-xyz/nexus-cli.git
+)
+
+options=(!lto)
+
+depends=(
+  protobuf
+)
+
+makedepends=(
+  git
+
+  mold
+  clang
+  rustup
+)
+
+pkgver() {
+	cd ${pkgname}/clients/cli
+
+	local _version=$(grep -m 1 'version = ' Cargo.toml | awk -F '["]' '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	cd ${pkgname}/clients/cli
+
+	cargo fetch --locked --target $(rustc -vV | sed -n 's/host: //p')
+}
+
+build() {
+	cd ${pkgname}/clients/cli
+
+	cargo build --frozen --release
+}
+
+package() {
+	cd ${pkgname}/clients/cli
+
+	install -Dm0755 target/release/nexus-network ${pkgdir}/usr/bin/${pkgname}
+}
