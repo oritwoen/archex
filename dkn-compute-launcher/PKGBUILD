@@ -1,0 +1,49 @@
+pkgname=dkn-compute-launcher
+
+arch=(x86_64)
+pkgver=0.1.18+206+cdbf572
+pkgrel=1
+
+b2sums=(
+	SKIP
+)
+
+source=(
+	git+https://github.com/firstbatchxyz/dkn-compute-launcher.git
+)
+
+makedepends=(
+  git
+
+  rust
+  mold
+  clang
+)
+
+pkgver() {
+	cd ${pkgname}
+
+	local _version=$(grep -m 1 'version = ' Cargo.toml | awk -F '["]' '{print $2}')
+	local _commits=$(git rev-list --count HEAD)
+	local _commith=$(git rev-parse --short HEAD)
+
+	echo ${_version}+${_commits}+${_commith}
+}
+
+prepare() {
+	cd ${pkgname}
+
+	cargo fetch --locked --target $(rustc -vV | sed -n 's/host: //p')
+}
+
+build() {
+	cd ${pkgname}
+
+	cargo build --frozen --release
+}
+
+package() {
+	cd ${pkgname}
+
+	install -Dm0755 target/release/${pkgname} ${pkgdir}/usr/bin/${pkgname}
+}
