@@ -1,0 +1,54 @@
+[Unit]
+Description=DKN Compute Launcher Service
+
+After=network.target
+
+[Service]
+Restart=on-failure
+ExecStart=/usr/bin/dkn-compute-launcher --env /etc/dria/dkn-compute-launcher.conf start
+
+User=dria
+Group=dria
+
+WorkingDirectory=/var/lib/dkn-compute-launcher
+
+# /var/lib/dkn-compute-launcher
+StateDirectory=dkn-compute-launcher
+StateDirectoryMode=0710
+
+# /run/dkn-compute-launcher
+RuntimeDirectory=dkn-compute-launcher
+RuntimeDirectoryMode=0710
+
+# /etc/dria
+ConfigurationDirectory=dria
+ConfigurationDirectoryMode=0710
+
+# Hardening measures
+####################
+
+# Provide a private /tmp and /var/tmp.
+PrivateTmp=true
+
+# Mount /usr, /boot/ and /etc read-only for the process.
+ProtectSystem=full
+
+# Deny access to /home, /root and /run/user
+ProtectHome=true
+
+# Disallow the process and all of its children to gain
+# new privileges through execve().
+NoNewPrivileges=true
+
+# Use a new /dev namespace only populated with API pseudo devices
+# such as /dev/null, /dev/zero and /dev/random.
+PrivateDevices=true
+
+# Deny the creation of writable and executable memory mappings.
+MemoryDenyWriteExecute=true
+
+# Restrict ABIs to help ensure MemoryDenyWriteExecute is enforced
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target

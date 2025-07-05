@@ -1,0 +1,2 @@
+d /etc/dria 0770 dria dria - -
+d /var/lib/dkn-compute-launcher 0770 dria dria - -
