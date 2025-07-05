@@ -2,14 +2,24 @@ pkgname=dkn-compute-launcher
 
 arch=(x86_64)
 pkgver=0.1.18+206+cdbf572
-pkgrel=1
+pkgrel=7
+
+options=(
+  !lto
+)
 
 b2sums=(
+	SKIP
+	SKIP
+	SKIP
 	SKIP
 )
 
 source=(
-	git+https://github.com/firstbatchxyz/dkn-compute-launcher.git
+  dria.tmpfiles
+	dria.sysusers
+	dkn-compute-launcher.service
+  git+https://github.com/firstbatchxyz/dkn-compute-launcher.git
 )
 
 makedepends=(
@@ -46,4 +56,13 @@ package() {
 	cd ${pkgname}
 
 	install -Dm0755 target/release/${pkgname} ${pkgdir}/usr/bin/${pkgname}
+
+  install -Dm644 ${srcdir}/dria.sysusers \
+    ${pkgdir}/usr/lib/sysusers.d/dria.conf
+
+  install -Dm644 ${srcdir}/dria.tmpfiles \
+    ${pkgdir}/usr/lib/tmpfiles.d/dria.conf
+
+	install -Dm644 ${srcdir}/dkn-compute-launcher.service \
+    ${pkgdir}/usr/lib/systemd/system/dkn-compute-launcher.service
 }
